@@ -1,0 +1,35 @@
+{
+	"BUILD_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet",
+	"CMAKE_SOURCE_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/employes.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/clients.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/ressource.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/logot.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/project.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/desk.ico",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/logo trans.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/desk.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/contrats.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/architect.png",
+		"C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/images/Logo.png"
+	],
+	"LOCK_FILE" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/projet_autogen.dir/AutoRcc_icons_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "icons" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_icons.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.7.3/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/projet_autogen.dir/AutoRcc_icons_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/dhiab/OneDrive/Documents/Projet C++/projet/icons.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}
