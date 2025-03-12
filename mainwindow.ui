@@ -182,7 +182,8 @@ QLabel {
     border: 2px solid #9f86c0;  /* Default thicker border */
     border-radius: 5px;
     background-color: white;  /* Ensure background stays white */
-
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);
 
 
 </string>
@@ -325,16 +326,9 @@ QLineEdit:focus {
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">/* QLabel styling */
-QLabel {
-    background: white;          /* Set background to white */
-    color: r#0000;             /* Text color */
-    font-size: 25px;            /* Font size */
-    padding: 5px;               /* Padding around the text */
-    border: 2px solid #4e1764;  /* Optional: Add a border */
-    border-radius: 14px;
-}
-</string>
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
              <widget class="QPushButton" name="modifier2">
@@ -390,6 +384,11 @@ QPushButton#modifier2:hover {
                 <width>82</width>
                 <height>28</height>
                </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
               </property>
               <item>
                <property name="text">
@@ -1203,7 +1202,9 @@ QLineEdit:focus {
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 255);</string>
+               <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </widget>
@@ -1227,7 +1228,7 @@ QLineEdit:focus {
               <string notr="true">/* QLabel styling */
 QLabel {
     background: white;          /* Set background to white */
-    color: rgb(0, 0, 0);             /* Text color */
+    color: #333333;             /* Text color */
     font-size: 25px;            /* Font size */
     padding: 5px;               /* Padding around the text */
     border: 2px solid #4e1764;  /* Optional: Add a border */

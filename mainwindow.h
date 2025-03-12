@@ -1,13 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "contracteur.h"
+#include <QMainWindow>
+#include <QTableWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -15,19 +14,23 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void on_addContracteurButton_clicked();
+    void on_supprimerContracteur_clicked();
+    void on_modifyContracteurButton_clicked();
+    void on_annulerButton_clicked();
+
 private slots:
-    void on_ajouter_clicked();
-    void on_modifier_clicked();
-    void on_supprimer_clicked();
-    void on_refreshButton_clicked();
-    void on_tableView_tri_2_currentIndexChanged(int index); // Add this line
+    void on_tableView_2_itemClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
     Contracteur currentContracteur;
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+    void refreshTableWidget();
+    void fillTableWidget();
 };
 
 #endif // MAINWINDOW_H

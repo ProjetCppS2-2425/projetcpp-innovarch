@@ -230,7 +230,8 @@ public:
 "    border: 2px solid #9f86c0;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
-"\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);\n"
 "\n"
 "\n"
 ""));
@@ -281,16 +282,9 @@ public:
         tableView_2 = new QTableView(widget_7);
         tableView_2->setObjectName("tableView_2");
         tableView_2->setGeometry(QRect(20, 70, 621, 371));
-        tableView_2->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
-"QLabel {\n"
-"    background: white;          /* Set background to white */\n"
-"    color: r#0000;             /* Text color */\n"
-"    font-size: 25px;            /* Font size */\n"
-"    padding: 5px;               /* Padding around the text */\n"
-"    border: 2px solid #4e1764;  /* Optional: Add a border */\n"
-"    border-radius: 14px;\n"
-"}\n"
-""));
+        tableView_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
         modifier2 = new QPushButton(widget_7);
         modifier2->setObjectName("modifier2");
         modifier2->setGeometry(QRect(460, 501, 181, 40));
@@ -318,6 +312,9 @@ public:
         comboBox_2->addItem(QString());
         comboBox_2->setObjectName("comboBox_2");
         comboBox_2->setGeometry(QRect(200, 22, 82, 28));
+        comboBox_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
         frame = new QFrame(tab_6);
         frame->setObjectName("frame");
         frame->setGeometry(QRect(0, 0, 191, 741));
@@ -467,7 +464,7 @@ public:
 
         verticalLayout->addWidget(pushButton_6);
 
-        layoutWidget1->raise();
+        layoutWidget->raise();
         label->raise();
         frame_6 = new QFrame(tab_6);
         frame_6->setObjectName("frame_6");
@@ -745,7 +742,9 @@ public:
         spinBox = new QSpinBox(frame_6);
         spinBox->setObjectName("spinBox");
         spinBox->setGeometry(QRect(10, 290, 101, 41));
-        spinBox->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        spinBox->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
         label_156 = new QLabel(tab_6);
         label_156->setObjectName("label_156");
         label_156->setGeometry(QRect(288, 70, 231, 51));
@@ -756,7 +755,7 @@ public:
         label_156->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
 "QLabel {\n"
 "    background: white;          /* Set background to white */\n"
-"    color: rgb(0, 0, 0);             /* Text color */\n"
+"    color: #333333;             /* Text color */\n"
 "    font-size: 25px;            /* Font size */\n"
 "    padding: 5px;               /* Padding around the text */\n"
 "    border: 2px solid #4e1764;  /* Optional: Add a border */\n"
