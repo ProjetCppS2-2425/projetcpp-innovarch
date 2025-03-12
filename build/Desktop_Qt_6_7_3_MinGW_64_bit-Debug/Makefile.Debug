@@ -16,7 +16,7 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I"../../../projet qt" -I. -IC:/PySchool/6.7.3/mingw_64/include -IC:/PySchool/6.7.3/mingw_64/include/QtWidgets -IC:/PySchool/6.7.3/mingw_64/include/QtGui -IC:/PySchool/6.7.3/mingw_64/include/QtSql -IC:/PySchool/6.7.3/mingw_64/include/QtCore -Idebug -I. -I/include -IC:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++ 
+INCPATH       = -I../../../projet_qt -I. -IC:/PySchool/6.7.3/mingw_64/include -IC:/PySchool/6.7.3/mingw_64/include/QtWidgets -IC:/PySchool/6.7.3/mingw_64/include/QtGui -IC:/PySchool/6.7.3/mingw_64/include/QtSql -IC:/PySchool/6.7.3/mingw_64/include/QtCore -Idebug -I. -I/include -IC:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
 LIBS        =        C:\PySchool\6.7.3\mingw_64\lib\libQt6Widgets.a C:\PySchool\6.7.3\mingw_64\lib\libQt6Gui.a C:\PySchool\6.7.3\mingw_64\lib\libQt6Sql.a C:\PySchool\6.7.3\mingw_64\lib\libQt6Core.a -lmingw32 C:\PySchool\6.7.3\mingw_64\lib\libQt6EntryPoint.a -lshell32  
@@ -51,17 +51,21 @@ OBJECTS_DIR   = debug
 ####### Files
 
 SOURCES       = ..\..\main.cpp \
+		..\..\connection.cpp \
 		..\..\mainwindow.cpp \
-		..\..\connection.cpp debug\moc_mainwindow.cpp
+		..\..\projetcrud.cpp debug\moc_mainwindow.cpp
 OBJECTS       = debug/main.o \
-		debug/mainwindow.o \
 		debug/connection.o \
+		debug/mainwindow.o \
+		debug/projetcrud.o \
 		debug/moc_mainwindow.o
 
-DIST          =  ..\..\mainwindow.h \
-		..\..\connection.h ..\..\main.cpp \
+DIST          =  ..\..\connection.h \
+		..\..\mainwindow.h \
+		..\..\projetcrud.h ..\..\main.cpp \
+		..\..\connection.cpp \
 		..\..\mainwindow.cpp \
-		..\..\connection.cpp
+		..\..\projetcrud.cpp
 QMAKE_TARGET  = Atelier_Connexion
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = Atelier_Connexion.exe
@@ -72,7 +76,7 @@ DESTDIR_TARGET = debug\Atelier_Connexion.exe
 first: all
 all: Makefile.Debug  debug/Atelier_Connexion.exe
 
-debug/Atelier_Connexion.exe: C:/PySchool/6.7.3/mingw_64/lib/libQt6Widgets.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Gui.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Sql.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Core.a C:/PySchool/6.7.3/mingw_64/lib/libQt6EntryPoint.a ui_mainwindow.h $(OBJECTS) 
+debug/Atelier_Connexion.exe: C:/PySchool/6.7.3/mingw_64/lib/libQt6Widgets.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Gui.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Sql.a C:/PySchool/6.7.3/mingw_64/lib/libQt6Core.a C:/PySchool/6.7.3/mingw_64/lib/libQt6EntryPoint.a ui_projetcrud.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS) $(LIBS)
 
 qmake: FORCE
@@ -81,10 +85,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Atelier_Connexion.zip $(SOURCES) $(DIST) ..\..\Atelier_Connexion.pro C:\PySchool\6.7.3\mingw_64\mkspecs\features\spec_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\device_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\common\sanitize.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\gcc-base.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\g++-base.conf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\PySchool\6.7.3\mingw_64\mkspecs\common\windows-vulkan.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\g++-win32.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\windows-desktop.conf C:\PySchool\6.7.3\mingw_64\mkspecs\qconfig.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3danimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dcore.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dextras.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dinput.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dlogic.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3drender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3drender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_activeqt.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_activeqt_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axbase_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axcontainer.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axserver.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bluetooth.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_core.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualization.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualizationqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualizationqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_graphs.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_graphs_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpc.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpcquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpcquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_help.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_httpserver.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_httpserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttracker.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttracker_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttrackerqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_jsonrpc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_languageserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_location.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_location_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_network.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_networkauth.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_nfc.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_nfc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdf.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdf_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioning.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioning_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioningquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobuf.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobuf_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtcoretypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtcoretypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtguitypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtguitypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufwellknowntypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufwellknowntypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysics.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysics_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysicshelpers.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysicshelpers_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjectsqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjectsqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_repparser.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_repparser_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxmlqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxmlqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensors.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensors_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensorsquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensorsquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialbus.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachine.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachine_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachineqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachineqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_texttospeech.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboardsettings.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboardsettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannelquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannelquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_websockets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_websockets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webview.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webview_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webviewquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webviewquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt_functions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\win32-g++\qmake.conf C:\PySchool\6.7.3\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\PySchool\6.7.3\mingw_64\mkspecs\features\exclusive_builds.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\toolchain.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\default_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\default_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resolve_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\default_post.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\build_pass.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qml_debug.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\precompile_header.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\warn_on.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\permissions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resources_functions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resources.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\moc.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\opengl.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\uic.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qmake_use.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\file_copies.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\windows.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\testcase_targets.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\exceptions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\yacc.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\lex.prf ..\..\Atelier_Connexion.pro C:\PySchool\6.7.3\mingw_64\lib\Qt6Widgets.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Gui.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Sql.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Core.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6EntryPoint.prl    C:\PySchool\6.7.3\mingw_64\mkspecs\features\data\dummy.cpp ..\..\mainwindow.h ..\..\connection.h  ..\..\main.cpp ..\..\mainwindow.cpp ..\..\connection.cpp ..\..\mainwindow.ui    
+	$(ZIP) Atelier_Connexion.zip $(SOURCES) $(DIST) ..\..\..\..\Atelier_Connexion.pro C:\PySchool\6.7.3\mingw_64\mkspecs\features\spec_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\device_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\common\sanitize.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\gcc-base.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\g++-base.conf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\PySchool\6.7.3\mingw_64\mkspecs\common\windows-vulkan.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\g++-win32.conf C:\PySchool\6.7.3\mingw_64\mkspecs\common\windows-desktop.conf C:\PySchool\6.7.3\mingw_64\mkspecs\qconfig.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3danimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dcore.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dextras.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dinput.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dlogic.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3drender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_3drender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_activeqt.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_activeqt_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axbase_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axcontainer.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axserver.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_axserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bluetooth.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_core.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualization.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualizationqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_datavisualizationqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_graphs.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_graphs_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpc.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpcquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_grpcquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_help.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_httpserver.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_httpserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttracker.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttracker_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttrackerqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_jsonrpc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_languageserver_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_location.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_location_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_network.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_networkauth.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_nfc.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_nfc_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdf.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdf_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_pdfwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioning.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioning_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioningquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobuf.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobuf_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtcoretypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtcoretypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtguitypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufqtguitypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufwellknowntypes.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_protobufwellknowntypes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysics.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysics_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysicshelpers.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dphysicshelpers_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjectsqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_remoteobjectsqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_repparser.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_repparser_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxmlqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_scxmlqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensors.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensors_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensorsquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sensorsquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialbus.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialport.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_serialport_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachine.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachine_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachineqml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_statemachineqml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_texttospeech.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboardsettings.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_virtualkeyboardsettings_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannel.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannelquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webchannelquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_websockets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_websockets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webview.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webview_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webviewquick.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_webviewquick_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt_functions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\win32-g++\qmake.conf C:\PySchool\6.7.3\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\PySchool\6.7.3\mingw_64\mkspecs\features\exclusive_builds.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\toolchain.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\default_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\default_pre.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resolve_config.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\default_post.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\build_pass.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qml_debug.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\precompile_header.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\warn_on.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\permissions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qt.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resources_functions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\resources.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\moc.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\opengl.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\uic.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\qmake_use.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\file_copies.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\win32\windows.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\testcase_targets.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\exceptions.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\yacc.prf C:\PySchool\6.7.3\mingw_64\mkspecs\features\lex.prf ..\..\Atelier_Connexion.pro C:\PySchool\6.7.3\mingw_64\lib\Qt6Widgets.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Gui.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Sql.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6Core.prl C:\PySchool\6.7.3\mingw_64\lib\Qt6EntryPoint.prl    C:\PySchool\6.7.3\mingw_64\mkspecs\features\data\dummy.cpp ..\..\connection.h ..\..\mainwindow.h ..\..\projetcrud.h  ..\..\main.cpp ..\..\connection.cpp ..\..\mainwindow.cpp ..\..\projetcrud.cpp ..\..\projetcrud.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\connection.o debug\moc_mainwindow.o
+	-$(DEL_FILE) debug\main.o debug\connection.o debug\mainwindow.o debug\projetcrud.o debug\moc_mainwindow.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -301,20 +305,31 @@ debug/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../projetcrud.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QString \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		debug/moc_predefs.h \
 		C:/PySchool/6.7.3/mingw_64/bin/moc.exe
-	C:\PySchool\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/debug/moc_predefs.h" -IC:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++ -I"C:/Users/21699/Desktop/projet qt" -IC:/PySchool/6.7.3/mingw_64/include -IC:/PySchool/6.7.3/mingw_64/include/QtWidgets -IC:/PySchool/6.7.3/mingw_64/include/QtGui -IC:/PySchool/6.7.3/mingw_64/include/QtSql -IC:/PySchool/6.7.3/mingw_64/include/QtCore -I. -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/PySchool/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\PySchool\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/21699/Desktop/projet_qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++ -IC:/Users/21699/Desktop/projet_qt -IC:/PySchool/6.7.3/mingw_64/include -IC:/PySchool/6.7.3/mingw_64/include/QtWidgets -IC:/PySchool/6.7.3/mingw_64/include/QtGui -IC:/PySchool/6.7.3/mingw_64/include/QtSql -IC:/PySchool/6.7.3/mingw_64/include/QtCore -I. -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/PySchool/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/PySchool/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_projetcrud.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../../mainwindow.ui \
+	-$(DEL_FILE) ui_projetcrud.h
+ui_projetcrud.h: ../../projetcrud.ui \
 		C:/PySchool/6.7.3/mingw_64/bin/uic.exe
-	C:\PySchool\6.7.3\mingw_64\bin\uic.exe ..\..\mainwindow.ui -o ui_mainwindow.h
+	C:\PySchool\6.7.3\mingw_64\bin\uic.exe ..\..\projetcrud.ui -o ui_projetcrud.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -517,6 +532,17 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../projetcrud.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QString \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QApplication \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qapplication.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
@@ -525,15 +551,133 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlDatabase \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlError \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlerror.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\..\main.cpp
+
+debug/connection.o: ../../connection.cpp ../../connection.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlDatabase \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qconfig.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtcore-config.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtconfigmacros.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtcoreexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcompilerdetection.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qprocessordetection.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsystemdetection.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtdeprecationmarkers.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtpreprocessorsupport.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qassert.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtnoop.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtypes.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtversion.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtclasshelpermacros.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtypeinfo.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcontainerfwd.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsysinfo.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlogging.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qflags.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcompare_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qatomic.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbasicatomic.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qatomic_cxx11.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qgenericatomic.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qyieldcpu.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qconstructormacros.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qdarwinhelpers.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qexceptionhandling.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qforeach.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qttypetraits.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qfunctionpointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qglobalstatic.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmalloc.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qminmax.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qnumeric.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qoverload.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qswap.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtenvironmentvariables.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtresource.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qttranslation.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstring.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qchar.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbytearray.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qrefcount.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qnamespace.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtmetamacros.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qarraydata.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qpair.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qarraydataops.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qxptype_traits.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/q20type_traits.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/q20functional.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/q20memory.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringliteral.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringalgorithms.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlatin1stringview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qanystringview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qutf8stringview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringtokenizer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qshareddata.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQuery \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\..\main.cpp
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qvariant.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcompare.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qdatastream.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qfloat16.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmath.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiterable.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmetacontainer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcontainerinfo.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtaggedpointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qscopeguard.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qdebug.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtextstream.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcontiguouscache.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlist.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiterator.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbytearraylist.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringlist.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringmatcher.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmap.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qshareddata_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qset.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qhash.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qvarlengtharray.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/q23utility.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobject.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbindingstorage.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\connection.o ..\..\connection.cpp
 
 debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
@@ -724,16 +868,24 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
-		ui_mainwindow.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtGui/QStandardItemModel \
-		C:/PySchool/6.7.3/mingw_64/include/QtGui/qstandarditemmodel.h \
+		../../projetcrud.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QString \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QTableView \
-		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qframe.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qitemselectionmodel.h \
+		ui_mainwindow.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QVariant \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/QIcon \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QApplication \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qapplication.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QComboBox \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
@@ -744,13 +896,63 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtGui/QFont
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qframe.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QDateEdit \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qdatetimeedit.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtimezone.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QFrame \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qpainter.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qtextoption.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qpen.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QHeaderView \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qheaderview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QLabel \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qlabel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qpicture.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qtextdocument.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QLineEdit \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qlineedit.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qtextcursor.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtGui/qtextformat.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QMenuBar \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qmenubar.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qmenu.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QPushButton \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qabstractbutton.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QStatusBar \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qstatusbar.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QTabWidget \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QTableView \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QVBoxLayout \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qboxlayout.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qlayout.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qlayoutitem.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qgridlayout.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QWidget \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlError \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 
-debug/connection.o: ../../connection.cpp ../../connection.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlDatabase \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+debug/projetcrud.o: ../../projetcrud.cpp ../../projetcrud.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QString \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstring.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qchar.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -795,10 +997,6 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstring.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qchar.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qrefcount.h \
@@ -825,12 +1023,12 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlError \
-		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qshareddata.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQuery \
 		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qvariant.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmetatype.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcompare.h \
@@ -839,6 +1037,7 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qfloat16.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qmath.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiterable.h \
@@ -853,6 +1052,7 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qtextstream.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcontiguouscache.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qshareddata.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qlist.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qiterator.h \
@@ -868,8 +1068,12 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/PySchool/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
-		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbindingstorage.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\connection.o ..\..\connection.cpp
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qbindingstorage.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/PySchool/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/PySchool/6.7.3/mingw_64/include/QtCore/QDebug
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\projetcrud.o ..\..\projetcrud.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_mainwindow.o debug\moc_mainwindow.cpp

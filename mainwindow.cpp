@@ -1,8 +1,8 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
-#include <QStandardItemModel>
-#include <QTableView>
-#include <QFont>
+#include "ui_mainwindow.h"
+#include <QMessageBox>
+#include <QSqlError>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,74 +10,93 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Create the model
-    QStandardItemModel *model = new QStandardItemModel(0, 6, this);  // 0 rows, 6 columns (including category)
+    connect(ui->tableView, &QTableView::clicked, this, &MainWindow::on_tableView_itemClicked);
+    connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addProjectButton_clicked);
+    connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_cancelButton_clicked);
+    connect(ui->supprimer, &QPushButton::clicked, this, &MainWindow::on_deleteProjectButton_clicked);
+    connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyProjectButton_clicked);
 
-    // Set headers
-    model->setHeaderData(0, Qt::Horizontal, "Produit");
-    model->setHeaderData(1, Qt::Horizontal, "Quantité");
-    model->setHeaderData(2, Qt::Horizontal, "Prix");
-    model->setHeaderData(3, Qt::Horizontal, "Catégorie");
-    model->setHeaderData(4, Qt::Horizontal, "Modifier");
-    model->setHeaderData(5, Qt::Horizontal, "Supprimer");
-
-    // Set bold font for headers
-    QFont boldFont;
-    boldFont.setBold(true);
-    for (int i = 0; i < 6; ++i) {
-        model->setHeaderData(i, Qt::Horizontal, model->headerData(i, Qt::Horizontal).toString(), Qt::DisplayRole);
-        model->setHeaderData(i, Qt::Horizontal, boldFont, Qt::FontRole);
-    }
-
-    // Add some example data with categories and prices in DT
-    model->insertRow(0);
-    model->setData(model->index(0, 0), "Chaise");
-    model->setData(model->index(0, 1), 10);
-    model->setData(model->index(0, 2), "150 DT");
-    model->setData(model->index(0, 3), "Mobilier");
-    model->setData(model->index(0, 4), "✏️");  // Modifier icon (pen)
-    model->setData(model->index(0, 5), "🗑️");  // Supprimer icon (bin)
-
-    model->insertRow(1);
-    model->setData(model->index(1, 0), "Table");
-    model->setData(model->index(1, 1), 5);
-    model->setData(model->index(1, 2), "300 DT");
-    model->setData(model->index(1, 3), "Mobilier");
-    model->setData(model->index(1, 4), "✏️");
-    model->setData(model->index(1, 5), "🗑️");
-
-    model->insertRow(2);
-    model->setData(model->index(2, 0), "Stylo");
-    model->setData(model->index(2, 1), 100);
-    model->setData(model->index(2, 2), "5 DT");
-    model->setData(model->index(2, 3), "Fournitures de bureau");
-    model->setData(model->index(2, 4), "✏️");
-    model->setData(model->index(2, 5), "🗑️");
-
-    model->insertRow(3);
-    model->setData(model->index(3, 0), "Ordinateur portable");
-    model->setData(model->index(3, 1), 20);
-    model->setData(model->index(3, 2), "2000 DT");
-    model->setData(model->index(3, 3), "Électronique");
-    model->setData(model->index(3, 4), "✏️");
-    model->setData(model->index(3, 5),"🗑️");
-
-    model->insertRow(4);
-    model->setData(model->index(4, 0), "Cahier");
-    model->setData(model->index(4, 1), 50);
-    model->setData(model->index(4, 2), "10 DT");
-    model->setData(model->index(4, 3), "Fournitures de bureau");
-    model->setData(model->index(4, 4), "✏️");
-    model->setData(model->index(4, 5), "🗑️");
-
-    // Set the model to your QTableView
-    ui->tableView->setModel(model);  // Assuming tableView is your QTableView object in the UI
-
-    // Set the size of the QTableView (621x371)
-    ui->tableView->setFixedSize(621, 371);
+    fillTableWidget();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::fillTableWidget() {
+    QSqlQueryModel *model = currentProject.afficher();
+    if (model) {
+        ui->tableView->setModel(model);
+        ui->tableView->resizeColumnsToContents();
+    }
+}
+
+void MainWindow::on_addProjectButton_clicked() {
+    QString nom = ui->lineEdit_nom->text();
+    QString description = ui->lineEdit_description->text();
+    double budget = ui->lineEdit_budget->text().toDouble();
+    QString date_debut = ui->lineEdit_dateDebut->text();
+    QString date_fin = ui->lineEdit_dateFin->text();
+
+    QSqlQuery query;
+    query.exec("SELECT MAX(ID_PROJET) FROM projets");
+    int id_projet = 1;
+    if (query.next()) {
+        id_projet = query.value(0).toInt() + 1;
+    }
+
+    currentProject = ProjetCRUD(id_projet, nom, description, budget, date_debut, date_fin);
+    if (currentProject.ajouter()) {
+        QMessageBox::information(this, "Success", "Projet ajouté avec succès.");
+        fillTableWidget();
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de l'ajout du projet.");
+    }
+}
+
+void MainWindow::on_modifyProjectButton_clicked() {
+    int id = ui->id_rech->text().toInt();
+    QString nom = ui->lineEdit_nom->text();
+    QString description = ui->lineEdit_description->text();
+    double budget = ui->lineEdit_budget->text().toDouble();
+    QString date_debut = ui->lineEdit_dateDebut->text();
+    QString date_fin = ui->lineEdit_dateFin->text();
+
+    currentProject = ProjetCRUD(id, nom, description, budget, date_debut, date_fin);
+    if (currentProject.modifier(id)) {
+        QMessageBox::information(this, "Success", "Projet modifié avec succès.");
+        fillTableWidget();
+    } else {
+        QMessageBox::warning(this, "Failure", "Échec de la modification du projet.");
+    }
+}
+
+void MainWindow::on_deleteProjectButton_clicked() {
+    int id = ui->id_rech->text().toInt();
+    if (currentProject.supprimer(id)) {
+        QMessageBox::information(this, "Success", "Projet supprimé avec succès.");
+        fillTableWidget();
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de la suppression du projet.");
+    }
+}
+
+void MainWindow::on_tableView_itemClicked(const QModelIndex &index) {
+    int row = index.row();
+
+    ui->id_rech->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 0)).toString());
+    ui->lineEdit_nom->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 1)).toString());
+    ui->lineEdit_description->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 2)).toString());
+    ui->lineEdit_budget->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 3)).toString());
+    ui->lineEdit_dateDebut->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 4)).toString());
+    ui->lineEdit_dateFin->setText(ui->tableView->model()->data(ui->tableView->model()->index(row, 5)).toString());
+}
+
+void MainWindow::on_cancelButton_clicked() {
+    ui->lineEdit_nom->clear();
+    ui->lineEdit_description->clear();
+    ui->lineEdit_budget->clear();
+    ui->lineEdit_dateDebut->clear();
+    ui->lineEdit_dateFin->clear();
 }

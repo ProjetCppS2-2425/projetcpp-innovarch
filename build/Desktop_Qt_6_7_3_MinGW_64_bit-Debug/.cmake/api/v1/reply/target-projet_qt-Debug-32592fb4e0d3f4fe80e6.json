@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "projet.exe"
+			"path" : "projet_qt.exe"
 		},
 		{
-			"path" : "projet.pdb"
+			"path" : "projet_qt.pdb"
 		}
 	],
 	"backtrace" : 4,
@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 63,
+				"line" : 62,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 46,
+				"line" : 45,
 				"parent" : 0
 			},
 			{
@@ -322,7 +322,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/include"
+					"path" : "C:/Users/21699/Desktop/projet_qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_qt_autogen/include"
 				},
 				{
 					"backtrace" : 14,
@@ -364,22 +364,21 @@
 			[
 				0,
 				1,
-				2,
-				8
+				2
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "projet_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"id" : "projet_qt_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
-			"id" : "projet_autogen::@6890427a1f51a3e7e1df"
+			"id" : "projet_qt_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "projet::@6890427a1f51a3e7e1df",
+	"id" : "projet_qt::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -391,7 +390,7 @@
 		],
 		"prefix" : 
 		{
-			"path" : "C:/Program Files (x86)/projet"
+			"path" : "C:/Program Files (x86)/projet_qt"
 		}
 	},
 	"link" : 
@@ -473,8 +472,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "projet",
-	"nameOnDisk" : "projet.exe",
+	"name" : "projet_qt",
+	"nameOnDisk" : "projet_qt.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -488,8 +487,7 @@
 			[
 				0,
 				1,
-				2,
-				8
+				2
 			]
 		},
 		{
@@ -497,7 +495,7 @@
 			"sourceIndexes" : 
 			[
 				3,
-				6
+				5
 			]
 		},
 		{
@@ -508,25 +506,17 @@
 			]
 		},
 		{
-			"name" : "Resources",
-			"sourceIndexes" : 
-			[
-				5
-			]
-		},
-		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				7
+				6
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				9,
-				10
+				7
 			]
 		}
 	],
@@ -536,7 +526,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp",
+			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_qt_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -562,40 +552,22 @@
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 4,
-			"path" : "icons.qrc",
-			"sourceGroupIndex" : 3
-		},
-		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/include/ui_mainwindow.h",
+			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_qt_autogen/include/ui_mainwindow.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp",
+			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_qt_autogen/timestamp",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_qt_autogen/timestamp.rule",
 			"sourceGroupIndex" : 4
-		},
-		{
-			"backtrace" : 0,
-			"compileGroupIndex" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/EWIEGA46WW/qrc_icons.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/EWIEGA46WW/qrc_icons.cpp.rule",
-			"sourceGroupIndex" : 5
 		}
 	],
 	"type" : "EXECUTABLE"

@@ -877,9 +877,9 @@ public:
         modifier->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         annuler->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
         ajouter->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "En cours", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "Termin\303\251", nullptr));
-        comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "Annul\303\251", nullptr));
+        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "bureaux", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "r\303\251sidentiel", nullptr));
+        comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "commercial", nullptr));
 
         comboBox_2->setCurrentText(QString());
         comboBox_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "statut", nullptr));

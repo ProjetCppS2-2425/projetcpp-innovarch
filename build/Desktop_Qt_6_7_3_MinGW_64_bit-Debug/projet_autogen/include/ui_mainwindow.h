@@ -57,6 +57,7 @@ public:
     QPushButton *pushButton_6;
     QFrame *frame_6;
     QLabel *label_146;
+    QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
     QDateEdit *dateEdit;
     QLineEdit *lineEdit_3;
@@ -69,12 +70,13 @@ public:
     QLabel *label_155;
     QLabel *label_151;
     QDateEdit *dateEdit_2;
+    QLineEdit *lineEdit_6;
+    QLabel *label_160;
     QLabel *label_161;
     QLineEdit *lineEdit_7;
     QPushButton *modifier;
     QPushButton *annuler;
     QPushButton *ajouter;
-    QComboBox *comboBox_2;
     QLabel *label_156;
     QWidget *tab_7;
     QGraphicsView *pie_2;
@@ -573,6 +575,21 @@ public:
         label_146->setObjectName("label_146");
         label_146->setGeometry(QRect(2, 10, 101, 31));
         label_146->setStyleSheet(QString::fromUtf8(""));
+        lineEdit = new QLineEdit(frame_6);
+        lineEdit->setObjectName("lineEdit");
+        lineEdit->setGeometry(QRect(10, 420, 111, 31));
+        lineEdit->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
         lineEdit_2 = new QLineEdit(frame_6);
         lineEdit_2->setObjectName("lineEdit_2");
         lineEdit_2->setGeometry(QRect(10, 120, 113, 26));
@@ -601,7 +618,7 @@ public:
 ""));
         lineEdit_3 = new QLineEdit(frame_6);
         lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(10, 50, 113, 31));
+        lineEdit_3->setGeometry(QRect(10, 50, 113, 26));
         lineEdit_3->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -624,7 +641,7 @@ public:
         label_149->setStyleSheet(QString::fromUtf8(""));
         label_150 = new QLabel(frame_6);
         label_150->setObjectName("label_150");
-        label_150->setGeometry(QRect(2, 148, 121, 35));
+        label_150->setGeometry(QRect(2, 148, 101, 35));
         label_150->setStyleSheet(QString::fromUtf8(""));
         lineEdit_5 = new QLineEdit(frame_6);
         lineEdit_5->setObjectName("lineEdit_5");
@@ -649,6 +666,11 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
         comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(10, 190, 141, 32));
         comboBox->setStyleSheet(QString::fromUtf8("\n"
@@ -661,7 +683,7 @@ public:
 ""));
         label_155 = new QLabel(frame_6);
         label_155->setObjectName("label_155");
-        label_155->setGeometry(QRect(150, 10, 131, 41));
+        label_155->setGeometry(QRect(172, 150, 91, 31));
         label_155->setStyleSheet(QString::fromUtf8(""));
         label_151 = new QLabel(frame_6);
         label_151->setObjectName("label_151");
@@ -678,13 +700,32 @@ public:
 "\n"
 "\n"
 ""));
+        lineEdit_6 = new QLineEdit(frame_6);
+        lineEdit_6->setObjectName("lineEdit_6");
+        lineEdit_6->setGeometry(QRect(180, 271, 113, 29));
+        lineEdit_6->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
+        label_160 = new QLabel(frame_6);
+        label_160->setObjectName("label_160");
+        label_160->setGeometry(QRect(172, 228, 121, 31));
+        label_160->setStyleSheet(QString::fromUtf8(""));
         label_161 = new QLabel(frame_6);
         label_161->setObjectName("label_161");
         label_161->setGeometry(QRect(2, 380, 91, 30));
         label_161->setStyleSheet(QString::fromUtf8(""));
         lineEdit_7 = new QLineEdit(frame_6);
         lineEdit_7->setObjectName("lineEdit_7");
-        lineEdit_7->setGeometry(QRect(160, 50, 111, 31));
+        lineEdit_7->setGeometry(QRect(180, 190, 111, 31));
         lineEdit_7->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -757,20 +798,6 @@ public:
 "    background-color: #9f86c0;  /* Darker when clicked */\n"
 "}\n"
 ""));
-        comboBox_2 = new QComboBox(frame_6);
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->setObjectName("comboBox_2");
-        comboBox_2->setGeometry(QRect(10, 420, 141, 32));
-        comboBox_2->setStyleSheet(QString::fromUtf8("\n"
-"    border: 2px solid #4e1764;  /* Default thicker border */\n"
-"    border-radius: 5px;\n"
-"    background-color: white;  /* Ensure background stays white */\n"
-"\n"
-"\n"
-"\n"
-""));
         label_156 = new QLabel(tab_6);
         label_156->setObjectName("label_156");
         label_156->setGeometry(QRect(290, 70, 221, 51));
@@ -812,7 +839,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1350, 25));
+        menubar->setGeometry(QRect(0, 0, 1350, 18));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -837,7 +864,7 @@ public:
         comboBox_tri_2->setItemText(5, QCoreApplication::translate("MainWindow", "Cat\303\251gorie", nullptr));
 
         supprimer->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
-        label_158->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:700;\">Recherche projet :</span></p></body></html>", nullptr));
+        label_158->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:700;\">Recherche ressource :</span></p></body></html>", nullptr));
         id_rech_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez l'id recherch\303\251", nullptr));
         chercher_2->setText(QCoreApplication::translate("MainWindow", "Chercher", nullptr));
         modifier2->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
@@ -849,41 +876,41 @@ public:
         pushButton_2->setText(QCoreApplication::translate("MainWindow", " Ressources", nullptr));
         pushButton_5->setText(QCoreApplication::translate("MainWindow", " Contrats", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", " Contracteurs", nullptr));
-        label_146->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Id projet:</span></p></body></html>", nullptr));
-        lineEdit_2->setText(QString());
-        lineEdit_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez nom client associ\303\251", nullptr));
+        label_146->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Id ressource:</span></p></body></html>", nullptr));
+        lineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez son \303\251tat", nullptr));
+        lineEdit_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez le nom de la ressource", nullptr));
 #if QT_CONFIG(tooltip)
         lineEdit_3->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>dhzbebcl</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(whatsthis)
         lineEdit_3->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>vj j;</p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
-        lineEdit_3->setText(QString());
         lineEdit_3->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez l'id", nullptr));
         label_148->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Date d'ajout :</span></p></body></html>", nullptr));
-        label_149->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Client associ\303\251 :</span></p></body></html>", nullptr));
-        label_150->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Type de projet :</span></p></body></html>", nullptr));
-        lineEdit_5->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez le budget", nullptr));
-        label_154->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">budget :</span></p></body></html>", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "bureaux", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "r\303\251sidentiel", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "commercial", nullptr));
+        label_149->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nom ressource :</span></p></body></html>", nullptr));
+        label_150->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Cat\303\251gorie :</span></p></body></html>", nullptr));
+        lineEdit_5->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez le co\303\273t", nullptr));
+        label_154->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Co\303\273t :</span></p></body></html>", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "S\303\251lectionnez la cat\303\251gorie", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
+        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
+        comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
+        comboBox->setItemText(6, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
+        comboBox->setItemText(7, QCoreApplication::translate("MainWindow", "Outils", nullptr));
 
-        comboBox->setPlaceholderText(QCoreApplication::translate("MainWindow", "S\303\251lectionnez type", nullptr));
-        label_155->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nom du projet :</span></p></body></html>", nullptr));
-        label_151->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Ech\303\251ance :</span></p></body></html>", nullptr));
-        label_161->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Statut :</span></p></body></html>", nullptr));
-        lineEdit_7->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez nom", nullptr));
+        comboBox->setPlaceholderText(QCoreApplication::translate("MainWindow", "S\303\251lectionnez la cat\303\251gorie", nullptr));
+        label_155->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Quantit\303\251 :</span></p></body></html>", nullptr));
+        label_151->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Date dernier entretien :</span></p></body></html>", nullptr));
+        lineEdit_6->setPlaceholderText(QCoreApplication::translate("MainWindow", "Nom du fournisseur", nullptr));
+        label_160->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Fournisseur :</span></p></body></html>", nullptr));
+        label_161->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Etat :</span></p></body></html>", nullptr));
+        lineEdit_7->setPlaceholderText(QCoreApplication::translate("MainWindow", "Entrez sa quantit\303\251", nullptr));
         modifier->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         annuler->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
         ajouter->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "En cours", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "Termin\303\251", nullptr));
-        comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "Annul\303\251", nullptr));
-
-        comboBox_2->setCurrentText(QString());
-        comboBox_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "statut", nullptr));
-        label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout projets</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
+        label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout ressources</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));

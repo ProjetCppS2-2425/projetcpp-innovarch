@@ -1544,16 +1544,13 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/PySchool/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake"
-		},
-		{
-			"path" : "icons.qrc"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
-		"source" : "C:/Users/21699/Desktop/projet qt"
+		"build" : "C:/Users/21699/Desktop/projet_qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+		"source" : "C:/Users/21699/Desktop/projet_qt"
 	},
 	"version" : 
 	{

@@ -381,6 +381,7 @@ Makefile: ../../Atelier_Connexion.pro C:/PySchool/6.7.3/mingw_64/mkspecs/win32-g
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/qt_config.prf \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++/qmake.conf \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/exclusive_builds.prf \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/toolchain.prf \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/default_pre.prf \
@@ -411,7 +412,6 @@ Makefile: ../../Atelier_Connexion.pro C:/PySchool/6.7.3/mingw_64/mkspecs/win32-g
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Sql.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Core.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6EntryPoint.prl \
-		.qmake.stash \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\..\Atelier_Connexion.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/spec_pre.prf:
@@ -725,6 +725,7 @@ C:/PySchool/6.7.3/mingw_64/mkspecs/features/qt_functions.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/qt_config.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/win32-g++/qmake.conf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/exclusive_builds.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/toolchain.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/default_pre.prf:
@@ -755,7 +756,6 @@ C:/PySchool/6.7.3/mingw_64/lib/Qt6Gui.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Sql.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Core.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6EntryPoint.prl:
-.qmake.stash:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/build_pass.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\..\Atelier_Connexion.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

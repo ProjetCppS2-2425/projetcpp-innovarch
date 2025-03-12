@@ -26,15 +26,19 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    mainwindow.cpp \
+    projet.cpp \
+    projetcrud.cpp
 
 HEADERS += \
-        mainwindow.h \
-    connection.h
+    connection.h \
+    mainwindow.h \
+    projet.h \
+    projetcrud.h
 
 FORMS += \
-        mainwindow.ui
+    projetcrud.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,30 +1,49 @@
 # ninja log v6
-19	2285	7622643871284944	projet_autogen/timestamp	22da0596cb88beaf
-19	2285	7622643871284944	projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-19	2285	7622643871284944	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	22da0596cb88beaf
-19	2285	7622643871284944	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-2305	2490	7622643874802649	projet_autogen/EWIEGA46WW/qrc_icons.cpp	7eafffb27f89e1d1
-2305	2490	7622643874802649	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/EWIEGA46WW/qrc_icons.cpp	7eafffb27f89e1d1
-2516	3311	7622643875322170	CMakeFiles/projet.dir/projet_autogen/EWIEGA46WW/qrc_icons.cpp.obj	aba1228623bc7e0f
-2491	7207	7622643875068275	CMakeFiles/projet.dir/projet_autogen/mocs_compilation.cpp.obj	3619f1f32f332a3f
-2508	9777	7622643875241797	CMakeFiles/projet.dir/mainwindow.cpp.obj	6b13df66357258d5
-63	368	7622644339521655	projet_autogen/timestamp	22da0596cb88beaf
-63	368	7622644339521655	projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-63	368	7622644339521655	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	22da0596cb88beaf
-63	368	7622644339521655	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-376	5490	7622644342690000	CMakeFiles/projet.dir/mainwindow.cpp.obj	6b13df66357258d5
-130	449	7622644582518377	projet_autogen/timestamp	22da0596cb88beaf
-130	449	7622644582518377	projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-130	449	7622644582518377	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	22da0596cb88beaf
-130	449	7622644582518377	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-457	5154	7622644585792878	CMakeFiles/projet.dir/mainwindow.cpp.obj	6b13df66357258d5
-167	522	7628316673265365	projet_autogen/timestamp	22da0596cb88beaf
-167	522	7628316673265365	projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-167	522	7628316673265365	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	22da0596cb88beaf
-167	522	7628316673265365	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-530	5488	7628316676944206	CMakeFiles/projet.dir/mainwindow.cpp.obj	6b13df66357258d5
-55	379	7628667121581817	projet_autogen/timestamp	22da0596cb88beaf
-55	379	7628667121581817	projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-55	379	7628667121581817	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	22da0596cb88beaf
-55	379	7628667121581817	C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	22da0596cb88beaf
-388	5280	7628667124916455	CMakeFiles/projet.dir/mainwindow.cpp.obj	6b13df66357258d5
+47	294	7616174570550265	projet_autogen/timestamp	d59cf9001d4b79b9
+47	294	7616174570550265	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+966	3726	7616169468538977	CMakeFiles/projet.dir/projet_autogen/mocs_compilation.cpp.obj	b98edb1a277c6c95
+4831	5198	7616174618382412	projet.exe	cc4c8d83b62a962
+970	3770	7616169468578845	CMakeFiles/projet.dir/main.cpp.obj	4aa3c625591a0c27
+47	294	7616174570550265	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+295	4831	7616174573023659	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+47	294	7616174570550265	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+20	43	7616169457888271	CMakeFiles/clean.additional	5ce10eb965afdbd9
+43	52	7616169458117155	clean	1948f3ff1c28614b
+884	965	7616169468417845	projet_autogen/EWIEGA46WW/qrc_icons.cpp	a8df194b510356d7
+884	965	7616169468417845	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/EWIEGA46WW/qrc_icons.cpp	a8df194b510356d7
+978	1609	7616169468658642	CMakeFiles/projet.dir/projet_autogen/EWIEGA46WW/qrc_icons.cpp.obj	3e709572b65d87af
+29	3689	7616153174359960	build.ninja	52e87e712ff19bef
+107	586	7616180839140172	projet_autogen/timestamp	d59cf9001d4b79b9
+107	586	7616180839140172	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+107	586	7616180839140172	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+107	586	7616180839140172	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+84	392	7616181665672498	projet_autogen/timestamp	d59cf9001d4b79b9
+84	392	7616181665672498	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+84	392	7616181665672498	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+84	392	7616181665672498	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+394	5370	7616181668776442	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+5370	5762	7616181718525243	projet.exe	cc4c8d83b62a962
+41	261	7616182745484192	projet_autogen/timestamp	d59cf9001d4b79b9
+41	261	7616182745484192	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+41	261	7616182745484192	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+41	261	7616182745484192	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+263	4903	7616182747708232	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+4903	5266	7616182794114176	projet.exe	cc4c8d83b62a962
+47	269	7616184016635085	projet_autogen/timestamp	d59cf9001d4b79b9
+47	269	7616184016635085	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+47	269	7616184016635085	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+47	269	7616184016635085	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+271	5553	7616184018878623	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+5554	5971	7616184071707986	projet.exe	cc4c8d83b62a962
+50	295	7616184572706088	projet_autogen/timestamp	d59cf9001d4b79b9
+50	295	7616184572706088	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+50	295	7616184572706088	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+50	295	7616184572706088	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+297	4698	7616184575179486	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+4699	5027	7616184619191837	projet.exe	cc4c8d83b62a962
+37	209	7616186287799471	projet_autogen/timestamp	d59cf9001d4b79b9
+37	209	7616186287799471	projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+37	209	7616186287799471	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/timestamp	d59cf9001d4b79b9
+37	209	7616186287799471	C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/mocs_compilation.cpp	d59cf9001d4b79b9
+211	4645	7616186289538908	CMakeFiles/projet.dir/mainwindow.cpp.obj	8a42baf062c2d6fc
+4646	4990	7616186333890552	projet.exe	cc4c8d83b62a962

@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-ffed567113e0bfd67267.json",
+					"jsonFile" : "directory-.-Debug-62a47300c491129d34a9.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -30,7 +30,7 @@
 					[
 						0
 					],
-					"name" : "projet",
+					"name" : "projet_qt",
 					"targetIndexes" : 
 					[
 						0,
@@ -43,23 +43,23 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "projet::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-projet-Debug-8c092716f8c530a4483c.json",
-					"name" : "projet",
+					"id" : "projet_qt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-projet_qt-Debug-32592fb4e0d3f4fe80e6.json",
+					"name" : "projet_qt",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "projet_autogen::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-projet_autogen-Debug-262a2d8db0cb6cf9fcaf.json",
-					"name" : "projet_autogen",
+					"id" : "projet_qt_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-projet_qt_autogen-Debug-e2b460add9e7d033b557.json",
+					"name" : "projet_qt_autogen",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "projet_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-projet_autogen_timestamp_deps-Debug-180e378d5815b92a31b7.json",
-					"name" : "projet_autogen_timestamp_deps",
+					"id" : "projet_qt_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-projet_qt_autogen_timestamp_deps-Debug-feb3b8f9904d34526b35.json",
+					"name" : "projet_qt_autogen_timestamp_deps",
 					"projectIndex" : 0
 				}
 			]
@@ -68,8 +68,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/21699/Desktop/projet qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
-		"source" : "C:/Users/21699/Desktop/projet qt"
+		"build" : "C:/Users/21699/Desktop/projet_qt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+		"source" : "C:/Users/21699/Desktop/projet_qt"
 	},
 	"version" : 
 	{

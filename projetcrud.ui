@@ -409,7 +409,7 @@ QPushButton#pdf_2:hover {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="icons.qrc">:/ressources/images/logot.png</pixmap>
+        <pixmap>:/ressources/images/logot.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -458,7 +458,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Employés</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/employes.png</normaloff>
             <normalon>:/ressources/images/employes.png</normalon>:/ressources/images/employes.png</iconset>
           </property>
@@ -499,7 +499,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Clients</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/clients.png</normaloff>
             <normalon>:/ressources/images/clients.png</normalon>:/ressources/images/clients.png</iconset>
           </property>
@@ -541,7 +541,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Projets</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/project.png</normaloff>
             <normalon>:/ressources/images/project.png</normalon>:/ressources/images/project.png</iconset>
           </property>
@@ -583,7 +583,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Ressources</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/desk.ico</normaloff>
             <normalon>:/ressources/images/desk.ico</normalon>:/ressources/images/desk.ico</iconset>
           </property>
@@ -625,7 +625,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Contrats</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/contrats.png</normaloff>
             <normalon>:/ressources/images/contrats.png</normalon>:/ressources/images/contrats.png</iconset>
           </property>
@@ -667,7 +667,7 @@ QPushButton:hover, QPushButton:pressed {
            <string> Contracteurs</string>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/ressources/images/architect.png</normaloff>
             <normalon>:/ressources/images/architect.png</normalon>:/ressources/images/architect.png</iconset>
           </property>
@@ -1006,9 +1006,9 @@ QLineEdit:focus {
         <string notr="true">
     border: 2px solid #4e1764;  /* Default thicker border */
     border-radius: 5px;
-    background-color: white;  /* Ensure background stays white */
+    
 
-
+background-color: rgb(255, 255, 255);
 
 </string>
        </property>
@@ -1249,17 +1249,17 @@ QPushButton#ajouter:pressed {
        </property>
        <item>
         <property name="text">
-         <string>En cours</string>
+         <string>bureaux</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Terminé</string>
+         <string>résidentiel</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Annulé</string>
+         <string>commercial</string>
         </property>
        </item>
       </widget>
@@ -1375,8 +1375,6 @@ QLabel {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
