@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/ressources">
+        <file>images/architect.png</file>
+        <file>images/clients.png</file>
+        <file>images/contrats.png</file>
+        <file>images/desk.ico</file>
+        <file>images/desk.png</file>
+        <file>images/employes.png</file>
+        <file>images/Logo.png</file>
+        <file>images/project.png</file>
+        <file>images/ressource.png</file>
+        <file>images/logot.png</file>
+        <file>images/bin.png</file>
+        <file>images/pen.png</file>
+        <file>images/ascending.png</file>
+        <file>images/descending.png</file>
+        <file>images/search.png</file>
+    </qresource>
+</RCC>
