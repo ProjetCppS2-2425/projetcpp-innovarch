@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-23e11ff6efbb1b0b8c38.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "selim",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "selim::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selim-Debug-7f882c31cb83ff6a3b1e.json",
+					"name" : "selim",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "selim_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selim_autogen-Debug-bc15da121fedfa99fb31.json",
+					"name" : "selim_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "selim_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-selim_autogen_timestamp_deps-Debug-04acd1609e8602cc5d1a.json",
+					"name" : "selim_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+		"source" : "C:/Users/selim/OneDrive/Bureau/projet c++/selim"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

@@ -1,0 +1,27 @@
+# ninja log v6
+32	4328	7616267704269016	selim_autogen/timestamp	8e69bef56a136c34
+32	4328	7616267704269016	selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+32	4328	7616267704269016	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/timestamp	8e69bef56a136c34
+32	4328	7616267704269016	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+4337	8236	7616267708641476	CMakeFiles/selim.dir/selim_autogen/mocs_compilation.cpp.obj	e7c3615cc940c60c
+4625	9117	7616267711529962	CMakeFiles/selim.dir/main.cpp.obj	1723ffc9ce58f0f2
+4906	11676	7616267714327915	CMakeFiles/selim.dir/mainwindow.cpp.obj	90a09b70c2ec738d
+11677	13881	7616267782114920	selim.exe	25d86d42be002c9
+52	2879	7616588535329551	selim_autogen/timestamp	8e69bef56a136c34
+52	2879	7616588535329551	selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+52	2879	7616588535329551	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/timestamp	8e69bef56a136c34
+52	2879	7616588535329551	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+2880	8799	7616588563614510	CMakeFiles/selim.dir/mainwindow.cpp.obj	90a09b70c2ec738d
+8799	11214	7616588622670581	selim.exe	25d86d42be002c9
+26	1126	7628461632397206	selim_autogen/timestamp	8e69bef56a136c34
+26	1126	7628461632397206	selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+26	1126	7628461632397206	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/timestamp	8e69bef56a136c34
+26	1126	7628461632397206	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+1127	3597	7628461643517781	CMakeFiles/selim.dir/mainwindow.cpp.obj	90a09b70c2ec738d
+3597	5006	7628461668210589	selim.exe	25d86d42be002c9
+56	2084	7628664220516745	selim_autogen/timestamp	8e69bef56a136c34
+56	2084	7628664220516745	selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+56	2084	7628664220516745	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/timestamp	8e69bef56a136c34
+56	2084	7628664220516745	C:/Users/selim/OneDrive/Bureau/projet c++/selim/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/selim_autogen/mocs_compilation.cpp	8e69bef56a136c34
+2085	4953	7628664240845294	CMakeFiles/selim.dir/mainwindow.cpp.obj	90a09b70c2ec738d
+4953	5961	7628664269496892	selim.exe	25d86d42be002c9
