@@ -1,31 +1,44 @@
 #include "projetcrud.h"
 #include <QDebug>
+#include <QSqlError>
 
 // Constructeurs
 ProjetCRUD::ProjetCRUD() {}
 
-ProjetCRUD::ProjetCRUD(int id, QString nom, QString description, double budget, QString date_debut, QString date_fin) {
+ProjetCRUD::ProjetCRUD(int id, QString nom, QString type, double budget, QString echeance, QString statut, int id_architecte, int id_contracteur) {
     this->id_projet = id;
     this->nom = nom;
-    this->description = description;
+    this->type = type;
     this->budget = budget;
-    this->date_debut = date_debut;
-    this->date_fin = date_fin;
+    this->echeance = echeance;
+    this->statut = statut;
+    this->id_architecte = id_architecte;
+    this->id_contracteur = id_contracteur;
 }
 
 // Ajouter un projet
 bool ProjetCRUD::ajouter() {
     QSqlQuery query;
-    query.prepare("INSERT INTO projets (ID_PROJET, NOM, DESCRIPTION, BUDGET, DATE_DEBUT, DATE_FIN) "
-                  "VALUES (:id, :nom, :description, :budget, :date_debut, :date_fin)");
-    query.bindValue(":id", id_projet);
-    query.bindValue(":nom", nom);
-    query.bindValue(":description", description);
-    query.bindValue(":budget", budget);
-    query.bindValue(":date_debut", date_debut);
-    query.bindValue(":date_fin", date_fin);
+    query.exec("SELECT MAX(ID_PROJET) FROM projets");
+    int new_id = 1;
+    if (query.next()) {
+        new_id = query.value(0).toInt() + 1;
+    }
 
-    return query.exec();
+    query.prepare("INSERT INTO projets (ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT) "
+                  "VALUES (:id, :nom, :type, :budget, TO_DATE(:echeance, 'YYYY-MM-DD'), :statut)");
+    query.bindValue(":id", new_id);
+    query.bindValue(":nom", nom);
+    query.bindValue(":type", type);
+    query.bindValue(":budget", budget);
+    query.bindValue(":echeance", echeance);
+    query.bindValue(":statut", statut);
+
+    if (!query.exec()) {
+        qDebug() << "Error adding project:" << query.lastError().text();
+        return false;
+    }
+    return true;
 }
 
 // Afficher les projets
@@ -38,14 +51,14 @@ QSqlQueryModel * ProjetCRUD::afficher() {
 // Modifier un projet
 bool ProjetCRUD::modifier(int id) {
     QSqlQuery query;
-    query.prepare("UPDATE projets SET NOM = :nom, DESCRIPTION = :description, BUDGET = :budget, "
-                  "DATE_DEBUT = :date_debut, DATE_FIN = :date_fin WHERE ID_PROJET = :id");
+    query.prepare("UPDATE projets SET NOM_PROJET = :nom, TYPE_PROJET = :type, BUDGET = :budget, "
+                  "ECHEANCE = TO_DATE(:echeance, 'YYYY-MM-DD'), STATUT = :statut WHERE ID_PROJET = :id");
     query.bindValue(":id", id);
     query.bindValue(":nom", nom);
-    query.bindValue(":description", description);
+    query.bindValue(":type", type);
     query.bindValue(":budget", budget);
-    query.bindValue(":date_debut", date_debut);
-    query.bindValue(":date_fin", date_fin);
+    query.bindValue(":echeance", echeance);
+    query.bindValue(":statut", statut);
 
     return query.exec();
 }
@@ -66,14 +79,20 @@ void ProjetCRUD::setId(int id) { this->id_projet = id; }
 QString ProjetCRUD::getNom() const { return nom; }
 void ProjetCRUD::setNom(const QString &nom) { this->nom = nom; }
 
-QString ProjetCRUD::getDescription() const { return description; }
-void ProjetCRUD::setDescription(const QString &description) { this->description = description; }
+QString ProjetCRUD::getType() const { return type; }
+void ProjetCRUD::setType(const QString &type) { this->type = type; }
 
 double ProjetCRUD::getBudget() const { return budget; }
 void ProjetCRUD::setBudget(double budget) { this->budget = budget; }
 
-QString ProjetCRUD::getDateDebut() const { return date_debut; }
-void ProjetCRUD::setDateDebut(const QString &date) { this->date_debut = date; }
+QString ProjetCRUD::getEcheance() const { return echeance; }
+void ProjetCRUD::setEcheance(const QString &date) { this->echeance = date; }
 
-QString ProjetCRUD::getDateFin() const { return date_fin; }
-void ProjetCRUD::setDateFin(const QString &date) { this->date_fin = date; }
+QString ProjetCRUD::getStatut() const { return statut; }
+void ProjetCRUD::setStatut(const QString &statut) { this->statut = statut; }
+
+int ProjetCRUD::getIdArchitecte() const { return id_architecte; }
+void ProjetCRUD::setIdArchitecte(int id) { this->id_architecte = id; }
+
+int ProjetCRUD::getIdContracteur() const { return id_contracteur; }
+void ProjetCRUD::setIdContracteur(int id) { this->id_contracteur = id; }

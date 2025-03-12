@@ -10,7 +10,7 @@ class ProjetCRUD
 public:
     // Constructeurs
     ProjetCRUD();
-    ProjetCRUD(int id, QString nom, QString description, double budget, QString date_debut, QString date_fin);
+    ProjetCRUD(int id, QString nom, QString type, double budget, QString echeance, QString statut, int id_architecte, int id_contracteur);
 
     // CRUD
     bool ajouter();
@@ -23,22 +23,28 @@ public:
     void setId(int id);
     QString getNom() const;
     void setNom(const QString &nom);
-    QString getDescription() const;
-    void setDescription(const QString &description);
+    QString getType() const;
+    void setType(const QString &type);
     double getBudget() const;
     void setBudget(double budget);
-    QString getDateDebut() const;
-    void setDateDebut(const QString &date);
-    QString getDateFin() const;
-    void setDateFin(const QString &date);
+    QString getEcheance() const;
+    void setEcheance(const QString &date);
+    QString getStatut() const;
+    void setStatut(const QString &statut);
+    int getIdArchitecte() const;
+    void setIdArchitecte(int id);
+    int getIdContracteur() const;
+    void setIdContracteur(int id);
 
 private:
     int id_projet;
     QString nom;
-    QString description;
+    QString type;
     double budget;
-    QString date_debut;
-    QString date_fin;
+    QString echeance;
+    QString statut;
+    int id_architecte;
+    int id_contracteur;
 };
 
 #endif // PROJETCRUD_H

@@ -276,7 +276,9 @@ public:
         tableView = new QTableView(widget_7);
         tableView->setObjectName("tableView");
         tableView->setGeometry(QRect(20, 70, 621, 371));
-        tableView->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        tableView->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: #0000;"));
         modifier2 = new QPushButton(widget_7);
         modifier2->setObjectName("modifier2");
         modifier2->setGeometry(QRect(460, 501, 181, 40));

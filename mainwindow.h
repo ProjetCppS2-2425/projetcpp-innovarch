@@ -24,6 +24,7 @@ private slots:
     void on_deleteProjectButton_clicked();
     void on_tableView_itemClicked(const QModelIndex &index);
     void refreshTableWidget();
+    void fillTableWidget(); // Add this line
     void on_cancelButton_clicked();
 
 private:

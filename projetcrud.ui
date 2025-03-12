@@ -325,7 +325,9 @@ QLineEdit:focus {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
+        <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: #0000;</string>
        </property>
       </widget>
       <widget class="QPushButton" name="modifier2">
