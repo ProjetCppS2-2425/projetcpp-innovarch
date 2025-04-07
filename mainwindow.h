@@ -4,6 +4,8 @@
 #include "contracteur.h"
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QPdfWriter>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +26,9 @@ public:
 
 private slots:
     void on_tableView_2_itemClicked(const QModelIndex &index);
+    void on_comboBox_tri_2_currentIndexChanged(int index);
+    void on_chercher_2_clicked();
+    void on_pdf_2_clicked();
 
 private:
     Ui::MainWindow *ui;

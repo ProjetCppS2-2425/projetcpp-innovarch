@@ -77,6 +77,10 @@ public:
     QLineEdit *lineEdit_13;
     QLabel *label_168;
     QSpinBox *spinBox;
+    QLineEdit *lineEdit_4;
+    QLabel *label_151;
+    QLineEdit *lineEdit_5;
+    QLabel *label_152;
     QLabel *label_156;
     QWidget *tab_7;
     QGraphicsView *pie_2;
@@ -464,7 +468,7 @@ public:
 
         verticalLayout->addWidget(pushButton_6);
 
-        layoutWidget->raise();
+        layoutWidget1->raise();
         label->raise();
         frame_6 = new QFrame(tab_6);
         frame_6->setObjectName("frame_6");
@@ -620,7 +624,7 @@ public:
         label_150->setStyleSheet(QString::fromUtf8(""));
         label_154 = new QLabel(frame_6);
         label_154->setObjectName("label_154");
-        label_154->setGeometry(QRect(10, 230, 221, 61));
+        label_154->setGeometry(QRect(10, 330, 221, 31));
         label_154->setStyleSheet(QString::fromUtf8(""));
         comboBox = new QComboBox(frame_6);
         comboBox->addItem(QString());
@@ -637,17 +641,19 @@ public:
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
+"	\n"
+"	color: rgb(0, 0, 0);\n"
 "\n"
 "\n"
 "\n"
 ""));
         label_155 = new QLabel(frame_6);
         label_155->setObjectName("label_155");
-        label_155->setGeometry(QRect(168, 148, 141, 31));
+        label_155->setGeometry(QRect(150, 148, 141, 31));
         label_155->setStyleSheet(QString::fromUtf8(""));
         lineEdit_7 = new QLineEdit(frame_6);
         lineEdit_7->setObjectName("lineEdit_7");
-        lineEdit_7->setGeometry(QRect(180, 190, 111, 31));
+        lineEdit_7->setGeometry(QRect(160, 190, 111, 31));
         lineEdit_7->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -737,14 +743,71 @@ public:
 ""));
         label_168 = new QLabel(frame_6);
         label_168->setObjectName("label_168");
-        label_168->setGeometry(QRect(153, 80, 141, 31));
+        label_168->setGeometry(QRect(150, 80, 141, 31));
         label_168->setStyleSheet(QString::fromUtf8(""));
         spinBox = new QSpinBox(frame_6);
         spinBox->setObjectName("spinBox");
-        spinBox->setGeometry(QRect(10, 290, 101, 41));
+        spinBox->setGeometry(QRect(10, 370, 51, 41));
         spinBox->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
+        lineEdit_4 = new QLineEdit(frame_6);
+        lineEdit_4->setObjectName("lineEdit_4");
+        lineEdit_4->setGeometry(QRect(10, 270, 113, 26));
+        lineEdit_4->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
+        label_151 = new QLabel(frame_6);
+        label_151->setObjectName("label_151");
+        label_151->setGeometry(QRect(4, 230, 81, 31));
+        label_151->setStyleSheet(QString::fromUtf8(""));
+        lineEdit_5 = new QLineEdit(frame_6);
+        lineEdit_5->setObjectName("lineEdit_5");
+        lineEdit_5->setGeometry(QRect(160, 270, 113, 26));
+        lineEdit_5->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
+        label_152 = new QLabel(frame_6);
+        label_152->setObjectName("label_152");
+        label_152->setGeometry(QRect(150, 230, 141, 31));
+        label_152->setStyleSheet(QString::fromUtf8(""));
+        label_146->raise();
+        lineEdit_2->raise();
+        label_149->raise();
+        label_150->raise();
+        label_154->raise();
+        comboBox->raise();
+        label_155->raise();
+        lineEdit_7->raise();
+        modifier->raise();
+        annuler->raise();
+        ajouter->raise();
+        lineEdit_13->raise();
+        label_168->raise();
+        spinBox->raise();
+        lineEdit_4->raise();
+        label_151->raise();
+        lineEdit_5->raise();
+        label_152->raise();
+        lineEdit_3->raise();
         label_156 = new QLabel(tab_6);
         label_156->setObjectName("label_156");
         label_156->setGeometry(QRect(288, 70, 231, 51));
@@ -865,6 +928,10 @@ public:
         ajouter->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
         lineEdit_13->setPlaceholderText(QCoreApplication::translate("MainWindow", "Prenom", nullptr));
         label_168->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:7pt; font-weight:700;\">Prenom contracteur :</span></p></body></html>", nullptr));
+        lineEdit_4->setPlaceholderText(QCoreApplication::translate("MainWindow", "Adresse", nullptr));
+        label_151->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Adresse :</span></p></body></html>", nullptr));
+        lineEdit_5->setPlaceholderText(QCoreApplication::translate("MainWindow", "Email", nullptr));
+        label_152->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Email :</span></p></body></html>", nullptr));
         label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout Contracteur</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));

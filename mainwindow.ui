@@ -935,9 +935,9 @@ QLineEdit:focus {
               <property name="geometry">
                <rect>
                 <x>10</x>
-                <y>230</y>
+                <y>330</y>
                 <width>221</width>
-                <height>61</height>
+                <height>31</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -961,6 +961,8 @@ QLineEdit:focus {
     border: 2px solid #4e1764;  /* Default thicker border */
     border-radius: 5px;
     background-color: white;  /* Ensure background stays white */
+	
+	color: rgb(0, 0, 0);
 
 
 
@@ -1013,7 +1015,7 @@ QLineEdit:focus {
              <widget class="QLabel" name="label_155">
               <property name="geometry">
                <rect>
-                <x>168</x>
+                <x>150</x>
                 <y>148</y>
                 <width>141</width>
                 <height>31</height>
@@ -1029,7 +1031,7 @@ QLineEdit:focus {
              <widget class="QLineEdit" name="lineEdit_7">
               <property name="geometry">
                <rect>
-                <x>180</x>
+                <x>160</x>
                 <y>190</y>
                 <width>111</width>
                 <height>31</height>
@@ -1179,7 +1181,7 @@ QLineEdit:focus {
              <widget class="QLabel" name="label_168">
               <property name="geometry">
                <rect>
-                <x>153</x>
+                <x>150</x>
                 <y>80</y>
                 <width>141</width>
                 <height>31</height>
@@ -1196,8 +1198,8 @@ QLineEdit:focus {
               <property name="geometry">
                <rect>
                 <x>10</x>
-                <y>290</y>
-                <width>101</width>
+                <y>370</y>
+                <width>51</width>
                 <height>41</height>
                </rect>
               </property>
@@ -1207,6 +1209,111 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
               </property>
              </widget>
+             <widget class="QLineEdit" name="lineEdit_4">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>270</y>
+                <width>113</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+    border: 2px solid #4e1764;  /* Default thicker border */
+    border-radius: 5px;
+    background-color: white;  /* Ensure background stays white */
+    padding: 4px;  /* Adjust padding for better spacing */
+}
+
+QLineEdit:focus {
+    border: 3px solid #9f86c0;  /* Highlight border when focused */
+    background-color: white;  /* Keep background white */
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Adresse</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_151">
+              <property name="geometry">
+               <rect>
+                <x>4</x>
+                <y>230</y>
+                <width>81</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Adresse :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_5">
+              <property name="geometry">
+               <rect>
+                <x>160</x>
+                <y>270</y>
+                <width>113</width>
+                <height>26</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+    border: 2px solid #4e1764;  /* Default thicker border */
+    border-radius: 5px;
+    background-color: white;  /* Ensure background stays white */
+    padding: 4px;  /* Adjust padding for better spacing */
+}
+
+QLineEdit:focus {
+    border: 3px solid #9f86c0;  /* Highlight border when focused */
+    background-color: white;  /* Keep background white */
+}
+</string>
+              </property>
+              <property name="placeholderText">
+               <string>Email</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_152">
+              <property name="geometry">
+               <rect>
+                <x>150</x>
+                <y>230</y>
+                <width>141</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Email :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+             <zorder>label_146</zorder>
+             <zorder>lineEdit_2</zorder>
+             <zorder>label_149</zorder>
+             <zorder>label_150</zorder>
+             <zorder>label_154</zorder>
+             <zorder>comboBox</zorder>
+             <zorder>label_155</zorder>
+             <zorder>lineEdit_7</zorder>
+             <zorder>modifier</zorder>
+             <zorder>annuler</zorder>
+             <zorder>ajouter</zorder>
+             <zorder>lineEdit_13</zorder>
+             <zorder>label_168</zorder>
+             <zorder>spinBox</zorder>
+             <zorder>lineEdit_4</zorder>
+             <zorder>label_151</zorder>
+             <zorder>lineEdit_5</zorder>
+             <zorder>label_152</zorder>
+             <zorder>lineEdit_3</zorder>
             </widget>
             <widget class="QLabel" name="label_156">
              <property name="geometry">

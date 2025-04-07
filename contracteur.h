@@ -51,6 +51,7 @@ public:
     bool modifier(int id);
     bool supprimer(int id);
     QSqlError getLastError() const;
+    void reassignIds();
 };
 
 #endif // CONTRACTEUR_H

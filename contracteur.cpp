@@ -36,8 +36,8 @@ bool Contracteur::ajouter() {
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO contracteurs (id_contracteur, nom, prenom, telephone, adresse, email, domaine, historique, avisclients) "
-                  "VALUES (:id_contracteur, :nom, :prenom, :telephone, :adresse, :email, :domaine, :historique, :avisclients)");
+    query.prepare("INSERT INTO contracteurs (id_contracteur, nom, prenom, telephone, adresse, email, domaine) "
+                  "VALUES (:id_contracteur, :nom, :prenom, :telephone, :adresse, :email, :domaine)");
     query.bindValue(":id_contracteur", id_contracteur);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -45,8 +45,6 @@ bool Contracteur::ajouter() {
     query.bindValue(":adresse", adresse);
     query.bindValue(":email", email);
     query.bindValue(":domaine", domaine);
-    query.bindValue(":historique", historique);
-    query.bindValue(":avisclients", avisclients);
 
     if (!query.exec()) {
         qDebug() << "Error adding contracteur:" << query.lastError().text();
@@ -74,7 +72,7 @@ QSqlQueryModel* Contracteur::afficher() {
 
 bool Contracteur::modifier(int id) {
     QSqlQuery query;
-    query.prepare("UPDATE contracteurs SET nom = :nom, prenom = :prenom, telephone = :telephone, adresse = :adresse, email = :email, domaine = :domaine, historique = :historique, avisclients = :avisclients WHERE id_contracteur = :id");
+    query.prepare("UPDATE contracteurs SET nom = :nom, prenom = :prenom, telephone = :telephone, adresse = :adresse, email = :email, domaine = :domaine WHERE id_contracteur = :id");
     query.bindValue(":id", id);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -82,8 +80,6 @@ bool Contracteur::modifier(int id) {
     query.bindValue(":adresse", adresse);
     query.bindValue(":email", email);
     query.bindValue(":domaine", domaine);
-    query.bindValue(":historique", historique);
-    query.bindValue(":avisclients", avisclients);
 
     if (!query.exec()) {
         qDebug() << "Error modifying contracteur:" << query.lastError().text();
@@ -101,7 +97,31 @@ bool Contracteur::supprimer(int id) {
         qDebug() << "Error deleting contracteur:" << query.lastError().text();
         return false;
     }
+
+    reassignIds(); // Reassign IDs after deletion
     return true;
+}
+
+void Contracteur::reassignIds() {
+    QSqlQuery selectQuery("SELECT id_contracteur FROM contracteurs ORDER BY id_contracteur ASC");
+    QList<int> ids;
+
+    // Fetch all IDs
+    while (selectQuery.next()) {
+        ids.append(selectQuery.value(0).toInt());
+    }
+
+    // Reassign IDs sequentially
+    for (int i = 0; i < ids.size(); ++i) {
+        QSqlQuery updateQuery;
+        updateQuery.prepare("UPDATE contracteurs SET id_contracteur = :new_id WHERE id_contracteur = :old_id");
+        updateQuery.bindValue(":new_id", i + 1);
+        updateQuery.bindValue(":old_id", ids[i]);
+
+        if (!updateQuery.exec()) {
+            qDebug() << "Error reassigning ID from" << ids[i] << "to" << (i + 1) << ":" << updateQuery.lastError().text();
+        }
+    }
 }
 
 QSqlError Contracteur::getLastError() const {
