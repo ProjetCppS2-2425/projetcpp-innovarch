@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QPdfWriter>
 #include <QPainter>
+#include <QModelIndex>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,23 +20,28 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
     void on_addContracteurButton_clicked();
     void on_supprimerContracteur_clicked();
     void on_modifyContracteurButton_clicked();
     void on_annulerButton_clicked();
-
-private slots:
     void on_tableView_2_itemClicked(const QModelIndex &index);
     void on_comboBox_tri_2_currentIndexChanged(int index);
     void on_chercher_2_clicked();
     void on_pdf_2_clicked();
+    void on_generateStatisticsButton_clicked();
+    void on_exportStatisticsPDFButton_clicked();
+    void on_tabWidget_currentChanged(int index); // Ensure this slot is declared
 
 private:
     Ui::MainWindow *ui;
     Contracteur currentContracteur;
-    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+
     void refreshTableWidget();
     void fillTableWidget();
+    void generateStatistics();
+    void exportStatisticsPDF();
+    void displayStatisticsInGraphicsView();
 };
 
 #endif // MAINWINDOW_H

@@ -4,29 +4,27 @@
 #include <QDebug>
 #include <QSqlDatabase>
 
-Contracteur::Contracteur() {
-    id_contracteur = 0;
-    nom = "";
-    prenom = "";
-    telephone = "";
-    adresse = "";
-    email = "";
-    domaine = "";
-    historique = "";
-    avisclients = "";
-}
+Contracteur::Contracteur()
+    : id_contracteur(0), nom(""), prenom(""), telephone(""), adresse(""), email(""), domaine("") {}
 
-Contracteur::Contracteur(int id, QString n, QString p, QString t, QString a, QString e, QString d, QString h, QString ac) {
-    id_contracteur = id;
-    nom = n;
-    prenom = p;
-    telephone = t;
-    adresse = a;
-    email = e;
-    domaine = d;
-    historique = h;
-    avisclients = ac;
-}
+Contracteur::Contracteur(int id, QString n, QString p, QString t, QString a, QString e, QString d)
+    : id_contracteur(id), nom(n), prenom(p), telephone(t), adresse(a), email(e), domaine(d) {}
+
+int Contracteur::getIdContracteur() const { return id_contracteur; }
+QString Contracteur::getNom() const { return nom; }
+QString Contracteur::getPrenom() const { return prenom; }
+QString Contracteur::getTelephone() const { return telephone; }
+QString Contracteur::getAdresse() const { return adresse; }
+QString Contracteur::getEmail() const { return email; }
+QString Contracteur::getDomaine() const { return domaine; }
+
+void Contracteur::setIdContracteur(int id) { id_contracteur = id; }
+void Contracteur::setNom(const QString &n) { nom = n; }
+void Contracteur::setPrenom(const QString &p) { prenom = p; }
+void Contracteur::setTelephone(const QString &t) { telephone = t; }
+void Contracteur::setAdresse(const QString &a) { adresse = a; }
+void Contracteur::setEmail(const QString &e) { email = e; }
+void Contracteur::setDomaine(const QString &d) { domaine = d; }
 
 bool Contracteur::ajouter() {
     // Ensure the database connection is open
@@ -36,8 +34,8 @@ bool Contracteur::ajouter() {
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO contracteurs (id_contracteur, nom, prenom, telephone, adresse, email, domaine) "
-                  "VALUES (:id_contracteur, :nom, :prenom, :telephone, :adresse, :email, :domaine)");
+    query.prepare("INSERT INTO contracteurs (id_contracteur, nom, prenom, telephone, adresse, email, domaine, dateajout) "
+                  "VALUES (:id_contracteur, :nom, :prenom, :telephone, :adresse, :email, :domaine, CURRENT_TIMESTAMP)");
     query.bindValue(":id_contracteur", id_contracteur);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -57,7 +55,7 @@ bool Contracteur::ajouter() {
 
 QSqlQueryModel* Contracteur::afficher() {
     QSqlQueryModel* model = new QSqlQueryModel();
-    model->setQuery("SELECT * FROM contracteurs");
+    model->setQuery("SELECT * FROM contracteurs ORDER BY id_contracteur ASC");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
@@ -65,8 +63,7 @@ QSqlQueryModel* Contracteur::afficher() {
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
     model->setHeaderData(6, Qt::Horizontal, QObject::tr("Domaine"));
-    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Historique"));
-    model->setHeaderData(8, Qt::Horizontal, QObject::tr("AvisClients"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
     return model;
 }
 
