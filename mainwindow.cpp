@@ -27,6 +27,11 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QtCharts>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QTableWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -44,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_rechercherButton_clicked);
     connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
                 this, &MainWindow::on_comboBox_tri_3_currentIndexChanged);
+    connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdf_2_clicked);
+
     // Appeler la fonction pour afficher les statistiques des genres
     displayGenderStatistics();
 }
@@ -443,3 +450,114 @@ void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
     ui->tableWidget->sortItems(DATE_COLUMN, order);
 }
 
+void MainWindow::on_pdf_2_clicked()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "*.pdf");
+    if (filePath.isEmpty()) return;
+    if (!filePath.endsWith(".pdf")) filePath += ".pdf";
+
+    QPdfWriter pdfWriter(filePath);
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    pdfWriter.setResolution(300);
+    pdfWriter.setPageMargins(QMargins(50, 50, 50, 50));
+
+    QPainter painter(&pdfWriter);
+    if (!painter.isActive()) {
+        QMessageBox::warning(this, "Erreur", "Impossible de créer le fichier PDF.");
+        return;
+    }
+
+    // Title
+    QFont titleFont("Arial", 24, QFont::Bold);
+    painter.setFont(titleFont);
+    painter.setPen(QColor(128, 0, 128));
+    painter.drawText(QRect(0, 0, pdfWriter.width(), 100), Qt::AlignCenter, "Liste des Architectes");
+
+    // Layout settings
+    QFont contentFont("Arial", 10);
+    painter.setFont(contentFont);
+    painter.setPen(Qt::black);
+
+    int yOffset = 130;
+    int rowHeight = 55; // slightly larger for more space
+
+    QStringList headers = {"ID", "Nom", "Prénom", "Date", "Poste", "Email", "Salaire", "Sexe"};
+    int columnCount = headers.size();
+
+    int totalWidth = pdfWriter.width() - 100;  // Use full width of the page
+    QVector<int> columnWidths = {
+        static_cast<int>(totalWidth * 0.06),  // ID
+        static_cast<int>(totalWidth * 0.10),  // Nom
+        static_cast<int>(totalWidth * 0.10),  // Prénom
+        static_cast<int>(totalWidth * 0.08),  // Date
+        static_cast<int>(totalWidth * 0.14),  // Poste (wider now)
+        static_cast<int>(totalWidth * 0.30),  // Email (much wider)
+        static_cast<int>(totalWidth * 0.12),  // Salaire
+        static_cast<int>(totalWidth * 0.10)   // Sexe
+    };
+
+    int leftMargin = 50;
+
+    // Header row
+    painter.setBrush(QColor(220, 220, 220));
+    painter.drawRect(leftMargin - 5, yOffset, totalWidth + 10, rowHeight);
+    painter.setBrush(Qt::NoBrush);
+    painter.setPen(QColor(0, 102, 204));
+    painter.setFont(QFont("Arial", 11, QFont::Bold));
+
+    int x = leftMargin;
+    for (int col = 0; col < columnCount; ++col) {
+        painter.drawText(x + 2, yOffset + 2, columnWidths[col] - 4, rowHeight - 4, Qt::AlignCenter, headers[col]);
+        x += columnWidths[col];
+    }
+
+    yOffset += rowHeight;
+    painter.setFont(contentFont);
+    painter.setPen(Qt::black);
+
+    // Table data rows
+    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+        x = leftMargin;
+        QStringList rowData;
+
+        for (int col = 0; col < columnCount; ++col) {
+            QString cellText = ui->tableWidget->item(row, col) ? ui->tableWidget->item(row, col)->text() : "";
+            rowData.append(cellText);
+        }
+
+        if (row % 2 == 0) {
+            painter.fillRect(QRect(leftMargin - 5, yOffset, totalWidth + 10, rowHeight), QColor(245, 245, 245));
+        }
+
+        for (int col = 0; col < columnCount; ++col) {
+            painter.drawRect(x, yOffset, columnWidths[col], rowHeight);
+            painter.drawText(QRect(x + 4, yOffset + 2, columnWidths[col] - 8, rowHeight - 4),
+                             Qt::AlignLeft | Qt::AlignVCenter, rowData[col]);
+            x += columnWidths[col];
+        }
+
+        yOffset += rowHeight;
+
+        if (yOffset + rowHeight > pdfWriter.height() - 50) {
+            pdfWriter.newPage();
+            yOffset = 100;
+
+            x = leftMargin;
+            painter.setBrush(QColor(220, 220, 220));
+            painter.drawRect(leftMargin - 5, yOffset, totalWidth + 10, rowHeight);
+            painter.setBrush(Qt::NoBrush);
+            painter.setPen(QColor(0, 102, 204));
+            painter.setFont(QFont("Arial", 11, QFont::Bold));
+            for (int col = 0; col < columnCount; ++col) {
+                painter.drawText(x + 2, yOffset + 2, columnWidths[col] - 4, rowHeight - 4, Qt::AlignCenter, headers[col]);
+                x += columnWidths[col];
+            }
+            yOffset += rowHeight;
+            painter.setFont(contentFont);
+            painter.setPen(Qt::black);
+        }
+    }
+
+    painter.end();
+    QMessageBox::information(this, "Succès", "Le fichier PDF a été exporté avec succès !");
+}
