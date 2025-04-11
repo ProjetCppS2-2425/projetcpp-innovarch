@@ -36,6 +36,7 @@ HEADERS += \
 FORMS += \
     GestionRessources.ui
 QT += sql
+QT += charts
 CONFIG += console
 RESOURCES += icons.qrc
 # Default rules for deployment.

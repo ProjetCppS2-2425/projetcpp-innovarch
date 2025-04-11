@@ -3,8 +3,29 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mmc:Q_OBJECT
  mdp:C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Desktop/innovArch/GestionRessource/projet/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/projet_autogen/moc_predefs.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QAbstractAxis
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QAbstractSeries
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QChart
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QChartGlobal
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QChartView
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/QLegend
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qabstractaxis.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qabstractseries.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qchart.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qchartglobal.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qchartview.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qlegend.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qtcharts-config.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCharts/qtchartsexports.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QDate
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QList
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QMargins
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QObject
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QRect
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QSize
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QSizeF
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QSortFilterProxyModel
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/QVariant
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/q20functional.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/q20memory.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/q20type_traits.h
@@ -37,12 +58,18 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcontainerinfo.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcontainertools_impl.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcontiguouscache.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcoreapplication.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcoreapplication_platform.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qcoreevent.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdarwinhelpers.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdatastream.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdatetime.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdeadlinetimer.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdebug.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qdir.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qelapsedtimer.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qendian.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qeventloop.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qexceptionhandling.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qfile.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qfiledevice.h
@@ -74,6 +101,7 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qmetatype.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qminmax.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qnamespace.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qnativeinterface.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qnumeric.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qobject.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qobject_impl.h
@@ -136,18 +164,28 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qversiontagging.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qxptype_traits.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtCore/qyieldcpu.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QBrush
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QFont
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QPainter
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QPdfWriter
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QPen
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/QTransform
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qaction.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qbitmap.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qbrush.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qcolor.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qcursor.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qevent.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qeventpoint.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qfont.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qfontinfo.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qfontmetrics.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qguiapplication.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qicon.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qimage.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qinputdevice.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qkeysequence.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpagedpaintdevice.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpagelayout.h
@@ -155,20 +193,26 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpagesize.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpaintdevice.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpainter.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpainterpath.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpalette.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpdfwriter.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpen.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpixelformat.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpixmap.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpointingdevice.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qpolygon.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qregion.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qrgb.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qrgba64.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qscreen.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qscreen_platform.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qtextoption.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qtgui-config.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qtguiexports.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qtguiglobal.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qtransform.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qvector2d.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qvectornd.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qwindowdefs.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtSql/QSqlQuery
@@ -180,13 +224,23 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/QFileDialog
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/QGraphicsView
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/QGraphicsWidget
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/QMessageBox
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qdialog.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qfiledialog.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qframe.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsitem.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qgraphicslayoutitem.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsscene.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsview.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qgraphicswidget.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h
+ mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qscrollarea.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h
  mdp:C:/Users/dell/Downloads/qt/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h
@@ -422,6 +476,8 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
+ uic:ui_GestionRessources.h
+C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.cpp
  uic:ui_GestionRessources.h
 C:/Users/dell/Desktop/innovArch/GestionRessource/projet/IconDelegate.h
  mmc:Q_OBJECT
@@ -805,8 +861,6 @@ C:/Users/dell/Desktop/innovArch/GestionRessource/projet/IconDelegate.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:C:/Users/dell/Downloads/qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
-C:/Users/dell/Desktop/innovArch/GestionRessource/projet/GestionRessources.cpp
- uic:ui_GestionRessources.h
-C:/Users/dell/Desktop/innovArch/GestionRessource/projet/connection.h
 C:/Users/dell/Desktop/innovArch/GestionRessource/projet/main.cpp
+C:/Users/dell/Desktop/innovArch/GestionRessource/projet/connection.h
 C:/Users/dell/Desktop/innovArch/GestionRessource/projet/connection.cpp

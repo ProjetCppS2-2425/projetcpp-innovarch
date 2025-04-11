@@ -34,7 +34,7 @@ class Ui_GestionRessources
 {
 public:
     QWidget *centralwidget;
-    QTabWidget *aceuille_2;
+    QTabWidget *acceuil1;
     QWidget *tab_6;
     QWidget *widget_7;
     QComboBox *triCb;
@@ -76,11 +76,9 @@ public:
     QComboBox *etatRessource;
     QLabel *label_156;
     QWidget *tab_7;
-    QGraphicsView *pie_2;
-    QFrame *line_2;
-    QGraphicsView *bar_2;
-    QPushButton *stat1_2;
-    QPushButton *stat2_2;
+    QGraphicsView *acceuil2;
+    QPushButton *statpb;
+    QGraphicsView *acceuil3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -97,12 +95,12 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy);
-        aceuille_2 = new QTabWidget(centralwidget);
-        aceuille_2->setObjectName("aceuille_2");
-        aceuille_2->setGeometry(QRect(0, 0, 1371, 841));
-        aceuille_2->setMinimumSize(QSize(300, 300));
-        aceuille_2->setAutoFillBackground(false);
-        aceuille_2->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;\n"
+        acceuil1 = new QTabWidget(centralwidget);
+        acceuil1->setObjectName("acceuil1");
+        acceuil1->setGeometry(QRect(0, 0, 1371, 841));
+        acceuil1->setMinimumSize(QSize(300, 300));
+        acceuil1->setAutoFillBackground(false);
+        acceuil1->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;\n"
 ""));
         tab_6 = new QWidget();
         tab_6->setObjectName("tab_6");
@@ -796,27 +794,29 @@ public:
 "    border-radius: 14px;\n"
 "}\n"
 ""));
-        aceuille_2->addTab(tab_6, QString());
+        acceuil1->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
-        pie_2 = new QGraphicsView(tab_7);
-        pie_2->setObjectName("pie_2");
-        pie_2->setGeometry(QRect(10, 10, 911, 631));
-        line_2 = new QFrame(tab_7);
-        line_2->setObjectName("line_2");
-        line_2->setGeometry(QRect(930, 10, 20, 631));
-        line_2->setFrameShape(QFrame::Shape::VLine);
-        line_2->setFrameShadow(QFrame::Shadow::Sunken);
-        bar_2 = new QGraphicsView(tab_7);
-        bar_2->setObjectName("bar_2");
-        bar_2->setGeometry(QRect(10, 10, 911, 631));
-        stat1_2 = new QPushButton(tab_7);
-        stat1_2->setObjectName("stat1_2");
-        stat1_2->setGeometry(QRect(750, 140, 161, 61));
-        stat2_2 = new QPushButton(tab_7);
-        stat2_2->setObjectName("stat2_2");
-        stat2_2->setGeometry(QRect(750, 270, 161, 71));
-        aceuille_2->addTab(tab_7, QString());
+        acceuil2 = new QGraphicsView(tab_7);
+        acceuil2->setObjectName("acceuil2");
+        acceuil2->setGeometry(QRect(10, 10, 591, 631));
+        statpb = new QPushButton(tab_7);
+        statpb->setObjectName("statpb");
+        statpb->setGeometry(QRect(240, 50, 161, 51));
+        statpb->setStyleSheet(QString::fromUtf8("QPushButton#statpb{\n"
+"    background-color: rgb(255, 255, 255);\n"
+"	 border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"	 font-size: 13px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton#statpb:hover {\n"
+"    background-color: #9f86c0; \n"
+"}"));
+        acceuil3 = new QGraphicsView(tab_7);
+        acceuil3->setObjectName("acceuil3");
+        acceuil3->setGeometry(QRect(610, 10, 741, 631));
+        acceuil1->addTab(tab_7, QString());
         GestionRessources->setCentralWidget(centralwidget);
         menubar = new QMenuBar(GestionRessources);
         menubar->setObjectName("menubar");
@@ -828,7 +828,7 @@ public:
 
         retranslateUi(GestionRessources);
 
-        aceuille_2->setCurrentIndex(0);
+        acceuil1->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(GestionRessources);
@@ -891,10 +891,9 @@ public:
 
         etatRessource->setPlaceholderText(QCoreApplication::translate("GestionRessources", "S\303\251lectionnez la cat\303\251gorie", nullptr));
         label_156->setText(QCoreApplication::translate("GestionRessources", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout ressources</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
-        aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("GestionRessources", "Consulter", nullptr));
-        stat1_2->setText(QCoreApplication::translate("GestionRessources", "statistique sexe", nullptr));
-        stat2_2->setText(QCoreApplication::translate("GestionRessources", "statistique conge", nullptr));
-        aceuille_2->setTabText(aceuille_2->indexOf(tab_7), QCoreApplication::translate("GestionRessources", "Statistique", nullptr));
+        acceuil1->setTabText(acceuil1->indexOf(tab_6), QCoreApplication::translate("GestionRessources", "Consulter", nullptr));
+        statpb->setText(QCoreApplication::translate("GestionRessources", "Statistiques Ressources ", nullptr));
+        acceuil1->setTabText(acceuil1->indexOf(tab_7), QCoreApplication::translate("GestionRessources", "Statistique", nullptr));
     } // retranslateUi
 
 };

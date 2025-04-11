@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QDate>
 #include <QSortFilterProxyModel>
+#include <QtCharts/QChartView>
 #include "ui_GestionRessources.h"
 class GestionRessources : public QMainWindow
 {
@@ -22,7 +23,10 @@ private slots:
     void supprimerRessource(int id);
     void rechercheRessource();
     void trierRessources();
-    //void exporterPDF();
+    void exporterPDF();
+    QPixmap genererGraph();
+    //QChartView* stat();
+    void on_statpb_clicked();
     void handleTableClick(const QModelIndex &index);
     void updateRessource();
 private:
