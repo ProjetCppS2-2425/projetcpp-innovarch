@@ -118,8 +118,9 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) release\moc_mainwindow.cpp
 release/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../architechtes.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -164,9 +165,12 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qrefcount.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qnamespace.h \
@@ -183,16 +187,6 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringliteral.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlatin1stringview.h \
@@ -202,6 +196,15 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qmath.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiterable.h \
@@ -233,16 +236,13 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbindingstorage.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDate \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -318,6 +318,23 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qrubberband.h \
 		release/moc_predefs.h \
 		C:/Qt/6.7.3/mingw_64/bin/moc.exe
 	C:\Qt\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.7.3/mingw_64/mkspecs/win32-g++ -I"C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface" -IC:/Qt/6.7.3/mingw_64/include -IC:/Qt/6.7.3/mingw_64/include/QtWidgets -IC:/Qt/6.7.3/mingw_64/include/QtGui -IC:/Qt/6.7.3/mingw_64/include/QtSql -IC:/Qt/6.7.3/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
@@ -466,89 +483,16 @@ release/architechtes.o: ../../architechtes.cpp C:/Qt/6.7.3/mingw_64/include/QtSq
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDebug \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QTime \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QRandomGenerator \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qrandom.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QDate \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmessagebox.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qtguiglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qtgui-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qtguiexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qmargins.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qaction.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qkeysequence.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qicon.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qsize.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpixmap.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpaintdevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qrect.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qpoint.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qcolor.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qrgb.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qrgba64.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qimage.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpixelformat.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qtransform.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpolygon.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qregion.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qline.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpalette.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qbrush.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qfont.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontmetrics.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontinfo.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qcursor.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qbitmap.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qevent.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qeventpoint.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qvector2d.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qvectornd.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qpointingdevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputdevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qscreen.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QList \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QObject \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QRect \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QSize \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QSizeF \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/QTransform \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qnativeinterface.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qscreen_platform.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfuture.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qmutex.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qtsan_impl.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qresultstore.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfuture_impl.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qthreadpool.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qthread.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qrunnable.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qexception.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qpromise.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QRandomGenerator \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qrandom.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QDate
+		../../architechtes.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\architechtes.o ..\..\architechtes.cpp
 
 release/connection.o: ../../connection.cpp ../../connection.h \
@@ -670,8 +614,9 @@ release/connection.o: ../../connection.cpp ../../connection.h \
 
 release/main.o: ../../main.cpp ../../mainwindow.h \
 		../../architechtes.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -716,9 +661,12 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qrefcount.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qnamespace.h \
@@ -735,16 +683,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringliteral.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlatin1stringview.h \
@@ -754,6 +692,15 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qmath.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiterable.h \
@@ -785,16 +732,13 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbindingstorage.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDate \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -870,6 +814,23 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qrubberband.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMessageBox \
@@ -882,8 +843,9 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 
 release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../architechtes.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtversionchecks.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -928,9 +890,12 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtresource.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qttranslation.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qversiontagging.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearray.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qrefcount.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qnamespace.h \
@@ -947,16 +912,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbytearrayview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringfwd.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstring.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qchar.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringliteral.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlatin1stringview.h \
@@ -966,6 +921,15 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qvariant.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcompare.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcomparehelpers.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qfloat16.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qhashfunctions.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qmath.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiterable.h \
@@ -997,16 +961,13 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qbindingstorage.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDate \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1082,6 +1043,23 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtableview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qrubberband.h \
 		ui_mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
@@ -1090,9 +1068,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QRegularExpression \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/QRegularExpressionValidator \
-		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\..\mainwindow.cpp
 

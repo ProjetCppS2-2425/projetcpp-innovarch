@@ -86,8 +86,7 @@ public:
     QComboBox *comboBox_tri_3;
     QTableWidget *tableWidget;
     QWidget *tab_7;
-    QGraphicsView *pie_2;
-    QGraphicsView *bar_2;
+    QGraphicsView *pie;
     QLabel *label_184;
     QWidget *widget_8;
     QLineEdit *prenom_conge_2;
@@ -114,6 +113,23 @@ public:
     QComboBox *poste_conge_2;
     QLabel *label_173;
     QComboBox *raison_conge_2;
+    QTabWidget *demande_conge_3;
+    QWidget *tab_11;
+    QWidget *tab_39;
+    QWidget *widget_14;
+    QPushButton *annuler_histo_3;
+    QLineEdit *id_conge_3;
+    QPushButton *rechercher_3;
+    QTableView *historique_3;
+    QLabel *label_196;
+    QWidget *tab_40;
+    QTableView *afficher_conge_3;
+    QLabel *label_197;
+    QWidget *widget_15;
+    QPushButton *annule_conge_3;
+    QLabel *label_11;
+    QPushButton *recherche_conge_3;
+    QLineEdit *id_emp_7;
     QFrame *frame;
     QLabel *label;
     QWidget *layoutWidget_2;
@@ -476,7 +492,7 @@ public:
         demande_conge_2->addTab(tab_38, QString());
         aceuille_2 = new QTabWidget(centralwidget);
         aceuille_2->setObjectName("aceuille_2");
-        aceuille_2->setGeometry(QRect(200, 20, 1741, 761));
+        aceuille_2->setGeometry(QRect(200, 0, 1741, 761));
         aceuille_2->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;\n"
 ""));
         tab_6 = new QWidget();
@@ -797,7 +813,7 @@ public:
 ""));
         widget_7 = new QWidget(tab_6);
         widget_7->setObjectName("widget_7");
-        widget_7->setGeometry(QRect(350, 110, 1171, 591));
+        widget_7->setGeometry(QRect(350, 110, 911, 571));
         widget_7->setStyleSheet(QString::fromUtf8("/* QLineEdit styling */\n"
 "QLineEdit {\n"
 "    background-color: #f0f0f0;\n"
@@ -923,7 +939,7 @@ public:
 "}"));
         pdf_2 = new QPushButton(widget_7);
         pdf_2->setObjectName("pdf_2");
-        pdf_2->setGeometry(QRect(780, 490, 161, 41));
+        pdf_2->setGeometry(QRect(630, 470, 161, 41));
         pdf_2->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
@@ -969,37 +985,30 @@ public:
         __qtablewidgetitem->setFont(font2);
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setFont(font2);
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        __qtablewidgetitem2->setFont(font2);
         tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        __qtablewidgetitem3->setFont(font2);
         tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        __qtablewidgetitem4->setFont(font2);
         tableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        __qtablewidgetitem5->setFont(font2);
         tableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        __qtablewidgetitem6->setFont(font2);
         tableWidget->setHorizontalHeaderItem(6, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        __qtablewidgetitem7->setFont(font2);
         tableWidget->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         tableWidget->setObjectName("tableWidget");
-        tableWidget->setGeometry(QRect(30, 80, 1001, 391));
+        tableWidget->setGeometry(QRect(30, 80, 681, 331));
         tableWidget->setStyleSheet(QString::fromUtf8("ui->tableWidget->setStyleSheet(\n"
 "    \"QTableWidget {\"\n"
-"    \"    background-color: black;\"  // Set the background color of the table to white\n"
+"    \"    background-color: white;\"  // Set the background color of the table to white\n"
 "    \"    color: black;\"  // Set the text color to black\n"
 "    \"    border: 1px solid #dcdcdc;\"  // Add a light border around the table\n"
 "    \"    font-size: 14px;\"  // Set font size for readability\n"
 "    \"}\"\n"
 "    \"QTableWidget::item {\"\n"
-"    \"    color: black;\"  // Set item text color to black\n"
+"    \"    border-bottom: 1px solid #dcdcdc;\"  // Add a bottom border for each row\n"
 "    \"}\"\n"
 "    \"QHeaderView::section {\"\n"
 "    \"    background-color: purple;\"  // Set header background color to purple\n"
@@ -1007,22 +1016,19 @@ public:
 "    \"    font-weight: bold;\"  // Make header text bold\n"
 "    \"    padding: 8px;\"  // Add some padding around the header text\n"
 "    \"    text-align: center;\"  // Center align the header text\n"
-"    \"} \"\n"
+"    \"}\"\n"
 "    \"QHeaderView::section:pressed {\"\n"
-"    \"    background-color: darkpurple;\"  // Darken header color when pressed\n"
-""
-                        "    \"}\"\n"
+"    \"    background-color: darkpurple;\"  // Darken head"
+                        "er color when pressed\n"
+"    \"}\"\n"
 ");\n"
 ""));
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
-        pie_2 = new QGraphicsView(tab_7);
-        pie_2->setObjectName("pie_2");
-        pie_2->setGeometry(QRect(10, 10, 471, 631));
-        bar_2 = new QGraphicsView(tab_7);
-        bar_2->setObjectName("bar_2");
-        bar_2->setGeometry(QRect(10, 10, 471, 701));
+        pie = new QGraphicsView(tab_7);
+        pie->setObjectName("pie");
+        pie->setGeometry(QRect(10, 10, 471, 701));
         label_184 = new QLabel(tab_7);
         label_184->setObjectName("label_184");
         label_184->setGeometry(QRect(860, 20, 431, 81));
@@ -1230,7 +1236,7 @@ public:
         label_175->setStyleSheet(QString::fromUtf8(""));
         layoutWidget = new QWidget(widget_8);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(0, 0, 256, 383));
+        layoutWidget->setGeometry(QRect(0, 0, 256, 475));
         verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName("verticalLayout_3");
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -1361,6 +1367,343 @@ public:
         label_174->raise();
         label_175->raise();
         aceuille_2->addTab(tab_7, QString());
+        demande_conge_3 = new QTabWidget(centralwidget);
+        demande_conge_3->setObjectName("demande_conge_3");
+        demande_conge_3->setGeometry(QRect(200, 740, 1451, 801));
+        demande_conge_3->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;\n"
+""));
+        tab_11 = new QWidget();
+        tab_11->setObjectName("tab_11");
+        demande_conge_3->addTab(tab_11, QString());
+        tab_39 = new QWidget();
+        tab_39->setObjectName("tab_39");
+        widget_14 = new QWidget(tab_39);
+        widget_14->setObjectName("widget_14");
+        widget_14->setGeometry(QRect(20, 100, 1081, 71));
+        widget_14->setStyleSheet(QString::fromUtf8("/* QLineEdit styling */\n"
+"QLineEdit {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    border-radius: 5px;         /* Corrected property and added border-radius */\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border: 1px solid #0078d7;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #3b5998;\n"
+"    background-color: #ffffff;\n"
+"}\n"
+"\n"
+"/* QDateEdit styling */\n"
+"QDateEdit {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid #5c5c5c;\n"
+"}\n"
+"\n"
+"/* QComboBox styling */\n"
+"QComboBox {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padd"
+                        "ing: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid #5c5c5c;\n"
+"}\n"
+"\n"
+"/* QPushButton styling */\n"
+"QPushButton {\n"
+"    color: black;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padding: 5px 15px;\n"
+"    font-size: 14px;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(252, 246, 243);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #C0C0C0; /* Change background color when pressed */\n"
+"    border: 1px solid black; /* Change border color when pressed */\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #C0C0C0;\n"
+"    color: #a0a0a0;\n"
+"    border: 1px solid #d3d3d3;\n"
+"}\n"
+"\n"
+"/* QCheckBox styling */\n"
+"QCheckBox {\n"
+"    "
+                        "spacing: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"}\n"
+"\n"
+"/* QLabel styling */\n"
+"QLabel {\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    padding: 5px;\n"
+"    border: none; /* Remove border if not needed */\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+""));
+        annuler_histo_3 = new QPushButton(widget_14);
+        annuler_histo_3->setObjectName("annuler_histo_3");
+        annuler_histo_3->setGeometry(QRect(350, 20, 151, 29));
+        annuler_histo_3->setStyleSheet(QString::fromUtf8("QPushButton#modifier2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton#modifier2:hover {\n"
+"    background-color: #9f86c0; \n"
+"}"));
+        id_conge_3 = new QLineEdit(widget_14);
+        id_conge_3->setObjectName("id_conge_3");
+        id_conge_3->setGeometry(QRect(10, 20, 181, 31));
+        id_conge_3->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
+        rechercher_3 = new QPushButton(widget_14);
+        rechercher_3->setObjectName("rechercher_3");
+        rechercher_3->setGeometry(QRect(200, 20, 141, 29));
+        rechercher_3->setStyleSheet(QString::fromUtf8("QPushButton#chercher_2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}"));
+        historique_3 = new QTableView(tab_39);
+        historique_3->setObjectName("historique_3");
+        historique_3->setGeometry(QRect(15, 190, 1091, 421));
+        historique_3->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        label_196 = new QLabel(tab_39);
+        label_196->setObjectName("label_196");
+        label_196->setGeometry(QRect(330, 10, 521, 91));
+        label_196->setFont(font);
+        label_196->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
+"QLabel {\n"
+"    background: white;          /* Set background to white */\n"
+"    color: #333333;             /* Text color */\n"
+"    font-size: 25px;            /* Font size */\n"
+"    padding: 5px;               /* Padding around the text */\n"
+"    border: 2px solid #4e1764;  /* Optional: Add a border */\n"
+"    border-radius: 14px;\n"
+"}\n"
+"\n"
+""));
+        demande_conge_3->addTab(tab_39, QString());
+        tab_40 = new QWidget();
+        tab_40->setObjectName("tab_40");
+        afficher_conge_3 = new QTableView(tab_40);
+        afficher_conge_3->setObjectName("afficher_conge_3");
+        afficher_conge_3->setGeometry(QRect(10, 180, 1101, 401));
+        afficher_conge_3->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        label_197 = new QLabel(tab_40);
+        label_197->setObjectName("label_197");
+        label_197->setGeometry(QRect(340, 10, 431, 71));
+        label_197->setFont(font);
+        label_197->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
+"QLabel {\n"
+"    background: white;          /* Set background to white */\n"
+"    color: #333333;             /* Text color */\n"
+"    font-size: 25px;            /* Font size */\n"
+"    padding: 5px;               /* Padding around the text */\n"
+"    border: 2px solid #4e1764;  /* Optional: Add a border */\n"
+"    border-radius: 14px;\n"
+"}\n"
+""));
+        widget_15 = new QWidget(tab_40);
+        widget_15->setObjectName("widget_15");
+        widget_15->setGeometry(QRect(10, 100, 1101, 71));
+        widget_15->setStyleSheet(QString::fromUtf8("/* QLineEdit styling */\n"
+"QLineEdit {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    border-radius: 5px;         /* Corrected property and added border-radius */\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border: 1px solid #0078d7;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 1px solid #3b5998;\n"
+"    background-color: #ffffff;\n"
+"}\n"
+"\n"
+"/* QDateEdit styling */\n"
+"QDateEdit {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid #5c5c5c;\n"
+"}\n"
+"\n"
+"/* QComboBox styling */\n"
+"QComboBox {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padd"
+                        "ing: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 20px;\n"
+"    border-left: 1px solid #5c5c5c;\n"
+"}\n"
+"\n"
+"/* QPushButton styling */\n"
+"QPushButton {\n"
+"    color: black;\n"
+"    border: 1px solid #5c5c5c;\n"
+"    padding: 5px 15px;\n"
+"    font-size: 14px;\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(252, 246, 243);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #C0C0C0; /* Change background color when pressed */\n"
+"    border: 1px solid black; /* Change border color when pressed */\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #C0C0C0;\n"
+"    color: #a0a0a0;\n"
+"    border: 1px solid #d3d3d3;\n"
+"}\n"
+"\n"
+"/* QCheckBox styling */\n"
+"QCheckBox {\n"
+"    "
+                        "spacing: 5px;\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"}\n"
+"\n"
+"/* QLabel styling */\n"
+"QLabel {\n"
+"    font-size: 14px;\n"
+"    color: #333333;\n"
+"    padding: 5px;\n"
+"    border: none; /* Remove border if not needed */\n"
+"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
+"}\n"
+""));
+        annule_conge_3 = new QPushButton(widget_15);
+        annule_conge_3->setObjectName("annule_conge_3");
+        annule_conge_3->setGeometry(QRect(500, 21, 151, 29));
+        annule_conge_3->setStyleSheet(QString::fromUtf8("QPushButton#modifier2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton#modifier2:hover {\n"
+"    background-color: #9f86c0; \n"
+"}"));
+        label_11 = new QLabel(widget_15);
+        label_11->setObjectName("label_11");
+        label_11->setGeometry(QRect(10, 10, 181, 51));
+        recherche_conge_3 = new QPushButton(widget_15);
+        recherche_conge_3->setObjectName("recherche_conge_3");
+        recherche_conge_3->setGeometry(QRect(350, 21, 141, 29));
+        recherche_conge_3->setStyleSheet(QString::fromUtf8("QPushButton#modifier2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton#modifier2:hover {\n"
+"    background-color: #9f86c0; \n"
+"}"));
+        id_emp_7 = new QLineEdit(widget_15);
+        id_emp_7->setObjectName("id_emp_7");
+        id_emp_7->setGeometry(QRect(160, 21, 181, 31));
+        id_emp_7->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
+        demande_conge_3->addTab(tab_40, QString());
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
         frame->setGeometry(QRect(0, 0, 201, 791));
@@ -1532,6 +1875,7 @@ public:
 
         demande_conge_2->setCurrentIndex(0);
         aceuille_2->setCurrentIndex(0);
+        demande_conge_3->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1636,6 +1980,17 @@ public:
         raison_conge_2->setItemText(5, QCoreApplication::translate("MainWindow", "Autre", nullptr));
 
         aceuille_2->setTabText(aceuille_2->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        demande_conge_3->setTabText(demande_conge_3->indexOf(tab_11), QCoreApplication::translate("MainWindow", "demande_conge", nullptr));
+        annuler_histo_3->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
+        id_conge_3->setPlaceholderText(QCoreApplication::translate("MainWindow", "id_cong\303\251", nullptr));
+        rechercher_3->setText(QCoreApplication::translate("MainWindow", "rechercher", nullptr));
+        label_196->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt;\">Historique Cong\303\251s</span></p></body></html>", nullptr));
+        demande_conge_3->setTabText(demande_conge_3->indexOf(tab_39), QCoreApplication::translate("MainWindow", "Historique conge", nullptr));
+        label_197->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt;\">Accepter/Refuser</span></p></body></html>", nullptr));
+        annule_conge_3->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:700;\">Rechercher :</span></p></body></html>", nullptr));
+        recherche_conge_3->setText(QCoreApplication::translate("MainWindow", "Recherche", nullptr));
+        demande_conge_3->setTabText(demande_conge_3->indexOf(tab_40), QCoreApplication::translate("MainWindow", "accepter/refuser", nullptr));
         label->setText(QString());
         pushButton->setText(QCoreApplication::translate("MainWindow", " Employ\303\251s", nullptr));
         pushButton_4->setText(QCoreApplication::translate("MainWindow", " Clients", nullptr));

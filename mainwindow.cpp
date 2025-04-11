@@ -6,6 +6,27 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QDebug>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QChartView>
+#include <QtCharts/QChart>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QGraphicsScene>
+#include <QPainter>
+#include <QColor>
+#include <QtCharts/QChartView>
+#include <QtCharts/QChart>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QBarCategoryAxis>  // Assurez-vous que cette ligne est présente
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QChartView>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,19 +34,25 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Fill the table widget with data when the window is loaded
+    // Remplir le tableau avec les données au chargement de la fenêtre
     fillTableWidget();
     connect(ui->tableWidget, &QTableWidget::itemClicked, this, &MainWindow::on_tableWidget_itemClicked);
 
     connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addEmployeeButton_clicked);
     connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_supprimerEmploye_clicked);
     connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyEmployeeButton_clicked);
+    connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_rechercherButton_clicked);
+    connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &MainWindow::on_comboBox_tri_3_currentIndexChanged);
+    // Appeler la fonction pour afficher les statistiques des genres
+    displayGenderStatistics();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 void MainWindow::fillTableWidget() {
     // Assuming 'emp.afficher()' returns a QSqlQueryModel with data in the correct order.
@@ -306,5 +333,113 @@ void MainWindow::refreshTableWidget() {
 
     // Resize the columns to fit the content
     ui->tableWidget->resizeColumnsToContents();
+}
+void MainWindow::displayGenderStatistics() {
+    // 1. Récupération des données
+    QMap<QString, int> stats = emp.getGenderStats();
+
+    // Déclarer maleCount et femaleCount AVANT de les utiliser
+    int maleCount = stats.value("m", 0);  // Déclaration correcte
+    int femaleCount = stats.value("f", 0); // Déclaration correcte
+    int total = maleCount + femaleCount;
+
+    qDebug() << "[Debug] Hommes:" << maleCount << "| Femmes:" << femaleCount;
+
+    if(total == 0) {
+        QGraphicsScene *scene = new QGraphicsScene();
+        QLabel *label = new QLabel("Aucune donnée disponible\n(Vérifiez la connexion à la base)");
+        label->setAlignment(Qt::AlignCenter);
+        label->setStyleSheet("font-size: 14px; color: #FF0000;");
+        scene->addWidget(label);
+        ui->pie->setScene(scene);
+        return;
+    }
+
+    // 4. Création du diagramme
+    QPieSeries *series = new QPieSeries();
+
+    // 5. Ajout des tranches avec style
+    if(maleCount > 0) {
+        QPieSlice *maleSlice = series->append("Hommes", maleCount);
+        maleSlice->setColor(QColor("#3498db")); // Bleu
+        maleSlice->setLabelVisible(true);
+    }
+
+    if(femaleCount > 0) {
+        QPieSlice *femaleSlice = series->append("Femmes", femaleCount);
+        femaleSlice->setColor(QColor("#e74c3c")); // Rouge
+        femaleSlice->setLabelVisible(true);
+    }
+
+    // 6. Configuration des labels
+    for(QPieSlice *slice : series->slices()) {
+        double percentage = (slice->value() / total) * 100.0;
+        slice->setLabel(QString("%1% (%L2)")
+                       .arg(percentage, 0, 'f', 1)
+                       .arg(slice->value()));
+        slice->setLabelArmLengthFactor(0.3);
+        slice->setLabelFont(QFont("Arial", 10));
+    }
+
+    // 7. Création du graphique
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Répartition des genres");
+    chart->legend()->setAlignment(Qt::AlignRight);
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    // 8. Intégration dans l'interface
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setMinimumSize(600, 450); // Taille augmentée
+
+    QGraphicsScene *scene = new QGraphicsScene();
+    scene->addWidget(chartView);
+    ui->pie->setScene(scene);
+    ui->pie->show();
+}
+void MainWindow::on_rechercherButton_clicked() {
+    QString idText = ui->id_rech->text().trimmed();
+    bool ok;
+    int id = idText.toInt(&ok);
+
+    if (!ok || idText.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "ID invalide !");
+        return;
+    }
+
+    Architecte arch;
+    if (arch.fetchById(id)) {
+        // Peupler les champs
+        ui->nom->setText(arch.getNom());
+        ui->prenom->setText(arch.getPrenom());
+        ui->email->setText(arch.getEmail());
+        ui->salaire->setText(QString::number(arch.getSalaire()));
+        ui->poste->setCurrentText(arch.getPoste());
+        ui->date_emboche->setDate(arch.getDateEmbauche());
+
+        // Gérer le genre
+        if (arch.getSexe() == "M") {
+            ui->homme->setChecked(true);
+            ui->femme_2->setChecked(false);
+        } else {
+            ui->homme->setChecked(false);
+            ui->femme_2->setChecked(true);
+        }
+    } else {
+        QMessageBox::information(this, "Recherche", "Aucun architecte trouvé avec cet ID.");
+}
+
+}
+void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
+    const int DATE_COLUMN = 3; // Colonne de la date dans le QTableWidget
+
+    Qt::SortOrder order = Qt::DescendingOrder; // Par défaut : décroissant
+
+    if (index == 1) { // Si "Date croissante" est sélectionné
+        order = Qt::AscendingOrder;
+    }
+
+    ui->tableWidget->sortItems(DATE_COLUMN, order);
 }
 

@@ -4,6 +4,17 @@
 #include <QRandomGenerator>
 #include <QDate>
 #include "architechtes.h"
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QChartView>
+#include <QtCharts/QChart>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QGraphicsScene>
+#include <QPainter>
+#include <QColor>
 
 Architecte::Architecte() {
     id_architecte = 0;
@@ -192,4 +203,60 @@ bool Architecte::modifier(QString nom, QString prenom, QString sexe, QString ema
     }
 
     return true;
+}
+QMap<QString, int> Architecte::getGenderStats() const {
+    QMap<QString, int> stats;
+    QSqlQuery query;
+
+    // 1. Requête corrigée (table 'architectes' au lieu de 'employes')
+    query.prepare("SELECT LOWER(sexe), COUNT(*) FROM architectes GROUP BY LOWER(sexe)");
+
+    if (!query.exec()) {
+        qCritical() << "Erreur SQL :" << query.lastError().text()
+                    << "\nRequête :" << query.lastQuery();
+        return stats;
+    }
+
+    // 2. Initialisation des valeurs par défaut
+    stats["m"] = 0;
+    stats["f"] = 0;
+
+    // 3. Traitement des résultats
+    while (query.next()) {
+        QString gender = query.value(0).toString().trimmed();
+        int count = query.value(1).toInt();
+
+        // Normalisation des clés
+        if (gender == "m" || gender == "male") stats["m"] += count;
+        else if (gender == "f" || gender == "female") stats["f"] += count;
+        else qDebug() << "Valeur de genre non reconnue :" << gender;
+    }
+
+    qDebug() << "[DEBUG] Statistiques genre - M:" << stats["m"] << "F:" << stats["f"];
+
+    return stats;
+}
+bool Architecte::fetchById(int id) {
+    QSqlQuery query;
+    query.prepare("SELECT nom, prenom, email, sexe, date_embauche, salaire, poste "
+                  "FROM architectes WHERE id_architecte = :id");
+    query.bindValue(":id", id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur de recherche :" << query.lastError().text();
+        return false;
+    }
+
+    if (query.next()) {
+        nom = query.value(0).toString();
+        prenom = query.value(1).toString();
+        email = query.value(2).toString();
+        sexe = query.value(3).toString();
+        date_embauche = query.value(4).toDate();
+        salaire = query.value(5).toFloat();
+        poste = query.value(6).toString();
+        return true;
+    }
+
+    return false;
 }

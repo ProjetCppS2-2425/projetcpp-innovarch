@@ -22,6 +22,8 @@ public:
     QString generateNumericPassword();
     bool idExists(QString id);
     bool supprimer(QString id_a);
+    QMap<QString, int> getGenderStats() const;
+    bool fetchById(int id);
 
     // Getters
     int getIdArchitecte() { return id_architecte; }
