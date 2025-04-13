@@ -533,7 +533,7 @@ QLineEdit:focus {
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -2051,7 +2051,16 @@ QLineEdit:focus {
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Email Employé :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <zorder>layoutWidget</zorder>
+      <zorder>label_173</zorder>
+      <zorder>raison_conge_2</zorder>
+      <zorder>label_171</zorder>
+      <zorder>departement_conge_3</zorder>
+      <zorder>label_172</zorder>
+      <zorder>poste_conge_2</zorder>
+      <zorder>email_conge_2</zorder>
+      <zorder>label_167</zorder>
+      <zorder>id_emp_4</zorder>
+      <zorder>label_170</zorder>
       <zorder>prenom_conge_2</zorder>
       <zorder>nom_conge_2</zorder>
       <zorder>calendarWidget_5</zorder>

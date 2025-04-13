@@ -1,26 +1,30 @@
 #include "mainwindow.h"
+#include "dialog.h"
+#include "connection.h"
+
 #include <QApplication>
 #include <QMessageBox>
-#include "connection.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Connection c;
 
+    Connection c;
     bool test = c.createconnect();
 
-    MainWindow w;
     if (test) {
-        w.show();
         QMessageBox::information(nullptr, QObject::tr("Database Status"),
-                                 QObject::tr("Connection successful.\nClick Cancel to exit."),
-                                 QMessageBox::Cancel);
+                                 QObject::tr("Connexion à la base réussie."),
+                                 QMessageBox::Ok);
+
+        Dialog loginDialog;
+        loginDialog.show();
+
+        return a.exec();
     } else {
         QMessageBox::critical(nullptr, QObject::tr("Database Status"),
-                              QObject::tr("Connection failed.\nClick Cancel to exit."),
-                              QMessageBox::Cancel);
+                              QObject::tr("Échec de la connexion à la base."),
+                              QMessageBox::Ok);
+        return -1;
     }
-    w.show();
-    return a.exec();
 }
