@@ -22,8 +22,10 @@ public:
     QString generateNumericPassword();
     bool idExists(QString id);
     bool supprimer(QString id_a);
-    QMap<QString, int> getGenderStats() const;
+    QMap<QString, int> getCongeStats() const;
     bool fetchById(int id);
+     QSqlQueryModel *afficherconge();
+     bool updateCongeStatus(const QString& id_conge, const QString& new_status);
 
     // Getters
     int getIdArchitecte() { return id_architecte; }
@@ -34,7 +36,7 @@ public:
     QString getPoste() { return poste; }
     QString getMotDePasse() { return mot_de_passe; }
     QString getSexe() { return sexe; }
-    QDate getDateEmbauche() { return date_embauche; }
+    QDate getDateEmbauche() const { return date_embauche; }
 
     // Setters
     void setIdArchitecte(int id) { id_architecte = id; }
@@ -50,7 +52,19 @@ public:
     // Méthodes
     bool ajouter();
     QSqlQueryModel *afficher();
+    QString generateLeaveDecision();
+    bool ajouterconge(const QString &id_emp,
+                      const QString &nom,
+                      const QString &prenom,
+                      const QString &email,
+                      const QString &raison,
+                      const QString &poste,
+                      const QDate &date_dep,
+                      const QDate &date_fin);
+
     bool modifier(QString nom, QString prenom, QString sexe, QString email, float salaire, QString poste, QDate date_embauche, QString id);
+
+
 };
 
 #endif // ARCHITECTE_H

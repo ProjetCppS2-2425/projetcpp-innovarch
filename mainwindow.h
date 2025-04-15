@@ -38,14 +38,29 @@ private:
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
     void refreshTableWidget();
     void fillTableWidget();
-    void displayGenderStatistics();  // Declare the function here
+    void displayCongeStatistics();  // Declare the function here
      Architecte architecte;
      void on_rechercherButton_clicked();
          QString m_userRole;
          void setupTabsBasedOnRole(); // Déclaration de la nouvelle fonction
+         bool isAscending = true; // Track sorting order
+         bool customTableWidgetItemCompare(QTableWidgetItem* item1, QTableWidgetItem* item2);
+             QSqlQueryModel* currentCongeModel;
+
+
 
 private slots:
     void on_comboBox_tri_3_currentIndexChanged(int index);
+    void on_triCb_currentIndexChanged(int index);
+    void on_triButton_clicked();
+    void on_tableWidget_sortIndicatorChanged(int logicalIndex, Qt::SortOrder order);
+    void populateEmployeeInfo();
+    void on_soumettreButton_clicked();
+   void onSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+        void refreshTableView();
+        void on_acceptation_clicked();  // Doit correspondre exactement au nom de l'objet UI
+            void on_refuser_clicked();
+
 };
 
 #endif // MAINWINDOW_H

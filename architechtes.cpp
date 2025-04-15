@@ -204,12 +204,12 @@ bool Architecte::modifier(QString nom, QString prenom, QString sexe, QString ema
 
     return true;
 }
-QMap<QString, int> Architecte::getGenderStats() const {
+QMap<QString, int> Architecte::getCongeStats() const {
     QMap<QString, int> stats;
     QSqlQuery query;
 
-    // 1. Requête corrigée (table 'architectes' au lieu de 'employes')
-    query.prepare("SELECT LOWER(sexe), COUNT(*) FROM architectes GROUP BY LOWER(sexe)");
+    // Requête sur les états de congés
+    query.prepare("SELECT LOWER(etat), COUNT(*) FROM CONGE GROUP BY LOWER(etat)");
 
     if (!query.exec()) {
         qCritical() << "Erreur SQL :" << query.lastError().text()
@@ -217,25 +217,31 @@ QMap<QString, int> Architecte::getGenderStats() const {
         return stats;
     }
 
-    // 2. Initialisation des valeurs par défaut
-    stats["m"] = 0;
-    stats["f"] = 0;
+    // Initialiser les compteurs
+    stats["accepté"] = 0;
+    stats["refusé"] = 0;
 
-    // 3. Traitement des résultats
+    // Lecture des résultats
     while (query.next()) {
-        QString gender = query.value(0).toString().trimmed();
+        QString etat = query.value(0).toString().trimmed().toLower();
         int count = query.value(1).toInt();
 
-        // Normalisation des clés
-        if (gender == "m" || gender == "male") stats["m"] += count;
-        else if (gender == "f" || gender == "female") stats["f"] += count;
-        else qDebug() << "Valeur de genre non reconnue :" << gender;
+        if (etat.contains("accept")) {
+            stats["accepté"] += count;
+        } else if (etat.contains("refus")) {
+            stats["refusé"] += count;
+        } else {
+            qDebug() << "État de congé non reconnu:" << query.value(0).toString();
+        }
     }
 
-    qDebug() << "[DEBUG] Statistiques genre - M:" << stats["m"] << "F:" << stats["f"];
+
+    qDebug() << "[DEBUG] Congés acceptés:" << stats["ACCEPTÉ"]
+             << " - Congés refusés:" << stats["REFUSÉ"];
 
     return stats;
 }
+
 bool Architecte::fetchById(int id) {
     QSqlQuery query;
     query.prepare("SELECT nom, prenom, email, sexe, date_embauche, salaire, poste "
@@ -260,3 +266,106 @@ bool Architecte::fetchById(int id) {
 
     return false;
 }
+QString Architecte::generateLeaveDecision() {
+    // Variables pour stocker le nombre d'architectes totaux et d'architectes non en congé
+    int totalArchitectes = 0;
+    int architectesNotOnLeave = 0;
+
+    // Requête pour obtenir le nombre total d'architectes
+    QSqlQuery query;
+
+    // Compter le nombre total d'architectes dans ARCHITECTES
+    query.prepare("SELECT COUNT(*) FROM ARCHITECTES");
+    if (query.exec() && query.next()) {
+        totalArchitectes = query.value(0).toInt();
+    } else {
+        qDebug() << "Erreur lors de la récupération du nombre d'architectes:" << query.lastError().text();
+        return "Erreur de calcul des architectes.";
+    }
+    qDebug() << "total architectes:" << totalArchitectes;
+
+    // Compter les architectes qui ne sont pas en congé dans CONGE
+    // Supposons que `ETAT` est le champ dans la table `CONGE` qui indique l'état du congé (ex. 'Non' pour non en congé)
+    query.prepare("SELECT COUNT(*) FROM CONGE WHERE ETAT != 'En congé' AND ID_EMP IN (SELECT ID_EMP FROM ARCHITECTES)");
+    if (query.exec() && query.next()) {
+        architectesNotOnLeave = query.value(0).toInt();
+    } else {
+        qDebug() << "Erreur lors de la récupération des architectes non en congé:" << query.lastError().text();
+        return "Erreur de calcul des architectes non en congé.";
+    }
+    qDebug() << "architectes on leave:" << architectesNotOnLeave;
+
+    // Calcul du pourcentage d'architectes non en congé
+    if (totalArchitectes == 0) {
+        return "Aucun architecte disponible pour calculer.";
+    }
+
+    float percentageNotOnLeave = (float)architectesNotOnLeave / totalArchitectes * 100;
+    float percentageWork = 100 - percentageNotOnLeave;
+    qDebug() << "percentage:" << percentageNotOnLeave;
+    qDebug() << "percentage work:" << percentageWork;
+
+    // Décision selon le seuil de 70%
+    if (percentageWork >= 70) {
+        return "Tu peux accepter le congé.";
+    } else {
+        return "N'accepte pas le congé.";
+    }
+}
+
+bool Architecte::ajouterconge(const QString &id_emp,
+                              const QString &nom,
+                              const QString &prenom,
+                              const QString &email,
+                              const QString &raison,
+                              const QString &poste,
+                              const QDate &date_dep,
+                              const QDate &date_fin)
+{
+    int id_conge = generateIdentifiant(); // Utilise ta fonction dans Architecte pour générer un ID
+    QString conseilMessage = generateLeaveDecision(); // Générer une consigne (conseil)
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO conge (ID_CONGE, ID_EMP, NOM, PRENOM, EMAIL, RAISON, POSTE, DATE_D, DATE_F, CONSEIG, TYPE_CONGE, ETAT) "
+                  "VALUES (:id_conge, :id_emp, :nom, :prenom, :email, :raison, :poste, :date_d, :date_f, :conseig, :type_conge, :etat)");
+
+    // Liaison des valeurs
+    query.bindValue(":id_conge", id_conge);
+    query.bindValue(":id_emp", id_emp);
+    query.bindValue(":nom", nom);
+    query.bindValue(":prenom", prenom);
+    query.bindValue(":email", email);
+    query.bindValue(":raison", raison);
+    query.bindValue(":poste", poste);
+    query.bindValue(":date_d", date_dep);
+    query.bindValue(":date_f", date_fin);
+    query.bindValue(":conseig", conseilMessage);
+    query.bindValue(":type_conge", "Congé annuel");
+    query.bindValue(":etat", "En attente");
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'ajout du congé :" << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+bool Architecte::updateCongeStatus(const QString& id_conge, const QString& new_status)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE conge SET \"ETAT\" = :etat WHERE \"ID_CONGE\" = :id");
+    query.bindValue(":etat", new_status.toUpper());
+    query.bindValue(":id", id_conge);
+
+    if(!query.exec()) {
+        qCritical() << "Échec de la requête UPDATE :" << query.lastError().text();
+        qCritical() << "Requête :" << query.lastQuery();
+        qCritical() << "Valeurs :" << id_conge << "/" << new_status;
+        return false;
+    }
+
+    // Vérifier qu'une ligne a bien été modifiée
+    return query.numRowsAffected() == 1;
+}
+
+
