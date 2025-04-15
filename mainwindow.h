@@ -27,6 +27,7 @@ public:
     // Slot functions for buttons and interactions
     void on_addEmployeeButton_clicked();
     void on_supprimerEmploye_clicked();
+    void on_refreshButton_clicked();
     void on_modifyEmployeeButton_clicked();
     void on_pdf_2_clicked();
 

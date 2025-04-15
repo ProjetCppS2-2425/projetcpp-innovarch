@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addEmployeeButton_clicked);
     connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_supprimerEmploye_clicked);
+    connect(ui->refresh, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
     connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyEmployeeButton_clicked);
     connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_rechercherButton_clicked);
     connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -114,6 +115,19 @@ void MainWindow::fillTableWidget() {
     ui->tableWidget->resizeColumnsToContents();
 }
 
+
+void MainWindow::on_refreshButton_clicked()
+{
+ui->id_rech->clear(); // Clear 'id' field
+ui->nom->clear(); // Clear 'nom' field
+ui->prenom->clear(); // Clear 'prenom' field
+ui->email->clear(); // Clear 'email' field
+ui->salaire->clear(); // Clear 'salaire' field
+ui->poste->setCurrentIndex(0); // Reset combo box (set to default/first item)
+ui->homme->setChecked(false); // Uncheck 'homme' radio button
+ui->femme_2->setChecked(false); // Uncheck 'femme' radio button
+ui->date_emboche->setDate(QDate::currentDate()); // Reset date field to current date
+}
 
 
 void MainWindow::on_addEmployeeButton_clicked()
