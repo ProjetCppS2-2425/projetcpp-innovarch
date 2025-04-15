@@ -21,8 +21,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);  // Explicit keyword added to prevent implicit conversions
-    ~MainWindow();  // Destructor to clean up the UI and other resources
+   explicit MainWindow(QWidget *parent = nullptr, const QString &userRole = "");
+   ~MainWindow();
 
     // Slot functions for buttons and interactions
     void on_addEmployeeButton_clicked();
@@ -40,6 +40,8 @@ private:
     void displayGenderStatistics();  // Declare the function here
      Architecte architecte;
      void on_rechercherButton_clicked();
+         QString m_userRole;
+         void setupTabsBasedOnRole(); // Déclaration de la nouvelle fonction
 
 private slots:
     void on_comboBox_tri_3_currentIndexChanged(int index);

@@ -33,12 +33,15 @@
 #include <QMessageBox>
 #include <QTableWidget>
 #include "dialog.h"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent, const QString &userRole)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      m_userRole(userRole)
 {
     ui->setupUi(this);
+    setupTabsBasedOnRole();
 
     // Remplir le tableau avec les données au chargement de la fenêtre
     fillTableWidget();
@@ -55,7 +58,23 @@ MainWindow::MainWindow(QWidget *parent)
     // Appeler la fonction pour afficher les statistiques des genres
     displayGenderStatistics();
 }
+void MainWindow::setupTabsBasedOnRole()
+{
+    QTabWidget* mainTabWidget = findChild<QTabWidget*>("aceuille_2");
+    if (!mainTabWidget) {
+        qWarning() << "Main TabWidget not found!";
+        return;
+    }
 
+    if (m_userRole != "Directeur") {
+        // Keep only the "Statistique et demande de congés" tab
+        for (int i = mainTabWidget->count() - 1; i >= 0; --i) {
+            if (mainTabWidget->widget(i)->objectName() != "tab_7") {
+                mainTabWidget->removeTab(i);
+            }
+        }
+    }
+}
 MainWindow::~MainWindow()
 {
     delete ui;

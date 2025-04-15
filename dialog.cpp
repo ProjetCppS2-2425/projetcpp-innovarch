@@ -19,18 +19,17 @@ Dialog::~Dialog()
     delete ui;
 }
 
+
 void Dialog::on_loginButton_clicked()
 {
     QString strId = ui->id->text().trimmed();
     QString password = ui->password->text().trimmed();
 
-    // Validation des champs
     if(strId.isEmpty() || password.isEmpty()) {
         showError("Veuillez remplir tous les champs");
         return;
     }
 
-    // Conversion de l'ID
     bool ok;
     int id = strId.toInt(&ok);
     if(!ok) {
@@ -38,12 +37,16 @@ void Dialog::on_loginButton_clicked()
         return;
     }
 
-    // Vérification des identifiants
     if(checkPassword(id, password)) {
+        m_currentUserId = id;  // Stocker l'ID
         QString fullName = getEmployeName(id);
-        showSuccess("Bienvenue " + fullName);
+        QString poste = getEmployePoste(id);  // Récupérer le poste/role
 
-        MainWindow *mainWindow = new MainWindow();
+        showSuccess("Bienvenue " + fullName);
+        emit userAuthenticated(id, poste);  // Émettre le signal
+
+        MainWindow *mainWindow = new MainWindow(nullptr, poste);
+        mainWindow->setAttribute(Qt::WA_DeleteOnClose); // Ensure it's deleted when closed
         mainWindow->show();
         this->close();
     }
@@ -51,7 +54,17 @@ void Dialog::on_loginButton_clicked()
         showError("Identifiant ou mot de passe incorrect");
     }
 }
+QString Dialog::getEmployePoste(int id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT POSTE FROM ARCHITECTES WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":id", id);
 
+    if(query.exec() && query.next()) {
+        return query.value("POSTE").toString();
+    }
+    return "Unknown";
+}
 bool Dialog::checkPassword(int id, const QString &password)
 {
     QSqlQuery query;
