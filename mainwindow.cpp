@@ -7,22 +7,11 @@
 #include <QFileDialog>
 #include <QPdfWriter>
 #include <QPainter>
-#include <QRegularExpression>
 #include <QtCharts/QChartView>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>
-#include <QRandomGenerator>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QGraphicsProxyWidget>
-#include <QtCharts/QLegendMarker>
-#include <QtCharts/QChart>
-#include <QJsonDocument>
-#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -45,15 +34,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->stat2_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
     connect(ui->statbutt, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
     connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButton_clicked);
-    connect(ui->soumettre, &QPushButton::clicked, this, &MainWindow::on_submitEvaluationButton_clicked);
-
-    // Connect table widgets for matching functionality
-    connect(ui->tableWidget, &QTableWidget::itemClicked, this, &MainWindow::on_tableWidget_itemClicked);
-    connect(ui->tableWidget_2, &QTableWidget::itemClicked, this, &MainWindow::on_tableWidget_2_itemClicked);
-
-    // Connect new buttons for showing evaluation and matching
-    connect(ui->evalbutt, &QPushButton::clicked, this, &MainWindow::on_evalbutt_clicked);
-    connect(ui->matchinbutt, &QPushButton::clicked, this, &MainWindow::on_matchinbutt_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -248,35 +228,35 @@ void MainWindow::on_modifyContracteurButton_clicked() {
 
 void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
     int row = index.row();
-    QString contractorId = ui->evatab->model()->data(ui->evatab->model()->index(row, 0)).toString();
-    QSqlQuery query;
-    query.prepare("SELECT evaluation FROM contracteurs WHERE id_contracteur = :id");
-    query.bindValue(":id", contractorId);
-    if (!query.exec() || !query.next()) {
-        qDebug() << "Error fetching contractor evaluation:" << query.lastError().text();
+    QAbstractItemModel *model = ui->tableView_2->model();
+
+    // Ensure the model is valid
+    if (!model) {
+        qDebug() << "Model is null.";
         return;
     }
-    QString evaluationJson = query.value(0).toString();
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(evaluationJson.toUtf8());
-    QJsonObject jsonObj = jsonDoc.object();
 
-    QPieSeries *series = new QPieSeries();
-    for (const QString &key : jsonObj.keys()) {
-        series->append(key, jsonObj[key].toDouble());
+    // Populate the form fields with the selected row's data
+    ui->lineEdit_3->setText(model->data(model->index(row, 0)).toString()); // ID
+    ui->lineEdit_2->setText(model->data(model->index(row, 1)).toString()); // Nom
+    ui->lineEdit_13->setText(model->data(model->index(row, 2)).toString()); // Prenom
+    ui->lineEdit_7->setText(model->data(model->index(row, 3)).toString()); // Telephone
+    ui->lineEdit_4->setText(model->data(model->index(row, 4)).toString()); // Adresse
+    ui->lineEdit_5->setText(model->data(model->index(row, 5)).toString()); // Email
+    ui->comboBox->setCurrentText(model->data(model->index(row, 6)).toString()); // Domaine
+
+    // Highlight the selected row in black
+    for (int i = 0; i < model->rowCount(); ++i) {
+        for (int j = 0; j < model->columnCount(); ++j) {
+            if (i == row) {
+                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::BackgroundRole);
+                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::white), Qt::ForegroundRole);
+            } else {
+                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::NoBrush), Qt::BackgroundRole);
+                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::ForegroundRole);
+            }
+        }
     }
-
-    QChart *chart = new QChart();
-    chart->addSeries(series);
-    chart->setTitle("Répartition des domaines évalués");
-    chart->setAnimationOptions(QChart::SeriesAnimations);
-
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    scene->addWidget(chartView);
-    ui->graphicsView_2->setScene(scene);
-    ui->graphicsView_2->show();
 }
 
 void MainWindow::refreshTableWidget() {
@@ -439,24 +419,46 @@ void MainWindow::on_pdf_2_clicked() {
 
 void MainWindow::generateStatistics() {
     QPieSeries *series = new QPieSeries();
-    QSqlQuery query("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine");
-    int total = 0;
-    while (query.next()) {
-        QString domaine = query.value(0).toString();
-        int count = query.value(1).toInt();
-        if (count > 0) {
-            total += count;
-            series->append(domaine, count);
-        }
+
+    // Ensure the database connection is open
+    if (!QSqlDatabase::database().isOpen()) {
+        QMessageBox::critical(this, "Database Error", "La connexion à la base de données est fermée.");
+        return;
     }
 
-    if (series->slices().isEmpty()) {
+    QSqlQuery query;
+    if (!query.exec("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine")) {
+        QMessageBox::critical(this, "Query Error", "Échec de l'exécution de la requête pour les statistiques.");
+        qDebug() << "Query Error:" << query.lastError().text();
+        return;
+    }
+
+    int total = 0;
+
+    // Calculate the total count
+    while (query.next()) {
+        total += query.value(1).toInt();
+    }
+
+    // Check if total is zero
+    if (total == 0) {
         QMessageBox::information(this, "Statistiques", "Aucune donnée disponible pour les statistiques.");
         return;
     }
 
+    // Reset the query to iterate again
+    query.exec("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine");
+
+    // Add slices with percentages
+    while (query.next()) {
+        QString domaine = query.value(0).toString();
+        int count = query.value(1).toInt();
+        double percentage = (static_cast<double>(count) / total) * 100;
+        series->append(QString("%1 (%2%)").arg(domaine).arg(QString::number(percentage, 'f', 2)), count);
+    }
+
     for (QPieSlice *slice : series->slices()) {
-        slice->setLabel(QString("%1 (%2)").arg(slice->label()).arg(slice->value()));
+        slice->setLabel(slice->label());
         slice->setLabelVisible(true);
         slice->setLabelFont(QFont("Helvetica", 8, QFont::Bold));
     }
@@ -466,7 +468,7 @@ void MainWindow::generateStatistics() {
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Répartition des domaines des contracteurs");
+    chart->setTitle("Répartition des domaines des contracteurs (en pourcentage)");
     chart->setTitleFont(QFont("Helvetica", 12, QFont::Bold));
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setFont(QFont("Helvetica", 8));
@@ -559,249 +561,4 @@ void MainWindow::on_generateStatisticsButton_clicked() {
 
 void MainWindow::on_exportStatisticsPDFButton_clicked() {
     exportStatisticsPDF();
-}
-
-void MainWindow::on_tabWidget_currentChanged(int index) {
-    qDebug() << "Tab changed to index:" << index;
-    switch (index) {
-        case 0:
-            qDebug() << "First tab selected.";
-            break;
-        case 1:
-            qDebug() << "Second tab selected.";
-            break;
-        case 2:
-            qDebug() << "Evaluation tab selected.";
-            break;
-        case 3:
-            qDebug() << "Matching tab selected.";
-            break;
-        default:
-            qDebug() << "Other tab selected.";
-            break;
-    }
-}
-
-void MainWindow::on_submitEvaluationButton_clicked() {
-    int contractorId = ui->lineEdit_8->text().toInt();
-    QString projectType = ui->comboBox_6->currentText();
-    double rating = ui->spinBox_2->value();
-
-    if (contractorId == 0 || projectType.isEmpty()) {
-        QMessageBox::warning(this, "Input Error", "Veuillez remplir tous les champs !");
-        return;
-    }
-
-    QSqlQuery query;
-    query.prepare("SELECT evaluation FROM contracteurs WHERE id_contracteur = :id");
-    query.bindValue(":id", contractorId);
-    if (!query.exec() || !query.next()) {
-        QMessageBox::warning(this, "Error", "Contractor not found.");
-        return;
-    }
-
-    QString evaluationJson = query.value(0).toString();
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(evaluationJson.toUtf8());
-    QJsonObject jsonObj = jsonDoc.object();
-
-    jsonObj[projectType] = rating;
-
-    QString updatedJson = QString(QJsonDocument(jsonObj).toJson(QJsonDocument::Compact));
-
-    query.prepare("UPDATE contracteurs SET evaluation = :evaluation WHERE id_contracteur = :id");
-    query.bindValue(":evaluation", updatedJson);
-    query.bindValue(":id", contractorId);
-
-    if (query.exec()) {
-        QMessageBox::information(this, "Success", "Évaluation soumise avec succès.");
-        fillTableWidget();
-    } else {
-        QMessageBox::warning(this, "Error", "Échec de la mise à jour de l'évaluation.");
-    }
-}
-
-void MainWindow::on_tableWidget_itemClicked(QTableWidgetItem *item) {
-    int row = item->row();
-    QString projectDomain = ui->tableWidget->item(row, 2)->text();
-    QSqlQuery query;
-    query.prepare("SELECT id_contracteur, nom, domaine, historique FROM contracteurs");
-    if (!query.exec()) {
-        qDebug() << "Error fetching contractors:" << query.lastError().text();
-        return;
-    }
-
-    ui->tableWidget_2->setRowCount(0);
-
-    while (query.next()) {
-        int id = query.value(0).toInt();
-        QString name = query.value(1).toString();
-        QString domain = query.value(2).toString();
-        int completedProjects = query.value(3).toInt();
-
-        int matchPercentage = 0;
-        if (domain == projectDomain) {
-            matchPercentage += 70;
-        }
-        matchPercentage += qMin(completedProjects / 10, 30);
-
-        int rowCount = ui->tableWidget_2->rowCount();
-        ui->tableWidget_2->insertRow(rowCount);
-        ui->tableWidget_2->setItem(rowCount, 0, new QTableWidgetItem(QString::number(id)));
-        ui->tableWidget_2->setItem(rowCount, 1, new QTableWidgetItem(name));
-        ui->tableWidget_2->setItem(rowCount, 2, new QTableWidgetItem(domain));
-        ui->tableWidget_2->setItem(rowCount, 3, new QTableWidgetItem(QString::number(completedProjects)));
-        ui->tableWidget_2->setItem(rowCount, 4, new QTableWidgetItem(QString::number(matchPercentage) + "%"));
-    }
-}
-
-void MainWindow::on_tableWidget_2_itemClicked(QTableWidgetItem *item) {
-    int row = item->row();
-    QString contractorDomain = ui->tableWidget_2->item(row, 2)->text();
-    QSqlQuery query;
-    query.prepare("SELECT id_projet, nom_projet, type_projet, budget, echeance FROM projets WHERE id_contracteur IS NULL");
-    if (!query.exec()) {
-        qDebug() << "Error fetching projects:" << query.lastError().text();
-        return;
-    }
-
-    ui->tableWidget->setRowCount(0);
-
-    while (query.next()) {
-        int id = query.value(0).toInt();
-        QString name = query.value(1).toString();
-        QString domain = query.value(2).toString();
-        int budget = query.value(3).toInt();
-        QString deadline = query.value(4).toString();
-
-        int matchPercentage = 0;
-        if (domain == contractorDomain) {
-            matchPercentage += 70;
-        }
-        matchPercentage += qMin(budget / 10000, 30);
-
-        int rowCount = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(rowCount);
-        ui->tableWidget->setItem(rowCount, 0, new QTableWidgetItem(QString::number(id)));
-        ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(name));
-        ui->tableWidget->setItem(rowCount, 2, new QTableWidgetItem(domain));
-        ui->tableWidget->setItem(rowCount, 3, new QTableWidgetItem(QString::number(budget)));
-        ui->tableWidget->setItem(rowCount, 4, new QTableWidgetItem(deadline));
-        ui->tableWidget->setItem(rowCount, 5, new QTableWidgetItem(QString::number(matchPercentage) + "%"));
-    }
-}
-
-void MainWindow::on_evalbutt_clicked() {
-    QSqlQueryModel *model = new QSqlQueryModel();
-    model->setQuery("SELECT id_contracteur, nom, domaine, historique FROM contracteurs");
-    if (model->lastError().isValid()) {
-        qDebug() << "Error fetching contractors for evaluation:" << model->lastError().text();
-        QMessageBox::warning(this, "Database Error", "Failed to fetch contractors for evaluation.");
-        return;
-    }
-
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Domaine"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Projets Réalisés"));
-
-    ui->evatab->setModel(model);
-    ui->evatab->resizeColumnsToContents();
-}
-
-void MainWindow::on_matchinbutt_clicked() {
-    qDebug() << "Matching button clicked.";
-
-    // Populate the free projects table
-    QSqlQuery projectQuery;
-    projectQuery.prepare("SELECT id_projet, nom_projet, type_projet, budget, echeance FROM projets WHERE id_contracteur IS NULL");
-    if (!projectQuery.exec()) {
-        qDebug() << "Error fetching free projects:" << projectQuery.lastError().text();
-        QMessageBox::warning(this, "Database Error", "Failed to fetch free projects.");
-        return;
-    }
-
-    ui->tableWidget->setRowCount(0);
-
-    while (projectQuery.next()) {
-        int rowCount = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(rowCount);
-        ui->tableWidget->setItem(rowCount, 0, new QTableWidgetItem(projectQuery.value(0).toString()));
-        ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(projectQuery.value(1).toString()));
-        ui->tableWidget->setItem(rowCount, 2, new QTableWidgetItem(projectQuery.value(2).toString()));
-        ui->tableWidget->setItem(rowCount, 3, new QTableWidgetItem(projectQuery.value(3).toString()));
-        ui->tableWidget->setItem(rowCount, 4, new QTableWidgetItem(projectQuery.value(4).toString()));
-    }
-
-    qDebug() << "Free projects table populated successfully.";
-
-    // Populate the suggested contractors table
-    QSqlQuery contractorQuery;
-    contractorQuery.prepare("SELECT id_contracteur, nom, domaine, historique FROM contracteurs");
-    if (!contractorQuery.exec()) {
-        qDebug() << "Error fetching contractors:" << contractorQuery.lastError().text();
-        QMessageBox::warning(this, "Database Error", "Failed to fetch contractors.");
-        return;
-    }
-
-    ui->tableWidget_2->setRowCount(0);
-
-    while (contractorQuery.next()) {
-        int rowCount = ui->tableWidget_2->rowCount();
-        ui->tableWidget_2->insertRow(rowCount);
-        ui->tableWidget_2->setItem(rowCount, 0, new QTableWidgetItem(contractorQuery.value(0).toString()));
-        ui->tableWidget_2->setItem(rowCount, 1, new QTableWidgetItem(contractorQuery.value(1).toString()));
-        ui->tableWidget_2->setItem(rowCount, 2, new QTableWidgetItem(contractorQuery.value(2).toString()));
-        ui->tableWidget_2->setItem(rowCount, 3, new QTableWidgetItem(contractorQuery.value(3).toString()));
-    }
-
-    qDebug() << "Suggested contractors table populated successfully.";
-}
-
-void MainWindow::on_matchingbutt_clicked() {
-    qDebug() << "Matching button clicked.";
-
-    // Populate the free projects table
-    QSqlQuery projectQuery;
-    projectQuery.prepare("SELECT id_projet, nom_projet, type_projet, budget, echeance FROM projets WHERE id_contracteur IS NULL");
-    if (!projectQuery.exec()) {
-        qDebug() << "Error fetching free projects:" << projectQuery.lastError().text();
-        QMessageBox::warning(this, "Database Error", "Failed to fetch free projects.");
-        return;
-    }
-
-    ui->tableWidget->setRowCount(0);
-
-    while (projectQuery.next()) {
-        int rowCount = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(rowCount);
-        ui->tableWidget->setItem(rowCount, 0, new QTableWidgetItem(projectQuery.value(0).toString()));
-        ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(projectQuery.value(1).toString()));
-        ui->tableWidget->setItem(rowCount, 2, new QTableWidgetItem(projectQuery.value(2).toString()));
-        ui->tableWidget->setItem(rowCount, 3, new QTableWidgetItem(projectQuery.value(3).toString()));
-        ui->tableWidget->setItem(rowCount, 4, new QTableWidgetItem(projectQuery.value(4).toString()));
-    }
-
-    qDebug() << "Free projects table populated successfully.";
-
-    // Populate the suggested contractors table
-    QSqlQuery contractorQuery;
-    contractorQuery.prepare("SELECT id_contracteur, nom, domaine, historique FROM contracteurs");
-    if (!contractorQuery.exec()) {
-        qDebug() << "Error fetching contractors:" << contractorQuery.lastError().text();
-        QMessageBox::warning(this, "Database Error", "Failed to fetch contractors.");
-        return;
-    }
-
-    ui->tableWidget_2->setRowCount(0);
-
-    while (contractorQuery.next()) {
-        int rowCount = ui->tableWidget_2->rowCount();
-        ui->tableWidget_2->insertRow(rowCount);
-        ui->tableWidget_2->setItem(rowCount, 0, new QTableWidgetItem(contractorQuery.value(0).toString()));
-        ui->tableWidget_2->setItem(rowCount, 1, new QTableWidgetItem(contractorQuery.value(1).toString()));
-        ui->tableWidget_2->setItem(rowCount, 2, new QTableWidgetItem(contractorQuery.value(2).toString()));
-        ui->tableWidget_2->setItem(rowCount, 3, new QTableWidgetItem(contractorQuery.value(3).toString()));
-    }
-
-    qDebug() << "Suggested contractors table populated successfully.";
 }

@@ -26,7 +26,6 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -91,31 +90,8 @@ public:
     QPushButton *pdf_3;
     QGraphicsView *graphicsView;
     QPushButton *statbutt;
-    QWidget *evaluation;
-    QWidget *widget;
-    QLabel *label_172;
-    QFrame *frame_7;
-    QLabel *label_147;
-    QLineEdit *lineEdit_8;
-    QLabel *label_157;
-    QComboBox *comboBox_6;
-    QPushButton *modifier_2;
-    QPushButton *annuler_2;
-    QPushButton *ajouter_2;
-    QSpinBox *spinBox_2;
-    QLabel *label_166;
-    QPushButton *soumettre;
-    QTableView *evatab;
-    QLabel *label_167;
-    QGraphicsView *graphicsView_2;
-    QPushButton *evalbutt;
-    QWidget *tab;
-    QWidget *widget_2;
-    QTableWidget *tableWidget;
-    QTableWidget *tableWidget_2;
-    QLabel *label_169;
-    QLabel *label_170;
-    QPushButton *matchinbutt;
+    QWidget *metav1;
+    QWidget *metav2;
     QWidget *tab_7;
     QGraphicsView *pie_2;
     QFrame *line_2;
@@ -1011,328 +987,12 @@ public:
 "    border-radius: 5px;\n"
 "}"));
         tabWidget->addTab(statistics, QString());
-        evaluation = new QWidget();
-        evaluation->setObjectName("evaluation");
-        widget = new QWidget(evaluation);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(-10, -10, 891, 551));
-        label_172 = new QLabel(widget);
-        label_172->setObjectName("label_172");
-        label_172->setGeometry(QRect(70, 30, 151, 51));
-        label_172->setFont(font2);
-        label_172->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
-"QLabel {\n"
-"    background: white;          /* Set background to white */\n"
-"    color: #333333;             /* Text color */\n"
-"    font-size: 25px;            /* Font size */\n"
-"    padding: 5px;               /* Padding around the text */\n"
-"    border: 2px solid #4e1764;  /* Optional: Add a border */\n"
-"    border-radius: 14px;\n"
-"}\n"
-""));
-        frame_7 = new QFrame(widget);
-        frame_7->setObjectName("frame_7");
-        frame_7->setGeometry(QRect(30, 70, 231, 351));
-        frame_7->setStyleSheet(QString::fromUtf8("/* QWidget styling */\n"
-"QWidget {\n"
-"    border: 2px solid #4e1764;  /* Set border width and color */\n"
-"    padding: 10px;              /* Set padding inside the widget */\n"
-"	border-radius: 5px;\n"
-"	\n"
-"	background-color: rgb(255, 241, 235);\n"
-"}\n"
-"\n"
-"/* QLineEdit styling */\n"
-"QLineEdit {\n"
-"    background-color: #f0f0f0;\n"
-"    border: 1px solid #5c5c5c;\n"
-"    border-radius: 5px;         /* Corrected property and added border-radius */\n"
-"    padding: 5px;\n"
-"    font-size: 14px;\n"
-"    color: #333333;\n"
-"}\n"
-"\n"
-"QLineEdit:hover {\n"
-"    border: 1px solid #0078d7;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 1px solid #3b5998;\n"
-"    background-color: #ffffff;\n"
-"}\n"
-"\n"
-"/* QDateEdit styling */\n"
-"QDateEdit {\n"
-"    background-color: #f0f0f0;\n"
-"    border: 1px solid #5c5c5c;\n"
-"    padding: 5px;\n"
-"    font-size: 14px;\n"
-"    color: #333333;\n"
-"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
-"}\n"
-"\n"
-"QDateEdit::drop-down {\n"
-"    "
-                        "subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 20px;\n"
-"    border-left: 1px solid #5c5c5c;\n"
-"}\n"
-"\n"
-"/* QComboBox styling */\n"
-"QComboBox {\n"
-"    background-color: #f0f0f0;\n"
-"    border: 1px solid #5c5c5c;\n"
-"    padding: 5px;\n"
-"    font-size: 14px;\n"
-"    color: #333333;\n"
-"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 20px;\n"
-"    border-left: 1px solid #5c5c5c;\n"
-"}\n"
-"\n"
-"/* QPushButton styling */\n"
-"QPushButton {\n"
-"    color: black;\n"
-"    border: 1px solid #5c5c5c;\n"
-"    padding: 5px 15px;\n"
-"    font-size: 14px;\n"
-"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(252, 246, 243);\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #C0C0C0; /* Change background color when pressed */\n"
-""
-                        "    border: 1px solid black; /* Change border color when pressed */\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background-color: #C0C0C0;\n"
-"    color: #a0a0a0;\n"
-"    border: 1px solid #d3d3d3;\n"
-"}\n"
-"\n"
-"/* QCheckBox styling */\n"
-"QCheckBox {\n"
-"    spacing: 5px;\n"
-"    font-size: 14px;\n"
-"    color: #333333;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
-"}\n"
-"\n"
-"/* QLabel styling */\n"
-"QLabel {\n"
-"    font-size: 14px;\n"
-"    color: #333333;\n"
-"    padding: 5px;\n"
-"    border: none; /* Remove border if not needed */\n"
-"    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
-"}\n"
-""));
-        label_147 = new QLabel(frame_7);
-        label_147->setObjectName("label_147");
-        label_147->setGeometry(QRect(2, 20, 121, 31));
-        label_147->setStyleSheet(QString::fromUtf8(""));
-        lineEdit_8 = new QLineEdit(frame_7);
-        lineEdit_8->setObjectName("lineEdit_8");
-        lineEdit_8->setGeometry(QRect(10, 50, 113, 26));
-        lineEdit_8->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
-"    border: 2px solid #4e1764;  /* Default thicker border */\n"
-"    border-radius: 5px;\n"
-"    background-color: white;  /* Ensure background stays white */\n"
-"    padding: 4px;  /* Adjust padding for better spacing */\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
-"    background-color: white;  /* Keep background white */\n"
-"}\n"
-""));
-        label_157 = new QLabel(frame_7);
-        label_157->setObjectName("label_157");
-        label_157->setGeometry(QRect(2, 80, 131, 35));
-        label_157->setStyleSheet(QString::fromUtf8(""));
-        comboBox_6 = new QComboBox(frame_7);
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->addItem(QString());
-        comboBox_6->setObjectName("comboBox_6");
-        comboBox_6->setGeometry(QRect(10, 110, 141, 32));
-        comboBox_6->setStyleSheet(QString::fromUtf8("\n"
-"    border: 2px solid #4e1764;  /* Default thicker border */\n"
-"    border-radius: 5px;\n"
-"    background-color: white;  /* Ensure background stays white */\n"
-"	\n"
-"	color: rgb(0, 0, 0);\n"
-"\n"
-"\n"
-"\n"
-""));
-        modifier_2 = new QPushButton(frame_7);
-        modifier_2->setObjectName("modifier_2");
-        modifier_2->setGeometry(QRect(111, 493, 85, 31));
-        modifier_2->setStyleSheet(QString::fromUtf8("QPushButton#modifier {\n"
-"	border-color: rgb(78, 23, 100);\n"
-"    background-color:  #4e1764;  /* Vibrant mauve */\n"
-"    border: none;\n"
-"    font-size: 13.1px;\n"
-"    font-weight: bold;\n"
-"	color: white;\n"
-"}\n"
-"\n"
-"QPushButton#modifier:hover {\n"
-"    background-color: #9f86c0;  /* Softer pinkish mauve on hover */\n"
-"}\n"
-"\n"
-"QPushButton#modifier:pressed {\n"
-"    background-color: #9f86c0;  /* Darker when clicked */\n"
-"}\n"
-""));
-        annuler_2 = new QPushButton(frame_7);
-        annuler_2->setObjectName("annuler_2");
-        annuler_2->setGeometry(QRect(20, 493, 81, 31));
-        annuler_2->setStyleSheet(QString::fromUtf8("QPushButton#annuler {\n"
-"	border-color: rgb(78, 23, 100);\n"
-"    background-color:  #4e1764;  /* Vibrant mauve */\n"
-"    border: none;\n"
-"    font-size: 13.1px;\n"
-"    font-weight: bold;\n"
-"	color: white;\n"
-"}\n"
-"\n"
-"QPushButton#annuler:hover {\n"
-"    background-color: #9f86c0;  /* Softer pinkish mauve on hover */\n"
-"}\n"
-"\n"
-"QPushButton#annuler:pressed {\n"
-"    background-color: #9f86c0;  /* Darker when clicked */\n"
-"}\n"
-""));
-        ajouter_2 = new QPushButton(frame_7);
-        ajouter_2->setObjectName("ajouter_2");
-        ajouter_2->setGeometry(QRect(208, 493, 78, 31));
-        ajouter_2->setStyleSheet(QString::fromUtf8("QPushButton#ajouter {\n"
-"	border-color: rgb(78, 23, 100);\n"
-"    background-color:  #4e1764;  /* Vibrant mauve */\n"
-"   border: none;\n"
-"    font-size: 13.1px;\n"
-"    font-weight: bold;\n"
-"	color: white;\n"
-"}\n"
-"\n"
-"QPushButton#ajouter:hover {\n"
-"    background-color: #9f86c0;  /* Softer pinkish mauve on hover */\n"
-"}\n"
-"\n"
-"QPushButton#ajouter:pressed {\n"
-"    background-color: #9f86c0;  /* Darker when clicked */\n"
-"}\n"
-""));
-        spinBox_2 = new QSpinBox(frame_7);
-        spinBox_2->setObjectName("spinBox_2");
-        spinBox_2->setGeometry(QRect(20, 210, 51, 41));
-        label_166 = new QLabel(frame_7);
-        label_166->setObjectName("label_166");
-        label_166->setGeometry(QRect(10, 170, 131, 35));
-        label_166->setStyleSheet(QString::fromUtf8(""));
-        soumettre = new QPushButton(frame_7);
-        soumettre->setObjectName("soumettre");
-        soumettre->setGeometry(QRect(60, 300, 101, 31));
-        soumettre->setStyleSheet(QString::fromUtf8("QPushButton#ajouter {\n"
-"	border-color: rgb(78, 23, 100);\n"
-"    background-color:  #4e1764;  /* Vibrant mauve */\n"
-"   border: none;\n"
-"    font-size: 13.1px;\n"
-"    font-weight: bold;\n"
-"	color: white;\n"
-"}\n"
-"\n"
-"QPushButton#ajouter:hover {\n"
-"    background-color: #9f86c0;  /* Softer pinkish mauve on hover */\n"
-"}\n"
-"\n"
-"QPushButton#ajouter:pressed {\n"
-"    background-color: #9f86c0;  /* Darker when clicked */\n"
-"}"));
-        evatab = new QTableView(widget);
-        evatab->setObjectName("evatab");
-        evatab->setGeometry(QRect(290, 320, 471, 101));
-        evatab->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"font: 9pt \"Segoe UI\";\n"
-"color: rgb(0, 0, 0);"));
-        label_167 = new QLabel(widget);
-        label_167->setObjectName("label_167");
-        label_167->setGeometry(QRect(290, 30, 281, 31));
-        label_167->setFont(font3);
-        graphicsView_2 = new QGraphicsView(widget);
-        graphicsView_2->setObjectName("graphicsView_2");
-        graphicsView_2->setGeometry(QRect(290, 70, 471, 241));
-        evalbutt = new QPushButton(widget);
-        evalbutt->setObjectName("evalbutt");
-        evalbutt->setGeometry(QRect(600, 440, 161, 41));
-        evalbutt->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
-"    border-radius: 5px;\n"
-"}"));
-        frame_7->raise();
-        label_172->raise();
-        evatab->raise();
-        label_167->raise();
-        graphicsView_2->raise();
-        evalbutt->raise();
-        tabWidget->addTab(evaluation, QString());
-        tab = new QWidget();
-        tab->setObjectName("tab");
-        widget_2 = new QWidget(tab);
-        widget_2->setObjectName("widget_2");
-        widget_2->setGeometry(QRect(-21, -11, 791, 541));
-        tableWidget = new QTableWidget(widget_2);
-        tableWidget->setObjectName("tableWidget");
-        tableWidget->setGeometry(QRect(30, 70, 271, 441));
-        tableWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"font: 9pt \"Segoe UI\";\n"
-"color: rgb(0, 0, 0);"));
-        tableWidget_2 = new QTableWidget(widget_2);
-        tableWidget_2->setObjectName("tableWidget_2");
-        tableWidget_2->setGeometry(QRect(320, 90, 451, 341));
-        tableWidget_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"font: 9pt \"Segoe UI\";\n"
-"color: rgb(0, 0, 0);"));
-        label_169 = new QLabel(widget_2);
-        label_169->setObjectName("label_169");
-        label_169->setGeometry(QRect(320, 60, 181, 21));
-        label_169->setStyleSheet(QString::fromUtf8(""));
-        label_170 = new QLabel(widget_2);
-        label_170->setObjectName("label_170");
-        label_170->setGeometry(QRect(30, 40, 121, 21));
-        label_170->setStyleSheet(QString::fromUtf8(""));
-        matchinbutt = new QPushButton(widget_2);
-        matchinbutt->setObjectName("matchinbutt");
-        matchinbutt->setGeometry(QRect(480, 450, 161, 41));
-        matchinbutt->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
-"    background-color: rgb(255, 255, 255);\n"
-"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
-"    border-radius: 5px;\n"
-"}"));
-        tabWidget->addTab(tab, QString());
+        metav1 = new QWidget();
+        metav1->setObjectName("metav1");
+        tabWidget->addTab(metav1, QString());
+        metav2 = new QWidget();
+        metav2->setObjectName("metav2");
+        tabWidget->addTab(metav2, QString());
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
@@ -1374,10 +1034,9 @@ public:
 
         retranslateUi(MainWindow);
         QObject::connect(tabWidget, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
-        QObject::connect(matchinbutt, SIGNAL(clicked()), MainWindow, SLOT(on_matchinbutt_clicked()));
 
         aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1453,37 +1112,8 @@ public:
         pdf_3->setText(QCoreApplication::translate("MainWindow", "exportation pdf", nullptr));
         statbutt->setText(QCoreApplication::translate("MainWindow", "Generer Statistiques", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(statistics), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
-        label_172->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Evaluation</p></body></html>", nullptr));
-        label_147->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Id contracteur:</span></p></body></html>", nullptr));
-#if QT_CONFIG(tooltip)
-        lineEdit_8->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>dhzbebcl</p></body></html>", nullptr));
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(whatsthis)
-        lineEdit_8->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>vj j;</p></body></html>", nullptr));
-#endif // QT_CONFIG(whatsthis)
-        lineEdit_8->setPlaceholderText(QCoreApplication::translate("MainWindow", "ID", nullptr));
-        label_157->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Type de projet</span></p></body></html>", nullptr));
-        comboBox_6->setItemText(0, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
-        comboBox_6->setItemText(1, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
-        comboBox_6->setItemText(2, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
-        comboBox_6->setItemText(3, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
-        comboBox_6->setItemText(4, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
-        comboBox_6->setItemText(5, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
-        comboBox_6->setItemText(6, QCoreApplication::translate("MainWindow", "Outils", nullptr));
-
-        comboBox_6->setPlaceholderText(QCoreApplication::translate("MainWindow", "Cat\303\251gorie", nullptr));
-        modifier_2->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
-        annuler_2->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
-        ajouter_2->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
-        label_166->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Note sur 10</span></p></body></html>", nullptr));
-        soumettre->setText(QCoreApplication::translate("MainWindow", "Soumettre", nullptr));
-        label_167->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Evaluation contracteur</span></p></body></html>", nullptr));
-        evalbutt->setText(QCoreApplication::translate("MainWindow", "Afficher evaluation", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(evaluation), QCoreApplication::translate("MainWindow", "Evaluation", nullptr));
-        label_169->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Contracteurs sugg\303\251r\303\251s</span></p></body></html>", nullptr));
-        label_170->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Projets libres</span></p></body></html>", nullptr));
-        matchinbutt->setText(QCoreApplication::translate("MainWindow", "Debut matching", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Matching Int\303\251lligent", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(metav1), QCoreApplication::translate("MainWindow", "metav1", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(metav2), QCoreApplication::translate("MainWindow", "metav2", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));
