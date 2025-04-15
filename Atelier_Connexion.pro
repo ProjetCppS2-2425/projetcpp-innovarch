@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,16 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    gestionressources.cpp \
     main.cpp \
-    GestionRessources.cpp \
+    mainwindow.cpp \
     connection.cpp
 
 HEADERS += \
-    GestionRessources.h \
-    connection.h
+    gestionressources.h \
+    mainwindow.h \
+    connection.h \
+    IconDelegate.h
+
 
 FORMS += \
-    GestionRessources.ui
+    mainwindow.ui
 QT += sql
 QT += charts
 CONFIG += console

@@ -5,14 +5,22 @@
 
 Connection::Connection(){}
 
+
 bool Connection::createconnect()
 {
-    bool test=false;
+    bool test = false;
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("InnovArch");//inserer le nom de la source de données
-    db.setUserName("maram");//inserer nom de l'utilisateur
-    db.setPassword("1234");//inserer mot de passe de cet utilisateur
-    if (db.open()) test=true;
+    db.setDatabaseName("InnovArch"); // Insert the data source name (DSN)
+    db.setUserName("maram");          // Insert username
+    db.setPassword("1234");          // Insert password
+
+    if (!db.open()) {  // Explicitly try to open the database
+        qDebug() << "Database connection error:" << db.lastError().text();
+    } else {
+        qDebug() << "Connection successful!";
+        test = true;
+    }
+
     return test;
 }
-void Connection::closeConnection(){db.close();}
+

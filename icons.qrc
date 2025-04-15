@@ -15,5 +15,7 @@
         <file>images/ascending.png</file>
         <file>images/descending.png</file>
         <file>images/search.png</file>
+        <file>images/refresh.png</file>
+        <file>sounds/notif.wav</file>
     </qresource>
 </RCC>
