@@ -21,9 +21,16 @@ public:
     void on_supprimerClient_clicked();
     void on_modifyClientButton_clicked();
     void on_annulerButton_clicked();
+    void on_pushButtonRecherche_clicked();
+    void on_trierClientButton_clicked();
+    void on_pdfClientButton_clicked();
+    void on_statButton_clicked();
+
+
 
 private slots:
     void on_tableView_itemClicked(const QModelIndex &index);
+
 
 private:
     Ui::MainWindow *ui;

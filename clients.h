@@ -34,6 +34,8 @@ public:
     QString getSexe() const;
     void setSexe(const QString &sexe);
 
+
+
 private:
     int id_client;
     QString nom;

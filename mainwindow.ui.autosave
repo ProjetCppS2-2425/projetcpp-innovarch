@@ -513,7 +513,7 @@ QPushButton#TrierButton:hover {
         <x>0</x>
         <y>0</y>
         <width>191</width>
-        <height>741</height>
+        <height>771</height>
        </rect>
       </property>
       <property name="styleSheet">

@@ -39,6 +39,8 @@ FORMS += \
     mainwindow.ui
 
 RESOURCES += icons.qrc
+QT += charts
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

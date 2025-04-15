@@ -62,6 +62,7 @@ bool Clients::supprimer(int id) {
     return query.exec();
 }
 
+
 // 🔹 Getters et Setters
 int Clients::getId() const { return id_client; }
 void Clients::setId(int id) { this->id_client = id; }
