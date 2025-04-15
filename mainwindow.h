@@ -32,6 +32,12 @@ private slots:
     void on_generateStatisticsButton_clicked();
     void on_exportStatisticsPDFButton_clicked();
     void on_tabWidget_currentChanged(int index); // Ensure this slot is declared
+    void on_submitEvaluationButton_clicked(); // Add this declaration
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+    void on_tableWidget_2_itemClicked(QTableWidgetItem *item);
+    void on_evalbutt_clicked();
+    void on_matchingbutt_clicked();
+    void on_matchinbutt_clicked(); // Declare the slot
 
 private:
     Ui::MainWindow *ui;
@@ -42,6 +48,9 @@ private:
     void generateStatistics();
     void exportStatisticsPDF();
     void displayStatisticsInGraphicsView();
+
+    // Add a reference to the evaluation table
+    QTableView *evatab;
 };
 
 #endif // MAINWINDOW_H
