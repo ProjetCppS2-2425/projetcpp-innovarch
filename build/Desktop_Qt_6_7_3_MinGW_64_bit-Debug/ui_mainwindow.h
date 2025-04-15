@@ -855,6 +855,14 @@ public:
         comboBox_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
+        comboBox_tri_2->raise();
+        supprimer->raise();
+        label_158->raise();
+        id_rech_2->raise();
+        chercher_2->raise();
+        pdf_2->raise();
+        comboBox_2->raise();
+        tableView_2->raise();
         tabWidget->addTab(recherche, QString());
         statistics = new QWidget();
         statistics->setObjectName("statistics");
@@ -1369,7 +1377,7 @@ public:
         QObject::connect(matchinbutt, SIGNAL(clicked()), MainWindow, SLOT(on_matchinbutt_clicked()));
 
         aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

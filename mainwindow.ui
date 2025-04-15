@@ -1009,7 +1009,7 @@ QLabel {
 color: rgb(0, 0, 0);</string>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="recherche">
               <attribute name="title">
@@ -1351,6 +1351,14 @@ color: rgb(0, 0, 0);</string>
                  </property>
                 </item>
                </widget>
+               <zorder>comboBox_tri_2</zorder>
+               <zorder>supprimer</zorder>
+               <zorder>label_158</zorder>
+               <zorder>id_rech_2</zorder>
+               <zorder>chercher_2</zorder>
+               <zorder>pdf_2</zorder>
+               <zorder>comboBox_2</zorder>
+               <zorder>tableView_2</zorder>
               </widget>
              </widget>
              <widget class="QWidget" name="statistics">
@@ -2300,6 +2308,16 @@ color: rgb(0, 0, 0);</string>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_matchinbutt_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
   </connection>
  </connections>
  <slots>
