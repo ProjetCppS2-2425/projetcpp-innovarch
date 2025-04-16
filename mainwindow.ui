@@ -1009,7 +1009,7 @@ QLabel {
 color: rgb(0, 0, 0);</string>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="recherche">
               <attribute name="title">
@@ -1161,11 +1161,6 @@ color: rgb(0, 0, 0);
                 </item>
                 <item>
                  <property name="text">
-                  <string>Date d'ajout</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
                   <string>Domaine</string>
                  </property>
                 </item>
@@ -1181,12 +1176,7 @@ color: rgb(0, 0, 0);
                 </item>
                 <item>
                  <property name="text">
-                  <string>Avis clients croissant</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Avis clients décroissant</string>
+                  <string>Nom</string>
                  </property>
                 </item>
                </widget>
@@ -1347,7 +1337,7 @@ color: rgb(0, 0, 0);</string>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Avis clients</string>
+                  <string>Nom</string>
                  </property>
                 </item>
                </widget>
@@ -1586,15 +1576,165 @@ color: rgb(0, 0, 0);
                </widget>
               </widget>
              </widget>
-             <widget class="QWidget" name="metav1">
+             <widget class="QWidget" name="calendrier">
               <attribute name="title">
-               <string>metav1</string>
+               <string>Calendrier</string>
               </attribute>
+              <widget class="QWidget" name="widget" native="true">
+               <property name="geometry">
+                <rect>
+                 <x>-10</x>
+                 <y>-10</y>
+                 <width>801</width>
+                 <height>531</height>
+                </rect>
+               </property>
+               <widget class="QTableView" name="tableView">
+                <property name="geometry">
+                 <rect>
+                  <x>470</x>
+                  <y>60</y>
+                  <width>256</width>
+                  <height>411</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="affichertree">
+                <property name="geometry">
+                 <rect>
+                  <x>180</x>
+                  <y>460</y>
+                  <width>83</width>
+                  <height>29</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Afficher</string>
+                </property>
+               </widget>
+               <widget class="QTreeView" name="treeView">
+                <property name="geometry">
+                 <rect>
+                  <x>70</x>
+                  <y>60</y>
+                  <width>256</width>
+                  <height>361</height>
+                 </rect>
+                </property>
+               </widget>
+              </widget>
              </widget>
-             <widget class="QWidget" name="metav2">
+             <widget class="QWidget" name="todolist">
               <attribute name="title">
-               <string>metav2</string>
+               <string>To Do List</string>
               </attribute>
+              <widget class="QWidget" name="widget_2" native="true">
+               <property name="geometry">
+                <rect>
+                 <x>-11</x>
+                 <y>-21</y>
+                 <width>791</width>
+                 <height>551</height>
+                </rect>
+               </property>
+               <widget class="QListView" name="taskslist">
+                <property name="geometry">
+                 <rect>
+                  <x>60</x>
+                  <y>40</y>
+                  <width>256</width>
+                  <height>271</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="addtask">
+                <property name="geometry">
+                 <rect>
+                  <x>40</x>
+                  <y>400</y>
+                  <width>83</width>
+                  <height>29</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Add task</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="completedtask">
+                <property name="geometry">
+                 <rect>
+                  <x>170</x>
+                  <y>400</y>
+                  <width>121</width>
+                  <height>29</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Mark as completed</string>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="rmtask">
+                <property name="geometry">
+                 <rect>
+                  <x>320</x>
+                  <y>400</y>
+                  <width>83</width>
+                  <height>29</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>remove task</string>
+                </property>
+               </widget>
+               <widget class="QLineEdit" name="tasktext">
+                <property name="geometry">
+                 <rect>
+                  <x>110</x>
+                  <y>330</y>
+                  <width>113</width>
+                  <height>28</height>
+                 </rect>
+                </property>
+               </widget>
+               <widget class="QPushButton" name="testaffichertodo">
+                <property name="geometry">
+                 <rect>
+                  <x>540</x>
+                  <y>310</y>
+                  <width>83</width>
+                  <height>29</height>
+                 </rect>
+                </property>
+                <property name="text">
+                 <string>Testafficher</string>
+                </property>
+               </widget>
+               <widget class="QTableView" name="contractorlisttable">
+                <property name="geometry">
+                 <rect>
+                  <x>405</x>
+                  <y>30</y>
+                  <width>271</width>
+                  <height>271</height>
+                 </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
+                </property>
+               </widget>
+              </widget>
              </widget>
             </widget>
            </widget>
@@ -1677,7 +1817,7 @@ color: rgb(0, 0, 0);
      <x>0</x>
      <y>0</y>
      <width>1501</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

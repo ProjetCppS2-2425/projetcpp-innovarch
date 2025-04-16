@@ -46,6 +46,8 @@ public:
     bool supprimer(int id);
     void reassignIds();
     QSqlError getLastError() const;
+    QString getTasks(int id);
+    QString getHistorique(int id);
 };
 
 #endif // CONTRACTEUR_H

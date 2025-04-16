@@ -121,6 +121,26 @@ void Contracteur::reassignIds() {
     }
 }
 
+QString Contracteur::getTasks(int id) {
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", id);
+    if (query.exec() && query.next()) {
+        return query.value(0).toString();
+    }
+    return "";
+}
+
+QString Contracteur::getHistorique(int id) {
+    QSqlQuery query;
+    query.prepare("SELECT historique FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", id);
+    if (query.exec() && query.next()) {
+        return query.value(0).toString();
+    }
+    return "";
+}
+
 QSqlError Contracteur::getLastError() const {
     QSqlQuery query;
     return query.lastError();

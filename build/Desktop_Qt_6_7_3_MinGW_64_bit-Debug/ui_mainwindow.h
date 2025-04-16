@@ -19,6 +19,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -26,6 +27,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -90,8 +92,20 @@ public:
     QPushButton *pdf_3;
     QGraphicsView *graphicsView;
     QPushButton *statbutt;
-    QWidget *metav1;
-    QWidget *metav2;
+    QWidget *calendrier;
+    QWidget *widget;
+    QTableView *tableView;
+    QPushButton *affichertree;
+    QTreeView *treeView;
+    QWidget *todolist;
+    QWidget *widget_2;
+    QListView *taskslist;
+    QPushButton *addtask;
+    QPushButton *completedtask;
+    QPushButton *rmtask;
+    QLineEdit *tasktext;
+    QPushButton *testaffichertodo;
+    QTableView *contractorlisttable;
     QWidget *tab_7;
     QGraphicsView *pie_2;
     QFrame *line_2;
@@ -748,8 +762,6 @@ public:
         comboBox_tri_2->addItem(QString());
         comboBox_tri_2->addItem(QString());
         comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
         comboBox_tri_2->setObjectName("comboBox_tri_2");
         comboBox_tri_2->setGeometry(QRect(540, 20, 141, 28));
         comboBox_tri_2->setAutoFillBackground(false);
@@ -987,12 +999,57 @@ public:
 "    border-radius: 5px;\n"
 "}"));
         tabWidget->addTab(statistics, QString());
-        metav1 = new QWidget();
-        metav1->setObjectName("metav1");
-        tabWidget->addTab(metav1, QString());
-        metav2 = new QWidget();
-        metav2->setObjectName("metav2");
-        tabWidget->addTab(metav2, QString());
+        calendrier = new QWidget();
+        calendrier->setObjectName("calendrier");
+        widget = new QWidget(calendrier);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(-10, -10, 801, 531));
+        tableView = new QTableView(widget);
+        tableView->setObjectName("tableView");
+        tableView->setGeometry(QRect(470, 60, 256, 411));
+        tableView->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
+        affichertree = new QPushButton(widget);
+        affichertree->setObjectName("affichertree");
+        affichertree->setGeometry(QRect(180, 460, 83, 29));
+        treeView = new QTreeView(widget);
+        treeView->setObjectName("treeView");
+        treeView->setGeometry(QRect(70, 60, 256, 361));
+        tabWidget->addTab(calendrier, QString());
+        todolist = new QWidget();
+        todolist->setObjectName("todolist");
+        widget_2 = new QWidget(todolist);
+        widget_2->setObjectName("widget_2");
+        widget_2->setGeometry(QRect(-11, -21, 791, 551));
+        taskslist = new QListView(widget_2);
+        taskslist->setObjectName("taskslist");
+        taskslist->setGeometry(QRect(60, 40, 256, 271));
+        taskslist->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
+        addtask = new QPushButton(widget_2);
+        addtask->setObjectName("addtask");
+        addtask->setGeometry(QRect(40, 400, 83, 29));
+        completedtask = new QPushButton(widget_2);
+        completedtask->setObjectName("completedtask");
+        completedtask->setGeometry(QRect(170, 400, 121, 29));
+        rmtask = new QPushButton(widget_2);
+        rmtask->setObjectName("rmtask");
+        rmtask->setGeometry(QRect(320, 400, 83, 29));
+        tasktext = new QLineEdit(widget_2);
+        tasktext->setObjectName("tasktext");
+        tasktext->setGeometry(QRect(110, 330, 113, 28));
+        testaffichertodo = new QPushButton(widget_2);
+        testaffichertodo->setObjectName("testaffichertodo");
+        testaffichertodo->setGeometry(QRect(540, 310, 83, 29));
+        contractorlisttable = new QTableView(widget_2);
+        contractorlisttable->setObjectName("contractorlisttable");
+        contractorlisttable->setGeometry(QRect(405, 30, 271, 271));
+        contractorlisttable->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
+        tabWidget->addTab(todolist, QString());
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
@@ -1026,7 +1083,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1501, 25));
+        menubar->setGeometry(QRect(0, 0, 1501, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -1036,7 +1093,7 @@ public:
         QObject::connect(tabWidget, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
 
         aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1087,12 +1144,10 @@ public:
         label_152->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Email :</span></p></body></html>", nullptr));
         label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout Contracteur</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
         comboBox_tri_2->setItemText(0, QCoreApplication::translate("MainWindow", "Trier selon ", nullptr));
-        comboBox_tri_2->setItemText(1, QCoreApplication::translate("MainWindow", "Date d'ajout", nullptr));
-        comboBox_tri_2->setItemText(2, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
-        comboBox_tri_2->setItemText(3, QCoreApplication::translate("MainWindow", "Id d\303\251croissant ", nullptr));
-        comboBox_tri_2->setItemText(4, QCoreApplication::translate("MainWindow", "Id croissant", nullptr));
-        comboBox_tri_2->setItemText(5, QCoreApplication::translate("MainWindow", "Avis clients croissant", nullptr));
-        comboBox_tri_2->setItemText(6, QCoreApplication::translate("MainWindow", "Avis clients d\303\251croissant", nullptr));
+        comboBox_tri_2->setItemText(1, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
+        comboBox_tri_2->setItemText(2, QCoreApplication::translate("MainWindow", "Id d\303\251croissant ", nullptr));
+        comboBox_tri_2->setItemText(3, QCoreApplication::translate("MainWindow", "Id croissant", nullptr));
+        comboBox_tri_2->setItemText(4, QCoreApplication::translate("MainWindow", "Nom", nullptr));
 
         supprimer->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
         label_158->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Recherche contracteur :</span></p></body></html>", nullptr));
@@ -1102,7 +1157,7 @@ public:
         comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "ID", nullptr));
         comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "Date d'ajout", nullptr));
         comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
-        comboBox_2->setItemText(3, QCoreApplication::translate("MainWindow", "Avis clients", nullptr));
+        comboBox_2->setItemText(3, QCoreApplication::translate("MainWindow", "Nom", nullptr));
 
         tabWidget->setTabText(tabWidget->indexOf(recherche), QCoreApplication::translate("MainWindow", "Recherche Et Tri", nullptr));
         comboBox_stat_3->setItemText(0, QCoreApplication::translate("MainWindow", "Type des projets", nullptr));
@@ -1112,8 +1167,13 @@ public:
         pdf_3->setText(QCoreApplication::translate("MainWindow", "exportation pdf", nullptr));
         statbutt->setText(QCoreApplication::translate("MainWindow", "Generer Statistiques", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(statistics), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(metav1), QCoreApplication::translate("MainWindow", "metav1", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(metav2), QCoreApplication::translate("MainWindow", "metav2", nullptr));
+        affichertree->setText(QCoreApplication::translate("MainWindow", "Afficher", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(calendrier), QCoreApplication::translate("MainWindow", "Calendrier", nullptr));
+        addtask->setText(QCoreApplication::translate("MainWindow", "Add task", nullptr));
+        completedtask->setText(QCoreApplication::translate("MainWindow", "Mark as completed", nullptr));
+        rmtask->setText(QCoreApplication::translate("MainWindow", "remove task", nullptr));
+        testaffichertodo->setText(QCoreApplication::translate("MainWindow", "Testafficher", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(todolist), QCoreApplication::translate("MainWindow", "To Do List", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));

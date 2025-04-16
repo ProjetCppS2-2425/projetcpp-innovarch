@@ -12,6 +12,10 @@
 #include <QtCharts/QPieSlice>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QStandardItemModel>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->stat2_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
     connect(ui->statbutt, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
     connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButton_clicked);
+    connect(ui->contractorlisttable, &QTableView::clicked, this, &MainWindow::on_contractorlisttable_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -299,6 +304,9 @@ void MainWindow::on_comboBox_tri_2_currentIndexChanged(int index) {
         case 6:
             queryStr = "SELECT * FROM contracteurs ORDER BY avis_clients DESC";
             break;
+        case 7: // Sort by name
+            queryStr = "SELECT * FROM contracteurs ORDER BY LOWER(nom) ASC";
+            break;
         default:
             queryStr = "SELECT * FROM contracteurs";
             break;
@@ -561,4 +569,242 @@ void MainWindow::on_generateStatisticsButton_clicked() {
 
 void MainWindow::on_exportStatisticsPDFButton_clicked() {
     exportStatisticsPDF();
+}
+
+void MainWindow::loadContractorsToTable(QTableView *tableView) {
+    QSqlQueryModel *model = currentContracteur.afficher();
+    tableView->setModel(model);
+    tableView->resizeColumnsToContents();
+}
+
+void MainWindow::loadTasksForContractor(int contractorId) {
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QStandardItemModel *model = new QStandardItemModel(this);
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            QString taskName = taskObj["name"].toString();
+            QString status = taskObj["status"].toString();
+
+            QStandardItem *item = new QStandardItem(taskName + " (" + status + ")");
+            model->appendRow(item);
+        }
+        ui->taskslist->setModel(model);
+    }
+}
+
+void MainWindow::populateTreeView(int contractorId) {
+    clearTreeView();
+
+    QSqlQuery query;
+    query.prepare("SELECT nom, prenom, historique, tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString contractorName = query.value(0).toString() + " " + query.value(1).toString();
+        QString historique = query.value(2).toString();
+        QString tasksJson = query.value(3).toString();
+
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QStandardItemModel *model = new QStandardItemModel(this);
+        QStandardItem *contractorItem = new QStandardItem(contractorName);
+        QStandardItem *historiqueItem = new QStandardItem("Historique: " + historique);
+        contractorItem->appendRow(historiqueItem);
+
+        QStandardItem *tasksItem = new QStandardItem("Tasks");
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            QString taskName = taskObj["name"].toString();
+            QString status = taskObj["status"].toString();
+
+            QStandardItem *taskItem = new QStandardItem(taskName + " (" + status + ")");
+            tasksItem->appendRow(taskItem);
+        }
+        contractorItem->appendRow(tasksItem);
+
+        model->appendRow(contractorItem);
+        ui->treeView->setModel(model);
+    }
+}
+
+void MainWindow::clearTreeView() {
+    QStandardItemModel *model = new QStandardItemModel(this);
+    ui->treeView->setModel(model);
+}
+
+void MainWindow::updateTaskStatus(int contractorId, const QString &task, const QString &status) {
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        for (int i = 0; i < tasksArray.size(); ++i) {
+            QJsonObject taskObj = tasksArray[i].toObject();
+            if (taskObj["name"].toString() == task) {
+                taskObj["status"] = status;
+                tasksArray[i] = taskObj; // Update the array element
+                break;
+            }
+        }
+
+        QJsonDocument updatedDoc(tasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        query.exec();
+    }
+}
+
+void MainWindow::on_addtask_clicked() {
+    QString task = ui->tasktext->text().trimmed();
+    if (task.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Task cannot be empty.");
+        return;
+    }
+
+    QModelIndex index = ui->contractorlisttable->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QJsonObject newTask;
+        newTask["name"] = task;
+        newTask["status"] = "Pending";
+        tasksArray.append(newTask);
+
+        QJsonDocument updatedDoc(tasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        if (query.exec()) {
+            QMessageBox::information(this, "Success", "Task added successfully.");
+            loadTasksForContractor(contractorId);
+            populateTreeView(contractorId);
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to add task.");
+        }
+    }
+}
+
+void MainWindow::on_completedtask_clicked() {
+    QModelIndex index = ui->taskslist->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a task.");
+        return;
+    }
+
+    QString task = index.data().toString().split(" (").first();
+    QModelIndex contractorIndex = ui->contractorlisttable->currentIndex();
+    if (!contractorIndex.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = contractorIndex.sibling(contractorIndex.row(), 0).data().toInt();
+    updateTaskStatus(contractorId, task, "Completed");
+    loadTasksForContractor(contractorId);
+    populateTreeView(contractorId);
+}
+
+void MainWindow::on_rmtask_clicked() {
+    QModelIndex index = ui->taskslist->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a task.");
+        return;
+    }
+
+    QString task = index.data().toString().split(" (").first();
+    QModelIndex contractorIndex = ui->contractorlisttable->currentIndex();
+    if (!contractorIndex.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = contractorIndex.sibling(contractorIndex.row(), 0).data().toInt();
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QJsonArray updatedTasksArray;
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            if (taskObj["name"].toString() != task) {
+                updatedTasksArray.append(taskObj);
+            }
+        }
+
+        QJsonDocument updatedDoc(updatedTasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        if (query.exec()) {
+            QMessageBox::information(this, "Success", "Task removed successfully.");
+            loadTasksForContractor(contractorId);
+            populateTreeView(contractorId);
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to remove task.");
+        }
+    }
+}
+
+void MainWindow::on_testaffichertodo_clicked() {
+    QModelIndex index = ui->contractorlisttable->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    loadTasksForContractor(contractorId);
+}
+
+void MainWindow::on_affichertree_clicked() {
+    QModelIndex index = ui->tableView->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    populateTreeView(contractorId);
+}
+
+void MainWindow::on_contractorlisttable_clicked(const QModelIndex &index) {
+    if (!index.isValid()) return;
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    loadTasksForContractor(contractorId);
+    populateTreeView(contractorId);
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index) {
+    if (index == 2) { // To-Do List tab
+        loadContractorsToTable(ui->contractorlisttable);
+    } else if (index == 3) { // Tree View tab
+        loadContractorsToTable(ui->tableView);
+    }
 }

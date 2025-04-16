@@ -260,6 +260,22 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonDocument \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsondocument.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonArray \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonarray.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonObject \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonobject.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -292,7 +308,6 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qpalette.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbrush.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfont.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontmetrics.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontinfo.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h \
@@ -300,7 +315,6 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbitmap.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qeventpoint.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvector2d.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvectornd.h \
@@ -333,7 +347,6 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qexception.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qpromise.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
@@ -347,7 +360,6 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
@@ -516,6 +528,22 @@ release/contracteur.o: ../../contracteur.cpp ../../contracteur.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonDocument \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsondocument.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonArray \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonarray.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonObject \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonobject.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QDebug \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlDatabase
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\contracteur.o ..\..\contracteur.cpp
@@ -646,6 +674,22 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonDocument \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsondocument.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonArray \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonarray.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonObject \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonobject.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -678,7 +722,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qpalette.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbrush.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfont.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontmetrics.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontinfo.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h \
@@ -686,7 +729,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbitmap.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qeventpoint.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvector2d.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvectornd.h \
@@ -719,7 +761,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qexception.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qpromise.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
@@ -733,7 +774,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
@@ -887,6 +927,22 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonDocument \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsondocument.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborvalue.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonArray \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonarray.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonObject \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonobject.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -919,7 +975,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qpalette.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbrush.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfont.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qendian.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontmetrics.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qfontinfo.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qsizepolicy.h \
@@ -927,7 +982,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qbitmap.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qurl.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qeventpoint.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvector2d.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvectornd.h \
@@ -960,7 +1014,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qexception.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qpromise.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTableWidget \
@@ -974,7 +1027,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyleoption.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qabstractslider.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qstyle.h \
@@ -1003,10 +1055,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qfiledevice.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qfileinfo.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcalendar.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qtimezone.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QRegularExpression \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QChartView \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/qchartview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QAbstractAxis \
@@ -1035,36 +1084,22 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qscrollarea.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsscene.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QBarSeries \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qbarseries.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QAbstractBarSeries \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qabstractbarseries.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QStringList \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QBarSet \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qbarset.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QBarCategoryAxis \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qbarcategoryaxis.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QValueAxis \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qvalueaxis.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QRandomGenerator \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qrandom.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QPieSeries \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/qpieseries.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QPieSlice \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/qpieslice.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QGraphicsScene \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QGraphicsProxyWidget \
-		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qgraphicsproxywidget.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/QLegendMarker \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qlegendmarker.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonDocument \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsondocument.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/QJsonObject \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qjsonobject.h
+		C:/Qt/6.7.3/mingw_64/include/QtGui/QTextCharFormat \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/QStandardItemModel \
+		C:/Qt/6.7.3/mingw_64/include/QtGui/qstandarditemmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlRecord \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlrecord.h \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QTreeView \
+		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtreeview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\..\mainwindow.cpp
 
 release/connection.o: ../../connection.cpp ../../connection.h \

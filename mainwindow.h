@@ -31,6 +31,13 @@ private slots:
     void on_pdf_2_clicked();
     void on_generateStatisticsButton_clicked();
     void on_exportStatisticsPDFButton_clicked();
+    void on_addtask_clicked();
+    void on_completedtask_clicked();
+    void on_rmtask_clicked();
+    void on_testaffichertodo_clicked();
+    void on_affichertree_clicked();
+    void on_tabWidget_currentChanged(int index);
+    void on_contractorlisttable_clicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +47,11 @@ private:
     void fillTableWidget();
     void generateStatistics();
     void exportStatisticsPDF();
+    void loadContractorsToTable(QTableView *tableView);
+    void loadTasksForContractor(int contractorId);
+    void populateTreeView(int contractorId);
+    void clearTreeView();
+    void updateTaskStatus(int contractorId, const QString &task, const QString &status);
 };
 
 #endif // MAINWINDOW_H
