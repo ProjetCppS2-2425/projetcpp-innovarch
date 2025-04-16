@@ -1606,7 +1606,7 @@ QPushButton#triButton:hover {
        <rect>
         <x>330</x>
         <y>490</y>
-        <width>711</width>
+        <width>851</width>
         <height>221</height>
        </rect>
       </property>
@@ -2271,6 +2271,39 @@ QPushButton#pdf_2:hover {
         <string>Soumettre</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="refresh_3">
+       <property name="geometry">
+        <rect>
+         <x>590</x>
+         <y>450</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#refresh{
+	 border: 1.5px solid #9f86c0;/* Default thicker border */
+    border-radius: 5px;
+	background-color: white;
+}
+QPushButton#refresh:hover {
+    background-color: #be95c4; 
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>16</height>
+        </size>
+       </property>
+      </widget>
       <zorder>label_173</zorder>
       <zorder>label_172</zorder>
       <zorder>email_conge</zorder>
@@ -2290,6 +2323,7 @@ QPushButton#pdf_2:hover {
       <zorder>raison_conge</zorder>
       <zorder>poste_conge</zorder>
       <zorder>soumettre</zorder>
+      <zorder>refresh_3</zorder>
      </widget>
      <widget class="QPushButton" name="statpb">
       <property name="geometry">

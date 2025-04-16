@@ -59,10 +59,11 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_supprimerEmploye_clicked);
     connect(ui->refresh, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
     connect(ui->refresh_2, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
+    connect(ui->refresh_3, &QPushButton::clicked, this, &MainWindow::on_refreshButton2_clicked);
     connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyEmployeeButton_clicked);
     connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_rechercherButton_clicked);
-    connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &MainWindow::on_triCb_currentIndexChanged);
+    /*connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &MainWindow::on_triCb_currentIndexChanged);*/
     connect(ui->triButton, &QPushButton::clicked, this, &MainWindow::on_triButton_clicked);
     connect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
             this, &MainWindow::on_tableWidget_sortIndicatorChanged);
@@ -192,6 +193,19 @@ ui->poste->setCurrentIndex(0); // Reset combo box (set to default/first item)
 ui->homme->setChecked(false); // Uncheck 'homme' radio button
 ui->femme_2->setChecked(false); // Uncheck 'femme' radio button
 ui->date_emboche->setDate(QDate::currentDate()); // Reset date field to current date
+}
+
+
+void MainWindow::on_refreshButton2_clicked()
+{
+ui->id_p->clear(); // Clear 'id' field
+ui->nom_conge->clear(); // Clear 'nom' field
+ui->prenom_conge->clear(); // Clear 'prenom' field
+ui->email_conge->clear(); // Clear 'email' field
+ui->raison_conge->clear(); // Clear 'salaire' field
+ui->poste_conge->clear(); // Reset combo box (set to default/first item)
+ui->date_debut->setDate(QDate::currentDate()); // Uncheck 'homme' radio button
+ui->date_fin->setDate(QDate::currentDate()); // Reset date field to current date
 }
 
 
