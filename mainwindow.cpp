@@ -94,7 +94,12 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
           /*refreshTableView();*/
 
-
+        connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+        connect(ui->pushButton_cl, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+        connect(ui->pushButton_ct, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+        connect(ui->pushButton_contrats, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+        connect(ui->pushButton_proj, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+        connect(ui->pushButton_r, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
 
 }
 
@@ -526,7 +531,7 @@ void MainWindow::displayCongeStatistics() {
     ui->pie->show();
 }
 
-void MainWindow::on_rechercherButton_clicked() {
+/*void MainWindow::on_rechercherButton_clicked() {
     QString idText = ui->id_rech->text().trimmed();
     bool ok;
     int id = idText.toInt(&ok);
@@ -558,7 +563,72 @@ void MainWindow::on_rechercherButton_clicked() {
         QMessageBox::information(this, "Recherche", "Aucun architecte trouvé avec cet ID.");
 }
 
-}
+}*/
+
+void MainWindow::on_rechercherButton_clicked() {
+    QString searchText = ui->id_rech->text().trimmed();
+        QString searchCriteria = ui->rechercheCb->currentText();
+        QSqlQuery query;
+
+        if (searchText.isEmpty()) {
+            query.prepare("SELECT * FROM ARCHITECTES");
+        } else {
+            if (searchCriteria == "ID") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE ID_ARCHITECTE = :searchText");
+                query.bindValue(":searchText", searchText.toInt());
+            } else if (searchCriteria == "Nom") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(NOM) LIKE LOWER(:searchText)");
+                query.bindValue(":searchText", "%" + searchText + "%");
+            } else if (searchCriteria == "Prénom") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(PRENOM) LIKE LOWER(:searchText)");
+                query.bindValue(":searchText", "%" + searchText + "%");
+            } else if (searchCriteria == "Email") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(EMAIL) LIKE LOWER(:searchText)");
+                query.bindValue(":searchText", "%" + searchText + "%");
+            } else if (searchCriteria == "Poste") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(POSTE) LIKE LOWER(:searchText)");
+                query.bindValue(":searchText", "%" + searchText + "%");
+            } else if (searchCriteria == "Sexe") {
+                query.prepare("SELECT * FROM ARCHITECTES WHERE SEXE = :searchText");
+                query.bindValue(":searchText", searchText);
+            } else if (searchCriteria == "Date") {  //  Added date search here
+                query.prepare("SELECT * FROM ARCHITECTES WHERE DATE_EMBAUCHE LIKE :searchText");
+                query.bindValue(":searchText", "%" + searchText + "%");
+            } else {
+                QMessageBox::warning(this, "Erreur", "Critère de recherche invalide.");
+                return;
+            }
+        }
+
+        if (!query.exec()) {
+            qDebug() << "Erreur requête:" << query.lastError().text();
+            QMessageBox::warning(this, "Erreur", "Erreur lors de l'exécution de la recherche.");
+            return;
+        }
+
+        ui->tableWidget->setRowCount(0);
+        ui->tableWidget->setColumnCount(8);
+        QStringList headers = {"ID", "Nom", "Prénom", "Date", "Poste", "Email", "Salaire", "Sexe"};
+        ui->tableWidget->setHorizontalHeaderLabels(headers);
+
+        int row = 0;
+        while (query.next()) {
+            ui->tableWidget->insertRow(row);
+            ui->tableWidget->setItem(row, 0, new QTableWidgetItem(query.value("ID_ARCHITECTE").toString()));
+            ui->tableWidget->setItem(row, 1, new QTableWidgetItem(query.value("NOM").toString()));
+            ui->tableWidget->setItem(row, 2, new QTableWidgetItem(query.value("PRENOM").toString()));
+            ui->tableWidget->setItem(row, 3, new QTableWidgetItem(query.value("DATE_EMBAUCHE").toString()));
+            ui->tableWidget->setItem(row, 4, new QTableWidgetItem(query.value("POSTE").toString()));
+            ui->tableWidget->setItem(row, 5, new QTableWidgetItem(query.value("EMAIL").toString()));
+            ui->tableWidget->setItem(row, 6, new QTableWidgetItem(query.value("SALAIRE").toString()));
+            ui->tableWidget->setItem(row, 7, new QTableWidgetItem(query.value("SEXE").toString()));
+            row++;
+        }
+
+        ui->tableWidget->resizeColumnsToContents();
+        qDebug() << "Recherche exécutée sur critère:" << searchCriteria << ", texte:" << searchText;
+    }
+
 void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
     const int DATE_COLUMN = 3; // Colonne de la date dans le QTableWidget
 
@@ -571,6 +641,7 @@ void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
     ui->tableWidget->sortItems(DATE_COLUMN, order);
 }
 
+// Sorts table based on the comboBox_tri_3 selected criteria
 void MainWindow::on_triCb_currentIndexChanged(int index)
 {
     Q_UNUSED(index);
@@ -583,15 +654,21 @@ void MainWindow::on_triCb_currentIndexChanged(int index)
     else if (criteria == "Sexe") columnIndex = 7;
 
     if (columnIndex != -1) {
-        disconnect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
-                   this, &MainWindow::on_tableWidget_sortIndicatorChanged);
+        // Before sorting, make sure the UserRole is set for the date column
+        if (columnIndex == 3) { // Only do this for the date column
+            for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
+                QTableWidgetItem* item = ui->tableWidget->item(row, columnIndex);
+                if (item) {
+                    QDate date = QDate::fromString(item->text(), "dd/MM/yyyy");
+                    item->setData(Qt::UserRole, date);
+                }
+            }
+        }
 
-        ui->tableWidget->sortByColumn(columnIndex, isAscending ? Qt::AscendingOrder : Qt::DescendingOrder);
-
-        connect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
-                this, &MainWindow::on_tableWidget_sortIndicatorChanged);
+        ui->tableWidget->sortItems(columnIndex, isAscending ? Qt::AscendingOrder : Qt::DescendingOrder);
     }
 }
+
 void MainWindow::on_triButton_clicked()
 {
     static bool isButtonClicked = false;
@@ -606,8 +683,8 @@ void MainWindow::on_triButton_clicked()
     on_triCb_currentIndexChanged(ui->comboBox_tri_3->currentIndex());
 
     ui->triButton->setIcon(QIcon(isAscending
-                               ? "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/ascending.png"
-                               : "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/descending.png"));
+        ? "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/ascending.png"
+        : "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/descending.png"));
 }
 
 void MainWindow::on_pdf_2_clicked()
@@ -1096,3 +1173,17 @@ void MainWindow::on_statConge_clicked()
 
     ui->pie->setScene(scene);
 }
+
+
+void MainWindow::onLoginClicked()
+{
+    Dialog *loginDialog = new Dialog(this);
+
+    connect(loginDialog, &Dialog::userAuthenticated, this, [=](int id, const QString &role) {
+        // Optional: show a message or update UI with the logged-in user's info
+        QMessageBox::information(this, "Authentifié", "ID: " + QString::number(id) + "\nRôle: " + role);
+    });
+
+    loginDialog->exec();  // or use show() if you prefer non-blocking
+}
+

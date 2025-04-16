@@ -11,6 +11,8 @@
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QChart>
+#include "dialog.h"  // Include your login dialog
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -62,6 +64,7 @@ private slots:
         void on_acceptation_clicked();  // Doit correspondre exactement au nom de l'objet UI
             void on_refuser_clicked();
             void on_statConge_clicked();
+    void onLoginClicked();  // Slot for login button
 
 
 };
