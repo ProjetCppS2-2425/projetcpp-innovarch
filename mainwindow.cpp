@@ -571,58 +571,70 @@ void MainWindow::on_pdf_2_clicked()
         return;
     }
 
-    int y = 60;
+    int y = 80; // Position verticale initiale
 
-    // Ajouter le logo
-    QPixmap logo(":/Architechtes_interface/images/Logo.png");
+    // Logo aligné à gauche
+    QPixmap logo("C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/Logo.png");
     if (!logo.isNull()) {
-        painter.drawPixmap(-40, -40, logo.scaledToHeight(220, Qt::SmoothTransformation));
+        painter.drawPixmap( -300, -400, logo.scaledToHeight(150, Qt::SmoothTransformation));
     }
 
-    // Date en haut à droite
+    // Date en haut à gauche
     QFont dateFont("Helvetica", 11);
     painter.setFont(dateFont);
     QString dateStr = QDate::currentDate().toString("dd/MM/yyyy");
-    painter.drawText(pdf.width() - 300, 50, "📅 " + dateStr);
 
-    // Titre
-    QFont titleFont("Helvetica", 18, QFont::Bold);
+    // Calculate text width to align properly
+    QFontMetrics dateMetrics(dateFont);
+    int dateWidth = dateMetrics.horizontalAdvance("📅 " + dateStr);
+
+    // Position calculation:
+    // pdf.width() = total page width (A4 width in pixels at 300 DPI ≈ 2480 pixels)
+    // Right margin = 50 (as set in pdf.setPageMargins)
+    // So, X position = pageWidth - rightMargin - textWidth
+    int dateX = pdf.width() - dateWidth - -300; // 50 is the right margin
+    int dateY = -300; // Top margin (adjust if needed)
+
+    painter.drawText(dateX, dateY, "📅 " + dateStr);
+    // Titre principal
+    QFont titleFont("Helvetica", 20, QFont::Bold);
     painter.setFont(titleFont);
     painter.setPen(QColor(85, 0, 127));
     painter.drawText(QRect(0, y, pdf.width(), 100), Qt::AlignCenter, "Liste des Architectes");
-    y += 200;
+    y += 300;
 
-    QFont headerFont("Helvetica", 11, QFont::Bold);
-    QFont contentFont("Helvetica", 10);
+    // Configuration du tableau
+    QFont headerFont("Helvetica", 12, QFont::Bold);
+    QFont contentFont("Helvetica", 11);
     painter.setFont(contentFont);
-    painter.setPen(Qt::black);
 
-    int rowHeight = 55;
+    int rowHeight = 100; // Hauteur de ligne augmentée
     QStringList headers = {"ID", "Nom", "Prénom", "Date", "Poste", "Email", "Salaire", "Sexe"};
-    int columnCount = headers.size();
-
     int totalWidth = pdf.width() - 100;
+
+    // Distribution des colonnes (identique au style ressources)
     QVector<int> columnWidths = {
-        static_cast<int>(totalWidth * 0.06),  // ID
-        static_cast<int>(totalWidth * 0.14),  // Nom
-        static_cast<int>(totalWidth * 0.14),  // Prénom
-        static_cast<int>(totalWidth * 0.07),  // Date
-        static_cast<int>(totalWidth * 0.12),  // Poste
-        static_cast<int>(totalWidth * 0.27),  // Email
-        static_cast<int>(totalWidth * 0.10),  // Salaire
-        static_cast<int>(totalWidth * 0.10)   // Sexe
+        static_cast<int>(totalWidth * 0.12),  // ID (5%)
+        static_cast<int>(totalWidth * 0.30),  // Nom (12%)
+        static_cast<int>(totalWidth * 0.35),  // Prénom (12%)
+        static_cast<int>(totalWidth * 0.25),  // Date (7%)
+        static_cast<int>(totalWidth * 0.25),  // Poste (10%)
+        static_cast<int>(totalWidth * 0.40),  // Email (35%)
+        static_cast<int>(totalWidth * 0.20),  // Salaire (10%)
+        static_cast<int>(totalWidth * 0.12)   // Sexe (9%)
     };
 
-    int leftMargin = 50;
+    int leftMargin = -525;
     int yOffset = y;
 
+    // Dessin de l'en-tête
     auto drawHeaderRow = [&]() {
-        int x = leftMargin;
         painter.setFont(headerFont);
         painter.setPen(QColor(0, 102, 204));
         painter.setBrush(QColor(220, 220, 250));
 
-        for (int col = 0; col < columnCount; ++col) {
+        int x = leftMargin;
+        for (int col = 0; col < headers.size(); ++col) {
             QRect cellRect(x, yOffset, columnWidths[col], rowHeight);
             painter.fillRect(cellRect, QColor(220, 220, 250));
             painter.drawRect(cellRect);
@@ -633,34 +645,33 @@ void MainWindow::on_pdf_2_clicked()
 
     drawHeaderRow();
     yOffset += rowHeight;
+
+    // Données du tableau
     painter.setFont(contentFont);
     painter.setPen(Qt::black);
 
-    // Données
     for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
-        int x = leftMargin;
-        QStringList rowData;
-
-        for (int col = 0; col < columnCount; ++col) {
-            QString cellText = ui->tableWidget->item(row, col) ? ui->tableWidget->item(row, col)->text() : "";
-            rowData.append(cellText);
-        }
-
+        // Fond alterné
         if (row % 2 == 0) {
             painter.fillRect(QRect(leftMargin, yOffset, totalWidth, rowHeight), QColor(245, 245, 245));
         }
 
-        for (int col = 0; col < columnCount; ++col) {
+        int x = leftMargin;
+        for (int col = 0; col < headers.size(); ++col) {
+            QString text = ui->tableWidget->item(row, col) ? ui->tableWidget->item(row, col)->text() : "";
             QRect cellRect(x, yOffset, columnWidths[col], rowHeight);
+
             painter.drawRect(cellRect);
-            painter.drawText(cellRect.adjusted(4, 2, -4, -2), Qt::AlignLeft | Qt::AlignVCenter, rowData[col]);
+            painter.drawText(cellRect.adjusted(8, 4, -8, -4),
+                          Qt::AlignLeft | Qt::AlignVCenter | Qt::TextWordWrap,
+                          text);
             x += columnWidths[col];
         }
 
         yOffset += rowHeight;
 
-        // Nouvelle page si besoin
-        if (yOffset + rowHeight > pdf.height() - 50) {
+        // Gestion des sauts de page
+        if (yOffset + rowHeight > pdf.height() - 100) {
             pdf.newPage();
             yOffset = 100;
             drawHeaderRow();
