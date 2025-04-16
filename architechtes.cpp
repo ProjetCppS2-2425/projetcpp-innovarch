@@ -368,5 +368,3 @@ bool Architecte::updateCongeStatus(const QString& id_conge, const QString& new_s
     // Vérifier qu'une ligne a bien été modifiée
     return query.numRowsAffected() == 1;
 }
-
-

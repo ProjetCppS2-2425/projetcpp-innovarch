@@ -49,6 +49,8 @@ private:
          bool isAscending = true; // Track sorting order
          bool customTableWidgetItemCompare(QTableWidgetItem* item1, QTableWidgetItem* item2);
              QSqlQueryModel* currentCongeModel;
+             //    QSqlDatabase db;
+
 
 
 
@@ -65,6 +67,7 @@ private slots:
             void on_refuser_clicked();
             void on_statConge_clicked();
     void onLoginClicked();  // Slot for login button
+    //void afficherConges(const QDate &date);
 
 
 };

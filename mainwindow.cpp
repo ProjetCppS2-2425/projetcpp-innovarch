@@ -101,6 +101,16 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
         connect(ui->pushButton_proj, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
         connect(ui->pushButton_r, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
 
+        /*// Connexion à la base de données SQLite
+            db = QSqlDatabase::addDatabase("QSQLITE");
+            db.setDatabaseName("ma_base_conges.db");  // Chemin vers ta base de données
+            if (!db.open()) {
+                qDebug() << "Erreur d'ouverture de la base de données :" << db.lastError().text();
+            }
+
+            // Connexion signal clic sur calendrier
+            connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::afficherConges);
+        }*/
 }
 
 
@@ -1186,4 +1196,44 @@ void MainWindow::onLoginClicked()
 
     loginDialog->exec();  // or use show() if you prefer non-blocking
 }
+
+
+
+/*
+void MainWindow::afficherConges(const QDate &date)
+{
+    ui->listConges->clear();  // Vide la liste des congés avant chaque nouvelle sélection
+    QString dateStr = date.toString("yyyy-MM-dd");
+
+    // Préparer la requête pour récupérer les congés pour cette date
+    QSqlQuery query;
+    query.prepare("SELECT NOM, PRENOM, TYPE_CONGE, RAISON FROM CONGE "
+                  "WHERE DATE(:date) BETWEEN DATE_D AND DATE_F");
+    query.bindValue(":date", dateStr);
+
+    // Exécuter la requête
+    if (query.exec()) {
+        bool found = false;
+        while (query.next()) {
+            QString nom = query.value(0).toString();
+            QString prenom = query.value(1).toString();
+            QString typeConge = query.value(2).toString();
+            QString raison = query.value(3).toString();
+
+            // Ajouter les congés dans la liste
+            ui->listConges->addItem(typeConge + " - " + prenom + " " + nom + " (" + raison + ")");
+            found = true;
+        }
+
+        // Afficher le message selon qu'il y ait ou non des congés
+        if (found) {
+            ui->labelInfo->setText("Congés pour le " + date.toString("dd MMMM yyyy") + " :");
+        } else {
+            ui->labelInfo->setText("Aucun congé pour le " + date.toString("dd MMMM yyyy") + ".");
+        }
+    } else {
+        qDebug() << "Erreur requête SQL :" << query.lastError().text();
+    }
+}
+*/
 
