@@ -571,6 +571,45 @@ void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
     ui->tableWidget->sortItems(DATE_COLUMN, order);
 }
 
+void MainWindow::on_triCb_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+
+    QString criteria = ui->comboBox_tri_3->currentText();
+    int columnIndex = -1;
+
+    if (criteria == "Date d'embauche") columnIndex = 3;
+    else if (criteria == "Salaire") columnIndex = 6;
+    else if (criteria == "Sexe") columnIndex = 7;
+
+    if (columnIndex != -1) {
+        disconnect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
+                   this, &MainWindow::on_tableWidget_sortIndicatorChanged);
+
+        ui->tableWidget->sortByColumn(columnIndex, isAscending ? Qt::AscendingOrder : Qt::DescendingOrder);
+
+        connect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
+                this, &MainWindow::on_tableWidget_sortIndicatorChanged);
+    }
+}
+void MainWindow::on_triButton_clicked()
+{
+    static bool isButtonClicked = false;
+    if (isButtonClicked) return;
+
+    isButtonClicked = true;
+    QTimer::singleShot(300, [this]() {
+        isButtonClicked = false;
+    });
+
+    isAscending = !isAscending;
+    on_triCb_currentIndexChanged(ui->comboBox_tri_3->currentIndex());
+
+    ui->triButton->setIcon(QIcon(isAscending
+                               ? "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/ascending.png"
+                               : "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/descending.png"));
+}
+
 void MainWindow::on_pdf_2_clicked()
 {
     QString fileName = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "PDF Files (*.pdf)");
@@ -715,44 +754,7 @@ bool MainWindow::customTableWidgetItemCompare(QTableWidgetItem* item1, QTableWid
     // Fallback to string
     return item1->text() < item2->text();
 }
-void MainWindow::on_triCb_currentIndexChanged(int index)
-{
-    Q_UNUSED(index);
 
-    QString criteria = ui->comboBox_tri_3->currentText();
-    int columnIndex = -1;
-
-    if (criteria == "Date d'embauche") columnIndex = 3;
-    else if (criteria == "Salaire") columnIndex = 6;
-    else if (criteria == "Sexe") columnIndex = 7;
-
-    if (columnIndex != -1) {
-        disconnect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
-                   this, &MainWindow::on_tableWidget_sortIndicatorChanged);
-
-        ui->tableWidget->sortByColumn(columnIndex, isAscending ? Qt::AscendingOrder : Qt::DescendingOrder);
-
-        connect(ui->tableWidget->horizontalHeader(), &QHeaderView::sortIndicatorChanged,
-                this, &MainWindow::on_tableWidget_sortIndicatorChanged);
-    }
-}
-void MainWindow::on_triButton_clicked()
-{
-    static bool isButtonClicked = false;
-    if (isButtonClicked) return;
-
-    isButtonClicked = true;
-    QTimer::singleShot(300, []() {
-        isButtonClicked = false;
-    });
-
-    isAscending = !isAscending;
-    on_triCb_currentIndexChanged(ui->comboBox_tri_3->currentIndex());
-
-    ui->triButton->setIcon(QIcon(isAscending
-                               ? ":/ressources/images/ascending.png"
-                               : ":/ressources/images/descending.png"));
-}
 void MainWindow::on_tableWidget_sortIndicatorChanged(int logicalIndex, Qt::SortOrder order)
 {
     Q_UNUSED(order);

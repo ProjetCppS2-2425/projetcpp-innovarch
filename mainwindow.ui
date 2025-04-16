@@ -1520,7 +1520,7 @@ QPushButton#chercher:hover {
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>:/ressources/images/search.png</normaloff>:/ressources/images/search.png</iconset>
+         <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/search.png</normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/search.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1553,7 +1553,7 @@ QPushButton#refresh:hover {
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
+         <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/refresh.png</normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/refresh.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2295,7 +2295,7 @@ QPushButton#refresh:hover {
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
+         <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/refresh.png</normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/refresh.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2384,7 +2384,7 @@ QPushButton#statpb:hover {
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>:/ressources/images/logot.png</pixmap>
+      <pixmap>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/logot.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2434,8 +2434,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/employes.png</normaloff>
-          <normalon>:/ressources/images/employes.png</normalon>:/ressources/images/employes.png</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/employes.png</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/employes.png</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/employes.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2475,8 +2475,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/clients.png</normaloff>
-          <normalon>:/ressources/images/clients.png</normalon>:/ressources/images/clients.png</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/clients.png</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/clients.png</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/clients.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2517,8 +2517,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/project.png</normaloff>
-          <normalon>:/ressources/images/project.png</normalon>:/ressources/images/project.png</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/project.png</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/project.png</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/project.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2559,8 +2559,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/desk.ico</normaloff>
-          <normalon>:/ressources/images/desk.ico</normalon>:/ressources/images/desk.ico</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/desk.ico</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/desk.ico</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/desk.ico</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2601,8 +2601,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/contrats.png</normaloff>
-          <normalon>:/ressources/images/contrats.png</normalon>:/ressources/images/contrats.png</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/contrats.png</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/contrats.png</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/contrats.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -2643,8 +2643,8 @@ QPushButton:hover, QPushButton:pressed {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>:/ressources/images/architect.png</normaloff>
-          <normalon>:/ressources/images/architect.png</normalon>:/ressources/images/architect.png</iconset>
+          <normaloff>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/architect.png</normaloff>
+          <normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/architect.png</normalon>C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/architect.png</iconset>
         </property>
         <property name="iconSize">
          <size>
