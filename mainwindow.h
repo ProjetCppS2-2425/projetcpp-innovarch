@@ -24,12 +24,21 @@ private slots:
     void on_deleteProjectButton_clicked();
     void on_tableView_itemClicked(const QModelIndex &index);
     void refreshTableWidget();
-    void fillTableWidget(); // Add this line
     void on_cancelButton_clicked();
+    void on_sortButton_clicked();
+    void on_searchButton_clicked();
+    void on_exportPDFButton_clicked();
+    void on_showStatsButton_clicked();
+    void on_stat1_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     ProjetCRUD currentProject;
+    void fillTableWidget();
+    void on_statButton_clicked();
+    void on_importPDFButton_clicked();
+    void on_advancedSearchButton_clicked();
+    void on_searchByCriteriaButton_clicked();
 };
 
 #endif // MAINWINDOW_H

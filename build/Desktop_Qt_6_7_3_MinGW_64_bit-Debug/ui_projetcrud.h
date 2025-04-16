@@ -81,7 +81,7 @@ public:
     QFrame *line_2;
     QGraphicsView *bar_2;
     QPushButton *stat1_2;
-    QPushButton *stat2_2;
+    QWidget *tab;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -276,9 +276,63 @@ public:
         tableView = new QTableView(widget_7);
         tableView->setObjectName("tableView");
         tableView->setGeometry(QRect(20, 70, 621, 371));
-        tableView->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"font: 9pt \"Segoe UI\";\n"
-"color: #0000;"));
+        QPalette palette;
+        QBrush brush(QColor(0, 0, 0, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(255, 255, 255, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        QBrush brush2(QColor(240, 240, 240, 255));
+        brush2.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Highlight, brush2);
+        palette.setBrush(QPalette::Active, QPalette::HighlightedText, brush);
+        QBrush brush3(QColor(0, 0, 0, 128));
+        brush3.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush3);
+#endif
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Highlight, brush2);
+        palette.setBrush(QPalette::Inactive, QPalette::HighlightedText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush3);
+#endif
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Highlight, brush2);
+        palette.setBrush(QPalette::Disabled, QPalette::HighlightedText, brush);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush3);
+#endif
+        tableView->setPalette(palette);
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Segoe UI")});
+        font1.setPointSize(9);
+        font1.setBold(false);
+        font1.setItalic(false);
+        tableView->setFont(font1);
+        tableView->setStyleSheet(QString::fromUtf8("\n"
+"     QTableView {\n"
+"         color: black;\n"
+"         background-color: white;\n"
+"         selection-background-color: #f0f0f0;\n"
+"         selection-color: black;\n"
+"     }\n"
+" "));
         modifier2 = new QPushButton(widget_7);
         modifier2->setObjectName("modifier2");
         modifier2->setGeometry(QRect(460, 501, 181, 40));
@@ -325,10 +379,10 @@ public:
         pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName("pushButton");
         pushButton->setMinimumSize(QSize(0, 0));
-        QFont font1;
-        font1.setFamilies({QString::fromUtf8("Roboto")});
-        font1.setPointSize(13);
-        pushButton->setFont(font1);
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Roboto")});
+        font2.setPointSize(13);
+        pushButton->setFont(font2);
         pushButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -350,9 +404,9 @@ public:
         pushButton_4 = new QPushButton(layoutWidget);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setMinimumSize(QSize(0, 0));
-        QFont font2;
-        font2.setPointSize(13);
-        pushButton_4->setFont(font2);
+        QFont font3;
+        font3.setPointSize(13);
+        pushButton_4->setFont(font3);
         pushButton_4->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -374,7 +428,7 @@ public:
         pushButton_3 = new QPushButton(layoutWidget);
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setMinimumSize(QSize(0, 0));
-        pushButton_3->setFont(font1);
+        pushButton_3->setFont(font2);
         pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -396,7 +450,7 @@ public:
         pushButton_2 = new QPushButton(layoutWidget);
         pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setMinimumSize(QSize(0, 0));
-        pushButton_2->setFont(font1);
+        pushButton_2->setFont(font2);
         pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -418,7 +472,7 @@ public:
         pushButton_5 = new QPushButton(layoutWidget);
         pushButton_5->setObjectName("pushButton_5");
         pushButton_5->setMinimumSize(QSize(0, 0));
-        pushButton_5->setFont(font1);
+        pushButton_5->setFont(font2);
         pushButton_5->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -440,7 +494,7 @@ public:
         pushButton_6 = new QPushButton(layoutWidget);
         pushButton_6->setObjectName("pushButton_6");
         pushButton_6->setMinimumSize(QSize(0, 0));
-        pushButton_6->setFont(font1);
+        pushButton_6->setFont(font2);
         pushButton_6->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #4e1764;\n"
 "    color: white;\n"
@@ -776,10 +830,10 @@ public:
         label_156 = new QLabel(tab_6);
         label_156->setObjectName("label_156");
         label_156->setGeometry(QRect(290, 70, 221, 51));
-        QFont font3;
-        font3.setBold(true);
-        font3.setItalic(true);
-        label_156->setFont(font3);
+        QFont font4;
+        font4.setBold(true);
+        font4.setItalic(true);
+        label_156->setFont(font4);
         label_156->setStyleSheet(QString::fromUtf8("/* QLabel styling */\n"
 "QLabel {\n"
 "    background: white;          /* Set background to white */\n"
@@ -807,10 +861,10 @@ public:
         stat1_2 = new QPushButton(tab_7);
         stat1_2->setObjectName("stat1_2");
         stat1_2->setGeometry(QRect(750, 140, 161, 61));
-        stat2_2 = new QPushButton(tab_7);
-        stat2_2->setObjectName("stat2_2");
-        stat2_2->setGeometry(QRect(750, 270, 161, 71));
         aceuille_2->addTab(tab_7, QString());
+        tab = new QWidget();
+        tab->setObjectName("tab");
+        aceuille_2->addTab(tab, QString());
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -822,7 +876,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        aceuille_2->setCurrentIndex(0);
+        aceuille_2->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -887,9 +941,9 @@ public:
         comboBox_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "statut", nullptr));
         label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout projets</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
-        stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
-        stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));
+        stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique ", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        aceuille_2->setTabText(aceuille_2->indexOf(tab), QCoreApplication::translate("MainWindow", "Page", nullptr));
     } // retranslateUi
 
 };

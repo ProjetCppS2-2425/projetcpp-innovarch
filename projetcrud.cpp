@@ -1,6 +1,12 @@
 #include "projetcrud.h"
 #include <QDebug>
 #include <QSqlError>
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QPageSize>
 
 // Constructeurs
 ProjetCRUD::ProjetCRUD() {}
@@ -44,7 +50,21 @@ bool ProjetCRUD::ajouter() {
 // Afficher les projets
 QSqlQueryModel * ProjetCRUD::afficher() {
     QSqlQueryModel * model = new QSqlQueryModel();
-    model->setQuery("SELECT * FROM projets");
+    model->setQuery("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, "
+                    "CASE "
+                    "WHEN STATUT = '0' THEN 'En cours' "
+                    "WHEN STATUT = '1' THEN 'Terminé' "
+                    "ELSE 'En cours' "  // Default to 'En cours' if the value is unexpected
+                    "END AS STATUT "
+                    "FROM projets");
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in afficher(): " << model->lastError().text();
+    } else {
+        qDebug() << "afficher() query executed successfully.";
+        qDebug() << "Number of rows fetched: " << model->rowCount();
+    }
+
     return model;
 }
 
@@ -70,6 +90,120 @@ bool ProjetCRUD::supprimer(int id) {
     query.bindValue(":id", id);
 
     return query.exec();
+}
+
+// Trier les projets
+QSqlQueryModel *ProjetCRUD::trier(const QString &critere, const QString &ordre) {
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString query = QString("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT FROM projets ORDER BY %1 %2")
+                        .arg(critere, ordre);
+    model->setQuery(query);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in trier(): " << model->lastError().text();
+    } else {
+        qDebug() << "Tri effectué avec succès. Nombre de lignes : " << model->rowCount();
+    }
+    return model;
+}
+
+// Rechercher un projet par ID
+QSqlQueryModel *ProjetCRUD::rechercher(const QString &keyword) {
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString query = QString("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT FROM projets WHERE ID_PROJET LIKE '%%1%'").arg(keyword);
+    model->setQuery(query);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in rechercher(): " << model->lastError().text();
+    } else {
+        qDebug() << "Recherche effectuée avec succès. Nombre de lignes : " << model->rowCount();
+    }
+
+    return model;
+}
+
+QSqlQueryModel *ProjetCRUD::rechercherAvance(const QString &colonne, const QString &valeur) {
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString query = QString("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT "
+                            "FROM projets WHERE %1 LIKE '%%2%'").arg(colonne, valeur);
+    model->setQuery(query);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in rechercherAvance(): " << model->lastError().text();
+    } else {
+        qDebug() << "Advanced search executed successfully. Rows fetched: " << model->rowCount();
+    }
+
+    return model;
+}
+
+QSqlQueryModel *ProjetCRUD::rechercherParCritere(const QString &colonne, const QString &valeur) {
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString query = QString("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT "
+                            "FROM projets WHERE %1 LIKE '%%2%'").arg(colonne, valeur);
+    model->setQuery(query);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in rechercherParCritere(): " << model->lastError().text();
+    } else {
+        qDebug() << "Search by criteria executed successfully. Rows fetched: " << model->rowCount();
+    }
+
+    return model;
+}
+
+// Importer les projets depuis un fichier PDF
+bool ProjetCRUD::importerPDF(const QString &filePath) {
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open file for reading:" << filePath;
+        return false;
+    }
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        // Logique pour traiter chaque ligne du fichier PDF
+        qDebug() << "Read line:" << line;
+    }
+    file.close();
+    return true;
+}
+
+// Exporter les projets en PDF
+bool ProjetCRUD::exporterPDF(const QString &filePath) {
+    QPdfWriter writer(filePath);
+    writer.setPageSize(QPageSize(QPageSize::A4));
+    writer.setTitle("Liste des Projets");
+    writer.setCreator("Application ProjetCRUD");
+
+    QPainter painter(&writer);
+    if (!painter.isActive()) {
+        qDebug() << "Failed to open PDF writer.";
+        return false;
+    }
+
+    QSqlQuery query("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT FROM projets");
+    int y = 100;
+    painter.setFont(QFont("Arial", 12));
+    painter.drawText(100, y, "Liste des Projets");
+    y += 50;
+
+    while (query.next()) {
+        QString line = QString("ID: %1, Nom: %2, Type: %3, Budget: %4, Echeance: %5, Statut: %6")
+                           .arg(query.value(0).toString())
+                           .arg(query.value(1).toString())
+                           .arg(query.value(2).toString())
+                           .arg(query.value(3).toString())
+                           .arg(query.value(4).toString())
+                           .arg(query.value(5).toString());
+        painter.drawText(100, y, line);
+        y += 30;
+    }
+
+    painter.end();
+    qDebug() << "PDF exporté avec succès.";
+    return true;
 }
 
 // Getters et Setters

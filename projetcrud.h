@@ -17,6 +17,12 @@ public:
     bool modifier(int id);
     bool supprimer(int id);
     QSqlQueryModel *afficher();
+    QSqlQueryModel *trier(const QString &critere, const QString &ordre);
+    QSqlQueryModel *rechercher(const QString &keyword);
+    QSqlQueryModel *rechercherAvance(const QString &colonne, const QString &valeur);
+    QSqlQueryModel *rechercherParCritere(const QString &colonne, const QString &valeur);
+    bool exporterPDF(const QString &filePath);
+    bool importerPDF(const QString &filePath); // Déclaration de la méthode importerPDF
 
     // Getters et setters
     int getId() const;

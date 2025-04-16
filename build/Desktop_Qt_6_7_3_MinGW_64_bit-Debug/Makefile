@@ -407,9 +407,13 @@ Makefile: ../../Atelier_Connexion.pro C:/PySchool/6.7.3/mingw_64/mkspecs/win32-g
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/yacc.prf \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/lex.prf \
 		../../Atelier_Connexion.pro \
+		C:/PySchool/6.7.3/mingw_64/lib/Qt6Charts.prl \
+		C:/PySchool/6.7.3/mingw_64/lib/Qt6OpenGLWidgets.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Widgets.prl \
+		C:/PySchool/6.7.3/mingw_64/lib/Qt6OpenGL.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Gui.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Sql.prl \
+		C:/PySchool/6.7.3/mingw_64/lib/Qt6Network.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6Core.prl \
 		C:/PySchool/6.7.3/mingw_64/lib/Qt6EntryPoint.prl \
 		C:/PySchool/6.7.3/mingw_64/mkspecs/features/build_pass.prf
@@ -751,9 +755,13 @@ C:/PySchool/6.7.3/mingw_64/mkspecs/features/exceptions.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/yacc.prf:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/lex.prf:
 ../../Atelier_Connexion.pro:
+C:/PySchool/6.7.3/mingw_64/lib/Qt6Charts.prl:
+C:/PySchool/6.7.3/mingw_64/lib/Qt6OpenGLWidgets.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Widgets.prl:
+C:/PySchool/6.7.3/mingw_64/lib/Qt6OpenGL.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Gui.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Sql.prl:
+C:/PySchool/6.7.3/mingw_64/lib/Qt6Network.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6Core.prl:
 C:/PySchool/6.7.3/mingw_64/lib/Qt6EntryPoint.prl:
 C:/PySchool/6.7.3/mingw_64/mkspecs/features/build_pass.prf:
