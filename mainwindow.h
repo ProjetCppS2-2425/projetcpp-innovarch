@@ -68,6 +68,8 @@ private slots:
             void on_statConge_clicked();
     void onLoginClicked();  // Slot for login button
     //void afficherConges(const QDate &date);
+    void onCalendarDateClicked(const QDate &date);
+    void refreshCongeTableViewOnDateClick(const QDate &date);
 
 
 };

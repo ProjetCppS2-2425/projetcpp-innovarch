@@ -533,7 +533,7 @@ QLineEdit:focus {
 </string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -2192,6 +2192,12 @@ QLineEdit:focus {
          <height>31</height>
         </rect>
        </property>
+       <property name="toolTip">
+        <string>Raison de congé</string>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Raison de congé&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit {
     border: 2px solid #4e1764;  /* Default thicker border */
@@ -2207,7 +2213,7 @@ QLineEdit:focus {
 </string>
        </property>
        <property name="text">
-        <string>Raison de congé</string>
+        <string/>
        </property>
        <property name="placeholderText">
         <string/>

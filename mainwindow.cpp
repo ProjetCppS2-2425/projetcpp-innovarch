@@ -60,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     connect(ui->refresh, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
     connect(ui->refresh_2, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
     connect(ui->refresh_3, &QPushButton::clicked, this, &MainWindow::on_refreshButton2_clicked);
+    connect(ui->refresh_4, &QPushButton::clicked, this, &MainWindow::refreshTableView);
     connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyEmployeeButton_clicked);
     connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_rechercherButton_clicked);
     /*connect(ui->comboBox_tri_3, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -111,6 +112,12 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
             // Connexion signal clic sur calendrier
             connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::afficherConges);
         }*/
+
+        connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateClicked);
+        // Connecting the calendar's clicked signal to the refresh function
+        connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::refreshCongeTableViewOnDateClick);
+
+
 }
 
 
@@ -1237,3 +1244,65 @@ void MainWindow::afficherConges(const QDate &date)
 }
 */
 
+
+void MainWindow::onCalendarDateClicked(const QDate &date)
+{
+    // Set the date in the date_debut and date_fin fields
+    ui->date_debut->setDate(date);
+    ui->date_fin->setDate(date);
+   }
+
+
+void MainWindow::refreshCongeTableViewOnDateClick(const QDate &date)
+{
+    // Create a new QSqlQueryModel to hold the data
+    QSqlQueryModel *model = new QSqlQueryModel();
+
+    // Convert the selected date to a string format (ensure it matches the Oracle format)
+    QString selectedDate = date.toString("yyyy-MM-dd");
+
+    qDebug() << "Selected date:" << selectedDate;
+
+    // SQL query to fetch only the desired columns from the "CONGE" table for the selected date
+    QSqlQuery query;
+    query.prepare("SELECT NOM, PRENOM, EMAIL, POSTE, DATE_D, DATE_F, ETAT "
+                  "FROM MARAM.CONGE "
+                  "WHERE DATE_D <= TO_DATE(:selectedDate, 'YYYY-MM-DD') "
+                  "AND DATE_F >= TO_DATE(:selectedDate, 'YYYY-MM-DD')");
+
+    query.bindValue(":selectedDate", selectedDate);
+
+    // Print the final query for debugging purposes
+    qDebug() << "Executing query: SELECT NOM, PRENOM, EMAIL, POSTE, DATE_D, DATE_F, ETAT "
+             "FROM MARAM.CONGE WHERE DATE_D <= TO_DATE('" << selectedDate << "', 'YYYY-MM-DD') "
+             "AND DATE_F >= TO_DATE('" << selectedDate << "', 'YYYY-MM-DD')";
+
+    if (query.exec()) {
+        qDebug() << "Query executed successfully.";
+
+        model->setQuery(query);  // Set the query result into the model
+
+        // Check if we have results and update the table
+        if (model->rowCount() > 0) {
+            // Set the model to the QTableView
+            ui->afficher_conge_3->setModel(nullptr);  // Reset the previous model
+            ui->afficher_conge_3->setModel(model);
+
+            // Resize columns to contents for better display
+            ui->afficher_conge_3->resizeColumnsToContents();
+
+            // Update the headers to match the data
+            model->setHeaderData(0, Qt::Horizontal, QObject::tr("Nom"));
+            model->setHeaderData(1, Qt::Horizontal, QObject::tr("Prénom"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("Email"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("Poste"));
+            model->setHeaderData(4, Qt::Horizontal, QObject::tr("Date Début"));
+            model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date Fin"));
+            model->setHeaderData(6, Qt::Horizontal, QObject::tr("État"));
+        } else {
+            qDebug() << "No records found for the selected date.";
+        }
+    } else {
+        qDebug() << "Error executing query: " << query.lastError().text();
+    }
+}
