@@ -28,19 +28,21 @@ SOURCES += \
     clients.cpp \
         main.cpp \
     connection.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sms.cpp
 
 HEADERS += \
     clients.h \
     connection.h \
-    mainwindow.h
+    mainwindow.h \
+    sms.h
 
 FORMS += \
     mainwindow.ui
 
 RESOURCES += icons.qrc
 QT += charts
-
+QT += network
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

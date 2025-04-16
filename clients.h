@@ -10,7 +10,7 @@ class Clients
 public:
     // Constructeurs
     Clients();
-    Clients(int id, QString nom, QString prenom, QString email, QString telephone = "", QString adresse = "", QString sexe = "");
+    Clients(int id, QString nom, QString prenom, QString email, QString telephone = "", QString adresse = "", QString sexe = "", int id_projet = -1);
 
     // CRUD
     bool ajouter();
@@ -34,7 +34,8 @@ public:
     QString getSexe() const;
     void setSexe(const QString &sexe);
 
-
+    int getIdProjet() const;
+    void setIdProjet(int id_projet);
 
 private:
     int id_client;
@@ -44,6 +45,7 @@ private:
     QString telephone;
     QString adresse;
     QString sexe;
+    int id_projet;
 };
 
 #endif // CLIENTS_H

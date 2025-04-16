@@ -12,6 +12,7 @@
 #include <QPieSeries>
 #include <QSqlQuery>
 #include <QMap>
+#include "sms.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->TrierButton, &QPushButton::clicked, this, &MainWindow::on_trierClientButton_clicked);
     connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdfClientButton_clicked);
     connect(ui->statButton, &QPushButton::clicked, this, &MainWindow::on_statButton_clicked);
+    connect(ui->sms, &QPushButton::clicked, this, &MainWindow::on_btnEnvoyerSMS_clicked);
+
 
 
 
@@ -84,6 +87,8 @@ void MainWindow::on_addClientButton_clicked()
     QString telephone = ui->lineEdit_7->text();
     QString adresse = ui->lineEdit_5->text();
     QString sexe = ui->comboBox->currentText();
+    int id_projet = ui->lineEdit->text().toInt();
+
 
     qDebug() << "Adding Client with details:";
     qDebug() << "ID:" << id_client;
@@ -93,8 +98,10 @@ void MainWindow::on_addClientButton_clicked()
     qDebug() << "Telephone:" << telephone;
     qDebug() << "Adresse:" << adresse;
     qDebug() << "Sexe:" << sexe;
+    qDebug() <<"id_projet"<<id_projet;
 
-    currentClient = Clients(id_client, nom, prenom, email, telephone, adresse, sexe);
+
+    currentClient = Clients(id_client, nom, prenom, email, telephone, adresse, sexe,id_projet);
 
     if (currentClient.ajouter()) {
         QMessageBox::information(this, "Success", "Client ajouté avec succès.");
@@ -105,6 +112,7 @@ void MainWindow::on_addClientButton_clicked()
         ui->lineEdit_6->clear();
         ui->lineEdit_7->clear();
         ui->lineEdit_5->clear();
+        ui->lineEdit->clear();
         ui->comboBox->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Error", "Échec de l'ajout du client.");
@@ -129,6 +137,7 @@ void MainWindow::on_supprimerClient_clicked() {
         ui->lineEdit_6->clear();
         ui->lineEdit_7->clear();
         ui->lineEdit_5->clear();
+        ui->lineEdit->clear();
         ui->comboBox->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Error", "Échec de la suppression du client.");
@@ -145,12 +154,15 @@ void MainWindow::on_modifyClientButton_clicked()
 
     QString nom = ui->lineEdit_2->text();
     QString prenom = ui->lineEdit_4->text();
-    QString email = ui->lineEdit_6->text();
-    QString telephone = ui->lineEdit_7->text();
-    QString adresse = ui->lineEdit_5->text();
-    QString sexe = ui->comboBox->currentText();
 
-    currentClient = Clients(id, nom, prenom, email, telephone, adresse, sexe);
+    QString telephone = ui->lineEdit_7->text();
+
+    QString adresse = ui->lineEdit_5->text();
+    QString email = ui->lineEdit_6->text();
+    QString sexe = ui->comboBox->currentText();
+    int id_projet = ui->lineEdit->text().toInt();
+
+    currentClient = Clients(id, nom, prenom, email, telephone, adresse, sexe,id_projet);
 
     if (currentClient.modifier(id)) {
         QMessageBox::information(this, "Success", "Client modifié avec succès.");
@@ -162,6 +174,7 @@ void MainWindow::on_modifyClientButton_clicked()
         ui->lineEdit_6->clear();
         ui->lineEdit_7->clear();
         ui->lineEdit_5->clear();
+        ui->lineEdit->clear();
         ui->comboBox->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Failure", "Échec de la modification du client.");
@@ -175,19 +188,25 @@ void MainWindow::on_tableView_itemClicked(const QModelIndex &index)
     QString id = ui->tableView->model()->data(ui->tableView->model()->index(row, 0)).toString();
     QString nom = ui->tableView->model()->data(ui->tableView->model()->index(row, 1)).toString();
     QString prenom = ui->tableView->model()->data(ui->tableView->model()->index(row, 2)).toString();
-    QString email = ui->tableView->model()->data(ui->tableView->model()->index(row, 3)).toString();
-    QString telephone = ui->tableView->model()->data(ui->tableView->model()->index(row, 4)).toString();
-    QString adresse = ui->tableView->model()->data(ui->tableView->model()->index(row, 5)).toString();
+    QString telephone = ui->tableView->model()->data(ui->tableView->model()->index(row, 3)).toString();
+    QString adresse = ui->tableView->model()->data(ui->tableView->model()->index(row, 4)).toString();
+    QString email = ui->tableView->model()->data(ui->tableView->model()->index(row, 5)).toString();
     QString sexe = ui->tableView->model()->data(ui->tableView->model()->index(row, 6)).toString();
+    QString id_projet = ui->tableView->model()->data(ui->tableView->model()->index(row, 7)).toString();
 
     ui->id_rech_2->setText(id);
     ui->lineEdit_2->setText(nom);
     ui->lineEdit_4->setText(prenom);
-    ui->lineEdit_6->setText(email);
     ui->lineEdit_7->setText(telephone);
     ui->lineEdit_5->setText(adresse);
+    ui->lineEdit_6->setText(email);
+    ui->lineEdit->setText(id_projet);
     ui->comboBox->setCurrentText(sexe);
+
+    // ⚠️ Envoi SMS ici automatiquement
+
 }
+
 
 void MainWindow::refreshTableWidget() {
     QSqlQueryModel *model = currentClient.afficher();
@@ -202,6 +221,7 @@ void MainWindow::on_annulerButton_clicked() {
     ui->lineEdit_6->clear();
     ui->lineEdit_7->clear();
     ui->lineEdit_5->clear();
+    ui->lineEdit->clear();
     ui->comboBox->setCurrentIndex(0);
 }
 
@@ -326,7 +346,7 @@ void MainWindow::on_pdfClientButton_clicked()
     QPdfWriter writer(filePath);
     writer.setPageSize(QPageSize::A4);
     writer.setResolution(300);
-    writer.setPageMargins(QMarginsF(20, 20, 20, 20));
+    writer.setPageMargins(QMarginsF(30, 30, 30, 30));
 
     QPainter painter(&writer);
     if (!painter.isActive()) {
@@ -335,15 +355,13 @@ void MainWindow::on_pdfClientButton_clicked()
     }
 
     // ---- Fonts ----
-    QFont titleFont("Arial", 18, QFont::Bold);
-    QFont headerFont("Arial", 12, QFont::Bold);
+    QFont titleFont("Arial", 22, QFont::Bold);
+    QFont headerFont("Arial", 13, QFont::Bold);
     QFont cellFont("Arial", 11);
-    QFont footerFont("Arial", 10);
+    QFont footerFont("Arial", 9);
 
-    const int marginLeft = 60;
-    const int marginRight = 60;
-    const int colWidth = 140;
-    const int rowHeight = 45;
+    const int marginLeft = 50;
+    const int marginRight = 50;
     const int padding = 10;
     int top = 100;
 
@@ -351,71 +369,87 @@ void MainWindow::on_pdfClientButton_clicked()
     int cols = model->columnCount();
     int rows = model->rowCount();
 
-    // ---- Header ----
+    // Largeur dynamique
+    int availableWidth = writer.width() - marginLeft - marginRight;
+    int colWidth = availableWidth / cols;
+    int rowHeight = 50;  // plus grand pour aération
+
+    // ---- Title ----
     painter.setFont(titleFont);
-    painter.drawText(marginLeft, top, "📄 Rapport: Liste des Clients");
+    painter.setPen(QColor("#0f172a")); // bleu foncé
+    painter.drawText(QRect(marginLeft, top, writer.width() - marginLeft - marginRight, 60),
+                     Qt::AlignCenter, "📄 Rapport des Clients");
 
+    top += 70;
+
+    // ---- Date ----
     painter.setFont(cellFont);
-    QString dateText = "Date : " + QDate::currentDate().toString("dd/MM/yyyy");
-    painter.drawText(writer.width() - marginRight - 200, top, dateText);
+    painter.setPen(Qt::gray);
+    painter.drawText(QRect(marginLeft, top, writer.width() - marginLeft - marginRight, 30),
+                     Qt::AlignRight, "📅 " + QDate::currentDate().toString("dd MMMM yyyy"));
 
-    top += 60;
-
-    // Optional logo placeholder
-    painter.drawRect(marginLeft, top, 60, 60);
-    painter.drawText(marginLeft + 70, top + 30, "ClientManager Pro");
-
-    top += 90;
+    top += 40;
 
     // ---- Table Header ----
     painter.setFont(headerFont);
-    painter.setBrush(QColor("#dbeafe")); // light blue
     painter.setPen(Qt::black);
+    QColor headerColor("#93c5fd"); // bleu clair
 
     for (int col = 0; col < cols; ++col) {
         QRect cellRect(marginLeft + col * colWidth, top, colWidth, rowHeight);
+        painter.fillRect(cellRect, headerColor);
+        painter.setPen(Qt::black);
         painter.drawRect(cellRect);
-        painter.drawText(cellRect.adjusted(padding, 0, -padding, 0), Qt::AlignVCenter | Qt::AlignLeft,
+        painter.drawText(cellRect.adjusted(padding, 0, -padding, 0),
+                         Qt::AlignVCenter | Qt::AlignLeft,
                          model->headerData(col, Qt::Horizontal).toString());
     }
+
     top += rowHeight;
 
     // ---- Table Rows ----
     painter.setFont(cellFont);
+
     for (int row = 0; row < rows; ++row) {
-        QColor bgColor = (row % 2 == 0) ? QColor("#f1f5f9") : QColor("#ffffff");
+        QColor bgColor = (row % 2 == 0) ? QColor("#f8fafc") : QColor("#e2e8f0");
         for (int col = 0; col < cols; ++col) {
             QRect cellRect(marginLeft + col * colWidth, top, colWidth, rowHeight);
             painter.fillRect(cellRect, bgColor);
-            painter.setPen(Qt::black);
+            painter.setPen(Qt::gray);
             painter.drawRect(cellRect);
 
+            painter.setPen(Qt::black);
             QString data = model->data(model->index(row, col)).toString();
-            painter.drawText(cellRect.adjusted(padding, 0, -padding, 0), Qt::AlignVCenter | Qt::AlignLeft, data);
+            painter.drawText(cellRect.adjusted(padding, 0, -padding, 0),
+                             Qt::AlignVCenter | Qt::AlignLeft, data);
         }
 
         top += rowHeight;
 
-        // New page if we reach bottom
-        if (top + rowHeight > writer.height() - 120) {
+        // Page break
+        if (top + rowHeight > writer.height() - 100) {
             writer.newPage();
             top = 100;
         }
     }
 
     // ---- Footer ----
-    int footerY = writer.height() - 80;
+    int footerY = writer.height() - 60;
     painter.setFont(footerFont);
-    painter.setPen(Qt::darkGray);
-    painter.drawLine(marginLeft, footerY - 15, writer.width() - marginRight, footerY - 15);
-
-    painter.drawText(marginLeft, footerY, "🧾 Ce rapport a été généré automatiquement via l'application Qt");
-    painter.drawText(marginLeft, footerY + 20, "🔗 Contact : support@clientmanager.app | © 2025 ClientManager Pro");
+    painter.setPen(QColor("#94a3b8"));
+    painter.drawLine(marginLeft, footerY - 10, writer.width() - marginRight, footerY - 10);
+    painter.drawText(marginLeft, footerY,
+                     "🧾 Rapport généré automatiquement par ClientManager Pro");
+    painter.drawText(marginLeft, footerY + 15,
+                     "📧 support@clientmanager.app    © 2025");
 
     painter.end();
 
-    QMessageBox::information(this, "PDF", "PDF généré avec succès !");
+    QMessageBox::information(this, "PDF", "✅ PDF généré avec succès !");
 }
+
+
+
 void MainWindow::on_statButton_clicked()
 {
     QMap<QString, int> villeCount;
@@ -516,6 +550,20 @@ void MainWindow::on_statButton_clicked()
     ui->stat->setAlignment(Qt::AlignLeft | Qt::AlignTop); // avoid auto-centering
 }
 
+void MainWindow::on_btnEnvoyerSMS_clicked()
+{
+    int idClient = ui->id_rech_2->text().toInt();
+
+    SMS sms;
+    bool success = sms.envoyerStatutProjetAuClient(idClient);
+
+
+    if (success) {
+        QMessageBox::information(this, "Succès", "SMS envoyé au client !");
+    } else {
+        QMessageBox::warning(this, "Erreur", "Échec de l’envoi du SMS.");
+    }
+}
 
 
 

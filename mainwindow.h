@@ -25,6 +25,8 @@ public:
     void on_trierClientButton_clicked();
     void on_pdfClientButton_clicked();
     void on_statButton_clicked();
+    void on_btnEnvoyerSMS_clicked();
+
 
 
 

@@ -4,7 +4,7 @@
 // Constructeurs
 Clients::Clients() {}
 
-Clients::Clients(int id, QString nom, QString prenom, QString email, QString telephone, QString adresse, QString sexe) {
+Clients::Clients(int id, QString nom, QString prenom, QString email, QString telephone, QString adresse, QString sexe, int id_projet) {
     this->id_client = id;
     this->nom = nom;
     this->prenom = prenom;
@@ -12,13 +12,14 @@ Clients::Clients(int id, QString nom, QString prenom, QString email, QString tel
     this->telephone = telephone;
     this->adresse = adresse;
     this->sexe = sexe;
+    this->id_projet = id_projet;
 }
 
 // 🔹 Ajouter un client
 bool Clients::ajouter() {
     QSqlQuery query;
-    query.prepare("INSERT INTO clients (ID_CLIENT, NOM, PRENOM, EMAIL, TELEPHONE, ADRESSE, SEXE) "
-                  "VALUES (:id, :nom, :prenom, :email, :telephone, :adresse, :sexe)");
+    query.prepare("INSERT INTO clients (ID_CLIENT, NOM, PRENOM, EMAIL, TELEPHONE, ADRESSE, SEXE, ID_PROJET) "
+                  "VALUES (:id, :nom, :prenom, :email, :telephone, :adresse, :sexe, :id_projet)");
     query.bindValue(":id", id_client);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -26,6 +27,7 @@ bool Clients::ajouter() {
     query.bindValue(":telephone", telephone);
     query.bindValue(":adresse", adresse);
     query.bindValue(":sexe", sexe);
+    query.bindValue(":id_projet", id_projet);
 
     return query.exec();
 }
@@ -41,7 +43,7 @@ QSqlQueryModel * Clients::afficher() {
 bool Clients::modifier(int id) {
     QSqlQuery query;
     query.prepare("UPDATE clients SET NOM = :nom, PRENOM = :prenom, EMAIL = :email, TELEPHONE = :telephone, "
-                  "ADRESSE = :adresse, SEXE = :sexe WHERE ID_CLIENT = :id");
+                  "ADRESSE = :adresse, SEXE = :sexe, ID_PROJET = :id_projet WHERE ID_CLIENT = :id");
     query.bindValue(":id", id);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -49,6 +51,7 @@ bool Clients::modifier(int id) {
     query.bindValue(":telephone", telephone);
     query.bindValue(":adresse", adresse);
     query.bindValue(":sexe", sexe);
+    query.bindValue(":id_projet", id_projet);
 
     return query.exec();
 }
@@ -61,7 +64,6 @@ bool Clients::supprimer(int id) {
 
     return query.exec();
 }
-
 
 // 🔹 Getters et Setters
 int Clients::getId() const { return id_client; }
@@ -84,3 +86,6 @@ void Clients::setAdresse(const QString &adresse) { this->adresse = adresse; }
 
 QString Clients::getSexe() const { return sexe; }
 void Clients::setSexe(const QString &sexe) { this->sexe = sexe; }
+
+int Clients::getIdProjet() const { return id_projet; }
+void Clients::setIdProjet(int id_projet) { this->id_projet = id_projet; }

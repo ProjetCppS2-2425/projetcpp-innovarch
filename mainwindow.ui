@@ -472,12 +472,12 @@ QComboBox QAbstractItemView {
        </item>
        <item>
         <property name="text">
-         <string>ASC</string>
+         <string>Croissant</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>DESC</string>
+         <string>Decroissant</string>
         </property>
        </item>
       </widget>
@@ -513,7 +513,7 @@ QPushButton#TrierButton:hover {
         <x>0</x>
         <y>0</y>
         <width>191</width>
-        <height>741</height>
+        <height>771</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1470,6 +1470,35 @@ QPushButton#statButton:hover {
       </property>
       <property name="text">
        <string>Statistiques Clients</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="sms">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>150</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#sms {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #9f86c0;
+    border-radius: 5px;
+    font: 12pt &quot;Segoe UI&quot;;
+    font-weight: bold;
+    color: #000000; /* Corrected font color */
+}
+
+QPushButton#sms:hover {
+    background-color: #9f86c0;
+    color: #000000; /* Ensure the text stays black on hover */
+}
+</string>
+      </property>
+      <property name="text">
+       <string>envoie sms</string>
       </property>
      </widget>
     </widget>
