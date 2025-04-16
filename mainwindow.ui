@@ -161,12 +161,12 @@ QLabel {
         <string notr="true">QPushButton#modifier2 {
     background-color: rgb(255, 255, 255);
 
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 
 QPushButton#modifier2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }</string>
        </property>
        <property name="text">
@@ -212,7 +212,7 @@ QLineEdit:focus {
        <property name="styleSheet">
         <string notr="true">QPushButton#chercher_2 {
     background-color: rgb(255, 255, 255);
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }</string>
        </property>
@@ -439,12 +439,12 @@ QLabel {
         <string notr="true">QPushButton#modifier2 {
     background-color: rgb(255, 255, 255);
 
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 
 QPushButton#modifier2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }</string>
        </property>
        <property name="text">
@@ -477,12 +477,12 @@ QPushButton#modifier2:hover {
         <string notr="true">QPushButton#modifier2 {
     background-color: rgb(255, 255, 255);
 
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 
 QPushButton#modifier2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }</string>
        </property>
        <property name="text">
@@ -553,7 +553,7 @@ QLineEdit:focus {
 QWidget {
     border: 2px solid #4e1764;  /* Set border width and color */
     padding: 10px;              /* Set padding inside the widget */
-	border-radius: 5px;
+        border-radius: 5px;
 }
 
 /* QLineEdit styling */
@@ -1007,12 +1007,12 @@ color: rgb(0, 0, 0);</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#modifier {
-	border-color: rgb(78, 23, 100);
+        border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
     border: none;
     font-size: 13.1px;
     font-weight: bold;
-	color: white;
+        color: white;
 }
 
 QPushButton#modifier:hover {
@@ -1039,12 +1039,12 @@ QPushButton#modifier:pressed {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#ajouter {
-	border-color: rgb(78, 23, 100);
+        border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
    border: none;
     font-size: 13.1px;
     font-weight: bold;
-	color: white;
+        color: white;
 }
 
 QPushButton#ajouter:hover {
@@ -1071,12 +1071,12 @@ QPushButton#ajouter:pressed {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#annuler {
-	border-color: rgb(78, 23, 100);
+        border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
     border: none;
     font-size: 13.1px;
     font-weight: bold;
-	color: white;
+        color: white;
 }
 
 QPushButton#annuler:hover {
@@ -1246,11 +1246,11 @@ QLabel {
        <property name="styleSheet">
         <string notr="true">QPushButton#pdf_2 {
     background-color: rgb(255, 255, 255);
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 QPushButton#pdf_2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }</string>
        </property>
        <property name="text">
@@ -1402,11 +1402,11 @@ QPushButton#pdf_2:hover {
    border: 2px solid #D74C4C; /* Default thicker border */
     border-radius: 5px;QPushButton#pdf_2 {
     background-color: rgb(255, 255, 255);
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 QPushButton#pdf_2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }
 }
 
@@ -1507,12 +1507,12 @@ QLineEdit:focus {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#chercher{
-	 border: 1.5px solid #9f86c0;/* Default thicker border */
+         border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
-	background-color: white;
+        background-color: white;
 }
 QPushButton#chercher:hover {
-    background-color: #be95c4; 
+    background-color: #be95c4;
 }</string>
        </property>
        <property name="text">
@@ -1540,12 +1540,12 @@ QPushButton#chercher:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#refresh{
-	 border: 1.5px solid #9f86c0;/* Default thicker border */
+         border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
-	background-color: white;
+        background-color: white;
 }
 QPushButton#refresh:hover {
-    background-color: #be95c4; 
+    background-color: #be95c4;
 }</string>
        </property>
        <property name="text">
@@ -1573,12 +1573,12 @@ QPushButton#refresh:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#triButton{
-	 border: 1.5px solid #9f86c0;/* Default thicker border */
+         border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
-	background-color: white;
+        background-color: white;
 }
 QPushButton#triButton:hover {
-    background-color: #be95c4; 
+    background-color: #be95c4;
 }</string>
        </property>
        <property name="text">
@@ -1635,12 +1635,12 @@ QPushButton#triButton:hover {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton#ajouter {
-	border-color: rgb(78, 23, 100);
+        border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
    border: none;
     font-size: 13.1px;
     font-weight: bold;
-	color: white;
+        color: white;
 }
 
 QPushButton#ajouter:hover {
@@ -1726,12 +1726,12 @@ QLineEdit:focus {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton#refresh{
-	 border: 1.5px solid #9f86c0;/* Default thicker border */
+         border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
-	background-color: white;
+        background-color: white;
 }
 QPushButton#refresh:hover {
-    background-color: #be95c4; 
+    background-color: #be95c4;
 }</string>
       </property>
       <property name="text">
@@ -2255,11 +2255,11 @@ QLineEdit:focus {
        <property name="styleSheet">
         <string notr="true">QPushButton#pdf_2 {
     background-color: rgb(255, 255, 255);
-	border: 2px solid #9f86c0 ;/* Default thicker border */
+        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
 QPushButton#pdf_2:hover {
-    background-color: #9f86c0; 
+    background-color: #9f86c0;
 }</string>
        </property>
        <property name="text">
@@ -2277,12 +2277,12 @@ QPushButton#pdf_2:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#refresh{
-	 border: 1.5px solid #9f86c0;/* Default thicker border */
+         border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
-	background-color: white;
+        background-color: white;
 }
 QPushButton#refresh:hover {
-    background-color: #be95c4; 
+    background-color: #be95c4;
 }</string>
        </property>
        <property name="text">
@@ -2354,7 +2354,7 @@ QPushButton#refresh:hover {
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton#statpb{
-    	 background-color:  #9f86c0;
+         background-color:  #9f86c0;
         color: white;
         border-radius: 12px;
         font-size: 19px;

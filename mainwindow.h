@@ -70,6 +70,7 @@ private slots:
     //void afficherConges(const QDate &date);
     void onCalendarDateClicked(const QDate &date);
     void refreshCongeTableViewOnDateClick(const QDate &date);
+    void onRowSelected();
 
 
 };

@@ -116,6 +116,8 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
         connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateClicked);
         // Connecting the calendar's clicked signal to the refresh function
         connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::refreshCongeTableViewOnDateClick);
+        connect(ui->tableWidget->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onRowSelected);
+
 
 
 }
@@ -584,67 +586,87 @@ void MainWindow::displayCongeStatistics() {
 
 void MainWindow::on_rechercherButton_clicked() {
     QString searchText = ui->id_rech->text().trimmed();
-        QString searchCriteria = ui->rechercheCb->currentText();
-        QSqlQuery query;
+    QString searchCriteria = ui->rechercheCb->currentText();
+    QSqlQuery query;
 
-        if (searchText.isEmpty()) {
-            query.prepare("SELECT * FROM ARCHITECTES");
+    if (searchText.isEmpty()) {
+        query.prepare("SELECT * FROM ARCHITECTES");
+    } else {
+        if (searchCriteria == "ID") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE ID_ARCHITECTE = :searchText");
+            query.bindValue(":searchText", searchText.toInt());
+        } else if (searchCriteria == "Nom") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(NOM) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Prénom") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(PRENOM) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Email") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(EMAIL) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Poste") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(POSTE) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Sexe") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE SEXE = :searchText");
+            query.bindValue(":searchText", searchText);
+        } else if (searchCriteria == "Date") {
+            query.prepare("SELECT * FROM ARCHITECTES WHERE DATE_EMBAUCHE LIKE :searchText");
+            query.bindValue(":searchText", "%" + searchText + "%");
         } else {
-            if (searchCriteria == "ID") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE ID_ARCHITECTE = :searchText");
-                query.bindValue(":searchText", searchText.toInt());
-            } else if (searchCriteria == "Nom") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(NOM) LIKE LOWER(:searchText)");
-                query.bindValue(":searchText", "%" + searchText + "%");
-            } else if (searchCriteria == "Prénom") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(PRENOM) LIKE LOWER(:searchText)");
-                query.bindValue(":searchText", "%" + searchText + "%");
-            } else if (searchCriteria == "Email") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(EMAIL) LIKE LOWER(:searchText)");
-                query.bindValue(":searchText", "%" + searchText + "%");
-            } else if (searchCriteria == "Poste") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE LOWER(POSTE) LIKE LOWER(:searchText)");
-                query.bindValue(":searchText", "%" + searchText + "%");
-            } else if (searchCriteria == "Sexe") {
-                query.prepare("SELECT * FROM ARCHITECTES WHERE SEXE = :searchText");
-                query.bindValue(":searchText", searchText);
-            } else if (searchCriteria == "Date") {  //  Added date search here
-                query.prepare("SELECT * FROM ARCHITECTES WHERE DATE_EMBAUCHE LIKE :searchText");
-                query.bindValue(":searchText", "%" + searchText + "%");
-            } else {
-                QMessageBox::warning(this, "Erreur", "Critère de recherche invalide.");
-                return;
-            }
-        }
-
-        if (!query.exec()) {
-            qDebug() << "Erreur requête:" << query.lastError().text();
-            QMessageBox::warning(this, "Erreur", "Erreur lors de l'exécution de la recherche.");
+            QMessageBox::warning(this, "Erreur", "Critère de recherche invalide.");
             return;
         }
-
-        ui->tableWidget->setRowCount(0);
-        ui->tableWidget->setColumnCount(8);
-        QStringList headers = {"ID", "Nom", "Prénom", "Date", "Poste", "Email", "Salaire", "Sexe"};
-        ui->tableWidget->setHorizontalHeaderLabels(headers);
-
-        int row = 0;
-        while (query.next()) {
-            ui->tableWidget->insertRow(row);
-            ui->tableWidget->setItem(row, 0, new QTableWidgetItem(query.value("ID_ARCHITECTE").toString()));
-            ui->tableWidget->setItem(row, 1, new QTableWidgetItem(query.value("NOM").toString()));
-            ui->tableWidget->setItem(row, 2, new QTableWidgetItem(query.value("PRENOM").toString()));
-            ui->tableWidget->setItem(row, 3, new QTableWidgetItem(query.value("DATE_EMBAUCHE").toString()));
-            ui->tableWidget->setItem(row, 4, new QTableWidgetItem(query.value("POSTE").toString()));
-            ui->tableWidget->setItem(row, 5, new QTableWidgetItem(query.value("EMAIL").toString()));
-            ui->tableWidget->setItem(row, 6, new QTableWidgetItem(query.value("SALAIRE").toString()));
-            ui->tableWidget->setItem(row, 7, new QTableWidgetItem(query.value("SEXE").toString()));
-            row++;
-        }
-
-        ui->tableWidget->resizeColumnsToContents();
-        qDebug() << "Recherche exécutée sur critère:" << searchCriteria << ", texte:" << searchText;
     }
+
+    if (!query.exec()) {
+        qDebug() << "Erreur requête:" << query.lastError().text();
+        QMessageBox::warning(this, "Erreur", "Erreur lors de l'exécution de la recherche.");
+        return;
+    }
+
+    ui->tableWidget->setRowCount(0);
+    ui->tableWidget->setColumnCount(8);
+    QStringList headers = {"ID", "Nom", "Prénom", "Date", "Poste", "Email", "Salaire", "Sexe"};
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+
+    int row = 0;
+    while (query.next()) {
+        ui->tableWidget->insertRow(row);
+        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(query.value("ID_ARCHITECTE").toString()));
+        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(query.value("NOM").toString()));
+        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(query.value("PRENOM").toString()));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(query.value("DATE_EMBAUCHE").toString()));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(query.value("POSTE").toString()));
+        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(query.value("EMAIL").toString()));
+        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(query.value("SALAIRE").toString()));
+        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(query.value("SEXE").toString()));
+        row++;
+    }
+
+    ui->tableWidget->resizeColumnsToContents();
+    qDebug() << "Recherche exécutée sur critère:" << searchCriteria << ", texte:" << searchText;
+
+    // Connect the selection model to handle row selection
+    connect(ui->tableWidget->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onRowSelected);
+}
+
+void MainWindow::onRowSelected() {
+    // Get the index of the selected row
+    QModelIndexList selectedIndexes = ui->tableWidget->selectionModel()->selectedRows();
+
+    if (!selectedIndexes.isEmpty()) {
+        // Get the first selected row
+        int selectedRow = selectedIndexes.first().row();
+
+        // Highlight the selected row
+        ui->tableWidget->selectRow(selectedRow);
+
+        // Optionally, you can add additional logic here to highlight or update the row's appearance
+        qDebug() << "Row " << selectedRow << " selected.";
+    }
+}
+
 
 void MainWindow::on_comboBox_tri_3_currentIndexChanged(int index) {
     const int DATE_COLUMN = 3; // Colonne de la date dans le QTableWidget
