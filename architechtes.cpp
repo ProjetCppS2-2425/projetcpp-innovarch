@@ -204,6 +204,7 @@ bool Architecte::modifier(QString nom, QString prenom, QString sexe, QString ema
 
     return true;
 }
+
 QMap<QString, int> Architecte::getCongeStats() const {
     QMap<QString, int> stats;
     QSqlQuery query;

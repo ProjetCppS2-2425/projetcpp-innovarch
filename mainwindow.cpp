@@ -70,7 +70,10 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdf_2_clicked);
     connect(ui->soumettre, &QPushButton::clicked, this, &MainWindow::on_soumettreButton_clicked);
     // Appeler la fonction pour afficher les statistiques des genres
-    displayCongeStatistics();
+    //displayCongeStatistics();
+    connect(ui->statpb, &QPushButton::clicked, this, &MainWindow::on_statConge_clicked);
+
+
     QSqlQueryModel *model = emp.afficherconge();
         ui->afficher_conge->setModel(model);
 
@@ -984,3 +987,96 @@ void MainWindow::on_refuser_clicked()
 
     }
 
+void MainWindow::on_statConge_clicked()
+{
+    QMap<QString, int> stats = architecte.getCongeStats();  // Call the method you showed earlier
+
+    // Remove entries with 0 count to avoid showing 0% slices
+    QMap<QString, int> filteredStats;
+    for (auto it = stats.constBegin(); it != stats.constEnd(); ++it) {
+        if (it.value() > 0) {
+            filteredStats.insert(it.key(), it.value());
+        }
+    }
+
+    QPieSeries* series = new QPieSeries();
+    int total = 0;
+
+    // Populate the series with accepted and refused counts
+    for (auto it = filteredStats.constBegin(); it != filteredStats.constEnd(); ++it) {
+        series->append(it.key(), it.value());
+        total += it.value();
+    }
+
+    QMap<QString, QColor> congeColors = {
+        {"accepté", QColor(0, 62, 28)},   // Green (#003E1C)
+        {"refusé", QColor(86, 9, 5)}     // Red (#560905 )
+    };
+
+    for (int i = 0; i < series->count(); ++i) {
+        QPieSlice* slice = series->slices().at(i);
+        QString label = slice->label().trimmed().toLower();
+
+        if (congeColors.contains(label)) {
+            slice->setBrush(congeColors[label]);
+        } else {
+            slice->setBrush(Qt::gray);
+            qDebug() << "Unknown congé state:" << label;
+        }
+
+        QString originalLabel = label;
+        double percentage = (slice->value() / total) * 100.0;
+        slice->setLabel(QString("%1%").arg(QString::number(percentage, 'f', 1)));
+        slice->setProperty("congeEtat", originalLabel);
+        slice->setLabelVisible(true);
+        slice->setLabelFont(QFont("Arial", 12, QFont::Bold));
+
+        connect(slice, &QPieSlice::hovered, [slice](bool state) {
+            slice->setExploded(state);
+            slice->setExplodeDistanceFactor(state ? 0.1 : 0);
+        });
+    }
+
+    QChart* chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Statistiques des Congés");
+    chart->setTitleFont(QFont("Arial", 16, QFont::Bold));
+    chart->setBackgroundBrush(QBrush(Qt::white));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QLegend* legend = chart->legend();
+    legend->setVisible(true);
+    legend->setAlignment(Qt::AlignRight);
+    legend->setFont(QFont("Arial", 12));
+
+    // Fix duplicate legend entries by setting custom labels
+    QList<QLegendMarker*> legendMarkers = legend->markers(series);
+    for (int i = 0; i < legendMarkers.size(); ++i) {
+        QLegendMarker* marker = legendMarkers.at(i);
+        QPieSlice* slice = series->slices().at(i);
+        QString congeEtat = slice->property("congeEtat").toString();
+
+        // Capitalize the first letter
+        congeEtat = congeEtat.left(1).toUpper() + congeEtat.mid(1);
+        marker->setLabel(congeEtat);
+    }
+
+    QChartView* chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setMinimumSize(550, 400);
+    chartView->setBackgroundBrush(Qt::transparent);
+
+    QWidget* containerWidget = new QWidget;
+    QVBoxLayout* layout = new QVBoxLayout(containerWidget);
+    layout->setContentsMargins(0, 37, 0, 0);
+    layout->addWidget(chartView);
+    containerWidget->setStyleSheet("background: transparent;");
+
+    QGraphicsProxyWidget* proxy = new QGraphicsProxyWidget();
+    proxy->setWidget(containerWidget);
+    QGraphicsScene* scene = new QGraphicsScene();
+    scene->setBackgroundBrush(Qt::transparent);
+    scene->addItem(proxy);
+
+    ui->pie->setScene(scene);
+}
