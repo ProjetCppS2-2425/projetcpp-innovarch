@@ -100,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     }
 
     connect(ui->id_p, &QLineEdit::returnPressed, this, &MainWindow::populateEmployeeInfo);
-    connect(ui->soumettre, &QPushButton::clicked, this, &MainWindow::on_soumettreButton_clicked);
+    //connect(ui->soumettre, &QPushButton::clicked, this, &MainWindow::on_soumettreButton_clicked);
 
     QSqlQueryModel *model = emp.afficherconge();
     ui->afficher_conge->setModel(model);
@@ -108,8 +108,8 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     ui->afficher_conge->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->afficher_conge->setSelectionMode(QAbstractItemView::SingleSelection);
     connect(ui->afficher_conge->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onSelectionChanged);
-    connect(ui->refuser_conge, &QPushButton::clicked, this, &MainWindow::on_refuser_clicked);
-    connect(ui->accepter_conge, &QPushButton::clicked, this, &MainWindow::on_acceptation_clicked);
+    //connect(ui->refuser_conge, &QPushButton::clicked, this, &MainWindow::on_refuser_clicked);
+    //connect(ui->accepter_conge, &QPushButton::clicked, this, &MainWindow::on_acceptation_clicked);
 
     connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateClicked);
     connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::refreshCongeTableViewOnDateClick);

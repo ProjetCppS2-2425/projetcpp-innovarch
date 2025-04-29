@@ -15,7 +15,7 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 String resourceName = "Waiting..."; // Default resource name
-int stock = -1;                    // Stock quantity, initialized to -1
+int stock = 10;                    // Stock quantity, initialized to -1
 int baselineDistance = 0;          // Initial distance baseline
 int lastDistance = 0;              // Last measured distance
 const int REMOVAL_THRESHOLD = 8;   // Distance change threshold (cm)
@@ -136,9 +136,15 @@ void updateDisplay(String message) {
     display.println(message);
   } else {
     display.println("Resource: " + resourceName);
-    display.println("Stock: " + String(stock));
-    if (stock < 5) {
-      display.println("LOW STOCK!");
+    if (resourceName != "Waiting...") { // Only show stock if not "Waiting..."
+      if (stock < 5) {
+        display.print("Stock: ");
+        display.println(stock);
+        display.println("LOW STOCK!");
+      } else {
+        display.print("Stock: ");
+        display.println(stock);
+      }
     }
   }
   display.display();

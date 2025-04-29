@@ -2101,7 +2101,7 @@ QLineEdit:focus {
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -3814,8 +3814,8 @@ QLineEdit:focus {
         <widget class="QPushButton" name="soumettre">
          <property name="geometry">
           <rect>
-           <x>200</x>
-           <y>380</y>
+           <x>270</x>
+           <y>370</y>
            <width>141</width>
            <height>31</height>
           </rect>
@@ -3837,8 +3837,8 @@ QPushButton#pdf_2:hover {
         <widget class="QPushButton" name="refresh_5">
          <property name="geometry">
           <rect>
-           <x>380</x>
-           <y>380</y>
+           <x>440</x>
+           <y>370</y>
            <width>41</width>
            <height>31</height>
           </rect>
@@ -3872,7 +3872,7 @@ QPushButton#refresh:hover {
           <rect>
            <x>180</x>
            <y>80</y>
-           <width>221</width>
+           <width>311</width>
            <height>151</height>
           </rect>
          </property>
@@ -3883,10 +3883,10 @@ QPushButton#refresh:hover {
         <widget class="QTableView" name="afficher_conge_3">
          <property name="geometry">
           <rect>
-           <x>170</x>
+           <x>180</x>
            <y>240</y>
-           <width>271</width>
-           <height>131</height>
+           <width>301</width>
+           <height>121</height>
           </rect>
          </property>
         </widget>
@@ -3910,7 +3910,6 @@ QPushButton#refresh:hover {
         <zorder>soumettre</zorder>
         <zorder>calendarConges</zorder>
         <zorder>afficher_conge_3</zorder>
-        <zorder>verticalSpacer</zorder>
        </widget>
        <widget class="QPushButton" name="statpb_2">
         <property name="geometry">
