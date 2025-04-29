@@ -16,19 +16,20 @@
 #include <QGraphicsProxyWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QJsonArray>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , networkManager(new QNetworkAccessManager(this)) // Initialize network manager
 {
     ui->setupUi(this);
 
-    // Check database connection
-    if (!QSqlDatabase::database().isOpen()) {
-        qDebug() << "Database connection is not open!";
-    } else {
-        qDebug() << "Database connection is open.";
-    }
+    // Ensure the correct UI elements are used
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::on_pushButton_ASK_clicked);
+    refreshTableWidget();
+    // Display stats at startup
+    displayProjectStats();
 
     // Apply custom style to the QComboBox for better readability
     ui->comboBox->setStyleSheet(
@@ -82,9 +83,185 @@ MainWindow::MainWindow(QWidget *parent)
     fillTableWidget();
 }
 
+void MainWindow::on_pushButton_ASK_clicked()
+{
+    QString userMessage = ui->lineEdit_projets->text().trimmed();
+    if (userMessage.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "Veuillez entrer une question.");
+        return;
+    }
+
+    ui->textEdit_chart->append("Vous: " + userMessage);
+    ui->lineEdit_projets->clear();
+
+    sendChatbotRequest(userMessage);
+}
+
+void MainWindow::sendChatbotRequest(const QString &userMessage)
+{
+    QString fullUrl = chatbotApiUrl + "?key=" + chatbotApiKey;
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(fullUrl));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject payload;
+    QJsonArray contents;
+    QJsonObject content;
+    QJsonArray parts;
+    QJsonObject textPart;
+
+    textPart["text"] = userMessage;
+    parts.append(textPart);
+    content["parts"] = parts;
+    contents.append(content);
+    payload["contents"] = contents;
+
+    QNetworkReply *reply = networkManager->post(request, QJsonDocument(payload).toJson());
+    connect(reply, &QNetworkReply::finished, this, &MainWindow::handleChatbotResponse);
+}
+
+void MainWindow::handleChatbotResponse()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+    if (!reply) return;
+
+    QByteArray response = reply->readAll();
+    if (reply->error() != QNetworkReply::NoError) {
+        ui->textEdit_chart->append("Erreur: " + reply->errorString());
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(response);
+    if (doc.isNull()) {
+        ui->textEdit_chart->append("Erreur: Réponse invalide.");
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonObject responseObj = doc.object();
+    if (responseObj.contains("candidates")) {
+        QJsonArray candidates = responseObj["candidates"].toArray();
+        if (!candidates.isEmpty()) {
+            QJsonObject content = candidates[0].toObject()["content"].toObject();
+            QJsonArray parts = content["parts"].toArray();
+            if (!parts.isEmpty()) {
+                QString botReply = parts[0].toObject()["text"].toString();
+                ui->textEdit_chart->append("Assistant: " + botReply);
+                reply->deleteLater();
+                return;
+            }
+        }
+    }
+
+    ui->textEdit_chart->append("Erreur: Impossible de traiter la réponse.");
+    reply->deleteLater();
+}
+
+void MainWindow::displayProjectStats()
+{
+    ProjetCRUD projetCRUD;
+    QMap<QString, int> statutCount = projetCRUD.getStatutStatistics();
+
+    // Calculate percentages
+    int total = 0;
+    for (int count : statutCount.values()) {
+        total += count;
+    }
+
+    QString statsText = "<==================== CHATBOT====================>\n";
+    for (auto it = statutCount.begin(); it != statutCount.end(); ++it) {
+        double percentage = (it.value() * 100.0) / total;
+        statsText += QString("- %1: %2% (%3 projets)\n")
+                         .arg(it.key())
+                         .arg(percentage, 0, 'f', 1)
+                         .arg(it.value());
+    }
+
+    ui->textEdit_chart->append(statsText); // Corrected to use textEdit_chart
+}
+
+// Fonction getResponse() adaptée
+QString MainWindow::getResponse(const QString &question)
+{
+    // Corrected: Ensure this function is declared in the header file
+    QString lowerQuestion = question.toLower();
+
+    if (lowerQuestion.contains("bonjour") || lowerQuestion.contains("salut")) {
+        return "Bonjour ! Je suis l'assistant de gestion de projets. Comment puis-je vous aider ?";
+    }
+    else if (lowerQuestion.contains("comment créer un projet")) {
+        return "Pour créer un projet, allez dans l'onglet 'Projets' et cliquez sur 'Ajouter'. Remplissez les champs requis (nom, type, budget, échéance).";
+    }
+    else if (lowerQuestion.contains("modifier un projet")) {
+        return "Sélectionnez le projet dans la liste, cliquez sur 'Modifier', faites vos changements et sauvegardez.";
+    }
+    else if (lowerQuestion.contains("supprimer un projet")) {
+        return "Sélectionnez le projet et cliquez sur 'Supprimer'. Attention : cette action est irréversible.";
+    }
+    else if (lowerQuestion.contains("types de projets")) {
+        return "Nous gérons différents types de projets : bureaux, résidentiel, commercial, et autres.";
+    }
+    else if (lowerQuestion.contains("statistiques") || lowerQuestion.contains("stats")) {
+        return "Cliquez sur le bouton 'Stat' pour voir la répartition des projets par type, budget et statut.";
+    }
+    else if (lowerQuestion.contains("rechercher un projet")) {
+        return "Utilisez la barre de recherche en haut de la liste des projets. Vous pouvez filtrer par ID, nom ou type.";
+    }
+    else if (lowerQuestion.contains("trier les projets")) {
+        return "Cliquez sur les en-têtes de colonne (Nom, Budget, Échéance) pour trier la liste.";
+    }
+    else if (lowerQuestion.contains("budget")) {
+        return "Le budget d'un projet peut être saisi lors de la création ou modifié ultérieurement dans les détails du projet.";
+    }
+    else if (lowerQuestion.contains("échéance")) {
+        return "L'échéance indique la date de fin prévue du projet. Vous pouvez la modifier dans les détails du projet.";
+    }
+    else if (lowerQuestion.contains("statut")) {
+        return "Les statuts possibles sont : En cours, Terminé, Commercialisé. Changez le statut dans les détails du projet.";
+    }
+    else if (lowerQuestion.contains("exporter")) {
+        return "Vous pouvez exporter la liste des projets en PDF via le bouton 'Exportation PDF'.";
+    }
+    else if (lowerQuestion.contains("client")) {
+        return "Chaque projet peut être associé à un client. Cette information est modifiable dans les détails du projet.";
+    }
+    else if (lowerQuestion.contains("architecte") || lowerQuestion.contains("contracteur")) {
+        return "Les ID d'architecte et de contracteur peuvent être associés à un projet dans ses propriétés avancées.";
+    }
+    else if (lowerQuestion.contains("pourcentage") || lowerQuestion.contains("répartition")) {
+        return "Le diagramme circulaire montre la répartition des projets par type. Cliquez sur 'Stat' pour le voir.";
+    }
+    else if (lowerQuestion.contains("ajouter") && lowerQuestion.contains("projet")) {
+        return "Remplissez le formulaire d'ajout avec : ID auto-généré, nom, type, budget, échéance et statut.";
+    }
+    else if (lowerQuestion.contains("filtre") || lowerQuestion.contains("recherche avancée")) {
+        return "Utilisez la recherche avancée pour filtrer par type, statut ou plage de budget.";
+    }
+    else if (lowerQuestion.contains("aide") || lowerQuestion.contains("documentation")) {
+        return "Consultez le menu 'Aide' pour le guide utilisateur complet ou posez-moi une question spécifique.";
+    }
+    else if (lowerQuestion.contains("merci") || lowerQuestion.contains("remercie")) {
+        return "Je vous en prie ! N'hésitez pas si vous avez d'autres questions sur la gestion des projets.";
+    }
+    else if (lowerQuestion.contains("au revoir") || lowerQuestion.contains("à plus")) {
+        return "Au revoir ! Bonne gestion de vos projets !";
+    }
+    else {
+        return "Je n'ai pas compris votre question. Voici ce que je peux faire :\n"
+               "- Aider à créer/modifier/supprimer des projets\n"
+               "- Expliquer les statistiques et rapports\n"
+               "- Donner des infos sur les budgets et échéances\n"
+               "- Aider avec les recherches et tris\n"
+               "Essayez une question plus précise !";
+    }
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete networkManager; // Clean up network manager
 }
 
 void MainWindow::fillTableWidget() {
@@ -96,24 +273,10 @@ void MainWindow::fillTableWidget() {
     QSqlQueryModel *model = currentProject.afficher();
     if (model) {
         ui->tableView->setModel(model);
-        ui->tableView->resizeColumnsToContents();
-        model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-        model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
-        model->setHeaderData(3, Qt::Horizontal, QObject::tr("Budget"));
-        model->setHeaderData(4, Qt::Horizontal, QObject::tr("Échéance"));
-        model->setHeaderData(5, Qt::Horizontal, QObject::tr("Statut"));
-
-        ui->tableView->setStyleSheet(
-            "QTableView {"
-            "    color: black;"
-            "    background-color: white;"
-            "    gridline-color: gray;"
-            "    selection-background-color: lightblue;"
-            "    selection-color: black;"
-            "    border: 1px solid #ccc;"
-            "}"
-        );
+        ui->tableView->resizeColumnsToContents(); // Adjust column widths
+        ui->tableView->horizontalHeader()->setStretchLastSection(true); // Stretch the last column
+        ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows); // Select entire rows
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers); // Disable editing
 
         qDebug() << "TableView updated successfully.";
     } else {
@@ -268,18 +431,152 @@ void MainWindow::on_searchButton_clicked() {
     }
 }
 
-void MainWindow::on_exportPDFButton_clicked() {
-    QString filePath = QFileDialog::getSaveFileName(this, "Export PDF", "", "*.pdf");
-    if (filePath.isEmpty()) {
-        QMessageBox::warning(this, "Erreur", "Veuillez sélectionner un emplacement pour enregistrer le fichier PDF.");
+void MainWindow::on_exportPDFButton_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, "Exporter la Liste des Projets en PDF", "", "*.pdf");
+    if (fileName.isEmpty())
+        return;
+
+    if (QFileInfo(fileName).suffix().isEmpty())
+        fileName.append(".pdf");
+
+    QPdfWriter pdf(fileName);
+    pdf.setResolution(300);
+    pdf.setPageMargins(QMarginsF(30, 30, 30, 30));
+
+    const int pageWidth = pdf.width();
+    const int pageHeight = pdf.height();
+
+    QPainter painter(&pdf);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    const int leftMargin = 50;
+    const int topMargin = 100;
+    const int bottomMargin = 50;
+    int currentY = topMargin;
+
+    painter.setFont(QFont("Arial", 16, QFont::Bold));
+    QRect titleRect(0, 50, pageWidth, 40);
+    painter.drawText(titleRect, Qt::AlignCenter, "Liste Détaillée des Projets");
+    currentY += 60;
+
+    QSqlQueryModel model;
+    model.setQuery("SELECT ID_PROJET, NOM_PROJET, TYPE_PROJET, BUDGET, ECHEANCE, STATUT FROM projets");
+
+    if (model.lastError().isValid()) {
+        QMessageBox::critical(this, "Erreur de base de données", "Erreur lors de la récupération des données des projets : " + model.lastError().text());
+        painter.end();
         return;
     }
 
-    if (currentProject.exporterPDF(filePath)) {
-        QMessageBox::information(this, "Succès", "PDF exporté avec succès.");
-    } else {
-        QMessageBox::warning(this, "Erreur", "Échec de l'exportation du PDF.");
+    if (model.rowCount() == 0) {
+        painter.setFont(QFont("Arial", 12));
+        painter.drawText(leftMargin, currentY, "Aucun projet à afficher.");
+        painter.end();
+        return;
     }
+
+    const int columnCount = model.columnCount();
+    const int rowCount = model.rowCount();
+    const int headerHeight = 30;
+    const int rowHeight = 25;
+    const int cellPadding = 5;
+
+    QVector<int> columnWidths(columnCount);
+    int totalWidth = 0;
+
+    painter.setFont(QFont("Arial", 8, QFont::Bold));
+    for (int col = 0; col < columnCount; ++col) {
+        QString header = model.headerData(col, Qt::Horizontal).toString();
+        columnWidths[col] = painter.fontMetrics().horizontalAdvance(header) + cellPadding * 2;
+
+        painter.setFont(QFont("Arial", 8));
+        for (int row = 0; row < rowCount; ++row) {
+            QString data = model.data(model.index(row, col)).toString();
+            columnWidths[col] = qMax(columnWidths[col], painter.fontMetrics().horizontalAdvance(data) + cellPadding * 2);
+        }
+        columnWidths[col] = qMax(columnWidths[col], 80); // Minimum width
+        totalWidth += columnWidths[col];
+    }
+
+    if (totalWidth > pageWidth - 2 * leftMargin) {
+        double ratio = (pageWidth - 2 * leftMargin) / (double)totalWidth;
+        for (int col = 0; col < columnCount; ++col) {
+            columnWidths[col] *= ratio;
+        }
+    }
+
+    int tableLeft = leftMargin; // Align left
+    currentY += 20;
+
+    // Draw Table Header
+    painter.setFont(QFont("Arial", 8, QFont::Bold));
+    painter.setPen(QPen(Qt::black, 1));
+    painter.setBrush(QBrush(QColor(220, 220, 220))); // Light Gray
+
+    int currentX = tableLeft;
+    for (int col = 0; col < columnCount; ++col) {
+        painter.drawRect(currentX, currentY, columnWidths[col], headerHeight);
+        painter.drawText(QRect(currentX + cellPadding, currentY, columnWidths[col] - 2 * cellPadding, headerHeight),
+                         Qt::AlignLeft | Qt::AlignVCenter, model.headerData(col, Qt::Horizontal).toString());
+        currentX += columnWidths[col];
+    }
+    currentY += headerHeight;
+
+    // Draw Table Data
+    painter.setFont(QFont("Arial", 8));
+    painter.setPen(QPen(Qt::black, 0.5));
+    painter.setBrush(Qt::NoBrush);
+
+    for (int row = 0; row < rowCount; ++row) {
+        currentX = tableLeft;
+        for (int col = 0; col < columnCount; ++col) {
+            painter.drawRect(currentX, currentY, columnWidths[col], rowHeight);
+            QString text = model.data(model.index(row, col)).toString();
+            if (col == 4) { // Format Date
+                QDate date = QDate::fromString(text, Qt::ISODate);
+                if (date.isValid()) {
+                    text = date.toString("dd-MM-yyyy");
+                }
+            }
+            painter.drawText(QRect(currentX + cellPadding, currentY, columnWidths[col] - 2 * cellPadding, rowHeight),
+                             Qt::AlignLeft | Qt::AlignVCenter, text);
+            currentX += columnWidths[col];
+        }
+        currentY += rowHeight;
+
+        if (currentY > pageHeight - bottomMargin - rowHeight) {
+            painter.setFont(QFont("Arial", 8));
+            painter.drawText(QRect(0, pageHeight - 30, pageWidth, 20),
+                             Qt::AlignCenter,
+                             "Date de génération : " + QDate::currentDate().toString("dd-MM-yyyy"));
+            pdf.newPage();
+            currentY = topMargin + 60 + headerHeight; // Reset Y after title and header on new page
+
+            // Redraw Header on new page
+            currentX = tableLeft;
+            painter.setFont(QFont("Arial", 8, QFont::Bold));
+            painter.setPen(QPen(Qt::black, 1));
+            painter.setBrush(QBrush(QColor(220, 220, 220)));
+            for (int col = 0; col < columnCount; ++col) {
+                painter.drawRect(currentX, currentY - headerHeight, columnWidths[col], headerHeight);
+                painter.drawText(QRect(currentX + cellPadding, currentY - headerHeight, columnWidths[col] - 2 * cellPadding, headerHeight),
+                                 Qt::AlignLeft | Qt::AlignVCenter, model.headerData(col, Qt::Horizontal).toString());
+                currentX += columnWidths[col];
+            }
+            painter.setFont(QFont("Arial", 8));
+            painter.setPen(QPen(Qt::black, 0.5));
+            painter.setBrush(Qt::NoBrush);
+        }
+    }
+
+    painter.setFont(QFont("Arial", 8));
+    painter.drawText(QRect(0, pageHeight - 30, pageWidth, 20),
+                     Qt::AlignCenter,
+                     "Date de génération : " + QDate::currentDate().toString("dd-MM-yyyy"));
+
+    painter.end();
+    QMessageBox::information(this, "Export PDF", "La liste des projets a été exportée avec succès !");
 }
 
 void MainWindow::on_importPDFButton_clicked() {

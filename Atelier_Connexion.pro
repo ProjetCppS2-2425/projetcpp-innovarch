@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
+    main.cpp \
     connection.cpp \
     mainwindow.cpp \
     projet.cpp \
@@ -38,7 +38,8 @@ HEADERS += \
     projetcrud.h
 
 FORMS += \
-    projetcrud.ui
+    mainwindow.ui \
+    mainwindow.ui  # Ensure the relative path is correct
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

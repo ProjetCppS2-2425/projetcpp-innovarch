@@ -4,6 +4,7 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QMap> // Include QMap
 
 class ProjetCRUD
 {
@@ -23,6 +24,7 @@ public:
     QSqlQueryModel *rechercherParCritere(const QString &colonne, const QString &valeur);
     bool exporterPDF(const QString &filePath);
     bool importerPDF(const QString &filePath); // Déclaration de la méthode importerPDF
+    QMap<QString, int> getStatutStatistics(); // Added placeholder for missing method
 
     // Getters et setters
     int getId() const;
