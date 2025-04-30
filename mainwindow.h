@@ -2,11 +2,13 @@
 #define MAINWINDOW_H
 
 #include "contracteur.h"
+#include "arduino.h"
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QPdfWriter>
 #include <QPainter>
 #include <QModelIndex>
+#include <QStandardItemModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -38,16 +40,27 @@ private slots:
     void on_affichertree_clicked();
     void on_tabWidget_currentChanged(int index);
     void on_contractorlisttable_clicked(const QModelIndex &index);
+    void on_assignCard_clicked();
+    void on_togglePresence_clicked();
 
 private:
     Ui::MainWindow *ui;
     Contracteur currentContracteur;
+    Arduino arduino; // Arduino instance
+    QString lastScannedCardId; // Add this to store the last scanned card ID
 
     void refreshTableWidget();
     void fillTableWidget();
     void generateStatistics();
     void exportStatisticsPDF();
     void loadContractorsToTable(QTableView *tableView);
+    void loadArchitectsToListView();
+    void updatePresenceView();
+    void assignCardToArchitect(int architectId, const QString &cardId);
+    void togglePresence(int architectId, bool isPresent);
+
+    // Add missing declarations
+    void readArduinoData();
     void loadTasksForContractor(int contractorId);
     void populateTreeView(int contractorId);
     void clearTreeView();

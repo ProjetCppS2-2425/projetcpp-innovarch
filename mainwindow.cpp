@@ -16,6 +16,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,11 +40,28 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->statbutt, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
     connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButton_clicked);
     connect(ui->contractorlisttable, &QTableView::clicked, this, &MainWindow::on_contractorlisttable_clicked);
+
+    // Populate the architects table
+    loadArchitectsToListView();
+
+    // Connect to Arduino
+    if (arduino.connect_arduino() == 0) {
+        qDebug() << "✅ Arduino connected successfully.";
+    } else {
+        qDebug() << "❌ Failed to connect to Arduino.";
+    }
+
+    // Set up a timer to continuously read from Arduino
+    QTimer *arduinoTimer = new QTimer(this);
+    connect(arduinoTimer, &QTimer::timeout, this, &MainWindow::readArduinoData);
+    arduinoTimer->start(100); // Check every 100ms
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    arduino.close_arduino(); // Ensure Arduino is disconnected on exit
 }
 
 void MainWindow::fillTableWidget() {
@@ -603,20 +621,27 @@ void MainWindow::populateTreeView(int contractorId) {
     clearTreeView();
 
     QSqlQuery query;
-    query.prepare("SELECT nom, prenom, historique, tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.prepare("SELECT nom, prenom, historique, tasks, email, telephone, adresse FROM contracteurs WHERE id_contracteur = :id");
     query.bindValue(":id", contractorId);
     if (query.exec() && query.next()) {
         QString contractorName = query.value(0).toString() + " " + query.value(1).toString();
         QString historique = query.value(2).toString();
         QString tasksJson = query.value(3).toString();
+        QString email = query.value(4).toString();
+        QString telephone = query.value(5).toString();
+        QString adresse = query.value(6).toString();
 
         QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
         QJsonArray tasksArray = doc.array();
 
         QStandardItemModel *model = new QStandardItemModel(this);
         QStandardItem *contractorItem = new QStandardItem(contractorName);
-        QStandardItem *historiqueItem = new QStandardItem("Historique: " + historique);
-        contractorItem->appendRow(historiqueItem);
+
+        // Add detailed information
+        contractorItem->appendRow(new QStandardItem("Email: " + email));
+        contractorItem->appendRow(new QStandardItem("Telephone: " + telephone));
+        contractorItem->appendRow(new QStandardItem("Adresse: " + adresse));
+        contractorItem->appendRow(new QStandardItem("Historique: " + historique));
 
         QStandardItem *tasksItem = new QStandardItem("Tasks");
         for (const QJsonValue &value : tasksArray) {
@@ -806,5 +831,183 @@ void MainWindow::on_tabWidget_currentChanged(int index) {
         loadContractorsToTable(ui->contractorlisttable);
     } else if (index == 3) { // Tree View tab
         loadContractorsToTable(ui->tableView);
+    } else if (index == 4) { // Architect tab
+        loadArchitectsToListView();
+        updatePresenceView();
+    }
+}
+
+void MainWindow::loadArchitectsToListView()
+{
+    QSqlQuery query("SELECT ID_ARCHITECTE, NOM, PRENOM FROM ARCHITECTES");
+    QStandardItemModel *model = new QStandardItemModel(this);
+
+    while (query.next()) {
+        QString architectInfo = QString("%1 - %2 %3")
+                                    .arg(query.value(0).toInt()) // ID
+                                    .arg(query.value(1).toString()) // Nom
+                                    .arg(query.value(2).toString()); // Prenom
+        QStandardItem *item = new QStandardItem(architectInfo);
+        model->appendRow(item);
+    }
+
+    ui->achitectview->setModel(model);
+}
+
+void MainWindow::readArduinoData()
+{
+    QByteArray data = arduino.read_from_arduino();
+    if (!data.isEmpty()) {
+        QString rawData = QString(data).trimmed(); // Raw data from the reader
+        qDebug() << "Raw data from RFID reader:" << rawData;
+
+        // Extract the card ID from the raw data
+        QRegularExpression regex("([0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2})");
+        QRegularExpressionMatch match = regex.match(rawData);
+
+        if (match.hasMatch()) {
+            QString cardId = match.captured(1).toUpper(); // Extracted card ID
+            qDebug() << "Card ID extracted:" << cardId;
+
+            // Query the database to find the matching poste in the architectes table
+            QSqlQuery query;
+            query.prepare("SELECT poste, nom, prenom, presence FROM architectes WHERE UPPER(TRIM(poste)) = :cardId");
+            query.bindValue(":cardId", cardId);
+
+            if (query.exec()) {
+                if (query.next()) {
+                    QString poste = query.value(0).toString().trimmed().toUpper();
+                    QString nom = query.value(1).toString();
+                    QString prenom = query.value(2).toString();
+                    QString presence = query.value(3).toString().toLower(); // Normalize presence value
+
+                    qDebug() << "Matching poste found:" << poste << "for architect:" << nom << prenom << "with presence:" << presence;
+
+                    // Toggle the presence attribute
+                    QString newPresence = (presence == "present") ? "absent" : "present";
+                    QSqlQuery updateQuery;
+                    updateQuery.prepare("UPDATE architectes SET presence = :newPresence WHERE UPPER(TRIM(poste)) = :cardId");
+                    updateQuery.bindValue(":newPresence", newPresence);
+                    updateQuery.bindValue(":cardId", cardId);
+
+                    if (updateQuery.exec()) {
+                        qDebug() << "Presence updated to:" << newPresence;
+                        updatePresenceView(); // Refresh the presence view
+                    } else {
+                        qDebug() << "Failed to update presence:" << updateQuery.lastError().text();
+                    }
+                } else {
+                    qDebug() << "No matching poste found for Card ID:" << cardId;
+                }
+            } else {
+                qDebug() << "Database query failed:" << query.lastError().text();
+            }
+        } else {
+            qDebug() << "No valid card ID found in the raw data.";
+        }
+
+        lastScannedCardId = rawData; // Store the last scanned raw data
+    }
+}
+
+void MainWindow::updatePresenceView()
+{
+    // Clear the current model to avoid stale data
+    QStandardItemModel *model = new QStandardItemModel(this);
+    ui->presenceview->setModel(model);
+
+    // Query the database for architects with "present" status
+    QSqlQuery query;
+    query.prepare("SELECT NOM, PRENOM FROM ARCHITECTES WHERE LOWER(PRESENCE) = 'present'");
+
+    if (!query.exec()) {
+        qDebug() << "Failed to fetch presence data:" << query.lastError().text();
+        return;
+    }
+
+    // Populate the model with the results
+    while (query.next()) {
+        QString presentArchitect = QString("%1 %2")
+                                       .arg(query.value(0).toString()) // NOM
+                                       .arg(query.value(1).toString()); // PRENOM
+        QStandardItem *item = new QStandardItem(presentArchitect);
+        model->appendRow(item);
+    }
+
+    // Set the updated model to the presenceview widget
+    ui->presenceview->setModel(model);
+
+    // Debug log to confirm the number of entries
+    qDebug() << "Presence view updated with" << model->rowCount() << "entries.";
+}
+
+void MainWindow::on_assignCard_clicked()
+{
+    QModelIndex index = ui->achitectview->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select an architect.");
+        return;
+    }
+
+    QString selectedArchitect = index.data().toString();
+    int architectId = selectedArchitect.split(" - ").first().toInt();
+
+    QString cardId = arduino.read_from_arduino().trimmed(); // Read RFID card ID
+    if (cardId.isEmpty()) {
+        QMessageBox::warning(this, "RFID Error", "No card detected.");
+        return;
+    }
+
+    // Assign the card ID to the selected architect
+    QSqlQuery query;
+    query.prepare("UPDATE ARCHITECTES SET RFID_CARD = :cardId WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":cardId", cardId);
+    query.bindValue(":id", architectId);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Success", QString("Card ID '%1' assigned to Architect ID %2.").arg(cardId).arg(architectId));
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to assign card.");
+    }
+}
+
+void MainWindow::togglePresence(int architectId, bool isPresent)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE ARCHITECTES SET PRESENCE = :presence WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":presence", isPresent ? "Yes" : "No");
+    query.bindValue(":id", architectId);
+
+    if (query.exec()) {
+        if (isPresent) {
+            arduino.write_to_arduino("OPEN_DOOR"); // Send command to open the door
+        }
+        updatePresenceView();
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to update presence.");
+    }
+}
+
+void MainWindow::on_togglePresence_clicked()
+{
+    QModelIndex index = ui->achitectview->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select an architect.");
+        return;
+    }
+
+    QString selectedArchitect = index.data().toString();
+    int architectId = selectedArchitect.split(" - ").first().toInt();
+
+    QSqlQuery query;
+    query.prepare("SELECT PRESENCE FROM ARCHITECTES WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":id", architectId);
+
+    if (query.exec() && query.next()) {
+        QString currentPresence = query.value(0).toString();
+        bool isPresent = (currentPresence == "present");
+        togglePresence(architectId, !isPresent);
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to toggle presence.");
     }
 }

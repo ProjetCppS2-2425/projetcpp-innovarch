@@ -106,6 +106,11 @@ public:
     QLineEdit *tasktext;
     QPushButton *testaffichertodo;
     QTableView *contractorlisttable;
+    QWidget *architect;
+    QWidget *widget_3;
+    QListView *achitectview;
+    QListView *presenceview;
+    QPushButton *assigncard;
     QWidget *tab_7;
     QGraphicsView *pie_2;
     QFrame *line_2;
@@ -1050,6 +1055,27 @@ public:
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
         tabWidget->addTab(todolist, QString());
+        architect = new QWidget();
+        architect->setObjectName("architect");
+        widget_3 = new QWidget(architect);
+        widget_3->setObjectName("widget_3");
+        widget_3->setGeometry(QRect(10, -10, 791, 551));
+        achitectview = new QListView(widget_3);
+        achitectview->setObjectName("achitectview");
+        achitectview->setGeometry(QRect(30, 30, 281, 241));
+        achitectview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
+        presenceview = new QListView(widget_3);
+        presenceview->setObjectName("presenceview");
+        presenceview->setGeometry(QRect(340, 30, 281, 241));
+        presenceview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"font: 9pt \"Segoe UI\";\n"
+"color: rgb(0, 0, 0);"));
+        assigncard = new QPushButton(widget_3);
+        assigncard->setObjectName("assigncard");
+        assigncard->setGeometry(QRect(80, 310, 83, 29));
+        tabWidget->addTab(architect, QString());
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
@@ -1083,7 +1109,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1501, 21));
+        menubar->setGeometry(QRect(0, 0, 1501, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -1093,7 +1119,7 @@ public:
         QObject::connect(tabWidget, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
 
         aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1174,6 +1200,8 @@ public:
         rmtask->setText(QCoreApplication::translate("MainWindow", "remove task", nullptr));
         testaffichertodo->setText(QCoreApplication::translate("MainWindow", "Testafficher", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(todolist), QCoreApplication::translate("MainWindow", "To Do List", nullptr));
+        assigncard->setText(QCoreApplication::translate("MainWindow", "As", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(architect), QCoreApplication::translate("MainWindow", "Entr\303\251e", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));
