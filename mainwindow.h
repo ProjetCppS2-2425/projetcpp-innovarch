@@ -42,6 +42,7 @@ private slots:
     void on_contractorlisttable_clicked(const QModelIndex &index);
     void on_assignCard_clicked();
     void on_togglePresence_clicked();
+    void on_pushButton_6_clicked(); // Slot for the "Contracteurs" button
 
 private:
     Ui::MainWindow *ui;

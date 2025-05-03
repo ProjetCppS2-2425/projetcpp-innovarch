@@ -104,13 +104,16 @@ public:
     QPushButton *completedtask;
     QPushButton *rmtask;
     QLineEdit *tasktext;
-    QPushButton *testaffichertodo;
     QTableView *contractorlisttable;
+    QLabel *label_161;
+    QLabel *label_162;
+    QLabel *label_164;
     QWidget *architect;
     QWidget *widget_3;
     QListView *achitectview;
     QListView *presenceview;
-    QPushButton *assigncard;
+    QLabel *label_160;
+    QLabel *label_163;
     QWidget *tab_7;
     QGraphicsView *pie_2;
     QFrame *line_2;
@@ -460,7 +463,6 @@ public:
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
-        comboBox->addItem(QString());
         comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(10, 190, 141, 32));
         comboBox->setStyleSheet(QString::fromUtf8("\n"
@@ -768,7 +770,7 @@ public:
         comboBox_tri_2->addItem(QString());
         comboBox_tri_2->addItem(QString());
         comboBox_tri_2->setObjectName("comboBox_tri_2");
-        comboBox_tri_2->setGeometry(QRect(540, 20, 141, 28));
+        comboBox_tri_2->setGeometry(QRect(540, 22, 141, 28));
         comboBox_tri_2->setAutoFillBackground(false);
         comboBox_tri_2->setStyleSheet(QString::fromUtf8("\n"
 "\n"
@@ -964,7 +966,6 @@ public:
 ""));
         comboBox_stat_3 = new QComboBox(widget_8);
         comboBox_stat_3->addItem(QString());
-        comboBox_stat_3->addItem(QString());
         comboBox_stat_3->setObjectName("comboBox_stat_3");
         comboBox_stat_3->setGeometry(QRect(200, 20, 141, 28));
         comboBox_stat_3->setAutoFillBackground(false);
@@ -1003,6 +1004,11 @@ public:
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
+        comboBox_stat_3->raise();
+        label_159->raise();
+        graphicsView->raise();
+        statbutt->raise();
+        pdf_3->raise();
         tabWidget->addTab(statistics, QString());
         calendrier = new QWidget();
         calendrier->setObjectName("calendrier");
@@ -1017,7 +1023,12 @@ public:
 "color: rgb(0, 0, 0);"));
         affichertree = new QPushButton(widget);
         affichertree->setObjectName("affichertree");
-        affichertree->setGeometry(QRect(180, 460, 83, 29));
+        affichertree->setGeometry(QRect(160, 460, 83, 29));
+        affichertree->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}"));
         treeView = new QTreeView(widget);
         treeView->setObjectName("treeView");
         treeView->setGeometry(QRect(70, 60, 256, 361));
@@ -1029,31 +1040,57 @@ public:
         widget_2->setGeometry(QRect(-11, -21, 791, 551));
         taskslist = new QListView(widget_2);
         taskslist->setObjectName("taskslist");
-        taskslist->setGeometry(QRect(60, 40, 256, 271));
+        taskslist->setGeometry(QRect(60, 90, 256, 271));
         taskslist->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
         addtask = new QPushButton(widget_2);
         addtask->setObjectName("addtask");
-        addtask->setGeometry(QRect(40, 400, 83, 29));
+        addtask->setGeometry(QRect(60, 450, 111, 29));
+        addtask->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"}"));
         completedtask = new QPushButton(widget_2);
         completedtask->setObjectName("completedtask");
-        completedtask->setGeometry(QRect(170, 400, 121, 29));
+        completedtask->setGeometry(QRect(180, 450, 141, 29));
         rmtask = new QPushButton(widget_2);
         rmtask->setObjectName("rmtask");
-        rmtask->setGeometry(QRect(320, 400, 83, 29));
+        rmtask->setGeometry(QRect(330, 450, 151, 29));
         tasktext = new QLineEdit(widget_2);
         tasktext->setObjectName("tasktext");
-        tasktext->setGeometry(QRect(110, 330, 113, 28));
-        testaffichertodo = new QPushButton(widget_2);
-        testaffichertodo->setObjectName("testaffichertodo");
-        testaffichertodo->setGeometry(QRect(540, 310, 83, 29));
+        tasktext->setGeometry(QRect(60, 380, 161, 28));
+        tasktext->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #4e1764;  /* Default thicker border */\n"
+"    border-radius: 5px;\n"
+"    background-color: white;  /* Ensure background stays white */\n"
+"    padding: 4px;  /* Adjust padding for better spacing */\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border: 3px solid #9f86c0;  /* Highlight border when focused */\n"
+"    background-color: white;  /* Keep background white */\n"
+"}\n"
+""));
         contractorlisttable = new QTableView(widget_2);
         contractorlisttable->setObjectName("contractorlisttable");
-        contractorlisttable->setGeometry(QRect(405, 30, 271, 271));
+        contractorlisttable->setGeometry(QRect(390, 90, 271, 271));
         contractorlisttable->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
+        label_161 = new QLabel(todolist);
+        label_161->setObjectName("label_161");
+        label_161->setGeometry(QRect(380, 30, 191, 31));
+        label_161->setFont(font3);
+        label_162 = new QLabel(todolist);
+        label_162->setObjectName("label_162");
+        label_162->setGeometry(QRect(50, 30, 191, 31));
+        label_162->setFont(font3);
+        label_164 = new QLabel(todolist);
+        label_164->setObjectName("label_164");
+        label_164->setGeometry(QRect(220, 357, 191, 31));
+        label_164->setFont(font3);
         tabWidget->addTab(todolist, QString());
         architect = new QWidget();
         architect->setObjectName("architect");
@@ -1062,19 +1099,24 @@ public:
         widget_3->setGeometry(QRect(10, -10, 791, 551));
         achitectview = new QListView(widget_3);
         achitectview->setObjectName("achitectview");
-        achitectview->setGeometry(QRect(30, 30, 281, 241));
+        achitectview->setGeometry(QRect(30, 70, 281, 431));
         achitectview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
         presenceview = new QListView(widget_3);
         presenceview->setObjectName("presenceview");
-        presenceview->setGeometry(QRect(340, 30, 281, 241));
+        presenceview->setGeometry(QRect(340, 70, 281, 431));
         presenceview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        assigncard = new QPushButton(widget_3);
-        assigncard->setObjectName("assigncard");
-        assigncard->setGeometry(QRect(80, 310, 83, 29));
+        label_160 = new QLabel(widget_3);
+        label_160->setObjectName("label_160");
+        label_160->setGeometry(QRect(30, 30, 191, 31));
+        label_160->setFont(font3);
+        label_163 = new QLabel(widget_3);
+        label_163->setObjectName("label_163");
+        label_163->setGeometry(QRect(340, 30, 231, 31));
+        label_163->setFont(font3);
         tabWidget->addTab(architect, QString());
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
@@ -1119,7 +1161,7 @@ public:
         QObject::connect(tabWidget, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
 
         aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1147,14 +1189,13 @@ public:
         label_149->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nom contracteur :</span></p></body></html>", nullptr));
         label_150->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Domaine :</span></p></body></html>", nullptr));
         label_154->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nombre des projets realis\303\251es :</span></p></body></html>", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Cat\303\251gorie", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
-        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
-        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
-        comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
-        comboBox->setItemText(6, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
-        comboBox->setItemText(7, QCoreApplication::translate("MainWindow", "Outils", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
+        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
+        comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
+        comboBox->setItemText(6, QCoreApplication::translate("MainWindow", "Outils", nullptr));
 
         comboBox->setPlaceholderText(QCoreApplication::translate("MainWindow", "Domaine", nullptr));
         label_155->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700;\">Num\303\251ro de telephone :</span></p></body></html>", nullptr));
@@ -1187,21 +1228,26 @@ public:
 
         tabWidget->setTabText(tabWidget->indexOf(recherche), QCoreApplication::translate("MainWindow", "Recherche Et Tri", nullptr));
         comboBox_stat_3->setItemText(0, QCoreApplication::translate("MainWindow", "Type des projets", nullptr));
-        comboBox_stat_3->setItemText(1, QCoreApplication::translate("MainWindow", "Nombre des projets r\303\251alis\303\251es", nullptr));
 
         label_159->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Statistique bas\303\251e sur :</span></p></body></html>", nullptr));
         pdf_3->setText(QCoreApplication::translate("MainWindow", "exportation pdf", nullptr));
         statbutt->setText(QCoreApplication::translate("MainWindow", "Generer Statistiques", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(statistics), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
         affichertree->setText(QCoreApplication::translate("MainWindow", "Afficher", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(calendrier), QCoreApplication::translate("MainWindow", "Calendrier", nullptr));
-        addtask->setText(QCoreApplication::translate("MainWindow", "Add task", nullptr));
-        completedtask->setText(QCoreApplication::translate("MainWindow", "Mark as completed", nullptr));
-        rmtask->setText(QCoreApplication::translate("MainWindow", "remove task", nullptr));
-        testaffichertodo->setText(QCoreApplication::translate("MainWindow", "Testafficher", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(calendrier), QCoreApplication::translate("MainWindow", "Informations", nullptr));
+        addtask->setText(QCoreApplication::translate("MainWindow", "Ajout de tache", nullptr));
+        completedtask->setText(QCoreApplication::translate("MainWindow", "Marquer comme fait", nullptr));
+        rmtask->setText(QCoreApplication::translate("MainWindow", "Suppression de tache", nullptr));
+        tasktext->setInputMask(QString());
+        tasktext->setText(QString());
+        tasktext->setPlaceholderText(QCoreApplication::translate("MainWindow", "Tache", nullptr));
+        label_161->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des contracteurs :</span></p></body></html>", nullptr));
+        label_162->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Taches \303\240 faire :</span></p></body></html>", nullptr));
+        label_164->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Tache \303\240 ajouter</span></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(todolist), QCoreApplication::translate("MainWindow", "To Do List", nullptr));
-        assigncard->setText(QCoreApplication::translate("MainWindow", "As", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(architect), QCoreApplication::translate("MainWindow", "Entr\303\251e", nullptr));
+        label_160->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des architects :</span></p></body></html>", nullptr));
+        label_163->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des architects presents :</span></p></body></html>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(architect), QCoreApplication::translate("MainWindow", "Pr\303\251sence", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));

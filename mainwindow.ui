@@ -621,11 +621,6 @@ QLineEdit:focus {
               </property>
               <item>
                <property name="text">
-                <string>Catégorie</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
                 <string>Eclairage</string>
                </property>
               </item>
@@ -1009,7 +1004,7 @@ QLabel {
 color: rgb(0, 0, 0);</string>
              </property>
              <property name="currentIndex">
-              <number>4</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="recherche">
               <attribute name="title">
@@ -1128,7 +1123,7 @@ QLabel {
                 <property name="geometry">
                  <rect>
                   <x>540</x>
-                  <y>20</y>
+                  <y>22</y>
                   <width>141</width>
                   <height>28</height>
                  </rect>
@@ -1499,11 +1494,6 @@ color: rgb(0, 0, 0);
                   <string>Type des projets</string>
                  </property>
                 </item>
-                <item>
-                 <property name="text">
-                  <string>Nombre des projets réalisées</string>
-                 </property>
-                </item>
                </widget>
                <widget class="QLabel" name="label_159">
                 <property name="geometry">
@@ -1574,11 +1564,16 @@ color: rgb(0, 0, 0);
                  <string>Generer Statistiques</string>
                 </property>
                </widget>
+               <zorder>comboBox_stat_3</zorder>
+               <zorder>label_159</zorder>
+               <zorder>graphicsView</zorder>
+               <zorder>statbutt</zorder>
+               <zorder>pdf_3</zorder>
               </widget>
              </widget>
              <widget class="QWidget" name="calendrier">
               <attribute name="title">
-               <string>Calendrier</string>
+               <string>Informations</string>
               </attribute>
               <widget class="QWidget" name="widget" native="true">
                <property name="geometry">
@@ -1607,11 +1602,18 @@ color: rgb(0, 0, 0);</string>
                <widget class="QPushButton" name="affichertree">
                 <property name="geometry">
                  <rect>
-                  <x>180</x>
+                  <x>160</x>
                   <y>460</y>
                   <width>83</width>
                   <height>29</height>
                  </rect>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton#pdf_2 {
+    background-color: rgb(255, 255, 255);
+	border: 2px solid #9f86c0 ;/* Default thicker border */
+    border-radius: 5px;
+}</string>
                 </property>
                 <property name="text">
                  <string>Afficher</string>
@@ -1646,7 +1648,7 @@ color: rgb(0, 0, 0);</string>
                 <property name="geometry">
                  <rect>
                   <x>60</x>
-                  <y>40</y>
+                  <y>90</y>
                   <width>256</width>
                   <height>271</height>
                  </rect>
@@ -1660,70 +1662,87 @@ color: rgb(0, 0, 0);</string>
                <widget class="QPushButton" name="addtask">
                 <property name="geometry">
                  <rect>
-                  <x>40</x>
-                  <y>400</y>
-                  <width>83</width>
+                  <x>60</x>
+                  <y>450</y>
+                  <width>111</width>
                   <height>29</height>
                  </rect>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton#pdf_2 {
+    background-color: rgb(255, 255, 255);
+	border: 2px solid #9f86c0 ;/* Default thicker border */
+    border-radius: 5px;
+}</string>
+                </property>
                 <property name="text">
-                 <string>Add task</string>
+                 <string>Ajout de tache</string>
                 </property>
                </widget>
                <widget class="QPushButton" name="completedtask">
                 <property name="geometry">
                  <rect>
-                  <x>170</x>
-                  <y>400</y>
-                  <width>121</width>
+                  <x>180</x>
+                  <y>450</y>
+                  <width>141</width>
                   <height>29</height>
                  </rect>
                 </property>
                 <property name="text">
-                 <string>Mark as completed</string>
+                 <string>Marquer comme fait</string>
                 </property>
                </widget>
                <widget class="QPushButton" name="rmtask">
                 <property name="geometry">
                  <rect>
-                  <x>320</x>
-                  <y>400</y>
-                  <width>83</width>
+                  <x>330</x>
+                  <y>450</y>
+                  <width>151</width>
                   <height>29</height>
                  </rect>
                 </property>
                 <property name="text">
-                 <string>remove task</string>
+                 <string>Suppression de tache</string>
                 </property>
                </widget>
                <widget class="QLineEdit" name="tasktext">
                 <property name="geometry">
                  <rect>
-                  <x>110</x>
-                  <y>330</y>
-                  <width>113</width>
+                  <x>60</x>
+                  <y>380</y>
+                  <width>161</width>
                   <height>28</height>
                  </rect>
                 </property>
-               </widget>
-               <widget class="QPushButton" name="testaffichertodo">
-                <property name="geometry">
-                 <rect>
-                  <x>540</x>
-                  <y>310</y>
-                  <width>83</width>
-                  <height>29</height>
-                 </rect>
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit {
+    border: 2px solid #4e1764;  /* Default thicker border */
+    border-radius: 5px;
+    background-color: white;  /* Ensure background stays white */
+    padding: 4px;  /* Adjust padding for better spacing */
+}
+
+QLineEdit:focus {
+    border: 3px solid #9f86c0;  /* Highlight border when focused */
+    background-color: white;  /* Keep background white */
+}
+</string>
+                </property>
+                <property name="inputMask">
+                 <string/>
                 </property>
                 <property name="text">
-                 <string>Testafficher</string>
+                 <string/>
+                </property>
+                <property name="placeholderText">
+                 <string>Tache</string>
                 </property>
                </widget>
                <widget class="QTableView" name="contractorlisttable">
                 <property name="geometry">
                  <rect>
-                  <x>405</x>
-                  <y>30</y>
+                  <x>390</x>
+                  <y>90</y>
                   <width>271</width>
                   <height>271</height>
                  </rect>
@@ -1735,10 +1754,64 @@ color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
               </widget>
+              <widget class="QLabel" name="label_161">
+               <property name="geometry">
+                <rect>
+                 <x>380</x>
+                 <y>30</y>
+                 <width>191</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Liste des contracteurs :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+              <widget class="QLabel" name="label_162">
+               <property name="geometry">
+                <rect>
+                 <x>50</x>
+                 <y>30</y>
+                 <width>191</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Taches à faire :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+              <widget class="QLabel" name="label_164">
+               <property name="geometry">
+                <rect>
+                 <x>220</x>
+                 <y>357</y>
+                 <width>191</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Roboto</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Tache à ajouter&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
              </widget>
              <widget class="QWidget" name="architect">
               <attribute name="title">
-               <string>Entrée</string>
+               <string>Présence</string>
               </attribute>
               <widget class="QWidget" name="widget_3" native="true">
                <property name="geometry">
@@ -1753,9 +1826,9 @@ color: rgb(0, 0, 0);</string>
                 <property name="geometry">
                  <rect>
                   <x>30</x>
-                  <y>30</y>
+                  <y>70</y>
                   <width>281</width>
-                  <height>241</height>
+                  <height>431</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -1768,9 +1841,9 @@ color: rgb(0, 0, 0);</string>
                 <property name="geometry">
                  <rect>
                   <x>340</x>
-                  <y>30</y>
+                  <y>70</y>
                   <width>281</width>
-                  <height>241</height>
+                  <height>431</height>
                  </rect>
                 </property>
                 <property name="styleSheet">
@@ -1779,17 +1852,40 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="assigncard">
+               <widget class="QLabel" name="label_160">
                 <property name="geometry">
                  <rect>
-                  <x>80</x>
-                  <y>310</y>
-                  <width>83</width>
-                  <height>29</height>
+                  <x>30</x>
+                  <y>30</y>
+                  <width>191</width>
+                  <height>31</height>
                  </rect>
                 </property>
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                 </font>
+                </property>
                 <property name="text">
-                 <string>As</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Liste des architects :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+               <widget class="QLabel" name="label_163">
+                <property name="geometry">
+                 <rect>
+                  <x>340</x>
+                  <y>30</y>
+                  <width>231</width>
+                  <height>31</height>
+                 </rect>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Roboto</family>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Liste des architects presents :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </widget>

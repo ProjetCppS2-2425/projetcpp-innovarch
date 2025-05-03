@@ -41,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButton_clicked);
     connect(ui->contractorlisttable, &QTableView::clicked, this, &MainWindow::on_contractorlisttable_clicked);
 
+    // Connect the "Contracteurs" button to its slot
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::on_pushButton_6_clicked);
+
     // Populate the architects table
     loadArchitectsToListView();
 
@@ -268,6 +271,9 @@ void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
     ui->lineEdit_5->setText(model->data(model->index(row, 5)).toString()); // Email
     ui->comboBox->setCurrentText(model->data(model->index(row, 6)).toString()); // Domaine
 
+    // Load Historique into the spinBox
+    ui->spinBox->setValue(model->data(model->index(row, 8)).toInt()); // Historique
+
     // Highlight the selected row in black
     for (int i = 0; i < model->rowCount(); ++i) {
         for (int j = 0; j < model->columnCount(); ++j) {
@@ -289,13 +295,15 @@ void MainWindow::refreshTableWidget() {
 }
 
 void MainWindow::on_annulerButton_clicked() {
+    // Clear all input fields
     ui->lineEdit_2->clear();
     ui->lineEdit_13->clear();
     ui->lineEdit_3->clear();
     ui->lineEdit_7->clear();
     ui->lineEdit_4->clear();
     ui->lineEdit_5->clear();
-    ui->comboBox->setCurrentIndex(0);
+    ui->comboBox->setCurrentIndex(0); // Reset Domaine
+    ui->spinBox->setValue(0);         // Reset Historique
 }
 
 void MainWindow::on_comboBox_tri_2_currentIndexChanged(int index) {
@@ -1010,4 +1018,9 @@ void MainWindow::on_togglePresence_clicked()
     } else {
         QMessageBox::warning(this, "Error", "Failed to toggle presence.");
     }
+}
+
+void MainWindow::on_pushButton_6_clicked() {
+    // Assuming your work is in the "Contracteurs" tab (index 4 in the QTabWidget)
+    ui->tabWidget->setCurrentIndex(4);
 }
