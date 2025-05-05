@@ -68,13 +68,13 @@ QLineEdit:focus {
 </string>
    </property>
    <property name="echoMode">
-    <enum>QLineEdit::Normal</enum>
+    <enum>QLineEdit::EchoMode::Normal</enum>
    </property>
    <property name="placeholderText">
     <string>password</string>
    </property>
    <property name="cursorMoveStyle">
-    <enum>Qt::LogicalMoveStyle</enum>
+    <enum>Qt::CursorMoveStyle::LogicalMoveStyle</enum>
    </property>
   </widget>
   <widget class="QPushButton" name="loginbutton">
@@ -118,7 +118,7 @@ QPushButton:pressed {
      <x>360</x>
      <y>50</y>
      <width>661</width>
-     <height>181</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="font">

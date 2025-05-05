@@ -93,7 +93,6 @@ private slots:
     void on_triCb_2_currentIndexChanged(int index);
 
     void on_triButton_2_clicked();
-    void on_tableWidget_itemClicked(QTableWidgetItem *item);
     void on_tableWidget_sortIndicatorChanged(int logicalIndex, Qt::SortOrder order);
     void on_soumettreButton_clicked();
     void onSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
@@ -133,6 +132,7 @@ private slots:
     void on_refresh_5_clicked();
     void on_chercher_2_clicked();
     void on_refresh_3_clicked();
+    void handleEmployeeCellClicked(int row, int column);
 };
 
 #endif // MAINWINDOW_H

@@ -31,6 +31,7 @@
 #include <QStandardItemModel>
 #include <QGroupBox>
 #include <QDesktopServices>
+#include <QTableWidget>
 
 // SQL
 #include <QSqlError>
@@ -75,11 +76,13 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     fillTab();
     populateLowStockTable();
     ui->triButton->setIcon(QIcon(":/ressources/images/ascending.png"));
+    ui->triButton_2->setIcon(QIcon(":/ressources/images/ascending.png"));
     connect(ui->tableView, &QTableView::clicked, this, &MainWindow::handleIconClick);
+
 
     // ----- EMPLOYEE/ROLE UI Initialization -----
     fillTableWidget();
-    connect(ui->tableWidget, &QTableWidget::itemClicked, this, &MainWindow::on_tableWidget_itemClicked);
+    connect(ui->tableWidget, &QTableWidget::cellClicked, this, &MainWindow::handleEmployeeCellClicked);
 
     // ----- BUTTON CONNECTIONS (Avoid duplicates if same name) -----
     connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_annuler_clicked);  // Use correct annuler handler
@@ -119,11 +122,10 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     // Login buttons
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-    connect(ui->pushButton_cl, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+    //connect(ui->pushButton_cl, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
     connect(ui->pushButton_ct, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
     connect(ui->pushButton_contrats, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
     connect(ui->pushButton_proj, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-    //connect(ui->pushButton_r, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
 }
 
 
@@ -217,7 +219,7 @@ void MainWindow::on_modifier_clicked()
         QMessageBox::warning(this, "Erreur", "Veuillez sélectionner une catégorie !");
         return;
     }
-    if (fournisseur <= 0 || QString::number(fournisseur).length() != 8) { // Corrected from 😎 to 8
+    if (fournisseur <= 0 || QString::number(fournisseur).length() != 8) {
         QMessageBox::warning(this, "Erreur", "Le fournisseur doit être un numéro valide à 8 chiffres !");
         return;
     }
@@ -975,11 +977,12 @@ void MainWindow::fillTableWidget() {
     // Clear the existing table content
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
-    ui->tableWidget->setColumnCount(8); // 8 columns
+    ui->tableWidget->setColumnCount(10); // 8 columns
 
     // Set column headers
-    ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nom", "Prenom", "Date", "Poste", "Email", "Salaire", "Sexe"});
-
+    ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nom", "Prenom", "Date", "Poste", "Email", "Salaire", "Sexe","Modifier", "Supprimer"});
+    QIcon modifyIcon(":/ressources/images/pen.png");     // Use resource path or absolute path
+    QIcon deleteIcon(":/ressources/images/bin.png");
     for (int row = 0; row < model->rowCount(); ++row) {
         ui->tableWidget->insertRow(row);
 
@@ -1010,7 +1013,17 @@ void MainWindow::fillTableWidget() {
 
         // Sexe
         QTableWidgetItem *sexeItem = new QTableWidgetItem(model->data(model->index(row, 5)).toString());
+        //modify button
+        QTableWidgetItem *modifyItem = new QTableWidgetItem();
+        modifyItem->setIcon(modifyIcon);
+        modifyItem->setData(Qt::UserRole, model->data(model->index(row, 0)).toString()); // Store ID
+        modifyItem->setFlags(Qt::ItemIsEnabled); // Non-editable but clickable
 
+        // Delete button
+        QTableWidgetItem *deleteItem = new QTableWidgetItem();
+        deleteItem->setIcon(deleteIcon);
+        deleteItem->setData(Qt::UserRole, model->data(model->index(row, 0)).toString()); // Store ID
+        deleteItem->setFlags(Qt::ItemIsEnabled);
         // Insert all items into the table
         ui->tableWidget->setItem(row, 0, idItem);
         ui->tableWidget->setItem(row, 1, nomItem);
@@ -1020,6 +1033,9 @@ void MainWindow::fillTableWidget() {
         ui->tableWidget->setItem(row, 5, emailItem);
         ui->tableWidget->setItem(row, 6, salaireItem);
         ui->tableWidget->setItem(row, 7, sexeItem);
+        ui->tableWidget->setItem(row, 8, modifyItem);
+        ui->tableWidget->setItem(row, 9, deleteItem);
+
     }
 
     // Enable sorting by clicking headers
@@ -1027,6 +1043,45 @@ void MainWindow::fillTableWidget() {
     ui->tableWidget->resizeColumnsToContents();
 }
 
+void MainWindow::handleEmployeeCellClicked(int row, int column)
+{
+    if (column == 8) { // Pen (modify)
+        QString id = ui->tableWidget->item(row, 0)->text();
+        QString nom = ui->tableWidget->item(row, 1)->text();
+        QString prenom = ui->tableWidget->item(row, 2)->text();
+        QDate date_emboche = QDate::fromString(ui->tableWidget->item(row, 3)->text(), "yyyy-MM-dd");
+        QString poste = ui->tableWidget->item(row, 4)->text();
+        QString email = ui->tableWidget->item(row, 5)->text();
+        float salaire = ui->tableWidget->item(row, 6)->data(Qt::UserRole).toFloat();
+        QString sexe = ui->tableWidget->item(row, 7)->text();
+
+        // Prefill UI fields
+        ui->id_rech->setText(id);
+        ui->nom->setText(nom);
+        ui->prenom->setText(prenom);
+        ui->email->setText(email);
+        ui->salaire->setText(QString::number(salaire, 'f', 2));
+        ui->date_emboche->setDate(date_emboche);
+
+        if (sexe == "M") ui->homme->setChecked(true);
+        else if (sexe == "F") ui->femme_2->setChecked(true);
+        else { ui->homme->setChecked(false); ui->femme_2->setChecked(false); }
+
+        // Match poste in combo box
+        int index = ui->poste->findText(poste);
+        if (index != -1) ui->poste->setCurrentIndex(index);
+
+    } else if (column == 9) { // Bin (delete)
+        QString id = ui->tableWidget->item(row, 0)->text();
+        bool deleted = emp.supprimer(id);
+        if (deleted) {
+            QMessageBox::information(this, "Suppression", "Employé supprimé avec succès.");
+            fillTableWidget();
+        } else {
+            QMessageBox::warning(this, "Erreur", "Échec de la suppression.");
+        }
+    }
+}
 
 
 void MainWindow::on_refreshButton_clicked()
@@ -1179,56 +1234,7 @@ void MainWindow::on_modifyEmployeeButton_clicked()
         QMessageBox::information(this, "Failure", "L'ID pour modifier n'existe pas.");
     }
 }
-void MainWindow::on_tableWidget_itemClicked(QTableWidgetItem *item)
-{
-    // Get the row index of the clicked item
-    int row = item->row();
 
-    // Retrieve the data from the clicked row for each column
-    QString id = ui->tableWidget->item(row, 0)->text();  // "ID" is in the first column
-    QString nom = ui->tableWidget->item(row, 1)->text();  // "Nom" is in the second column
-    QString prenom = ui->tableWidget->item(row, 2)->text();  // "Prenom" is in the third column
-    QDate date = QDate::fromString(ui->tableWidget->item(row, 3)->text(), "yyyy-MM-dd");  // "Date" is in the fourth column
-    QString poste = ui->tableWidget->item(row, 4)->text();  // "Poste" is in the fifth column
-    QString email = ui->tableWidget->item(row, 5)->text();  // "Email" is in the sixth column
-    QString sexe = ui->tableWidget->item(row, 7)->text();  // "Sexe" is in the seventh column
-    QString salaireText = ui->tableWidget->item(row, 6)->text();  // "Salaire" is in the eighth column
-
-    // Debug: Print the value of salaireText to verify the raw string value
-    qDebug() << "Salaire Text: " << salaireText;
-
-    // Convert the string to a double (handle potential conversion errors)
-    bool conversionOk;
-    double salaire = salaireText.toDouble(&conversionOk);
-
-    // Debug: Print the result of conversion
-    if (conversionOk) {
-        qDebug() << "Converted Salaire: " << salaire;
-    } else {
-        qDebug() << "Conversion failed, setting salary to 0";
-        salaire = 0;  // Fallback to 0 if conversion fails
-    }
-
-    // Populate the corresponding UI fields with the selected row data
-    ui->id_rech->setText(id);  // Set the ID in the id_rech QLineEdit
-    ui->nom->setText(nom);
-    ui->prenom->setText(prenom);
-    ui->date_emboche->setDate(date);
-    ui->poste->setCurrentText(poste);
-    ui->email->setText(email);
-    if (sexe == "M") {
-        ui->homme->setChecked(true);  // Assuming you have radio buttons for "Male" and "Female"
-    } else if (sexe == "F") {
-        ui->femme_2->setChecked(true);
-    }
-
-    // Check if the salaire is valid before setting the QLineEdit
-    if (conversionOk) {
-        ui->salaire->setText(QString::number(salaire));  // Set the Salaire in the salaire QLineEdit
-    } else {
-        ui->salaire->setText("0");  // In case of an invalid salary, set it to "0"
-    }
-}
 void MainWindow::refreshTableWidget() {
     // Fetch updated data from the database
     QSqlQueryModel *model = emp.afficher();  // Assuming 'emp.afficher()' returns a QSqlQueryModel with updated data.
@@ -1238,10 +1244,10 @@ void MainWindow::refreshTableWidget() {
     ui->tableWidget->setRowCount(0);
 
     // Set the correct column count (ID + other fields)
-    ui->tableWidget->setColumnCount(8);  // 8 columns (ID, Nom, Prenom, Date, Poste, Email, Salaire, Sexe)
+    ui->tableWidget->setColumnCount(10);  // 10 columns (ID, Nom, Prenom, Date, Poste, Email, Salaire, Sexe)
 
     // Set the column headers
-    ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nom", "Prenom", "Date", "Poste", "Email", "Salaire", "Sexe"});
+    ui->tableWidget->setHorizontalHeaderLabels({"ID", "Nom", "Prenom", "Date", "Poste", "Email", "Salaire", "Sexe", "Modifier","Supprimer"});
 
     // Populate the table with the data
     for (int row = 0; row < model->rowCount(); ++row) {
@@ -1332,40 +1338,6 @@ void MainWindow::displayCongeStatistics() {
     ui->pie->setScene(scene);
     ui->pie->show();
 }
-
-/*void MainWindow::on_rechercherButton_clicked() {
-    QString idText = ui->id_rech->text().trimmed();
-    bool ok;
-    int id = idText.toInt(&ok);
-
-    if (!ok || idText.isEmpty()) {
-        QMessageBox::warning(this, "Erreur", "ID invalide !");
-        return;
-    }
-
-    Architecte arch;
-    if (arch.fetchById(id)) {
-        // Peupler les champs
-        ui->nom->setText(arch.getNom());
-        ui->prenom->setText(arch.getPrenom());
-        ui->email->setText(arch.getEmail());
-        ui->salaire->setText(QString::number(arch.getSalaire()));
-        ui->poste->setCurrentText(arch.getPoste());
-        ui->date_emboche->setDate(arch.getDateEmbauche());
-
-        // Gérer le genre
-        if (arch.getSexe() == "M") {
-            ui->homme->setChecked(true);
-            ui->femme_2->setChecked(false);
-        } else {
-            ui->homme->setChecked(false);
-            ui->femme_2->setChecked(true);
-        }
-    } else {
-        QMessageBox::information(this, "Recherche", "Aucun architecte trouvé avec cet ID.");
-}
-
-}*/
 
 void MainWindow::on_rechercherButton_clicked() {
     QString searchText = ui->id_rech->text().trimmed();
@@ -1504,9 +1476,9 @@ void MainWindow::on_triButton_2_clicked()
     isAscending = !isAscending;
     on_triCb_currentIndexChanged(ui->comboBox_tri_3->currentIndex());
 
-    ui->triButton->setIcon(QIcon(isAscending
-                                     ? "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/ascending.png"
-                                     : "C:/Users/onsna/OneDrive/Desktop/Projet C++/Architechtes/Architechtes_interface/Architechtes_interface/images/descending.png"));
+    ui->triButton_2->setIcon(QIcon(isAscending
+                                     ? ":/ressources/images/ascending.png"
+                                     : ":/ressources/images/descending.png"));
 }
 
 void MainWindow::on_pdf_2_clicked()

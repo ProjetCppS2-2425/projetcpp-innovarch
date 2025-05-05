@@ -49,7 +49,7 @@
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="acceuil1Page1">
      <widget class="QWidget" name="widget_7" native="true">
@@ -1369,29 +1369,20 @@ QPushButton#ajouter:pressed {
        <property name="geometry">
         <rect>
          <x>80</x>
-         <y>520</y>
+         <y>530</y>
          <width>151</width>
          <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton#modifier {
-	border-color: rgb(78, 23, 100);
-    background-color:  #4e1764;  /* Vibrant mauve */
-    border: none;
-    font-size: 13.1px;
-    font-weight: bold;
-	color: white;
+        <string notr="true">QPushButton#voirlesStatistiques{
+    background-color: rgb(255, 255, 255);
+	border: 2px solid #9f86c0 ;/* Default thicker border */
+    border-radius: 5px;
 }
-
-QPushButton#modifier:hover {
-    background-color: #9f86c0;  /* Softer pinkish mauve on hover */
-}
-
-QPushButton#modifier:pressed {
-    background-color: #9f86c0;  /* Darker when clicked */
-}
-</string>
+QPushButton#voirlesStatistiques:hover {
+    background-color: #9f86c0; 
+}</string>
        </property>
        <property name="text">
         <string>Voir Statistiques</string>
@@ -1575,7 +1566,7 @@ QPushButton#statpb:hover {
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>81</width>
+        <width>101</width>
         <height>41</height>
        </rect>
       </property>
@@ -1599,7 +1590,7 @@ QPushButton#statpb:hover {
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_8">
        <attribute name="title">
@@ -2230,16 +2221,16 @@ QLabel {
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>9</y>
-           <width>171</width>
-           <height>41</height>
+           <y>10</y>
+           <width>81</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:700;&quot;&gt;nom &amp;amp; prenom :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Nom :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
         <widget class="QDateEdit" name="date_emboche">
@@ -2289,7 +2280,7 @@ QLineEdit:focus {
           <string/>
          </property>
          <property name="placeholderText">
-          <string>email</string>
+          <string>Email</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="nom">
@@ -2359,7 +2350,7 @@ QLineEdit:focus {
 </string>
          </property>
          <property name="placeholderText">
-          <string>salaire</string>
+          <string>Salaire</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="prenom">
@@ -2389,7 +2380,7 @@ QLineEdit:focus {
           <string/>
          </property>
          <property name="placeholderText">
-          <string>prenom</string>
+          <string>Prenom</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_153">
@@ -2417,6 +2408,11 @@ QLineEdit:focus {
            <height>41</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">border : transparent;
 color: rgb(0, 0, 0);</string>
@@ -2433,6 +2429,11 @@ color: rgb(0, 0, 0);</string>
            <width>141</width>
            <height>41</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">border : transparent;
@@ -2462,9 +2463,9 @@ color: rgb(0, 0, 0);</string>
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>80</y>
+           <y>84</y>
            <width>141</width>
-           <height>35</height>
+           <height>31</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -2527,7 +2528,7 @@ color: rgb(0, 0, 0);</string>
          </property>
          <item>
           <property name="text">
-           <string>choisir poste</string>
+           <string>Choisir poste</string>
           </property>
          </item>
          <item>
@@ -2577,7 +2578,7 @@ color: rgb(0, 0, 0);</string>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#modifier {
+          <string notr="true">QPushButton#modifier_2 {
         border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
     border: none;
@@ -2586,11 +2587,11 @@ color: rgb(0, 0, 0);</string>
         color: white;
 }
 
-QPushButton#modifier:hover {
+QPushButton#modifier_2:hover {
     background-color: #9f86c0;  /* Softer pinkish mauve on hover */
 }
 
-QPushButton#modifier:pressed {
+QPushButton#modifier_2:pressed {
     background-color: #9f86c0;  /* Darker when clicked */
 }
 </string>
@@ -2609,7 +2610,7 @@ QPushButton#modifier:pressed {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#ajouter {
+          <string notr="true">QPushButton#ajouter_2 {
         border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
    border: none;
@@ -2618,11 +2619,11 @@ QPushButton#modifier:pressed {
         color: white;
 }
 
-QPushButton#ajouter:hover {
+QPushButton#ajouter_2:hover {
     background-color: #9f86c0;  /* Softer pinkish mauve on hover */
 }
 
-QPushButton#ajouter:pressed {
+QPushButton#ajouter_2:pressed {
     background-color: #9f86c0;  /* Darker when clicked */
 }
 </string>
@@ -2641,7 +2642,7 @@ QPushButton#ajouter:pressed {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#annuler {
+          <string notr="true">QPushButton#refresh_2 {
         border-color: rgb(78, 23, 100);
     background-color:  #4e1764;  /* Vibrant mauve */
     border: none;
@@ -2650,11 +2651,11 @@ QPushButton#ajouter:pressed {
         color: white;
 }
 
-QPushButton#annuler:hover {
+QPushButton#refresh_2:hover {
     background-color: #9f86c0;  /* Softer pinkish mauve on hover */
 }
 
-QPushButton#annuler:pressed {
+QPushButton#refresh_2:pressed {
     background-color: #9f86c0;  /* Darker when clicked */
 }
 </string>
@@ -2663,11 +2664,47 @@ QPushButton#annuler:pressed {
           <string>Annuler</string>
          </property>
         </widget>
+        <widget class="QLabel" name="label_147">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>10</y>
+           <width>91</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Prenom :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+        <zorder>label_147</zorder>
+        <zorder>label_146</zorder>
+        <zorder>date_emboche</zorder>
+        <zorder>email</zorder>
+        <zorder>nom</zorder>
+        <zorder>label_157</zorder>
+        <zorder>salaire</zorder>
+        <zorder>prenom</zorder>
+        <zorder>label_153</zorder>
+        <zorder>homme</zorder>
+        <zorder>femme_2</zorder>
+        <zorder>label_158</zorder>
+        <zorder>label_162</zorder>
+        <zorder>label_163</zorder>
+        <zorder>label_164</zorder>
+        <zorder>poste</zorder>
+        <zorder>label_165</zorder>
+        <zorder>modifier_2</zorder>
+        <zorder>ajouter_2</zorder>
+        <zorder>refresh_2</zorder>
        </widget>
        <widget class="QLabel" name="label_159">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>50</x>
           <y>10</y>
           <width>221</width>
           <height>51</height>
@@ -2831,7 +2868,7 @@ QPushButton#pdf_2:hover {
         <widget class="QComboBox" name="comboBox_tri_3">
          <property name="geometry">
           <rect>
-           <x>520</x>
+           <x>510</x>
            <y>10</y>
            <width>141</width>
            <height>28</height>
@@ -2883,7 +2920,7 @@ QPushButton#pdf_2:hover {
           <rect>
            <x>20</x>
            <y>50</y>
-           <width>781</width>
+           <width>731</width>
            <height>301</height>
           </rect>
          </property>
@@ -2968,20 +3005,13 @@ QPushButton#pdf_2:hover {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#supprimer {
+          <string notr="true">QPushButton#annuler_2 {
     background-color: rgb(255, 255, 255);
    border: 2px solid #D74C4C; /* Default thicker border */
-    border-radius: 5px;QPushButton#pdf_2 {
-    background-color: rgb(255, 255, 255);
-        border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
-QPushButton#pdf_2:hover {
-    background-color: #9f86c0;
-}
-}
 
-QPushButton#supprimer:hover {
+QPushButton#annuler_2:hover {
     background-color:#D74C4C;
 }
 </string>
@@ -3077,12 +3107,12 @@ QLineEdit:focus {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#chercher{
+          <string notr="true">QPushButton#chercher_2{
          border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
         background-color: white;
 }
-QPushButton#chercher:hover {
+QPushButton#chercher_2:hover {
     background-color: #be95c4;
 }</string>
          </property>
@@ -3090,8 +3120,8 @@ QPushButton#chercher:hover {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/search.png</normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/search.png</iconset>
+          <iconset resource="icons.qrc">
+           <normaloff>:/ressources/images/search.png</normaloff>:/ressources/images/search.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -3110,12 +3140,12 @@ QPushButton#chercher:hover {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#refresh{
+          <string notr="true">QPushButton#refresh_3{
          border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
         background-color: white;
 }
-QPushButton#refresh:hover {
+QPushButton#refresh_3:hover {
     background-color: #be95c4;
 }</string>
          </property>
@@ -3123,8 +3153,8 @@ QPushButton#refresh:hover {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</iconset>
+          <iconset resource="icons.qrc">
+           <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -3143,12 +3173,12 @@ QPushButton#refresh:hover {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#triButton{
+          <string notr="true">QPushButton#triButton_2{
          border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
         background-color: white;
 }
-QPushButton#triButton:hover {
+QPushButton#triButton_2:hover {
     background-color: #be95c4;
 }</string>
          </property>
@@ -3188,11 +3218,29 @@ QPushButton#triButton:hover {
           <x>930</x>
           <y>440</y>
           <width>75</width>
-          <height>24</height>
+          <height>31</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#refuser_conge {
+    background-color: rgb(255, 255, 255);
+   border: 2px solid #D74C4C; /* Default thicker border */
+    border-radius: 5px;
+}
+
+QPushButton#refuser_conge:hover {
+    background-color:#D74C4C;
+}
+</string>
+        </property>
         <property name="text">
-         <string>REFUSER</string>
+         <string>Refuser</string>
         </property>
        </widget>
        <widget class="QPushButton" name="accepter_conge">
@@ -3201,30 +3249,27 @@ QPushButton#triButton:hover {
           <x>840</x>
           <y>440</y>
           <width>81</width>
-          <height>24</height>
+          <height>31</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton#ajouter {
-        border-color: rgb(78, 23, 100);
-    background-color:  #4e1764;  /* Vibrant mauve */
-   border: none;
-    font-size: 13.1px;
-    font-weight: bold;
-        color: white;
+         <string notr="true">QPushButton#accepter_conge {
+    background-color: rgb(255, 255, 255);
+        border: 2px solid #9f86c0 ;/* Default thicker border */
+    border-radius: 5px;
 }
-
-QPushButton#ajouter:hover {
-    background-color: #9f86c0;  /* Softer pinkish mauve on hover */
-}
-
-QPushButton#ajouter:pressed {
-    background-color: #9f86c0;  /* Darker when clicked */
-}
-</string>
+QPushButton#accepter_conge:hover {
+    background-color: #9f86c0;
+}</string>
         </property>
         <property name="text">
-         <string>ACCEPTER</string>
+         <string>Accepter</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_166">
@@ -3232,8 +3277,8 @@ QPushButton#ajouter:pressed {
          <rect>
           <x>330</x>
           <y>430</y>
-          <width>331</width>
-          <height>51</height>
+          <width>341</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="font">
@@ -3256,7 +3301,7 @@ QLabel {
 </string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Demande d'acceptation de congés&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Demande d'acceptation de congés&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="id_emp3">
@@ -3296,12 +3341,12 @@ QLineEdit:focus {
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton#refresh{
+         <string notr="true">QPushButton#refresh_4{
          border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
         background-color: white;
 }
-QPushButton#refresh:hover {
+QPushButton#refresh_4:hover {
     background-color: #be95c4;
 }</string>
         </property>
@@ -3309,8 +3354,8 @@ QPushButton#refresh:hover {
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</iconset>
+         <iconset resource="icons.qrc">
+          <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -3337,10 +3382,10 @@ QPushButton#refresh:hover {
        <widget class="QLabel" name="label_184">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>20</y>
+          <x>580</x>
+          <y>10</y>
           <width>431</width>
-          <height>41</height>
+          <height>51</height>
          </rect>
         </property>
         <property name="font">
@@ -3638,7 +3683,7 @@ QLineEdit:focus {
           <rect>
            <x>0</x>
            <y>280</y>
-           <width>231</width>
+           <width>181</width>
            <height>29</height>
           </rect>
          </property>
@@ -3646,7 +3691,7 @@ QLineEdit:focus {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;raison de congé :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Raison de congé :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_172">
@@ -3692,7 +3737,7 @@ QLineEdit:focus {
           <string/>
          </property>
          <property name="placeholderText">
-          <string>email</string>
+          <string>Email</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_167">
@@ -3778,10 +3823,10 @@ QLineEdit:focus {
 </string>
          </property>
          <property name="text">
-          <string>Raison de congé</string>
+          <string/>
          </property>
          <property name="placeholderText">
-          <string/>
+          <string>Raison de congé</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="poste_conge">
@@ -3808,28 +3853,28 @@ QLineEdit:focus {
 </string>
          </property>
          <property name="text">
-          <string>Poste</string>
+          <string/>
          </property>
          <property name="placeholderText">
-          <string/>
+          <string>Poste</string>
          </property>
         </widget>
         <widget class="QPushButton" name="soumettre">
          <property name="geometry">
           <rect>
            <x>270</x>
-           <y>370</y>
+           <y>380</y>
            <width>141</width>
            <height>31</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#pdf_2 {
+          <string notr="true">QPushButton#soumettre {
     background-color: rgb(255, 255, 255);
         border: 2px solid #9f86c0 ;/* Default thicker border */
     border-radius: 5px;
 }
-QPushButton#pdf_2:hover {
+QPushButton#soumettre:hover {
     background-color: #9f86c0;
 }</string>
          </property>
@@ -3840,19 +3885,19 @@ QPushButton#pdf_2:hover {
         <widget class="QPushButton" name="refresh_5">
          <property name="geometry">
           <rect>
-           <x>440</x>
-           <y>370</y>
+           <x>430</x>
+           <y>380</y>
            <width>41</width>
            <height>31</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton#refresh{
+          <string notr="true">QPushButton#refresh_5{
          border: 1.5px solid #9f86c0;/* Default thicker border */
     border-radius: 5px;
         background-color: white;
 }
-QPushButton#refresh:hover {
+QPushButton#refresh_5:hover {
     background-color: #be95c4;
 }</string>
          </property>
@@ -3860,8 +3905,8 @@ QPushButton#refresh:hover {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/refresh.png</iconset>
+          <iconset resource="icons.qrc">
+           <normaloff>:/ressources/images/refresh.png</normaloff>:/ressources/images/refresh.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -3886,8 +3931,8 @@ QPushButton#refresh:hover {
         <widget class="QTableView" name="afficher_conge_3">
          <property name="geometry">
           <rect>
-           <x>180</x>
-           <y>240</y>
+           <x>190</x>
+           <y>250</y>
            <width>301</width>
            <height>121</height>
           </rect>
@@ -3924,14 +3969,14 @@ QPushButton#refresh:hover {
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton#statpb{
+         <string notr="true">QPushButton#statpb_2{
          background-color:  #9f86c0;
         color: white;
         border-radius: 12px;
         font-size: 19px;
         font-weight: bold;
 }
-QPushButton#statpb:hover {
+QPushButton#statpb_2:hover {
     background-color: #be95c4;
         border-color: #be95c4;
 }
@@ -3950,7 +3995,7 @@ QPushButton#statpb:hover {
         <x>0</x>
         <y>0</y>
         <width>201</width>
-        <height>791</height>
+        <height>821</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3960,34 +4005,12 @@ QPushButton#statpb:hover {
       <property name="frameShape">
        <enum>QFrame::Shape::NoFrame</enum>
       </property>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>201</width>
-         <height>191</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../../../../projetcpp-innovarch-Gestion-des-architectes/images/logot.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
       <widget class="QWidget" name="layoutWidget_2">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>220</y>
-         <width>191</width>
+         <width>201</width>
          <height>331</height>
         </rect>
        </property>
@@ -4022,9 +4045,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Employés</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/employes.png</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/employes.png</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/employes.png</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/employes.png</normaloff>:/ressources/images/employes.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4063,9 +4085,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Clients</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/clients.png</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/clients.png</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/clients.png</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/clients.png</normaloff>:/ressources/images/clients.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4105,9 +4126,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Projets</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/project.png</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/project.png</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/project.png</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/project.png</normaloff>:/ressources/images/project.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4147,9 +4167,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Ressources</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/desk.ico</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/desk.ico</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/desk.ico</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/desk.ico</normaloff>:/ressources/images/desk.ico</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4189,9 +4208,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Contrats</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/contrats.png</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/contrats.png</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/contrats.png</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/contrats.png</normaloff>:/ressources/images/contrats.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4231,9 +4249,8 @@ QPushButton:hover, QPushButton:pressed {
            <string> Contracteurs</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../projetcpp-innovarch-Gestion-des-architectes/images/architect.png</normaloff>
-            <normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/architect.png</normalon>../../../../projetcpp-innovarch-Gestion-des-architectes/images/architect.png</iconset>
+           <iconset resource="icons.qrc">
+            <normaloff>:/ressources/images/architect.png</normaloff>:/ressources/images/architect.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -4244,6 +4261,22 @@ QPushButton:hover, QPushButton:pressed {
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>201</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/ressources/images/logot.png);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
       </widget>
      </widget>
     </widget>
