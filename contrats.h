@@ -15,15 +15,17 @@ public:
     // CRUD Methods
     bool ajouter();
     QSqlQueryModel* afficher();
+    QSqlQueryModel *trier(QString critere);
+    QSqlQueryModel* rechercher(int id);
+    QMap<QString, int> statistiquesStatut();
+
+
+
     bool supprimer(int id);
     bool modifier(int id);
 
     // Search and Sorting
-    QSqlQueryModel* rechercher(const QString &critere);
-    QSqlQueryModel* trier(const QString &critere, const QString &ordre);
 
-    // Statistics
-    QMap<QString, int> statistiques();
 
 private:
     int id;

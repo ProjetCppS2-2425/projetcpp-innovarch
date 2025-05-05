@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.7.3
+** Created by: Qt User Interface Compiler version 6.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -77,12 +77,15 @@ public:
     QLabel *label_156;
     QWidget *widget_7;
     QLineEdit *id_rech;
-    QPushButton *chercher_2;
-    QPushButton *supprimer;
+    QPushButton *chercher;
+    QPushButton *exporter;
     QLabel *label_166;
-    QComboBox *comboBox_tri_3;
+    QComboBox *tricombobox;
     QTableWidget *tableWidget;
-    QPushButton *pdf_3;
+    QPushButton *supprimer;
+    QPushButton *tributton;
+    QPushButton *stats;
+    QPushButton *pushbutton_Email;
     QWidget *tab_7;
     QGraphicsView *pie_2;
     QGraphicsView *bar_2;
@@ -886,18 +889,18 @@ public:
 "    background-color: white;  /* Keep background white */\n"
 "}\n"
 ""));
-        chercher_2 = new QPushButton(widget_7);
-        chercher_2->setObjectName("chercher_2");
-        chercher_2->setGeometry(QRect(430, 19, 91, 31));
-        chercher_2->setStyleSheet(QString::fromUtf8("QPushButton#chercher_2 {\n"
+        chercher = new QPushButton(widget_7);
+        chercher->setObjectName("chercher");
+        chercher->setGeometry(QRect(430, 19, 91, 31));
+        chercher->setStyleSheet(QString::fromUtf8("QPushButton#chercher_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        supprimer = new QPushButton(widget_7);
-        supprimer->setObjectName("supprimer");
-        supprimer->setGeometry(QRect(630, 470, 161, 41));
-        supprimer->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        exporter = new QPushButton(widget_7);
+        exporter->setObjectName("exporter");
+        exporter->setGeometry(QRect(630, 470, 161, 41));
+        exporter->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -911,17 +914,17 @@ public:
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Roboto")});
         label_166->setFont(font1);
-        comboBox_tri_3 = new QComboBox(widget_7);
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->addItem(QString());
-        comboBox_tri_3->setObjectName("comboBox_tri_3");
-        comboBox_tri_3->setGeometry(QRect(600, 20, 141, 28));
-        comboBox_tri_3->setAutoFillBackground(false);
-        comboBox_tri_3->setStyleSheet(QString::fromUtf8("\n"
+        tricombobox = new QComboBox(widget_7);
+        tricombobox->addItem(QString());
+        tricombobox->addItem(QString());
+        tricombobox->addItem(QString());
+        tricombobox->addItem(QString());
+        tricombobox->addItem(QString());
+        tricombobox->addItem(QString());
+        tricombobox->setObjectName("tricombobox");
+        tricombobox->setGeometry(QRect(600, 0, 141, 28));
+        tricombobox->setAutoFillBackground(false);
+        tricombobox->setStyleSheet(QString::fromUtf8("\n"
 "\n"
 "    border: 2px solid #9f86c0;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -930,18 +933,18 @@ public:
 "\n"
 "\n"
 ""));
-        comboBox_tri_3->setDuplicatesEnabled(false);
-        comboBox_tri_3->setFrame(true);
+        tricombobox->setDuplicatesEnabled(false);
+        tricombobox->setFrame(true);
         tableWidget = new QTableWidget(widget_7);
         tableWidget->setObjectName("tableWidget");
         tableWidget->setGeometry(QRect(30, 80, 681, 331));
         tableWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        pdf_3 = new QPushButton(widget_7);
-        pdf_3->setObjectName("pdf_3");
-        pdf_3->setGeometry(QRect(70, 440, 161, 41));
-        pdf_3->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        supprimer = new QPushButton(widget_7);
+        supprimer->setObjectName("supprimer");
+        supprimer->setGeometry(QRect(70, 440, 161, 41));
+        supprimer->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -949,6 +952,15 @@ public:
 "QPushButton#pdf_2:hover {\n"
 "    background-color: #9f86c0; \n"
 "}"));
+        tributton = new QPushButton(widget_7);
+        tributton->setObjectName("tributton");
+        tributton->setGeometry(QRect(630, 40, 61, 21));
+        stats = new QPushButton(widget_7);
+        stats->setObjectName("stats");
+        stats->setGeometry(QRect(350, 450, 83, 29));
+        pushbutton_Email = new QPushButton(widget_7);
+        pushbutton_Email->setObjectName("pushbutton_Email");
+        pushbutton_Email->setGeometry(QRect(350, 500, 83, 29));
         aceuille_2->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
@@ -1167,9 +1179,9 @@ public:
         iclient_2->setText(QString());
         iclient_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "id client", nullptr));
         iclient->setText(QString());
-        iclient->setPlaceholderText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        iclient->setPlaceholderText(QCoreApplication::translate("MainWindow", "id projet", nullptr));
         label_147->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Id client :</span></p></body></html>", nullptr));
-        label_148->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Nom client :</span></p></body></html>", nullptr));
+        label_148->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Id projet :</span></p></body></html>", nullptr));
         label_157->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Statut de paiement :</span></p></body></html>", nullptr));
         status_2->setItemText(0, QCoreApplication::translate("MainWindow", "pay\303\251", nullptr));
         status_2->setItemText(1, QCoreApplication::translate("MainWindow", "en attente", nullptr));
@@ -1177,17 +1189,20 @@ public:
 
         label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">Ajout &amp; Modifier</p><p align=\"center\"><br/></p></body></html>", nullptr));
         id_rech->setPlaceholderText(QCoreApplication::translate("MainWindow", "identifiant", nullptr));
-        chercher_2->setText(QCoreApplication::translate("MainWindow", "chercher", nullptr));
-        supprimer->setText(QCoreApplication::translate("MainWindow", "Exportation pdf", nullptr));
+        chercher->setText(QCoreApplication::translate("MainWindow", "chercher", nullptr));
+        exporter->setText(QCoreApplication::translate("MainWindow", "Exportation pdf", nullptr));
         label_166->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:700;\">Recherche contract :</span></p></body></html>", nullptr));
-        comboBox_tri_3->setItemText(0, QCoreApplication::translate("MainWindow", "Trier selon ", nullptr));
-        comboBox_tri_3->setItemText(1, QString());
-        comboBox_tri_3->setItemText(2, QCoreApplication::translate("MainWindow", "Salaire d\303\251croissant", nullptr));
-        comboBox_tri_3->setItemText(3, QCoreApplication::translate("MainWindow", "salaire croissant", nullptr));
-        comboBox_tri_3->setItemText(4, QCoreApplication::translate("MainWindow", "date d'emboche d\303\251c", nullptr));
-        comboBox_tri_3->setItemText(5, QCoreApplication::translate("MainWindow", "date d'emboche croi", nullptr));
+        tricombobox->setItemText(0, QCoreApplication::translate("MainWindow", "Trier selon ", nullptr));
+        tricombobox->setItemText(1, QString());
+        tricombobox->setItemText(2, QCoreApplication::translate("MainWindow", "salaire dec", nullptr));
+        tricombobox->setItemText(3, QCoreApplication::translate("MainWindow", "salaire croi", nullptr));
+        tricombobox->setItemText(4, QCoreApplication::translate("MainWindow", "date emboche dec", nullptr));
+        tricombobox->setItemText(5, QCoreApplication::translate("MainWindow", "date emboche croi", nullptr));
 
-        pdf_3->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
+        supprimer->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
+        tributton->setText(QCoreApplication::translate("MainWindow", "Tri", nullptr));
+        stats->setText(QCoreApplication::translate("MainWindow", "Stats", nullptr));
+        pushbutton_Email->setText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         aceuille_2->setTabText(aceuille_2->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
         label->setText(QString());

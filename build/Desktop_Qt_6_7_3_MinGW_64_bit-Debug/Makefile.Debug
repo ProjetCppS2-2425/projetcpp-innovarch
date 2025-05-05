@@ -305,21 +305,21 @@ debug/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		../../contrats.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QMap \
 		debug/moc_predefs.h \
 		C:/Qt/6.7.3/mingw_64/bin/moc.exe
-	C:\Qt\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/dhiab/Downloads/Atelier_Connexion/gestion_contrats/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.7.3/mingw_64/mkspecs/win32-g++ -IC:/Users/dhiab/Downloads/Atelier_Connexion/gestion_contrats -IC:/Qt/6.7.3/mingw_64/include -IC:/Qt/6.7.3/mingw_64/include/QtCharts -IC:/Qt/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.7.3/mingw_64/include/QtWidgets -IC:/Qt/6.7.3/mingw_64/include/QtOpenGL -IC:/Qt/6.7.3/mingw_64/include/QtGui -IC:/Qt/6.7.3/mingw_64/include/QtSql -IC:/Qt/6.7.3/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\Qt\6.7.3\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/user/Downloads/gestion_contrats/gestion_contrats/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.7.3/mingw_64/mkspecs/win32-g++ -IC:/Users/user/Downloads/gestion_contrats/gestion_contrats -IC:/Qt/6.7.3/mingw_64/include -IC:/Qt/6.7.3/mingw_64/include/QtCharts -IC:/Qt/6.7.3/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.7.3/mingw_64/include/QtWidgets -IC:/Qt/6.7.3/mingw_64/include/QtOpenGL -IC:/Qt/6.7.3/mingw_64/include/QtGui -IC:/Qt/6.7.3/mingw_64/include/QtSql -IC:/Qt/6.7.3/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -660,17 +660,17 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		../../contrats.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QMap \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qapplication.h \
@@ -873,17 +873,17 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.3/mingw_64/include/QtGui/qguiapplication_platform.h \
 		C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
 		../../contrats.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QString \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlQueryModel \
-		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlquerymodel.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QMap \
 		ui_mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/QVariant \
@@ -985,7 +985,10 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QPieSlice \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/qpieslice.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCharts/QChartView \
-		C:/Qt/6.7.3/mingw_64/include/QtCharts/qchartview.h
+		C:/Qt/6.7.3/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlDatabase \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/QSqlError \
+		C:/Qt/6.7.3/mingw_64/include/QtSql/qsqlerror.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 
 debug/connection.o: ../../connection.cpp ../../connection.h \
@@ -1109,7 +1112,8 @@ debug/connection.o: ../../connection.cpp ../../connection.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qobject.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt/6.7.3/mingw_64/include/QtCore/qobject_impl.h \
-		C:/Qt/6.7.3/mingw_64/include/QtCore/qbindingstorage.h
+		C:/Qt/6.7.3/mingw_64/include/QtCore/qbindingstorage.h \
+		C:/Qt/6.7.3/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\connection.o ..\..\connection.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 
