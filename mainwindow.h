@@ -19,6 +19,7 @@
 #include "architechtes.h"
 #include "gestionressources.h"
 #include "arduino.h"
+#include "rec.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,6 +50,7 @@ private:
     bool customTableWidgetItemCompare(QTableWidgetItem* item1, QTableWidgetItem* item2);
     void displayCongeStatistics();
     void refreshTableView();
+    void handleRecommendationClick(int row);
 
 
     // ==== Ressource Module ====
@@ -71,6 +73,9 @@ private:
     void handleAlertNotification(const QString &message, const QString &type);
     void showAllAlerts();
     void updateBellCount();
+    void populateLowStockTable();
+    void showProductCards(const QList<Product>& products, const QString& title);
+    void handlePersonalizedRecommendation();
 
     bool isAscending = true; // Shared between modules
 

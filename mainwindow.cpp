@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "architechtes.h"
+#include "rec.h"
 #include "dialog.h"
 #include "arduino.h"
 #include "IconDelegate.h"
@@ -27,6 +28,9 @@
 #include <QRegularExpressionValidator>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include <QStandardItemModel>
+#include <QGroupBox>
+#include <QDesktopServices>
 
 // SQL
 #include <QSqlError>
@@ -52,10 +56,6 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     isAscending(true)
 {
     ui->setupUi(this);
-
-    // ----- COMMON: Setup tabs based on role -----
-    //setupTabsBasedOnRole();
-
     // ----- COMMON: Arduino initialization -----
     arduino = new Arduino(this);
     arduino->connectToArduino();
@@ -73,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     // ----- RESOURCE UI Initialization -----
     ui->mainStack->setCurrentWidget(ui->mainStack);
     fillTab();
+    populateLowStockTable();
     ui->triButton->setIcon(QIcon(":/ressources/images/ascending.png"));
     connect(ui->tableView, &QTableView::clicked, this, &MainWindow::handleIconClick);
 
@@ -81,7 +82,6 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     connect(ui->tableWidget, &QTableWidget::itemClicked, this, &MainWindow::on_tableWidget_itemClicked);
 
     // ----- BUTTON CONNECTIONS (Avoid duplicates if same name) -----
-    //connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addEmployeeButton_clicked);
     connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_annuler_clicked);  // Use correct annuler handler
     connect(ui->refresh, &QPushButton::clicked, this, &MainWindow::on_refreshButton_clicked);
     connect(ui->refresh_3, &QPushButton::clicked, this, &MainWindow::on_refreshButton2_clicked);
@@ -93,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     connect(ui->bellIcon, &QPushButton::clicked, this, &MainWindow::on_bellIcon_clicked);
     connect(ui->bellIcon, &QPushButton::clicked, this, &MainWindow::showAllAlerts);
+    connect(ui->recPerso, &QPushButton::clicked, this, &MainWindow::handlePersonalizedRecommendation);
 
     QList<QPair<QString, QString>> alerts = gestionRessources.checkAlerts();
     for (const auto& alert : alerts) {
@@ -177,6 +178,7 @@ void MainWindow::on_ajouter_clicked()
     if (success) {
         fillTab();
         clearFields();
+        populateLowStockTable();
         QMessageBox::information(this, "Succès", "Ressource ajoutée avec succès !");
         // Check if the added resource is the scanner (ID 9)
         if (nom2 == gestionRessources.getScannerName()) {
@@ -240,6 +242,7 @@ void MainWindow::on_modifier_clicked()
     if (success) {
         fillTab();
         clearFields();
+        populateLowStockTable();
         m_currentResourceId = -1;
 
         // Check if the modified resource is the scanner (ID 9)
@@ -750,6 +753,191 @@ void MainWindow::on_bellIcon_clicked()
     }
 }
 
+void MainWindow::populateLowStockTable()
+{
+    QSqlQuery query("SELECT NOM_RESSOURCE, QUANTITE, CATEGORIE, FOURNISSEUR FROM RESSOURCES WHERE QUANTITE < 5");
+
+    auto* model = new QStandardItemModel(this);
+    model->setHorizontalHeaderLabels({"Nom", "Quantité", "Catégorie", "Fournisseur", "Action"});
+
+    int row = 0;
+    while (query.next()) {
+        QString nom = query.value("NOM_RESSOURCE").toString();
+        int quantite = query.value("QUANTITE").toInt();
+        QString categorie = query.value("CATEGORIE").toString();
+        QString fournisseur = query.value("FOURNISSEUR").toString();
+
+        model->setItem(row, 0, new QStandardItem(nom));
+        model->setItem(row, 1, new QStandardItem(QString::number(quantite)));
+        model->setItem(row, 2, new QStandardItem(categorie));
+        model->setItem(row, 3, new QStandardItem(fournisseur));
+        model->setItem(row, 4, new QStandardItem()); // Placeholder for the button
+        row++;
+    }
+
+    ui->tableView2->setModel(model);
+
+    // Add buttons to the last column (index 4)
+    for (int i = 0; i < model->rowCount(); ++i) {
+        QPushButton* button = new QPushButton("Recommandation");
+        button->setStyleSheet(R"(
+            QPushButton {
+                background-color: white;
+                color: black;
+                border: none;
+                border-radius: 2px;
+            }
+            QPushButton:hover {
+                background-color: #aec3b0;
+            })");
+
+        QModelIndex index = model->index(i, 4);
+        ui->tableView2->setIndexWidget(index, button);
+
+        connect(button, &QPushButton::clicked, this, [=]() {
+            handleRecommendationClick(i);
+        });
+    }
+
+    ui->tableView2->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView2->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView2->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableView2->setAlternatingRowColors(true);
+}
+
+void MainWindow::showProductCards(const QList<Product>& products, const QString& title)
+{
+    QDialog* dialog = new QDialog(this);
+    dialog->setWindowTitle("Suggestions pour restocker");
+
+    QScrollArea* scrollArea = new QScrollArea;
+    QWidget* container = new QWidget;
+    QGridLayout* layout = new QGridLayout(container);
+
+    int row = 0, col = 0;
+    for (const Product& product : products) {
+        QGroupBox* card = new QGroupBox;
+        card->setStyleSheet(R"(QGroupBox {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: white;}
+        QGroupBox:hover {
+        border: 2px solid #0099ff;
+        background-color: #f0f8ff;
+        })");
+        QVBoxLayout* cardLayout = new QVBoxLayout(card);
+        cardLayout->setAlignment(Qt::AlignCenter);
+
+        QLabel* img = new QLabel;
+        QPixmap pix(product.imagePath);
+        img->setPixmap(pix.scaled(120, 120, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        img->setFixedSize(130, 130);
+        img->setAlignment(Qt::AlignCenter);
+        img->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+        QLabel* name = new QLabel("<b>" + product.name + "</b>");
+        name->setWordWrap(true);
+        name->setAlignment(Qt::AlignCenter);
+
+        QLabel* price = new QLabel(product.price);
+        price->setAlignment(Qt::AlignCenter);
+
+        QLabel* rating = new QLabel("⭐ " + product.rating);
+        rating->setAlignment(Qt::AlignCenter);
+
+        QPushButton* visit = new QPushButton("Voir le produit");
+        visit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        visit->setStyleSheet(R"(QPushButton {
+        background-color: #0099ff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 12px;}
+        QPushButton:hover {
+        background-color: #007acc;})");
+        connect(visit, &QPushButton::clicked, this, [=]() {
+            QDesktopServices::openUrl(QUrl(QUrl(product.url)));
+        });
+
+        cardLayout->addWidget(img);
+        cardLayout->addWidget(name);
+        cardLayout->addWidget(price);
+        cardLayout->addWidget(rating);
+        cardLayout->addWidget(visit, 0, Qt::AlignHCenter);
+        cardLayout->setSpacing(8);
+
+        layout->addWidget(card, row, col);
+        col++;
+        if (col == 3) {
+            col = 0;
+            row++;
+        }
+    }
+
+    scrollArea->setWidget(container);
+    scrollArea->setWidgetResizable(true);
+
+    QVBoxLayout* mainLayout = new QVBoxLayout(dialog);
+
+    // ✅ Add the dynamic title at the top
+    if (!title.isEmpty()) {
+        QLabel* titleLabel = new QLabel(title);
+        titleLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #333; margin-bottom: 15px;");
+        titleLabel->setAlignment(Qt::AlignCenter);
+        mainLayout->addWidget(titleLabel);
+    }
+
+    mainLayout->addWidget(scrollArea);
+    dialog->resize(600, 500);
+    dialog->exec();
+}
+
+void MainWindow::handlePersonalizedRecommendation()
+{
+    QSqlQuery query("SELECT * FROM (SELECT CATEGORIE, SUM(QUANTITE) AS total FROM RESSOURCES GROUP BY CATEGORIE ORDER BY total DESC) WHERE ROWNUM = 1");
+
+    if (!query.next()) {
+        qDebug() << "SQL Error:" << query.lastError().text();
+        QMessageBox::warning(this, "Erreur", "Impossible de récupérer les données de recommandation.");
+        return;
+    }
+
+    QString topCategory = query.value("CATEGORIE").toString();
+    QString title = "Recommandation pour la catégorie la plus utilisée: " + topCategory;
+
+    QList<Product> products = getRecommendationsForCategory(topCategory);
+
+    if (products.isEmpty()) {
+        QMessageBox::information(this, "Recommandations", "Aucun produit trouvé pour la catégorie : " + topCategory);
+        return;
+    }
+
+    showProductCards(products, title); // ✅ Pass the title to show in the popup
+}
+
+
+void MainWindow::handleRecommendationClick(int row)
+{
+    QAbstractItemModel* model = ui->tableView2->model();
+    if (!model) return;
+
+    QString category = model->index(row, 2).data().toString(); // Column 2 = Category
+    QString resourceName = model->index(row, 0).data().toString(); // Column 0 = Name
+    QString title = "Recommandations pour : " + resourceName;
+
+    QList<Product> products = getRecommendationsForCategory(category);
+
+    if (products.isEmpty()) {
+        QMessageBox::information(this, "Recommandations", "Aucun produit trouvé pour la catégorie : " + category);
+        return;
+    }
+
+    showProductCards(products, title);
+}
+
+
+
 void MainWindow::handleDecrement() {
     qDebug() << "Received DECREMENT request from Arduino";
     int oldQty = gestionRessources.getScannerQuantity();
@@ -944,10 +1132,6 @@ void MainWindow::on_addEmployeeButton_clicked()
         QMessageBox::warning(this, "Error", "Échec de l'ajout de l'employé.");
     }
 }
-
-
-
-
 
 void MainWindow::on_modifyEmployeeButton_clicked()
 {

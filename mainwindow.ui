@@ -48,6 +48,9 @@
      <string notr="true">background-color:#F8EDEB;
 </string>
     </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
     <widget class="QWidget" name="acceuil1Page1">
      <widget class="QWidget" name="widget_7" native="true">
       <property name="geometry">
@@ -2101,7 +2104,7 @@ QLineEdit:focus {
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
