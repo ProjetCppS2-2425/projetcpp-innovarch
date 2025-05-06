@@ -72,7 +72,7 @@ bool SMS::envoyerSMS(const QString &numero, const QString &message)
 
     // 2. Authentification Basic (SID + Token)
    // QString sid = "ACf80b786d0a097e58100548c9a13a973e";
-  //  QString token = "3f6e22fc19b8c7b798d6cff2c114dd4b";  // Remplace par ton vrai Auth Token
+    //QString token = "3f6e22fc19b8c7b798d6cff2c114dd4b";  // Remplace par ton vrai Auth Token
     QString credentials = sid + ":" + token;
     QByteArray auth = "Basic " + credentials.toUtf8().toBase64();
     request.setRawHeader("Authorization", auth);
