@@ -67,12 +67,12 @@ QString SMS::recupererStatutProjet(int idClient)
 bool SMS::envoyerSMS(const QString &numero, const QString &message)
 {
     // 1. URL Twilio
-    QUrl url("https://api.twilio.com/2010-04-01/Accounts/ACf80b786d0a097e58100548c9a13a973e/Messages.json");
+    //QUrl url("https://api.twilio.com/2010-04-01/Accounts/ACf80b786d0a097e58100548c9a13a973e/Messages.json");
     QNetworkRequest request(url);
 
     // 2. Authentification Basic (SID + Token)
-    QString sid = "ACf80b786d0a097e58100548c9a13a973e";
-    QString token = "3f6e22fc19b8c7b798d6cff2c114dd4b";  // Remplace par ton vrai Auth Token
+   // QString sid = "ACf80b786d0a097e58100548c9a13a973e";
+  //  QString token = "3f6e22fc19b8c7b798d6cff2c114dd4b";  // Remplace par ton vrai Auth Token
     QString credentials = sid + ":" + token;
     QByteArray auth = "Basic " + credentials.toUtf8().toBase64();
     request.setRawHeader("Authorization", auth);
