@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql charts serialport
+QT       += core gui sql charts serialport multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

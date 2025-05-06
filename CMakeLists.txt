@@ -45,6 +45,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
         sms.h sms.cpp
         arduinocl.h arduinocl.cpp
+        arduinocontracteur.cpp
+        arduinocontracteur.h
+        contracteur.cpp
+        contracteur.h
 
 
     )

@@ -1,0 +1,31 @@
+# ninja log v6
+189	1372	7682510903178269	GestionRessources_autogen/timestamp	75258915349a1d52
+6727	16691	7682463885433794	CMakeFiles/GestionRessources.dir/GestionRessources_autogen/EWIEGA46WW/qrc_icons.cpp.obj	1cf7b7681f3bd2c8
+189	1372	7682510903178269	GestionRessources_autogen/mocs_compilation.cpp	75258915349a1d52
+4677	6199	7682463879657504	GestionRessources_autogen/EWIEGA46WW/qrc_icons.cpp	226982a020b6c795
+189	1372	7682510903178269	C:/Users/dhiab/OneDrive/Documents/Projet C++/integration dhia/integration maram ons selim dhia/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/GestionRessources_autogen/timestamp	75258915349a1d52
+189	1372	7682510903178269	C:/Users/dhiab/OneDrive/Documents/Projet C++/integration dhia/integration maram ons selim dhia/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/GestionRessources_autogen/mocs_compilation.cpp	75258915349a1d52
+6710	12218	7682463885188905	CMakeFiles/GestionRessources.dir/arduinocl.cpp.obj	ee00be1fbdb3a9d
+4677	6199	7682463879657504	C:/Users/dhiab/OneDrive/Documents/Projet C++/integration dhia/integration maram ons selim dhia/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/GestionRessources_autogen/EWIEGA46WW/qrc_icons.cpp	226982a020b6c795
+6575	13242	7682463884017694	CMakeFiles/GestionRessources.dir/arduino.cpp.obj	33099d5b9f0c1602
+6508	12398	7682463883201696	CMakeFiles/GestionRessources.dir/connection.cpp.obj	f5cd700cd31a06e9
+6660	12584	7682463884769556	CMakeFiles/GestionRessources.dir/clients.cpp.obj	b5b41393bde5391a
+6529	13342	7682463883527240	CMakeFiles/GestionRessources.dir/rec.cpp.obj	33137b9ea72efe49
+4114	9176	7682508209077849	CMakeFiles/GestionRessources.dir/main.cpp.obj	12394bbff2d36e6b
+6610	14998	7682463884184083	CMakeFiles/GestionRessources.dir/architechtes.cpp.obj	65d6fff827958b04
+1423	6307	7682510915525960	CMakeFiles/GestionRessources.dir/dialog.cpp.obj	bbed65c0c6448813
+1400	7096	7682510915276265	CMakeFiles/GestionRessources.dir/GestionRessources_autogen/mocs_compilation.cpp.obj	37001621f2750fb
+6483	16163	7682463882954731	CMakeFiles/GestionRessources.dir/gestionressources.cpp.obj	334402782b81b0ba
+4177	7447	7682508209734178	CMakeFiles/GestionRessources.dir/arduinocontracteur.cpp.obj	ef44bf4f2df19988
+1435	6719	7682510915609207	CMakeFiles/GestionRessources.dir/sms.cpp.obj	878279d97c97176c
+1411	13214	7682510915358768	CMakeFiles/GestionRessources.dir/mainwindow.cpp.obj	42dce3a282dc18e3
+94	1425	7682513180146567	GestionRessources_autogen/timestamp	75258915349a1d52
+94	1425	7682513180146567	GestionRessources_autogen/mocs_compilation.cpp	75258915349a1d52
+94	1425	7682513180146567	C:/Users/dhiab/OneDrive/Documents/Projet C++/integration dhia/integration maram ons selim dhia/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/GestionRessources_autogen/timestamp	75258915349a1d52
+94	1425	7682513180146567	C:/Users/dhiab/OneDrive/Documents/Projet C++/integration dhia/integration maram ons selim dhia/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/GestionRessources_autogen/mocs_compilation.cpp	75258915349a1d52
+1503	4939	7682513194311823	CMakeFiles/GestionRessources.dir/contracteur.cpp.obj	794089c1d5b75843
+1480	6829	7682513194064012	CMakeFiles/GestionRessources.dir/dialog.cpp.obj	bbed65c0c6448813
+1491	7260	7682513194146481	CMakeFiles/GestionRessources.dir/sms.cpp.obj	878279d97c97176c
+1456	7684	7682513193816336	CMakeFiles/GestionRessources.dir/GestionRessources_autogen/mocs_compilation.cpp.obj	37001621f2750fb
+1468	13225	7682513193899917	CMakeFiles/GestionRessources.dir/mainwindow.cpp.obj	42dce3a282dc18e3
+13229	16564	7682513311519741	GestionRessources.exe	2576749878037dc0

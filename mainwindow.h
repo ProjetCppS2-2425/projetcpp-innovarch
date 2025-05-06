@@ -40,9 +40,11 @@ public:
     void on_modifyClientButton_clicked();
     void on_pushButtonRecherche_clicked();
     void on_trierClientButton_clicked();
-    void on_pdfClientButton_clicked();
+    void on_pdf_2_clicked();
     void on_statButton_clicked();
     void on_btnEnvoyerSMS_clicked();
+    void on_annuler_5_clicked();
+    void on_pdfClientButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -98,6 +100,25 @@ private:
     void updatePresence(QString id);
     bool isUpdatingPresence;
 
+    // contracteur
+    void loadContractorsToTable(QTableView *tableView);
+    void loadTasksForContractor(int contractorId);
+    void populateTreeView(int contractorId);
+    void clearTreeView();
+    void updateTaskStatus(int contractorId, const QString &task, const QString &status);
+    void generateStatistics();
+    void exportStatisticsPDF();
+    void loadArchitectsToListView();
+    void readArduinoData();
+    void updatePresenceView();
+    void togglePresence(int architectId, bool isPresent);
+    void fillTableWidgetCont();
+    void refreshTableWidgetCont();
+    Contracteur currentContracteur; // Fix undeclared variable error
+    QString lastScannedCardId;      // Fix undeclared variable error
+    ArduinoCL ArdCont;
+    QTimer *arduinoTimer;           // Fix undeclared variable error
+
 private slots:
     // ==== Architecte Slots ====
     void on_addEmployeeButton_clicked();
@@ -121,6 +142,7 @@ private slots:
     void onCalendarDateClicked(const QDate &date);
     void onRowSelected();
     void onLoginClicked();
+    void on_chercher_2_clicked();
 
     // ==== Ressource Slots ====
     void on_ajouter_clicked();
@@ -157,13 +179,14 @@ private slots:
 
     //Module Contracteur
 
+    void on_annuler_3_clicked();
+    void on_chercher_3_clicked();
+    void on_pdf_3_clicked();
+    void on_generateStatisticsButton_clicked();
+    void on_exportStatisticsPDFButton_clicked();
     void on_addContracteurButton_clicked();
     void on_supprimerContracteur_clicked();
     void on_modifyContracteurButton_clicked();
-    void on_tableView_2_itemClicked(const QModelIndex &index);
-    void on_comboBox_tri_2_currentIndexChanged(int index);
-    void on_generateStatisticsButton_clicked();
-    void on_exportStatisticsPDFButton_clicked();
     void on_addtask_clicked();
     void on_completedtask_clicked();
     void on_rmtask_clicked();
@@ -173,7 +196,9 @@ private slots:
     void on_contractorlisttable_clicked(const QModelIndex &index);
     void on_assignCard_clicked();
     void on_togglePresence_clicked();
-    void on_pushButton_6_clicked(); // Slot for the "Contracteurs" button
+    void on_tableView_2_itemClicked(const QModelIndex &index);
+    void on_comboBox_tri_2_currentIndexChanged(int index);
+    void on_pushButton_6_clicked();
 
 };
 

@@ -1,16 +1,16 @@
-#ifndef ARDUINO_H
-#define ARDUINO_H
+#ifndef ARDUINOCONTRACTEUR_H
+#define ARDUINOCONTRACTEUR_H
 
 #include <QtSerialPort/QSerialPort>
 #include <QDebug>
 #include <QObject>
 
-class Arduino : public QObject
+class ArduinoCont : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Arduino(QObject *parent = nullptr); // Fix constructor declaration
+    explicit ArduinoCont(QObject *parent = nullptr); // Fix constructor declaration
     int connect_arduino();
     int close_arduino();
     void write_to_arduino(const QByteArray &data); // Fix parameter type
@@ -27,4 +27,4 @@ private:
     QByteArray data;
 };
 
-#endif // ARDUINO_H
+#endif // ARDUINOCONTRACTEUR_H

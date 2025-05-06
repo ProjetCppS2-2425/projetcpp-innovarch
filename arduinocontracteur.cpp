@@ -1,23 +1,23 @@
 #include "arduinocontracteur.h"
 
-Arduino::Arduino(QObject *parent) : QObject(parent) // Fix constructor
+ArduinoCont::ArduinoCont(QObject *parent) : QObject(parent) // Fix constructor
 {
     data = "";
     arduino_port_name = "COM15";
     serial = new QSerialPort;
 }
 
-QString Arduino::get_arduino_port_name() // Fix method name
+QString ArduinoCont::get_arduino_port_name() // Fix method name
 {
     return arduino_port_name;
 }
 
-QSerialPort* Arduino::get_serial() // Fix method name
+QSerialPort* ArduinoCont::get_serial() // Fix method name
 {
     return serial;
 }
 
-int Arduino::connect_arduino()
+int ArduinoCont::connect_arduino()
 {
     serial->setPortName(arduino_port_name);
 
@@ -36,7 +36,7 @@ int Arduino::connect_arduino()
     }
 }
 
-int Arduino::close_arduino()
+int ArduinoCont::close_arduino()
 {
     if (serial->isOpen()) {
         serial->close();
@@ -45,7 +45,7 @@ int Arduino::close_arduino()
     return 1;
 }
 
-QByteArray Arduino::read_from_arduino()
+QByteArray ArduinoCont::read_from_arduino()
 {
     if (serial->isReadable()) {
         data = serial->readAll();
@@ -57,7 +57,7 @@ QByteArray Arduino::read_from_arduino()
     return "";
 }
 
-void Arduino::write_to_arduino(const QByteArray &d) // Fix parameter type
+void ArduinoCont::write_to_arduino(const QByteArray &d) // Fix parameter type
 {
     if (serial->isWritable()) {
         serial->write(d);

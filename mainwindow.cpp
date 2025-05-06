@@ -35,6 +35,11 @@
 #include <QStandardItemModel>
 #include <QGroupBox>
 #include <QDesktopServices>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QTimer>
+
 
 // SQL
 #include <QSqlError>
@@ -118,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateClicked);
     connect(ui->calendarConges, &QCalendarWidget::clicked, this, &MainWindow::refreshCongeTableViewOnDateClick);
-
+    connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_chercher_2_clicked);
     connect(ui->tableWidget->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::onRowSelected);
 
     // Login buttons
@@ -135,12 +140,12 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     connect(ui->tableView_4, &QTableView::clicked, this, &MainWindow::on_tableView_itemClicked);
     connect(ui->ajouter_5, &QPushButton::clicked, this, &MainWindow::on_addClientButton_clicked);
-    connect(ui->annuler_5, &QPushButton::clicked, this, &MainWindow::on_annulerButton_clicked);
+    connect(ui->annuler_5, &QPushButton::clicked, this, &MainWindow::on_annuler_5_clicked);
     connect(ui->supprimer_3, &QPushButton::clicked, this, &MainWindow::on_supprimerClient_clicked);
     connect(ui->modifier_5, &QPushButton::clicked, this, &MainWindow::on_modifyClientButton_clicked);
     connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_pushButtonRecherche_clicked);
     connect(ui->TrierButton_3, &QPushButton::clicked, this, &MainWindow::on_trierClientButton_clicked);
-    connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdfClientButton_clicked);
+    connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdf_2_clicked);
     connect(ui->statButton_2, &QPushButton::clicked, this, &MainWindow::on_statButton_clicked);
     connect(ui->sms_2, &QPushButton::clicked, this, &MainWindow::on_btnEnvoyerSMS_clicked);
     connect(ui->Door_2, &QPushButton::clicked, this, &MainWindow::on_pushButton_openDoor_clicked);
@@ -150,15 +155,15 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     ui->setupUi(this);
 
-    fillTableWidget();
+    fillTableWidgetCont();
     connect(ui->tableView_2, &QTableView::clicked, this, &MainWindow::on_tableView_2_itemClicked);
     connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addContracteurButton_clicked);
-    connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_annulerButton_clicked);
+    connect(ui->annuler_3, &QPushButton::clicked, this, &MainWindow::on_annuler_3_clicked);
     connect(ui->supprimer, &QPushButton::clicked, this, &MainWindow::on_supprimerContracteur_clicked);
     connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyContracteurButton_clicked);
     connect(ui->comboBox_tri_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::on_comboBox_tri_2_currentIndexChanged);
-    connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_chercher_2_clicked);
-    connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdf_2_clicked);
+    connect(ui->chercher_3, &QPushButton::clicked, this, &MainWindow::on_chercher_3_clicked);
+    connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_pdf_3_clicked);
 
     // Connect statistics-related buttons to their slots
     connect(ui->stat1_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
@@ -174,11 +179,10 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     loadArchitectsToListView();
 
     // Connect to Arduino
-    if (arduino.connect_arduino() == 0) {
-        qDebug() << "✅ Arduino connected successfully.";
-    } else {
-        qDebug() << "❌ Failed to connect to Arduino.";
-    }
+    arduino->connectToArduino() ;
+
+    connect(arduinoTimer, &QTimer::timeout, this, &MainWindow::readArduinoData);
+
 
     // Set up a timer to continuously read from Arduino
     QTimer *arduinoTimer = new QTimer(this);
@@ -2995,7 +2999,7 @@ void MainWindow::refreshTableWidget1() {
     ui->tableView->resizeColumnsToContents();
 }
 
-void MainWindow::on_annulerButton_clicked() {
+void MainWindow::on_annuler_5_clicked() {
 
     ui->lineEdit_16->clear();
     ui->lineEdit_21->clear();
@@ -3351,7 +3355,7 @@ void MainWindow::on_btnEnvoyerSMS_clicked()
 //Partie Contracteurs
 
 
-void MainWindow::fillTableWidget() {
+void MainWindow::fillTableWidgetCont() {
     QSqlQueryModel *model = currentContracteur.afficher();
     if (!model) {
         qDebug() << "Failed to fetch model for tableView_2.";
@@ -3432,7 +3436,7 @@ void MainWindow::on_addContracteurButton_clicked() {
             qDebug() << "Failed to update historique:" << updateQuery.lastError().text();
         }
         QMessageBox::information(this, "Success", "Contracteur ajouté avec succès.");
-        fillTableWidget();
+        fillTableWidgetCont();
 
         // Clear input fields
         ui->lineEdit_2->clear();
@@ -3455,7 +3459,7 @@ void MainWindow::on_supprimerContracteur_clicked() {
     if (currentContracteur.supprimer(id)) {
         currentContracteur.reassignIds();
         QMessageBox::information(this, "Success", "Contracteur supprimé avec succès.");
-        fillTableWidget();
+        fillTableWidgetCont();
         ui->lineEdit_3->clear();
         ui->lineEdit_2->clear();
         ui->lineEdit_13->clear();
@@ -3523,7 +3527,7 @@ void MainWindow::on_modifyContracteurButton_clicked() {
 
     if (currentContracteur.modifier(id)) {
         QMessageBox::information(this, "Success", "Information du contracteur modifiée avec succès.");
-        fillTableWidget();
+        fillTableWidgetCont();
         ui->lineEdit_3->clear();
         ui->lineEdit_2->clear();
         ui->lineEdit_13->clear();
@@ -3572,13 +3576,13 @@ void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
     }
 }
 
-void MainWindow::refreshTableWidget() {
+void MainWindow::refreshTableWidgetCont() {
     QSqlQueryModel *model = currentContracteur.afficher();
     ui->tableView_2->setModel(model);
     ui->tableView_2->resizeColumnsToContents();
 }
 
-void MainWindow::on_annulerButton_clicked() {
+void MainWindow::on_annuler_3_clicked() {
     // Clear all input fields
     ui->lineEdit_2->clear();
     ui->lineEdit_13->clear();
@@ -3641,7 +3645,7 @@ void MainWindow::on_comboBox_tri_2_currentIndexChanged(int index) {
     ui->tableView_2->resizeColumnsToContents();
 }
 
-void MainWindow::on_chercher_2_clicked() {
+void MainWindow::on_chercher_3_clicked() {
     QString searchText = ui->id_rech_2->text().trimmed();
     QString searchCriteria = ui->comboBox_2->currentText();
     QSqlQueryModel *model = new QSqlQueryModel();
@@ -3672,7 +3676,7 @@ void MainWindow::on_chercher_2_clicked() {
     ui->tableView_2->resizeColumnsToContents();
 }
 
-void MainWindow::on_pdf_2_clicked() {
+void MainWindow::on_pdf_3_clicked() {
     static bool isExporting = false;
     if (isExporting) {
         return;
@@ -4148,7 +4152,7 @@ void MainWindow::loadArchitectsToListView()
 
 void MainWindow::readArduinoData()
 {
-    QByteArray data = arduino.read_from_arduino();
+    QByteArray data = ArdCont.read_from_arduino();
     if (!data.isEmpty()) {
         QString rawData = QString(data).trimmed(); // Raw data from the reader
         qDebug() << "Raw data from RFID reader:" << rawData;
@@ -4244,7 +4248,7 @@ void MainWindow::on_assignCard_clicked()
     QString selectedArchitect = index.data().toString();
     int architectId = selectedArchitect.split(" - ").first().toInt();
 
-    QString cardId = arduino.read_from_arduino().trimmed(); // Read RFID card ID
+    QString cardId = ArdCont.read_from_arduino().trimmed(); // Read RFID card ID
     if (cardId.isEmpty()) {
         QMessageBox::warning(this, "RFID Error", "No card detected.");
         return;
@@ -4272,7 +4276,7 @@ void MainWindow::togglePresence(int architectId, bool isPresent)
 
     if (query.exec()) {
         if (isPresent) {
-            arduino.write_to_arduino("OPEN_DOOR"); // Send command to open the door
+            ArdCont.write_to_arduino("OPEN_DOOR"); // Send command to open the door
         }
         updatePresenceView();
     } else {
