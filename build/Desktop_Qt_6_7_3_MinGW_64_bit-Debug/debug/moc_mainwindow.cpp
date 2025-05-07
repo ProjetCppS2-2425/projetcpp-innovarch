@@ -36,29 +36,29 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "on_addContracteurButton_clicked",
+    "on_addContracteurButtoncontracteur_clicked",
     "",
-    "on_supprimerContracteur_clicked",
-    "on_modifyContracteurButton_clicked",
-    "on_annulerButton_clicked",
-    "on_tableView_2_itemClicked",
+    "on_supprimerContracteurcontracteur_clicked",
+    "on_modifyContracteurButtoncontracteur_clicked",
+    "on_annulerButtoncontracteur_clicked",
+    "on_tableView_2contracteur_itemClicked",
     "QModelIndex",
     "index",
-    "on_comboBox_tri_2_currentIndexChanged",
-    "on_chercher_2_clicked",
-    "on_pdf_2_clicked",
-    "on_generateStatisticsButton_clicked",
-    "on_exportStatisticsPDFButton_clicked",
-    "on_addtask_clicked",
-    "on_completedtask_clicked",
-    "on_rmtask_clicked",
-    "on_testaffichertodo_clicked",
-    "on_affichertree_clicked",
-    "on_tabWidget_currentChanged",
-    "on_contractorlisttable_clicked",
-    "on_assignCard_clicked",
-    "on_togglePresence_clicked",
-    "on_pushButton_6_clicked"
+    "on_comboBox_tri_2contracteur_currentIndexChanged",
+    "on_chercher_2contracteur_clicked",
+    "on_pdf_2contracteur_clicked",
+    "on_generateStatisticsButtoncontracteur_clicked",
+    "on_exportStatisticsPDFButtoncontracteur_clicked",
+    "on_addtaskcontracteur_clicked",
+    "on_completedtaskcontracteur_clicked",
+    "on_rmtaskcontracteur_clicked",
+    "on_testaffichertodocontracteur_clicked",
+    "on_affichertreecontracteur_clicked",
+    "on_tabWidgetcontracteur_currentChanged",
+    "on_contractorlisttablecontracteur_clicked",
+    "on_assignCardcontracteur_clicked",
+    "on_togglePresencecontracteur_clicked",
+    "on_pushButton_6contracteur_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -134,49 +134,49 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
-        // method 'on_addContracteurButton_clicked'
+        // method 'on_addContracteurButtoncontracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_supprimerContracteur_clicked'
+        // method 'on_supprimerContracteurcontracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_modifyContracteurButton_clicked'
+        // method 'on_modifyContracteurButtoncontracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_annulerButton_clicked'
+        // method 'on_annulerButtoncontracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_tableView_2_itemClicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
-        // method 'on_comboBox_tri_2_currentIndexChanged'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'on_chercher_2_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pdf_2_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_generateStatisticsButton_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_exportStatisticsPDFButton_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_addtask_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_completedtask_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_rmtask_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_testaffichertodo_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_affichertree_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_tabWidget_currentChanged'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'on_contractorlisttable_clicked'
+        // method 'on_tableView_2contracteur_itemClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
-        // method 'on_assignCard_clicked'
+        // method 'on_comboBox_tri_2contracteur_currentIndexChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_togglePresence_clicked'
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_chercher_2contracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_pushButton_6_clicked'
+        // method 'on_pdf_2contracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_generateStatisticsButtoncontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_exportStatisticsPDFButtoncontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_addtaskcontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_completedtaskcontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_rmtaskcontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_testaffichertodocontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_affichertreecontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_tabWidgetcontracteur_currentChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'on_contractorlisttablecontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>,
+        // method 'on_assignCardcontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_togglePresencecontracteur_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_pushButton_6contracteur_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -188,26 +188,26 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->on_addContracteurButton_clicked(); break;
-        case 1: _t->on_supprimerContracteur_clicked(); break;
-        case 2: _t->on_modifyContracteurButton_clicked(); break;
-        case 3: _t->on_annulerButton_clicked(); break;
-        case 4: _t->on_tableView_2_itemClicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
-        case 5: _t->on_comboBox_tri_2_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 6: _t->on_chercher_2_clicked(); break;
-        case 7: _t->on_pdf_2_clicked(); break;
-        case 8: _t->on_generateStatisticsButton_clicked(); break;
-        case 9: _t->on_exportStatisticsPDFButton_clicked(); break;
-        case 10: _t->on_addtask_clicked(); break;
-        case 11: _t->on_completedtask_clicked(); break;
-        case 12: _t->on_rmtask_clicked(); break;
-        case 13: _t->on_testaffichertodo_clicked(); break;
-        case 14: _t->on_affichertree_clicked(); break;
-        case 15: _t->on_tabWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 16: _t->on_contractorlisttable_clicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
-        case 17: _t->on_assignCard_clicked(); break;
-        case 18: _t->on_togglePresence_clicked(); break;
-        case 19: _t->on_pushButton_6_clicked(); break;
+        case 0: _t->on_addContracteurButtoncontracteur_clicked(); break;
+        case 1: _t->on_supprimerContracteurcontracteur_clicked(); break;
+        case 2: _t->on_modifyContracteurButtoncontracteur_clicked(); break;
+        case 3: _t->on_annulerButtoncontracteur_clicked(); break;
+        case 4: _t->on_tableView_2contracteur_itemClicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
+        case 5: _t->on_comboBox_tri_2contracteur_currentIndexChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 6: _t->on_chercher_2contracteur_clicked(); break;
+        case 7: _t->on_pdf_2contracteur_clicked(); break;
+        case 8: _t->on_generateStatisticsButtoncontracteur_clicked(); break;
+        case 9: _t->on_exportStatisticsPDFButtoncontracteur_clicked(); break;
+        case 10: _t->on_addtaskcontracteur_clicked(); break;
+        case 11: _t->on_completedtaskcontracteur_clicked(); break;
+        case 12: _t->on_rmtaskcontracteur_clicked(); break;
+        case 13: _t->on_testaffichertodocontracteur_clicked(); break;
+        case 14: _t->on_affichertreecontracteur_clicked(); break;
+        case 15: _t->on_tabWidgetcontracteur_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 16: _t->on_contractorlisttablecontracteur_clicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
+        case 17: _t->on_assignCardcontracteur_clicked(); break;
+        case 18: _t->on_togglePresencecontracteur_clicked(); break;
+        case 19: _t->on_pushButton_6contracteur_clicked(); break;
         default: ;
         }
     }

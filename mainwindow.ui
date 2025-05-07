@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="contracteur_2">
    <widget class="QWidget" name="layoutWidget1">
     <property name="geometry">
      <rect>
@@ -35,7 +35,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_32">
          <item>
-          <widget class="QTabWidget" name="aceuille_2">
+          <widget class="QTabWidget" name="contracteur">
            <property name="minimumSize">
             <size>
              <width>300</width>
@@ -487,7 +487,7 @@ QLabel {
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Id contracteur:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_2">
+             <widget class="QLineEdit" name="lineEdit_2contracteur">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -514,7 +514,7 @@ QLineEdit:focus {
                <string>Nom</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_3">
+             <widget class="QLineEdit" name="lineEdit_3contracteur">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -595,7 +595,7 @@ QLineEdit:focus {
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Nombre des projets realisées :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="comboBoxcontracteur">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -671,7 +671,7 @@ QLineEdit:focus {
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-weight:700;&quot;&gt;Numéro de telephone :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_7">
+             <widget class="QLineEdit" name="lineEdit_7contracteur">
               <property name="geometry">
                <rect>
                 <x>160</x>
@@ -698,7 +698,7 @@ QLineEdit:focus {
                <string>+*** ** *** ***</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="modifier">
+             <widget class="QPushButton" name="modifiercontracteur">
               <property name="geometry">
                <rect>
                 <x>111</x>
@@ -730,7 +730,7 @@ QPushButton#modifier:pressed {
                <string>Modifier</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="annuler">
+             <widget class="QPushButton" name="annulercontracteur">
               <property name="geometry">
                <rect>
                 <x>20</x>
@@ -762,7 +762,7 @@ QPushButton#annuler:pressed {
                <string>Annuler</string>
               </property>
              </widget>
-             <widget class="QPushButton" name="ajouter">
+             <widget class="QPushButton" name="ajoutercontracteur">
               <property name="geometry">
                <rect>
                 <x>208</x>
@@ -794,7 +794,7 @@ QPushButton#ajouter:pressed {
                <string>Ajouter</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_13">
+             <widget class="QLineEdit" name="lineEdit_13contracteur">
               <property name="geometry">
                <rect>
                 <x>160</x>
@@ -837,7 +837,7 @@ QLineEdit:focus {
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-weight:700;&quot;&gt;Prenom contracteur :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
-             <widget class="QSpinBox" name="spinBox">
+             <widget class="QSpinBox" name="spinBoxcontracteur">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -852,7 +852,7 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_4">
+             <widget class="QLineEdit" name="lineEdit_4contracteur">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -895,7 +895,7 @@ QLineEdit:focus {
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Adresse :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
-             <widget class="QLineEdit" name="lineEdit_5">
+             <widget class="QLineEdit" name="lineEdit_5contracteur">
               <property name="geometry">
                <rect>
                 <x>160</x>
@@ -939,24 +939,24 @@ QLineEdit:focus {
               </property>
              </widget>
              <zorder>label_146</zorder>
-             <zorder>lineEdit_2</zorder>
+             <zorder>lineEdit_2contracteur</zorder>
              <zorder>label_149</zorder>
              <zorder>label_150</zorder>
              <zorder>label_154</zorder>
-             <zorder>comboBox</zorder>
+             <zorder>comboBoxcontracteur</zorder>
              <zorder>label_155</zorder>
-             <zorder>lineEdit_7</zorder>
-             <zorder>modifier</zorder>
-             <zorder>annuler</zorder>
-             <zorder>ajouter</zorder>
-             <zorder>lineEdit_13</zorder>
+             <zorder>lineEdit_7contracteur</zorder>
+             <zorder>modifiercontracteur</zorder>
+             <zorder>annulercontracteur</zorder>
+             <zorder>ajoutercontracteur</zorder>
+             <zorder>lineEdit_13contracteur</zorder>
              <zorder>label_168</zorder>
-             <zorder>spinBox</zorder>
-             <zorder>lineEdit_4</zorder>
+             <zorder>spinBoxcontracteur</zorder>
+             <zorder>lineEdit_4contracteur</zorder>
              <zorder>label_151</zorder>
-             <zorder>lineEdit_5</zorder>
+             <zorder>lineEdit_5contracteur</zorder>
              <zorder>label_152</zorder>
-             <zorder>lineEdit_3</zorder>
+             <zorder>lineEdit_3contracteur</zorder>
             </widget>
             <widget class="QLabel" name="label_156">
              <property name="geometry">
@@ -990,7 +990,7 @@ QLabel {
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;Ajout Contracteur&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QTabWidget" name="tabWidget">
+            <widget class="QTabWidget" name="tabWidgetcontracteur">
              <property name="geometry">
               <rect>
                <x>610</x>
@@ -1119,7 +1119,7 @@ QLabel {
 }
 </string>
                </property>
-               <widget class="QComboBox" name="comboBox_tri_2">
+               <widget class="QComboBox" name="comboBox_tri_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>540</x>
@@ -1175,7 +1175,7 @@ color: rgb(0, 0, 0);
                  </property>
                 </item>
                </widget>
-               <widget class="QPushButton" name="supprimer">
+               <widget class="QPushButton" name="supprimercontracteur">
                 <property name="geometry">
                  <rect>
                   <x>460</x>
@@ -1219,7 +1219,7 @@ QPushButton#supprimer:hover {
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:700;&quot;&gt;Recherche contracteur :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
-               <widget class="QLineEdit" name="id_rech_2">
+               <widget class="QLineEdit" name="id_rech_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>290</x>
@@ -1246,7 +1246,7 @@ QLineEdit:focus {
                  <string>Recherche</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="chercher_2">
+               <widget class="QPushButton" name="chercher_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>440</x>
@@ -1266,7 +1266,7 @@ QLineEdit:focus {
                  <string>Chercher</string>
                 </property>
                </widget>
-               <widget class="QTableView" name="tableView_2">
+               <widget class="QTableView" name="tableView_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>20</x>
@@ -1281,7 +1281,7 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="pdf_2">
+               <widget class="QPushButton" name="pdf_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>20</x>
@@ -1301,7 +1301,7 @@ color: rgb(0, 0, 0);</string>
                  <string>Exportation PDF</string>
                 </property>
                </widget>
-               <widget class="QComboBox" name="comboBox_2">
+               <widget class="QComboBox" name="comboBox_2contracteur">
                 <property name="geometry">
                  <rect>
                   <x>200</x>
@@ -1336,14 +1336,14 @@ color: rgb(0, 0, 0);</string>
                  </property>
                 </item>
                </widget>
-               <zorder>comboBox_tri_2</zorder>
-               <zorder>supprimer</zorder>
+               <zorder>comboBox_tri_2contracteur</zorder>
+               <zorder>supprimercontracteur</zorder>
                <zorder>label_158</zorder>
-               <zorder>id_rech_2</zorder>
-               <zorder>chercher_2</zorder>
-               <zorder>pdf_2</zorder>
-               <zorder>comboBox_2</zorder>
-               <zorder>tableView_2</zorder>
+               <zorder>id_rech_2contracteur</zorder>
+               <zorder>chercher_2contracteur</zorder>
+               <zorder>pdf_2contracteur</zorder>
+               <zorder>comboBox_2contracteur</zorder>
+               <zorder>tableView_2contracteur</zorder>
               </widget>
              </widget>
              <widget class="QWidget" name="statistics">
@@ -1514,7 +1514,7 @@ color: rgb(0, 0, 0);
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:9pt; font-weight:700;&quot;&gt;Statistique basée sur :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="pdf_3">
+               <widget class="QPushButton" name="pdf_3contracteur">
                 <property name="geometry">
                  <rect>
                   <x>20</x>
@@ -1534,7 +1534,7 @@ color: rgb(0, 0, 0);
                  <string>exportation pdf</string>
                 </property>
                </widget>
-               <widget class="QGraphicsView" name="graphicsView">
+               <widget class="QGraphicsView" name="graphicsViewcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>5</x>
@@ -1544,7 +1544,7 @@ color: rgb(0, 0, 0);
                  </rect>
                 </property>
                </widget>
-               <widget class="QPushButton" name="statbutt">
+               <widget class="QPushButton" name="statbuttcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>590</x>
@@ -1566,9 +1566,9 @@ color: rgb(0, 0, 0);
                </widget>
                <zorder>comboBox_stat_3</zorder>
                <zorder>label_159</zorder>
-               <zorder>graphicsView</zorder>
-               <zorder>statbutt</zorder>
-               <zorder>pdf_3</zorder>
+               <zorder>graphicsViewcontracteur</zorder>
+               <zorder>statbuttcontracteur</zorder>
+               <zorder>pdf_3contracteur</zorder>
               </widget>
              </widget>
              <widget class="QWidget" name="calendrier">
@@ -1584,7 +1584,7 @@ color: rgb(0, 0, 0);
                  <height>531</height>
                 </rect>
                </property>
-               <widget class="QTableView" name="tableView">
+               <widget class="QTableView" name="tableViewcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>470</x>
@@ -1599,7 +1599,7 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="affichertree">
+               <widget class="QPushButton" name="affichertreecontracteur">
                 <property name="geometry">
                  <rect>
                   <x>160</x>
@@ -1619,7 +1619,7 @@ color: rgb(0, 0, 0);</string>
                  <string>Afficher</string>
                 </property>
                </widget>
-               <widget class="QTreeView" name="treeView">
+               <widget class="QTreeView" name="treeViewcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>70</x>
@@ -1644,7 +1644,7 @@ color: rgb(0, 0, 0);</string>
                  <height>551</height>
                 </rect>
                </property>
-               <widget class="QListView" name="taskslist">
+               <widget class="QListView" name="taskslistcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>60</x>
@@ -1659,7 +1659,7 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="addtask">
+               <widget class="QPushButton" name="addtaskcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>60</x>
@@ -1679,7 +1679,7 @@ color: rgb(0, 0, 0);</string>
                  <string>Ajout de tache</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="completedtask">
+               <widget class="QPushButton" name="completedtaskcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>180</x>
@@ -1692,7 +1692,7 @@ color: rgb(0, 0, 0);</string>
                  <string>Marquer comme fait</string>
                 </property>
                </widget>
-               <widget class="QPushButton" name="rmtask">
+               <widget class="QPushButton" name="rmtaskcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>330</x>
@@ -1705,7 +1705,7 @@ color: rgb(0, 0, 0);</string>
                  <string>Suppression de tache</string>
                 </property>
                </widget>
-               <widget class="QLineEdit" name="tasktext">
+               <widget class="QLineEdit" name="tasktextcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>60</x>
@@ -1738,7 +1738,7 @@ QLineEdit:focus {
                  <string>Tache</string>
                 </property>
                </widget>
-               <widget class="QTableView" name="contractorlisttable">
+               <widget class="QTableView" name="contractorlisttablecontracteur">
                 <property name="geometry">
                  <rect>
                   <x>390</x>
@@ -1822,7 +1822,7 @@ color: rgb(0, 0, 0);</string>
                  <height>551</height>
                 </rect>
                </property>
-               <widget class="QListView" name="achitectview">
+               <widget class="QListView" name="achitectviewcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>30</x>
@@ -1837,7 +1837,7 @@ font: 9pt &quot;Segoe UI&quot;;
 color: rgb(0, 0, 0);</string>
                 </property>
                </widget>
-               <widget class="QListView" name="presenceview">
+               <widget class="QListView" name="presenceviewcontracteur">
                 <property name="geometry">
                  <rect>
                   <x>340</x>
@@ -1982,7 +1982,7 @@ color: rgb(0, 0, 0);</string>
  </resources>
  <connections>
   <connection>
-   <sender>tabWidget</sender>
+   <sender>tabWidgetcontracteur</sender>
    <signal>currentChanged(int)</signal>
    <receiver>MainWindow</receiver>
    <slot>on_tabWidget_currentChanged(int)</slot>

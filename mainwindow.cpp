@@ -25,24 +25,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     fillTableWidget();
-    connect(ui->tableView_2, &QTableView::clicked, this, &MainWindow::on_tableView_2_itemClicked);
-    connect(ui->ajouter, &QPushButton::clicked, this, &MainWindow::on_addContracteurButton_clicked);
-    connect(ui->annuler, &QPushButton::clicked, this, &MainWindow::on_annulerButton_clicked);
-    connect(ui->supprimer, &QPushButton::clicked, this, &MainWindow::on_supprimerContracteur_clicked);
-    connect(ui->modifier, &QPushButton::clicked, this, &MainWindow::on_modifyContracteurButton_clicked);
-    connect(ui->comboBox_tri_2, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::on_comboBox_tri_2_currentIndexChanged);
-    connect(ui->chercher_2, &QPushButton::clicked, this, &MainWindow::on_chercher_2_clicked);
-    connect(ui->pdf_2, &QPushButton::clicked, this, &MainWindow::on_pdf_2_clicked);
+    connect(ui->tableView_2contracteur, &QTableView::clicked, this, &MainWindow::on_tableView_2contracteur_itemClicked);
+    connect(ui->ajoutercontracteur, &QPushButton::clicked, this, &MainWindow::on_addContracteurButtoncontracteur_clicked);
+    connect(ui->annulercontracteur, &QPushButton::clicked, this, &MainWindow::on_annulerButtoncontracteur_clicked);
+    connect(ui->supprimercontracteur, &QPushButton::clicked, this, &MainWindow::on_supprimerContracteurcontracteur_clicked);
+    connect(ui->modifiercontracteur, &QPushButton::clicked, this, &MainWindow::on_modifyContracteurButtoncontracteur_clicked);
+    connect(ui->comboBox_tri_2contracteur, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::on_comboBox_tri_2contracteur_currentIndexChanged);
+    connect(ui->chercher_2contracteur, &QPushButton::clicked, this, &MainWindow::on_chercher_2contracteur_clicked);
+    connect(ui->pdf_2contracteur, &QPushButton::clicked, this, &MainWindow::on_pdf_2contracteur_clicked);
 
     // Connect statistics-related buttons to their slots
-    connect(ui->stat1_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
-    connect(ui->stat2_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
-    connect(ui->statbutt, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButton_clicked);
-    connect(ui->pdf_3, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButton_clicked);
-    connect(ui->contractorlisttable, &QTableView::clicked, this, &MainWindow::on_contractorlisttable_clicked);
+    connect(ui->stat1_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->stat2_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->statbuttcontracteur, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->pdf_3contracteur, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButtoncontracteur_clicked);
+    connect(ui->contractorlisttablecontracteur, &QTableView::clicked, this, &MainWindow::on_contractorlisttablecontracteur_clicked);
 
     // Connect the "Contracteurs" button to its slot
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::on_pushButton_6_clicked);
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::on_pushButton_6contracteur_clicked);
 
     // Populate the architects table
     loadArchitectsToListView();
@@ -73,22 +73,22 @@ void MainWindow::fillTableWidget() {
         qDebug() << "Failed to fetch model for tableView_2.";
         return;
     }
-    ui->tableView_2->setModel(model);
-    ui->tableView_2->resizeColumnsToContents();
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
 }
 
-void MainWindow::on_addContracteurButton_clicked() {
+void MainWindow::on_addContracteurButtoncontracteur_clicked() {
     // Input validation
-    if (ui->lineEdit_2->text().isEmpty()) {
+    if (ui->lineEdit_2contracteur->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Nom est vide !");
         return;
     }
-    if (ui->lineEdit_13->text().isEmpty()) {
+    if (ui->lineEdit_13contracteur->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Prenom est vide !");
         return;
     }
-    QString telephone = ui->lineEdit_7->text();
+    QString telephone = ui->lineEdit_7contracteur->text();
     if (telephone.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Telephone est vide !");
         return;
@@ -97,12 +97,12 @@ void MainWindow::on_addContracteurButton_clicked() {
         QMessageBox::warning(this, "Input Error", "Le numéro de téléphone doit contenir exactement 8 chiffres !");
         return;
     }
-    QString adresse = ui->lineEdit_4->text();
+    QString adresse = ui->lineEdit_4contracteur->text();
     if (adresse.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Adresse est vide !");
         return;
     }
-    QString email = ui->lineEdit_5->text();
+    QString email = ui->lineEdit_5contracteur->text();
     if (email.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Email est vide !");
         return;
@@ -111,7 +111,7 @@ void MainWindow::on_addContracteurButton_clicked() {
         QMessageBox::warning(this, "Input Error", "L'email doit être au format something@something.something !");
         return;
     }
-    QString domaine = ui->comboBox->currentText();
+    QString domaine = ui->comboBoxcontracteur->currentText();
     if (domaine == "Categorie") {
         QMessageBox::warning(this, "Input Error", "Veuillez sélectionner un domaine valide !");
         return;
@@ -125,8 +125,8 @@ void MainWindow::on_addContracteurButton_clicked() {
         id_contracteur = query.value(0).toInt() + 1;
     }
 
-    QString nom = ui->lineEdit_2->text();
-    QString prenom = ui->lineEdit_13->text();
+    QString nom = ui->lineEdit_2contracteur->text();
+    QString prenom = ui->lineEdit_13contracteur->text();
     QDateTime currentDateTime = QDateTime::currentDateTime();
     QString dateAjout = currentDateTime.toString("yyyy-MM-dd HH:mm:ss");
 
@@ -151,19 +151,19 @@ void MainWindow::on_addContracteurButton_clicked() {
         fillTableWidget();
 
         // Clear input fields
-        ui->lineEdit_2->clear();
-        ui->lineEdit_13->clear();
-        ui->lineEdit_7->clear();
-        ui->lineEdit_4->clear();
-        ui->lineEdit_5->clear();
-        ui->comboBox->setCurrentIndex(0);
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Error", "Échec de l'ajout du contracteur.");
     }
 }
 
-void MainWindow::on_supprimerContracteur_clicked() {
-    int id = ui->lineEdit_3->text().toInt();
+void MainWindow::on_supprimerContracteurcontracteur_clicked() {
+    int id = ui->lineEdit_3contracteur->text().toInt();
     if (id == 0) {
         QMessageBox::warning(this, "Input Error", "L'ID pour supprimer est vide.");
         return;
@@ -172,33 +172,33 @@ void MainWindow::on_supprimerContracteur_clicked() {
         currentContracteur.reassignIds();
         QMessageBox::information(this, "Success", "Contracteur supprimé avec succès.");
         fillTableWidget();
-        ui->lineEdit_3->clear();
-        ui->lineEdit_2->clear();
-        ui->lineEdit_13->clear();
-        ui->lineEdit_7->clear();
-        ui->lineEdit_4->clear();
-        ui->lineEdit_5->clear();
-        ui->comboBox->setCurrentIndex(0);
+        ui->lineEdit_3contracteur->clear();
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Error", "Échec de la suppression du contracteur.");
     }
 }
 
-void MainWindow::on_modifyContracteurButton_clicked() {
-    int id = ui->lineEdit_3->text().toInt();
+void MainWindow::on_modifyContracteurButtoncontracteur_clicked() {
+    int id = ui->lineEdit_3contracteur->text().toInt();
     if (id == 0) {
         QMessageBox::warning(this, "Input Error", "L'ID pour modifier est vide.");
         return;
     }
-    if (ui->lineEdit_2->text().isEmpty()) {
+    if (ui->lineEdit_2contracteur->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Nom est vide !");
         return;
     }
-    if (ui->lineEdit_13->text().isEmpty()) {
+    if (ui->lineEdit_13contracteur->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Prenom est vide !");
         return;
     }
-    QString telephone = ui->lineEdit_7->text();
+    QString telephone = ui->lineEdit_7contracteur->text();
     if (telephone.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Telephone est vide !");
         return;
@@ -207,12 +207,12 @@ void MainWindow::on_modifyContracteurButton_clicked() {
         QMessageBox::warning(this, "Input Error", "Le numéro de téléphone doit contenir exactement 8 chiffres !");
         return;
     }
-    QString adresse = ui->lineEdit_4->text();
+    QString adresse = ui->lineEdit_4contracteur->text();
     if (adresse.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Adresse est vide !");
         return;
     }
-    QString email = ui->lineEdit_5->text();
+    QString email = ui->lineEdit_5contracteur->text();
     if (email.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Email est vide !");
         return;
@@ -221,14 +221,14 @@ void MainWindow::on_modifyContracteurButton_clicked() {
         QMessageBox::warning(this, "Input Error", "L'email doit être au format something@something.something !");
         return;
     }
-    if (ui->comboBox->currentText() == "Domaine") {
+    if (ui->comboBoxcontracteur->currentText() == "Domaine") {
         QMessageBox::warning(this, "Input Error", "Veuillez sélectionner un domaine valide !");
         return;
     }
 
-    QString nom = ui->lineEdit_2->text();
-    QString prenom = ui->lineEdit_13->text();
-    QString domaine = ui->comboBox->currentText();
+    QString nom = ui->lineEdit_2contracteur->text();
+    QString prenom = ui->lineEdit_13contracteur->text();
+    QString domaine = ui->comboBoxcontracteur->currentText();
 
     currentContracteur.setNom(nom);
     currentContracteur.setPrenom(prenom);
@@ -240,21 +240,21 @@ void MainWindow::on_modifyContracteurButton_clicked() {
     if (currentContracteur.modifier(id)) {
         QMessageBox::information(this, "Success", "Information du contracteur modifiée avec succès.");
         fillTableWidget();
-        ui->lineEdit_3->clear();
-        ui->lineEdit_2->clear();
-        ui->lineEdit_13->clear();
-        ui->lineEdit_7->clear();
-        ui->lineEdit_4->clear();
-        ui->lineEdit_5->clear();
-        ui->comboBox->setCurrentIndex(0);
+        ui->lineEdit_3contracteur->clear();
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
     } else {
         QMessageBox::warning(this, "Failure", "Échec de la modification des informations du contracteur.");
     }
 }
 
-void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
+void MainWindow::on_tableView_2contracteur_itemClicked(const QModelIndex &index) {
     int row = index.row();
-    QAbstractItemModel *model = ui->tableView_2->model();
+    QAbstractItemModel *model = ui->tableView_2contracteur->model();
 
     // Ensure the model is valid
     if (!model) {
@@ -263,26 +263,26 @@ void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
     }
 
     // Populate the form fields with the selected row's data
-    ui->lineEdit_3->setText(model->data(model->index(row, 0)).toString()); // ID
-    ui->lineEdit_2->setText(model->data(model->index(row, 1)).toString()); // Nom
-    ui->lineEdit_13->setText(model->data(model->index(row, 2)).toString()); // Prenom
-    ui->lineEdit_7->setText(model->data(model->index(row, 3)).toString()); // Telephone
-    ui->lineEdit_4->setText(model->data(model->index(row, 4)).toString()); // Adresse
-    ui->lineEdit_5->setText(model->data(model->index(row, 5)).toString()); // Email
-    ui->comboBox->setCurrentText(model->data(model->index(row, 6)).toString()); // Domaine
+    ui->lineEdit_3contracteur->setText(model->data(model->index(row, 0)).toString()); // ID
+    ui->lineEdit_2contracteur->setText(model->data(model->index(row, 1)).toString()); // Nom
+    ui->lineEdit_13contracteur->setText(model->data(model->index(row, 2)).toString()); // Prenom
+    ui->lineEdit_7contracteur->setText(model->data(model->index(row, 3)).toString()); // Telephone
+    ui->lineEdit_4contracteur->setText(model->data(model->index(row, 4)).toString()); // Adresse
+    ui->lineEdit_5contracteur->setText(model->data(model->index(row, 5)).toString()); // Email
+    ui->comboBoxcontracteur->setCurrentText(model->data(model->index(row, 6)).toString()); // Domaine
 
     // Load Historique into the spinBox
-    ui->spinBox->setValue(model->data(model->index(row, 8)).toInt()); // Historique
+    ui->spinBoxcontracteur->setValue(model->data(model->index(row, 8)).toInt()); // Historique
 
     // Highlight the selected row in black
     for (int i = 0; i < model->rowCount(); ++i) {
         for (int j = 0; j < model->columnCount(); ++j) {
             if (i == row) {
-                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::BackgroundRole);
-                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::white), Qt::ForegroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::BackgroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::white), Qt::ForegroundRole);
             } else {
-                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::NoBrush), Qt::BackgroundRole);
-                ui->tableView_2->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::ForegroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::NoBrush), Qt::BackgroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::ForegroundRole);
             }
         }
     }
@@ -290,24 +290,24 @@ void MainWindow::on_tableView_2_itemClicked(const QModelIndex &index) {
 
 void MainWindow::refreshTableWidget() {
     QSqlQueryModel *model = currentContracteur.afficher();
-    ui->tableView_2->setModel(model);
-    ui->tableView_2->resizeColumnsToContents();
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
 }
 
-void MainWindow::on_annulerButton_clicked() {
+void MainWindow::on_annulerButtoncontracteur_clicked() {
     // Clear all input fields
-    ui->lineEdit_2->clear();
-    ui->lineEdit_13->clear();
-    ui->lineEdit_3->clear();
-    ui->lineEdit_7->clear();
-    ui->lineEdit_4->clear();
-    ui->lineEdit_5->clear();
-    ui->comboBox->setCurrentIndex(0); // Reset Domaine
-    ui->spinBox->setValue(0);         // Reset Historique
+    ui->lineEdit_2contracteur->clear();
+    ui->lineEdit_13contracteur->clear();
+    ui->lineEdit_3contracteur->clear();
+    ui->lineEdit_7contracteur->clear();
+    ui->lineEdit_4contracteur->clear();
+    ui->lineEdit_5contracteur->clear();
+    ui->comboBoxcontracteur->setCurrentIndex(0); // Reset Domaine
+    ui->spinBoxcontracteur->setValue(0);         // Reset Historique
 }
 
-void MainWindow::on_comboBox_tri_2_currentIndexChanged(int index) {
-    ui->tableView_2->setModel(nullptr);
+void MainWindow::on_comboBox_tri_2contracteur_currentIndexChanged(int index) {
+    ui->tableView_2contracteur->setModel(nullptr);
     QSqlQueryModel *model = new QSqlQueryModel();
     QString queryStr;
 
@@ -353,13 +353,13 @@ void MainWindow::on_comboBox_tri_2_currentIndexChanged(int index) {
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("Avis Clients"));
 
-    ui->tableView_2->setModel(model);
-    ui->tableView_2->resizeColumnsToContents();
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
 }
 
-void MainWindow::on_chercher_2_clicked() {
-    QString searchText = ui->id_rech_2->text().trimmed();
-    QString searchCriteria = ui->comboBox_2->currentText();
+void MainWindow::on_chercher_2contracteur_clicked() {
+    QString searchText = ui->id_rech_2contracteur->text().trimmed();
+    QString searchCriteria = ui->comboBox_2contracteur->currentText();
     QSqlQueryModel *model = new QSqlQueryModel();
     QString queryStr;
 
@@ -384,11 +384,11 @@ void MainWindow::on_chercher_2_clicked() {
         return;
     }
 
-    ui->tableView_2->setModel(model);
-    ui->tableView_2->resizeColumnsToContents();
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
 }
 
-void MainWindow::on_pdf_2_clicked() {
+void MainWindow::on_pdf_2contracteur_clicked() {
     static bool isExporting = false;
     if (isExporting) {
         return;
@@ -514,8 +514,8 @@ void MainWindow::generateStatistics() {
 
     QGraphicsScene *scene = new QGraphicsScene(this);
     scene->addWidget(chartView);
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->show();
+    ui->graphicsViewcontracteur->setScene(scene);
+    ui->graphicsViewcontracteur->show();
 }
 
 void MainWindow::exportStatisticsPDF() {
@@ -548,7 +548,7 @@ void MainWindow::exportStatisticsPDF() {
     painter.drawText(QRect(margin, y, pdf.width() - 2 * margin, 50), Qt::AlignCenter, "Statistiques des domaines des contracteurs");
     y += 80;
 
-    QPixmap chartPixmap = ui->graphicsView->grab();
+    QPixmap chartPixmap = ui->graphicsViewcontracteur->grab();
     if (!chartPixmap.isNull()) {
         int chartWidth = pdf.width() - 2 * margin;
         QPixmap scaledChart = chartPixmap.scaledToWidth(chartWidth, Qt::SmoothTransformation);
@@ -589,11 +589,11 @@ void MainWindow::exportStatisticsPDF() {
     QMessageBox::information(this, "Exportation PDF", "Statistiques exportées avec succès en PDF.");
 }
 
-void MainWindow::on_generateStatisticsButton_clicked() {
+void MainWindow::on_generateStatisticsButtoncontracteur_clicked() {
     generateStatistics();
 }
 
-void MainWindow::on_exportStatisticsPDFButton_clicked() {
+void MainWindow::on_exportStatisticsPDFButtoncontracteur_clicked() {
     exportStatisticsPDF();
 }
 
@@ -621,7 +621,7 @@ void MainWindow::loadTasksForContractor(int contractorId) {
             QStandardItem *item = new QStandardItem(taskName + " (" + status + ")");
             model->appendRow(item);
         }
-        ui->taskslist->setModel(model);
+        ui->taskslistcontracteur->setModel(model);
     }
 }
 
@@ -663,13 +663,13 @@ void MainWindow::populateTreeView(int contractorId) {
         contractorItem->appendRow(tasksItem);
 
         model->appendRow(contractorItem);
-        ui->treeView->setModel(model);
+        ui->treeViewcontracteur->setModel(model);
     }
 }
 
 void MainWindow::clearTreeView() {
     QStandardItemModel *model = new QStandardItemModel(this);
-    ui->treeView->setModel(model);
+    ui->treeViewcontracteur->setModel(model);
 }
 
 void MainWindow::updateTaskStatus(int contractorId, const QString &task, const QString &status) {
@@ -698,14 +698,14 @@ void MainWindow::updateTaskStatus(int contractorId, const QString &task, const Q
     }
 }
 
-void MainWindow::on_addtask_clicked() {
-    QString task = ui->tasktext->text().trimmed();
+void MainWindow::on_addtaskcontracteur_clicked() {
+    QString task = ui->tasktextcontracteur->text().trimmed();
     if (task.isEmpty()) {
         QMessageBox::warning(this, "Input Error", "Task cannot be empty.");
         return;
     }
 
-    QModelIndex index = ui->contractorlisttable->currentIndex();
+    QModelIndex index = ui->contractorlisttablecontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
         return;
@@ -739,15 +739,15 @@ void MainWindow::on_addtask_clicked() {
     }
 }
 
-void MainWindow::on_completedtask_clicked() {
-    QModelIndex index = ui->taskslist->currentIndex();
+void MainWindow::on_completedtaskcontracteur_clicked() {
+    QModelIndex index = ui->taskslistcontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a task.");
         return;
     }
 
     QString task = index.data().toString().split(" (").first();
-    QModelIndex contractorIndex = ui->contractorlisttable->currentIndex();
+    QModelIndex contractorIndex = ui->contractorlisttablecontracteur->currentIndex();
     if (!contractorIndex.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
         return;
@@ -759,15 +759,15 @@ void MainWindow::on_completedtask_clicked() {
     populateTreeView(contractorId);
 }
 
-void MainWindow::on_rmtask_clicked() {
-    QModelIndex index = ui->taskslist->currentIndex();
+void MainWindow::on_rmtaskcontracteur_clicked() {
+    QModelIndex index = ui->taskslistcontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a task.");
         return;
     }
 
     QString task = index.data().toString().split(" (").first();
-    QModelIndex contractorIndex = ui->contractorlisttable->currentIndex();
+    QModelIndex contractorIndex = ui->contractorlisttablecontracteur->currentIndex();
     if (!contractorIndex.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
         return;
@@ -804,8 +804,8 @@ void MainWindow::on_rmtask_clicked() {
     }
 }
 
-void MainWindow::on_testaffichertodo_clicked() {
-    QModelIndex index = ui->contractorlisttable->currentIndex();
+void MainWindow::on_testaffichertodocontracteur_clicked() {
+    QModelIndex index = ui->contractorlisttablecontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
         return;
@@ -815,8 +815,8 @@ void MainWindow::on_testaffichertodo_clicked() {
     loadTasksForContractor(contractorId);
 }
 
-void MainWindow::on_affichertree_clicked() {
-    QModelIndex index = ui->tableView->currentIndex();
+void MainWindow::on_affichertreecontracteur_clicked() {
+    QModelIndex index = ui->tableViewcontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
         return;
@@ -826,7 +826,7 @@ void MainWindow::on_affichertree_clicked() {
     populateTreeView(contractorId);
 }
 
-void MainWindow::on_contractorlisttable_clicked(const QModelIndex &index) {
+void MainWindow::on_contractorlisttablecontracteur_clicked(const QModelIndex &index) {
     if (!index.isValid()) return;
 
     int contractorId = index.sibling(index.row(), 0).data().toInt();
@@ -834,11 +834,11 @@ void MainWindow::on_contractorlisttable_clicked(const QModelIndex &index) {
     populateTreeView(contractorId);
 }
 
-void MainWindow::on_tabWidget_currentChanged(int index) {
+void MainWindow::on_tabWidgetcontracteur_currentChanged(int index) {
     if (index == 2) { // To-Do List tab
-        loadContractorsToTable(ui->contractorlisttable);
+        loadContractorsToTable(ui->contractorlisttablecontracteur);
     } else if (index == 3) { // Tree View tab
-        loadContractorsToTable(ui->tableView);
+        loadContractorsToTable(ui->tableViewcontracteur);
     } else if (index == 4) { // Architect tab
         loadArchitectsToListView();
         updatePresenceView();
@@ -859,7 +859,7 @@ void MainWindow::loadArchitectsToListView()
         model->appendRow(item);
     }
 
-    ui->achitectview->setModel(model);
+    ui->achitectviewcontracteur->setModel(model);
 }
 
 void MainWindow::readArduinoData()
@@ -922,7 +922,7 @@ void MainWindow::updatePresenceView()
 {
     // Clear the current model to avoid stale data
     QStandardItemModel *model = new QStandardItemModel(this);
-    ui->presenceview->setModel(model);
+    ui->presenceviewcontracteur->setModel(model);
 
     // Query the database for architects with "present" status
     QSqlQuery query;
@@ -943,15 +943,15 @@ void MainWindow::updatePresenceView()
     }
 
     // Set the updated model to the presenceview widget
-    ui->presenceview->setModel(model);
+    ui->presenceviewcontracteur->setModel(model);
 
     // Debug log to confirm the number of entries
     qDebug() << "Presence view updated with" << model->rowCount() << "entries.";
 }
 
-void MainWindow::on_assignCard_clicked()
+void MainWindow::on_assignCardcontracteur_clicked()
 {
-    QModelIndex index = ui->achitectview->currentIndex();
+    QModelIndex index = ui->achitectviewcontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select an architect.");
         return;
@@ -996,9 +996,9 @@ void MainWindow::togglePresence(int architectId, bool isPresent)
     }
 }
 
-void MainWindow::on_togglePresence_clicked()
+void MainWindow::on_togglePresencecontracteur_clicked()
 {
-    QModelIndex index = ui->achitectview->currentIndex();
+    QModelIndex index = ui->achitectviewcontracteur->currentIndex();
     if (!index.isValid()) {
         QMessageBox::warning(this, "Selection Error", "Please select an architect.");
         return;
@@ -1020,7 +1020,7 @@ void MainWindow::on_togglePresence_clicked()
     }
 }
 
-void MainWindow::on_pushButton_6_clicked() {
+void MainWindow::on_pushButton_6contracteur_clicked() {
     // Assuming your work is in the "Contracteurs" tab (index 4 in the QTabWidget)
-    ui->tabWidget->setCurrentIndex(4);
+    ui->tabWidgetcontracteur->setCurrentIndex(4);
 }

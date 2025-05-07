@@ -36,12 +36,12 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QWidget *centralwidget;
+    QWidget *contracteur_2;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout_31;
     QVBoxLayout *verticalLayout_32;
-    QTabWidget *aceuille_2;
+    QTabWidget *contracteur;
     QWidget *tab_6;
     QFrame *frame;
     QLabel *label;
@@ -55,63 +55,63 @@ public:
     QPushButton *pushButton_6;
     QFrame *frame_6;
     QLabel *label_146;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_2contracteur;
+    QLineEdit *lineEdit_3contracteur;
     QLabel *label_149;
     QLabel *label_150;
     QLabel *label_154;
-    QComboBox *comboBox;
+    QComboBox *comboBoxcontracteur;
     QLabel *label_155;
-    QLineEdit *lineEdit_7;
-    QPushButton *modifier;
-    QPushButton *annuler;
-    QPushButton *ajouter;
-    QLineEdit *lineEdit_13;
+    QLineEdit *lineEdit_7contracteur;
+    QPushButton *modifiercontracteur;
+    QPushButton *annulercontracteur;
+    QPushButton *ajoutercontracteur;
+    QLineEdit *lineEdit_13contracteur;
     QLabel *label_168;
-    QSpinBox *spinBox;
-    QLineEdit *lineEdit_4;
+    QSpinBox *spinBoxcontracteur;
+    QLineEdit *lineEdit_4contracteur;
     QLabel *label_151;
-    QLineEdit *lineEdit_5;
+    QLineEdit *lineEdit_5contracteur;
     QLabel *label_152;
     QLabel *label_156;
-    QTabWidget *tabWidget;
+    QTabWidget *tabWidgetcontracteur;
     QWidget *recherche;
     QWidget *widget_7;
-    QComboBox *comboBox_tri_2;
-    QPushButton *supprimer;
+    QComboBox *comboBox_tri_2contracteur;
+    QPushButton *supprimercontracteur;
     QLabel *label_158;
-    QLineEdit *id_rech_2;
-    QPushButton *chercher_2;
-    QTableView *tableView_2;
-    QPushButton *pdf_2;
-    QComboBox *comboBox_2;
+    QLineEdit *id_rech_2contracteur;
+    QPushButton *chercher_2contracteur;
+    QTableView *tableView_2contracteur;
+    QPushButton *pdf_2contracteur;
+    QComboBox *comboBox_2contracteur;
     QWidget *statistics;
     QWidget *widget_8;
     QComboBox *comboBox_stat_3;
     QLabel *label_159;
-    QPushButton *pdf_3;
-    QGraphicsView *graphicsView;
-    QPushButton *statbutt;
+    QPushButton *pdf_3contracteur;
+    QGraphicsView *graphicsViewcontracteur;
+    QPushButton *statbuttcontracteur;
     QWidget *calendrier;
     QWidget *widget;
-    QTableView *tableView;
-    QPushButton *affichertree;
-    QTreeView *treeView;
+    QTableView *tableViewcontracteur;
+    QPushButton *affichertreecontracteur;
+    QTreeView *treeViewcontracteur;
     QWidget *todolist;
     QWidget *widget_2;
-    QListView *taskslist;
-    QPushButton *addtask;
-    QPushButton *completedtask;
-    QPushButton *rmtask;
-    QLineEdit *tasktext;
-    QTableView *contractorlisttable;
+    QListView *taskslistcontracteur;
+    QPushButton *addtaskcontracteur;
+    QPushButton *completedtaskcontracteur;
+    QPushButton *rmtaskcontracteur;
+    QLineEdit *tasktextcontracteur;
+    QTableView *contractorlisttablecontracteur;
     QLabel *label_161;
     QLabel *label_162;
     QLabel *label_164;
     QWidget *architect;
     QWidget *widget_3;
-    QListView *achitectview;
-    QListView *presenceview;
+    QListView *achitectviewcontracteur;
+    QListView *presenceviewcontracteur;
     QLabel *label_160;
     QLabel *label_163;
     QWidget *tab_7;
@@ -129,9 +129,9 @@ public:
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(1501, 766);
         MainWindow->setMinimumSize(QSize(800, 600));
-        centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName("centralwidget");
-        layoutWidget1 = new QWidget(centralwidget);
+        contracteur_2 = new QWidget(MainWindow);
+        contracteur_2->setObjectName("contracteur_2");
+        layoutWidget1 = new QWidget(contracteur_2);
         layoutWidget1->setObjectName("layoutWidget1");
         layoutWidget1->setGeometry(QRect(0, -30, 1461, 769));
         horizontalLayout_7 = new QHBoxLayout(layoutWidget1);
@@ -141,11 +141,11 @@ public:
         verticalLayout_31->setObjectName("verticalLayout_31");
         verticalLayout_32 = new QVBoxLayout();
         verticalLayout_32->setObjectName("verticalLayout_32");
-        aceuille_2 = new QTabWidget(layoutWidget1);
-        aceuille_2->setObjectName("aceuille_2");
-        aceuille_2->setMinimumSize(QSize(300, 300));
-        aceuille_2->setAutoFillBackground(false);
-        aceuille_2->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;"));
+        contracteur = new QTabWidget(layoutWidget1);
+        contracteur->setObjectName("contracteur");
+        contracteur->setMinimumSize(QSize(300, 300));
+        contracteur->setAutoFillBackground(false);
+        contracteur->setStyleSheet(QString::fromUtf8("background-color:#F8EDEB;"));
         tab_6 = new QWidget();
         tab_6->setObjectName("tab_6");
         frame = new QFrame(tab_6);
@@ -413,10 +413,10 @@ public:
         label_146->setObjectName("label_146");
         label_146->setGeometry(QRect(2, 10, 121, 31));
         label_146->setStyleSheet(QString::fromUtf8(""));
-        lineEdit_2 = new QLineEdit(frame_6);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(10, 120, 113, 26));
-        lineEdit_2->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_2contracteur = new QLineEdit(frame_6);
+        lineEdit_2contracteur->setObjectName("lineEdit_2contracteur");
+        lineEdit_2contracteur->setGeometry(QRect(10, 120, 113, 26));
+        lineEdit_2contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -428,10 +428,10 @@ public:
 "    background-color: white;  /* Keep background white */\n"
 "}\n"
 ""));
-        lineEdit_3 = new QLineEdit(frame_6);
-        lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(10, 50, 113, 26));
-        lineEdit_3->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_3contracteur = new QLineEdit(frame_6);
+        lineEdit_3contracteur->setObjectName("lineEdit_3contracteur");
+        lineEdit_3contracteur->setGeometry(QRect(10, 50, 113, 26));
+        lineEdit_3contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -455,17 +455,17 @@ public:
         label_154->setObjectName("label_154");
         label_154->setGeometry(QRect(10, 330, 221, 31));
         label_154->setStyleSheet(QString::fromUtf8(""));
-        comboBox = new QComboBox(frame_6);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName("comboBox");
-        comboBox->setGeometry(QRect(10, 190, 141, 32));
-        comboBox->setStyleSheet(QString::fromUtf8("\n"
+        comboBoxcontracteur = new QComboBox(frame_6);
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->addItem(QString());
+        comboBoxcontracteur->setObjectName("comboBoxcontracteur");
+        comboBoxcontracteur->setGeometry(QRect(10, 190, 141, 32));
+        comboBoxcontracteur->setStyleSheet(QString::fromUtf8("\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -479,10 +479,10 @@ public:
         label_155->setObjectName("label_155");
         label_155->setGeometry(QRect(150, 148, 151, 31));
         label_155->setStyleSheet(QString::fromUtf8(""));
-        lineEdit_7 = new QLineEdit(frame_6);
-        lineEdit_7->setObjectName("lineEdit_7");
-        lineEdit_7->setGeometry(QRect(160, 190, 111, 31));
-        lineEdit_7->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_7contracteur = new QLineEdit(frame_6);
+        lineEdit_7contracteur->setObjectName("lineEdit_7contracteur");
+        lineEdit_7contracteur->setGeometry(QRect(160, 190, 111, 31));
+        lineEdit_7contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -494,10 +494,10 @@ public:
 "    background-color: white;  /* Keep background white */\n"
 "}\n"
 ""));
-        modifier = new QPushButton(frame_6);
-        modifier->setObjectName("modifier");
-        modifier->setGeometry(QRect(111, 493, 85, 31));
-        modifier->setStyleSheet(QString::fromUtf8("QPushButton#modifier {\n"
+        modifiercontracteur = new QPushButton(frame_6);
+        modifiercontracteur->setObjectName("modifiercontracteur");
+        modifiercontracteur->setGeometry(QRect(111, 493, 85, 31));
+        modifiercontracteur->setStyleSheet(QString::fromUtf8("QPushButton#modifier {\n"
 "	border-color: rgb(78, 23, 100);\n"
 "    background-color:  #4e1764;  /* Vibrant mauve */\n"
 "    border: none;\n"
@@ -514,10 +514,10 @@ public:
 "    background-color: #9f86c0;  /* Darker when clicked */\n"
 "}\n"
 ""));
-        annuler = new QPushButton(frame_6);
-        annuler->setObjectName("annuler");
-        annuler->setGeometry(QRect(20, 493, 81, 31));
-        annuler->setStyleSheet(QString::fromUtf8("QPushButton#annuler {\n"
+        annulercontracteur = new QPushButton(frame_6);
+        annulercontracteur->setObjectName("annulercontracteur");
+        annulercontracteur->setGeometry(QRect(20, 493, 81, 31));
+        annulercontracteur->setStyleSheet(QString::fromUtf8("QPushButton#annuler {\n"
 "	border-color: rgb(78, 23, 100);\n"
 "    background-color:  #4e1764;  /* Vibrant mauve */\n"
 "    border: none;\n"
@@ -534,10 +534,10 @@ public:
 "    background-color: #9f86c0;  /* Darker when clicked */\n"
 "}\n"
 ""));
-        ajouter = new QPushButton(frame_6);
-        ajouter->setObjectName("ajouter");
-        ajouter->setGeometry(QRect(208, 493, 78, 31));
-        ajouter->setStyleSheet(QString::fromUtf8("QPushButton#ajouter {\n"
+        ajoutercontracteur = new QPushButton(frame_6);
+        ajoutercontracteur->setObjectName("ajoutercontracteur");
+        ajoutercontracteur->setGeometry(QRect(208, 493, 78, 31));
+        ajoutercontracteur->setStyleSheet(QString::fromUtf8("QPushButton#ajouter {\n"
 "	border-color: rgb(78, 23, 100);\n"
 "    background-color:  #4e1764;  /* Vibrant mauve */\n"
 "   border: none;\n"
@@ -554,10 +554,10 @@ public:
 "    background-color: #9f86c0;  /* Darker when clicked */\n"
 "}\n"
 ""));
-        lineEdit_13 = new QLineEdit(frame_6);
-        lineEdit_13->setObjectName("lineEdit_13");
-        lineEdit_13->setGeometry(QRect(160, 120, 113, 26));
-        lineEdit_13->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_13contracteur = new QLineEdit(frame_6);
+        lineEdit_13contracteur->setObjectName("lineEdit_13contracteur");
+        lineEdit_13contracteur->setGeometry(QRect(160, 120, 113, 26));
+        lineEdit_13contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -573,16 +573,16 @@ public:
         label_168->setObjectName("label_168");
         label_168->setGeometry(QRect(150, 80, 141, 31));
         label_168->setStyleSheet(QString::fromUtf8(""));
-        spinBox = new QSpinBox(frame_6);
-        spinBox->setObjectName("spinBox");
-        spinBox->setGeometry(QRect(10, 370, 51, 41));
-        spinBox->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        spinBoxcontracteur = new QSpinBox(frame_6);
+        spinBoxcontracteur->setObjectName("spinBoxcontracteur");
+        spinBoxcontracteur->setGeometry(QRect(10, 370, 51, 41));
+        spinBoxcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        lineEdit_4 = new QLineEdit(frame_6);
-        lineEdit_4->setObjectName("lineEdit_4");
-        lineEdit_4->setGeometry(QRect(10, 270, 113, 26));
-        lineEdit_4->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_4contracteur = new QLineEdit(frame_6);
+        lineEdit_4contracteur->setObjectName("lineEdit_4contracteur");
+        lineEdit_4contracteur->setGeometry(QRect(10, 270, 113, 26));
+        lineEdit_4contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -598,10 +598,10 @@ public:
         label_151->setObjectName("label_151");
         label_151->setGeometry(QRect(4, 230, 81, 31));
         label_151->setStyleSheet(QString::fromUtf8(""));
-        lineEdit_5 = new QLineEdit(frame_6);
-        lineEdit_5->setObjectName("lineEdit_5");
-        lineEdit_5->setGeometry(QRect(160, 270, 113, 26));
-        lineEdit_5->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        lineEdit_5contracteur = new QLineEdit(frame_6);
+        lineEdit_5contracteur->setObjectName("lineEdit_5contracteur");
+        lineEdit_5contracteur->setGeometry(QRect(160, 270, 113, 26));
+        lineEdit_5contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -618,24 +618,24 @@ public:
         label_152->setGeometry(QRect(150, 230, 141, 31));
         label_152->setStyleSheet(QString::fromUtf8(""));
         label_146->raise();
-        lineEdit_2->raise();
+        lineEdit_2contracteur->raise();
         label_149->raise();
         label_150->raise();
         label_154->raise();
-        comboBox->raise();
+        comboBoxcontracteur->raise();
         label_155->raise();
-        lineEdit_7->raise();
-        modifier->raise();
-        annuler->raise();
-        ajouter->raise();
-        lineEdit_13->raise();
+        lineEdit_7contracteur->raise();
+        modifiercontracteur->raise();
+        annulercontracteur->raise();
+        ajoutercontracteur->raise();
+        lineEdit_13contracteur->raise();
         label_168->raise();
-        spinBox->raise();
-        lineEdit_4->raise();
+        spinBoxcontracteur->raise();
+        lineEdit_4contracteur->raise();
         label_151->raise();
-        lineEdit_5->raise();
+        lineEdit_5contracteur->raise();
         label_152->raise();
-        lineEdit_3->raise();
+        lineEdit_3contracteur->raise();
         label_156 = new QLabel(tab_6);
         label_156->setObjectName("label_156");
         label_156->setGeometry(QRect(288, 70, 231, 51));
@@ -653,10 +653,10 @@ public:
 "    border-radius: 14px;\n"
 "}\n"
 ""));
-        tabWidget = new QTabWidget(tab_6);
-        tabWidget->setObjectName("tabWidget");
-        tabWidget->setGeometry(QRect(610, 100, 771, 551));
-        tabWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(231, 219, 209);\n"
+        tabWidgetcontracteur = new QTabWidget(tab_6);
+        tabWidgetcontracteur->setObjectName("tabWidgetcontracteur");
+        tabWidgetcontracteur->setGeometry(QRect(610, 100, 771, 551));
+        tabWidgetcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(231, 219, 209);\n"
 "color: rgb(0, 0, 0);"));
         recherche = new QWidget();
         recherche->setObjectName("recherche");
@@ -763,16 +763,16 @@ public:
 "    border-radius: 5px;         /* Add border-radius for rounded corners */\n"
 "}\n"
 ""));
-        comboBox_tri_2 = new QComboBox(widget_7);
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->addItem(QString());
-        comboBox_tri_2->setObjectName("comboBox_tri_2");
-        comboBox_tri_2->setGeometry(QRect(540, 22, 141, 28));
-        comboBox_tri_2->setAutoFillBackground(false);
-        comboBox_tri_2->setStyleSheet(QString::fromUtf8("\n"
+        comboBox_tri_2contracteur = new QComboBox(widget_7);
+        comboBox_tri_2contracteur->addItem(QString());
+        comboBox_tri_2contracteur->addItem(QString());
+        comboBox_tri_2contracteur->addItem(QString());
+        comboBox_tri_2contracteur->addItem(QString());
+        comboBox_tri_2contracteur->addItem(QString());
+        comboBox_tri_2contracteur->setObjectName("comboBox_tri_2contracteur");
+        comboBox_tri_2contracteur->setGeometry(QRect(540, 22, 141, 28));
+        comboBox_tri_2contracteur->setAutoFillBackground(false);
+        comboBox_tri_2contracteur->setStyleSheet(QString::fromUtf8("\n"
 "\n"
 "    border: 2px solid #9f86c0;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -782,12 +782,12 @@ public:
 "\n"
 "\n"
 ""));
-        comboBox_tri_2->setDuplicatesEnabled(false);
-        comboBox_tri_2->setFrame(true);
-        supprimer = new QPushButton(widget_7);
-        supprimer->setObjectName("supprimer");
-        supprimer->setGeometry(QRect(460, 450, 181, 41));
-        supprimer->setStyleSheet(QString::fromUtf8("QPushButton#supprimer {\n"
+        comboBox_tri_2contracteur->setDuplicatesEnabled(false);
+        comboBox_tri_2contracteur->setFrame(true);
+        supprimercontracteur = new QPushButton(widget_7);
+        supprimercontracteur->setObjectName("supprimercontracteur");
+        supprimercontracteur->setGeometry(QRect(460, 450, 181, 41));
+        supprimercontracteur->setStyleSheet(QString::fromUtf8("QPushButton#supprimer {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "   border: 2px solid #D74C4C; /* Default thicker border */\n"
 "    border-radius: 5px;\n"
@@ -803,10 +803,10 @@ public:
         QFont font3;
         font3.setFamilies({QString::fromUtf8("Roboto")});
         label_158->setFont(font3);
-        id_rech_2 = new QLineEdit(widget_7);
-        id_rech_2->setObjectName("id_rech_2");
-        id_rech_2->setGeometry(QRect(290, 20, 141, 31));
-        id_rech_2->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        id_rech_2contracteur = new QLineEdit(widget_7);
+        id_rech_2contracteur->setObjectName("id_rech_2contracteur");
+        id_rech_2contracteur->setGeometry(QRect(290, 20, 141, 31));
+        id_rech_2contracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -818,47 +818,47 @@ public:
 "    background-color: white;  /* Keep background white */\n"
 "}\n"
 ""));
-        chercher_2 = new QPushButton(widget_7);
-        chercher_2->setObjectName("chercher_2");
-        chercher_2->setGeometry(QRect(440, 20, 91, 31));
-        chercher_2->setStyleSheet(QString::fromUtf8("QPushButton#chercher_2 {\n"
+        chercher_2contracteur = new QPushButton(widget_7);
+        chercher_2contracteur->setObjectName("chercher_2contracteur");
+        chercher_2contracteur->setGeometry(QRect(440, 20, 91, 31));
+        chercher_2contracteur->setStyleSheet(QString::fromUtf8("QPushButton#chercher_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        tableView_2 = new QTableView(widget_7);
-        tableView_2->setObjectName("tableView_2");
-        tableView_2->setGeometry(QRect(20, 70, 621, 371));
-        tableView_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        tableView_2contracteur = new QTableView(widget_7);
+        tableView_2contracteur->setObjectName("tableView_2contracteur");
+        tableView_2contracteur->setGeometry(QRect(20, 70, 621, 371));
+        tableView_2contracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        pdf_2 = new QPushButton(widget_7);
-        pdf_2->setObjectName("pdf_2");
-        pdf_2->setGeometry(QRect(20, 450, 161, 41));
-        pdf_2->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        pdf_2contracteur = new QPushButton(widget_7);
+        pdf_2contracteur->setObjectName("pdf_2contracteur");
+        pdf_2contracteur->setGeometry(QRect(20, 450, 161, 41));
+        pdf_2contracteur->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        comboBox_2 = new QComboBox(widget_7);
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->setObjectName("comboBox_2");
-        comboBox_2->setGeometry(QRect(200, 22, 82, 28));
-        comboBox_2->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        comboBox_2contracteur = new QComboBox(widget_7);
+        comboBox_2contracteur->addItem(QString());
+        comboBox_2contracteur->addItem(QString());
+        comboBox_2contracteur->addItem(QString());
+        comboBox_2contracteur->addItem(QString());
+        comboBox_2contracteur->setObjectName("comboBox_2contracteur");
+        comboBox_2contracteur->setGeometry(QRect(200, 22, 82, 28));
+        comboBox_2contracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        comboBox_tri_2->raise();
-        supprimer->raise();
+        comboBox_tri_2contracteur->raise();
+        supprimercontracteur->raise();
         label_158->raise();
-        id_rech_2->raise();
-        chercher_2->raise();
-        pdf_2->raise();
-        comboBox_2->raise();
-        tableView_2->raise();
-        tabWidget->addTab(recherche, QString());
+        id_rech_2contracteur->raise();
+        chercher_2contracteur->raise();
+        pdf_2contracteur->raise();
+        comboBox_2contracteur->raise();
+        tableView_2contracteur->raise();
+        tabWidgetcontracteur->addTab(recherche, QString());
         statistics = new QWidget();
         statistics->setObjectName("statistics");
         widget_8 = new QWidget(statistics);
@@ -985,83 +985,83 @@ public:
         label_159->setObjectName("label_159");
         label_159->setGeometry(QRect(10, 20, 191, 31));
         label_159->setFont(font3);
-        pdf_3 = new QPushButton(widget_8);
-        pdf_3->setObjectName("pdf_3");
-        pdf_3->setGeometry(QRect(20, 470, 161, 41));
-        pdf_3->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        pdf_3contracteur = new QPushButton(widget_8);
+        pdf_3contracteur->setObjectName("pdf_3contracteur");
+        pdf_3contracteur->setGeometry(QRect(20, 470, 161, 41));
+        pdf_3contracteur->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        graphicsView = new QGraphicsView(widget_8);
-        graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(5, 51, 761, 411));
-        statbutt = new QPushButton(widget_8);
-        statbutt->setObjectName("statbutt");
-        statbutt->setGeometry(QRect(590, 470, 161, 41));
-        statbutt->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        graphicsViewcontracteur = new QGraphicsView(widget_8);
+        graphicsViewcontracteur->setObjectName("graphicsViewcontracteur");
+        graphicsViewcontracteur->setGeometry(QRect(5, 51, 761, 411));
+        statbuttcontracteur = new QPushButton(widget_8);
+        statbuttcontracteur->setObjectName("statbuttcontracteur");
+        statbuttcontracteur->setGeometry(QRect(590, 470, 161, 41));
+        statbuttcontracteur->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
         comboBox_stat_3->raise();
         label_159->raise();
-        graphicsView->raise();
-        statbutt->raise();
-        pdf_3->raise();
-        tabWidget->addTab(statistics, QString());
+        graphicsViewcontracteur->raise();
+        statbuttcontracteur->raise();
+        pdf_3contracteur->raise();
+        tabWidgetcontracteur->addTab(statistics, QString());
         calendrier = new QWidget();
         calendrier->setObjectName("calendrier");
         widget = new QWidget(calendrier);
         widget->setObjectName("widget");
         widget->setGeometry(QRect(-10, -10, 801, 531));
-        tableView = new QTableView(widget);
-        tableView->setObjectName("tableView");
-        tableView->setGeometry(QRect(470, 60, 256, 411));
-        tableView->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        tableViewcontracteur = new QTableView(widget);
+        tableViewcontracteur->setObjectName("tableViewcontracteur");
+        tableViewcontracteur->setGeometry(QRect(470, 60, 256, 411));
+        tableViewcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        affichertree = new QPushButton(widget);
-        affichertree->setObjectName("affichertree");
-        affichertree->setGeometry(QRect(160, 460, 83, 29));
-        affichertree->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        affichertreecontracteur = new QPushButton(widget);
+        affichertreecontracteur->setObjectName("affichertreecontracteur");
+        affichertreecontracteur->setGeometry(QRect(160, 460, 83, 29));
+        affichertreecontracteur->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        treeView = new QTreeView(widget);
-        treeView->setObjectName("treeView");
-        treeView->setGeometry(QRect(70, 60, 256, 361));
-        tabWidget->addTab(calendrier, QString());
+        treeViewcontracteur = new QTreeView(widget);
+        treeViewcontracteur->setObjectName("treeViewcontracteur");
+        treeViewcontracteur->setGeometry(QRect(70, 60, 256, 361));
+        tabWidgetcontracteur->addTab(calendrier, QString());
         todolist = new QWidget();
         todolist->setObjectName("todolist");
         widget_2 = new QWidget(todolist);
         widget_2->setObjectName("widget_2");
         widget_2->setGeometry(QRect(-11, -21, 791, 551));
-        taskslist = new QListView(widget_2);
-        taskslist->setObjectName("taskslist");
-        taskslist->setGeometry(QRect(60, 90, 256, 271));
-        taskslist->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        taskslistcontracteur = new QListView(widget_2);
+        taskslistcontracteur->setObjectName("taskslistcontracteur");
+        taskslistcontracteur->setGeometry(QRect(60, 90, 256, 271));
+        taskslistcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        addtask = new QPushButton(widget_2);
-        addtask->setObjectName("addtask");
-        addtask->setGeometry(QRect(60, 450, 111, 29));
-        addtask->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
+        addtaskcontracteur = new QPushButton(widget_2);
+        addtaskcontracteur->setObjectName("addtaskcontracteur");
+        addtaskcontracteur->setGeometry(QRect(60, 450, 111, 29));
+        addtaskcontracteur->setStyleSheet(QString::fromUtf8("QPushButton#pdf_2 {\n"
 "    background-color: rgb(255, 255, 255);\n"
 "	border: 2px solid #9f86c0 ;/* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "}"));
-        completedtask = new QPushButton(widget_2);
-        completedtask->setObjectName("completedtask");
-        completedtask->setGeometry(QRect(180, 450, 141, 29));
-        rmtask = new QPushButton(widget_2);
-        rmtask->setObjectName("rmtask");
-        rmtask->setGeometry(QRect(330, 450, 151, 29));
-        tasktext = new QLineEdit(widget_2);
-        tasktext->setObjectName("tasktext");
-        tasktext->setGeometry(QRect(60, 380, 161, 28));
-        tasktext->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        completedtaskcontracteur = new QPushButton(widget_2);
+        completedtaskcontracteur->setObjectName("completedtaskcontracteur");
+        completedtaskcontracteur->setGeometry(QRect(180, 450, 141, 29));
+        rmtaskcontracteur = new QPushButton(widget_2);
+        rmtaskcontracteur->setObjectName("rmtaskcontracteur");
+        rmtaskcontracteur->setGeometry(QRect(330, 450, 151, 29));
+        tasktextcontracteur = new QLineEdit(widget_2);
+        tasktextcontracteur->setObjectName("tasktextcontracteur");
+        tasktextcontracteur->setGeometry(QRect(60, 380, 161, 28));
+        tasktextcontracteur->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #4e1764;  /* Default thicker border */\n"
 "    border-radius: 5px;\n"
 "    background-color: white;  /* Ensure background stays white */\n"
@@ -1073,10 +1073,10 @@ public:
 "    background-color: white;  /* Keep background white */\n"
 "}\n"
 ""));
-        contractorlisttable = new QTableView(widget_2);
-        contractorlisttable->setObjectName("contractorlisttable");
-        contractorlisttable->setGeometry(QRect(390, 90, 271, 271));
-        contractorlisttable->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        contractorlisttablecontracteur = new QTableView(widget_2);
+        contractorlisttablecontracteur->setObjectName("contractorlisttablecontracteur");
+        contractorlisttablecontracteur->setGeometry(QRect(390, 90, 271, 271));
+        contractorlisttablecontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
         label_161 = new QLabel(todolist);
@@ -1091,22 +1091,22 @@ public:
         label_164->setObjectName("label_164");
         label_164->setGeometry(QRect(220, 357, 191, 31));
         label_164->setFont(font3);
-        tabWidget->addTab(todolist, QString());
+        tabWidgetcontracteur->addTab(todolist, QString());
         architect = new QWidget();
         architect->setObjectName("architect");
         widget_3 = new QWidget(architect);
         widget_3->setObjectName("widget_3");
         widget_3->setGeometry(QRect(10, -10, 791, 551));
-        achitectview = new QListView(widget_3);
-        achitectview->setObjectName("achitectview");
-        achitectview->setGeometry(QRect(30, 70, 281, 431));
-        achitectview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        achitectviewcontracteur = new QListView(widget_3);
+        achitectviewcontracteur->setObjectName("achitectviewcontracteur");
+        achitectviewcontracteur->setGeometry(QRect(30, 70, 281, 431));
+        achitectviewcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
-        presenceview = new QListView(widget_3);
-        presenceview->setObjectName("presenceview");
-        presenceview->setGeometry(QRect(340, 70, 281, 431));
-        presenceview->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+        presenceviewcontracteur = new QListView(widget_3);
+        presenceviewcontracteur->setObjectName("presenceviewcontracteur");
+        presenceviewcontracteur->setGeometry(QRect(340, 70, 281, 431));
+        presenceviewcontracteur->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "font: 9pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);"));
         label_160 = new QLabel(widget_3);
@@ -1117,8 +1117,8 @@ public:
         label_163->setObjectName("label_163");
         label_163->setGeometry(QRect(340, 30, 231, 31));
         label_163->setFont(font3);
-        tabWidget->addTab(architect, QString());
-        aceuille_2->addTab(tab_6, QString());
+        tabWidgetcontracteur->addTab(architect, QString());
+        contracteur->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName("tab_7");
         pie_2 = new QGraphicsView(tab_7);
@@ -1138,9 +1138,9 @@ public:
         stat2_2 = new QPushButton(tab_7);
         stat2_2->setObjectName("stat2_2");
         stat2_2->setGeometry(QRect(950, 360, 161, 71));
-        aceuille_2->addTab(tab_7, QString());
+        contracteur->addTab(tab_7, QString());
 
-        verticalLayout_32->addWidget(aceuille_2);
+        verticalLayout_32->addWidget(contracteur);
 
 
         verticalLayout_31->addLayout(verticalLayout_32);
@@ -1148,7 +1148,7 @@ public:
 
         horizontalLayout_7->addLayout(verticalLayout_31);
 
-        MainWindow->setCentralWidget(centralwidget);
+        MainWindow->setCentralWidget(contracteur_2);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 1501, 25));
@@ -1158,10 +1158,10 @@ public:
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
-        QObject::connect(tabWidget, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
+        QObject::connect(tabWidgetcontracteur, SIGNAL(currentChanged(int)), MainWindow, SLOT(on_tabWidget_currentChanged(int)));
 
-        aceuille_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        contracteur->setCurrentIndex(0);
+        tabWidgetcontracteur->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1178,80 +1178,80 @@ public:
         pushButton_5->setText(QCoreApplication::translate("MainWindow", " Contrats", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", " Contracteurs", nullptr));
         label_146->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Id contracteur:</span></p></body></html>", nullptr));
-        lineEdit_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        lineEdit_2contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Nom", nullptr));
 #if QT_CONFIG(tooltip)
-        lineEdit_3->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>dhzbebcl</p></body></html>", nullptr));
+        lineEdit_3contracteur->setToolTip(QCoreApplication::translate("MainWindow", "<html><head/><body><p>dhzbebcl</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(whatsthis)
-        lineEdit_3->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>vj j;</p></body></html>", nullptr));
+        lineEdit_3contracteur->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>vj j;</p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
-        lineEdit_3->setPlaceholderText(QCoreApplication::translate("MainWindow", "ID", nullptr));
+        lineEdit_3contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "ID", nullptr));
         label_149->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nom contracteur :</span></p></body></html>", nullptr));
         label_150->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Domaine :</span></p></body></html>", nullptr));
         label_154->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Nombre des projets realis\303\251es :</span></p></body></html>", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
-        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
-        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
-        comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
-        comboBox->setItemText(6, QCoreApplication::translate("MainWindow", "Outils", nullptr));
+        comboBoxcontracteur->setItemText(0, QCoreApplication::translate("MainWindow", "Eclairage", nullptr));
+        comboBoxcontracteur->setItemText(1, QCoreApplication::translate("MainWindow", "Technologie", nullptr));
+        comboBoxcontracteur->setItemText(2, QCoreApplication::translate("MainWindow", "Papeterie", nullptr));
+        comboBoxcontracteur->setItemText(3, QCoreApplication::translate("MainWindow", "Nettoyage", nullptr));
+        comboBoxcontracteur->setItemText(4, QCoreApplication::translate("MainWindow", "Mobilier", nullptr));
+        comboBoxcontracteur->setItemText(5, QCoreApplication::translate("MainWindow", "Electrique", nullptr));
+        comboBoxcontracteur->setItemText(6, QCoreApplication::translate("MainWindow", "Outils", nullptr));
 
-        comboBox->setPlaceholderText(QCoreApplication::translate("MainWindow", "Domaine", nullptr));
+        comboBoxcontracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Domaine", nullptr));
         label_155->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700;\">Num\303\251ro de telephone :</span></p></body></html>", nullptr));
-        lineEdit_7->setPlaceholderText(QCoreApplication::translate("MainWindow", "+*** ** *** ***", nullptr));
-        modifier->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
-        annuler->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
-        ajouter->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
-        lineEdit_13->setPlaceholderText(QCoreApplication::translate("MainWindow", "Prenom", nullptr));
+        lineEdit_7contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "+*** ** *** ***", nullptr));
+        modifiercontracteur->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
+        annulercontracteur->setText(QCoreApplication::translate("MainWindow", "Annuler", nullptr));
+        ajoutercontracteur->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
+        lineEdit_13contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Prenom", nullptr));
         label_168->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700;\">Prenom contracteur :</span></p></body></html>", nullptr));
-        lineEdit_4->setPlaceholderText(QCoreApplication::translate("MainWindow", "Adresse", nullptr));
+        lineEdit_4contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Adresse", nullptr));
         label_151->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Adresse :</span></p></body></html>", nullptr));
-        lineEdit_5->setPlaceholderText(QCoreApplication::translate("MainWindow", "Email", nullptr));
+        lineEdit_5contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Email", nullptr));
         label_152->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Email :</span></p></body></html>", nullptr));
         label_156->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-style:normal;\">Ajout Contracteur</span></p><p align=\"center\"><br/></p></body></html>", nullptr));
-        comboBox_tri_2->setItemText(0, QCoreApplication::translate("MainWindow", "Trier selon ", nullptr));
-        comboBox_tri_2->setItemText(1, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
-        comboBox_tri_2->setItemText(2, QCoreApplication::translate("MainWindow", "Id d\303\251croissant ", nullptr));
-        comboBox_tri_2->setItemText(3, QCoreApplication::translate("MainWindow", "Id croissant", nullptr));
-        comboBox_tri_2->setItemText(4, QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        comboBox_tri_2contracteur->setItemText(0, QCoreApplication::translate("MainWindow", "Trier selon ", nullptr));
+        comboBox_tri_2contracteur->setItemText(1, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
+        comboBox_tri_2contracteur->setItemText(2, QCoreApplication::translate("MainWindow", "Id d\303\251croissant ", nullptr));
+        comboBox_tri_2contracteur->setItemText(3, QCoreApplication::translate("MainWindow", "Id croissant", nullptr));
+        comboBox_tri_2contracteur->setItemText(4, QCoreApplication::translate("MainWindow", "Nom", nullptr));
 
-        supprimer->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
+        supprimercontracteur->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
         label_158->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Recherche contracteur :</span></p></body></html>", nullptr));
-        id_rech_2->setPlaceholderText(QCoreApplication::translate("MainWindow", "Recherche", nullptr));
-        chercher_2->setText(QCoreApplication::translate("MainWindow", "Chercher", nullptr));
-        pdf_2->setText(QCoreApplication::translate("MainWindow", "Exportation PDF", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "ID", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "Date d'ajout", nullptr));
-        comboBox_2->setItemText(2, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
-        comboBox_2->setItemText(3, QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        id_rech_2contracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Recherche", nullptr));
+        chercher_2contracteur->setText(QCoreApplication::translate("MainWindow", "Chercher", nullptr));
+        pdf_2contracteur->setText(QCoreApplication::translate("MainWindow", "Exportation PDF", nullptr));
+        comboBox_2contracteur->setItemText(0, QCoreApplication::translate("MainWindow", "ID", nullptr));
+        comboBox_2contracteur->setItemText(1, QCoreApplication::translate("MainWindow", "Date d'ajout", nullptr));
+        comboBox_2contracteur->setItemText(2, QCoreApplication::translate("MainWindow", "Domaine", nullptr));
+        comboBox_2contracteur->setItemText(3, QCoreApplication::translate("MainWindow", "Nom", nullptr));
 
-        tabWidget->setTabText(tabWidget->indexOf(recherche), QCoreApplication::translate("MainWindow", "Recherche Et Tri", nullptr));
+        tabWidgetcontracteur->setTabText(tabWidgetcontracteur->indexOf(recherche), QCoreApplication::translate("MainWindow", "Recherche Et Tri", nullptr));
         comboBox_stat_3->setItemText(0, QCoreApplication::translate("MainWindow", "Type des projets", nullptr));
 
         label_159->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:9pt; font-weight:700;\">Statistique bas\303\251e sur :</span></p></body></html>", nullptr));
-        pdf_3->setText(QCoreApplication::translate("MainWindow", "exportation pdf", nullptr));
-        statbutt->setText(QCoreApplication::translate("MainWindow", "Generer Statistiques", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(statistics), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
-        affichertree->setText(QCoreApplication::translate("MainWindow", "Afficher", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(calendrier), QCoreApplication::translate("MainWindow", "Informations", nullptr));
-        addtask->setText(QCoreApplication::translate("MainWindow", "Ajout de tache", nullptr));
-        completedtask->setText(QCoreApplication::translate("MainWindow", "Marquer comme fait", nullptr));
-        rmtask->setText(QCoreApplication::translate("MainWindow", "Suppression de tache", nullptr));
-        tasktext->setInputMask(QString());
-        tasktext->setText(QString());
-        tasktext->setPlaceholderText(QCoreApplication::translate("MainWindow", "Tache", nullptr));
+        pdf_3contracteur->setText(QCoreApplication::translate("MainWindow", "exportation pdf", nullptr));
+        statbuttcontracteur->setText(QCoreApplication::translate("MainWindow", "Generer Statistiques", nullptr));
+        tabWidgetcontracteur->setTabText(tabWidgetcontracteur->indexOf(statistics), QCoreApplication::translate("MainWindow", "Statistiques", nullptr));
+        affichertreecontracteur->setText(QCoreApplication::translate("MainWindow", "Afficher", nullptr));
+        tabWidgetcontracteur->setTabText(tabWidgetcontracteur->indexOf(calendrier), QCoreApplication::translate("MainWindow", "Informations", nullptr));
+        addtaskcontracteur->setText(QCoreApplication::translate("MainWindow", "Ajout de tache", nullptr));
+        completedtaskcontracteur->setText(QCoreApplication::translate("MainWindow", "Marquer comme fait", nullptr));
+        rmtaskcontracteur->setText(QCoreApplication::translate("MainWindow", "Suppression de tache", nullptr));
+        tasktextcontracteur->setInputMask(QString());
+        tasktextcontracteur->setText(QString());
+        tasktextcontracteur->setPlaceholderText(QCoreApplication::translate("MainWindow", "Tache", nullptr));
         label_161->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des contracteurs :</span></p></body></html>", nullptr));
         label_162->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Taches \303\240 faire :</span></p></body></html>", nullptr));
         label_164->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Tache \303\240 ajouter</span></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(todolist), QCoreApplication::translate("MainWindow", "To Do List", nullptr));
+        tabWidgetcontracteur->setTabText(tabWidgetcontracteur->indexOf(todolist), QCoreApplication::translate("MainWindow", "To Do List", nullptr));
         label_160->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des architects :</span></p></body></html>", nullptr));
         label_163->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700;\">Liste des architects presents :</span></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(architect), QCoreApplication::translate("MainWindow", "Pr\303\251sence", nullptr));
-        aceuille_2->setTabText(aceuille_2->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
+        tabWidgetcontracteur->setTabText(tabWidgetcontracteur->indexOf(architect), QCoreApplication::translate("MainWindow", "Pr\303\251sence", nullptr));
+        contracteur->setTabText(contracteur->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Consulter", nullptr));
         stat1_2->setText(QCoreApplication::translate("MainWindow", "statistique sexe", nullptr));
         stat2_2->setText(QCoreApplication::translate("MainWindow", "statistique conge", nullptr));
-        aceuille_2->setTabText(aceuille_2->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        contracteur->setTabText(contracteur->indexOf(tab_7), QCoreApplication::translate("MainWindow", "Statistique", nullptr));
     } // retranslateUi
 
 };

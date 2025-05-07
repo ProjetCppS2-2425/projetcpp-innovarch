@@ -56,14 +56,14 @@ bool Contracteur::ajouter() {
 QSqlQueryModel* Contracteur::afficher() {
     QSqlQueryModel* model = new QSqlQueryModel();
     model->setQuery("SELECT * FROM contracteurs ORDER BY id_contracteur ASC");
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Telephone"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
-    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Domaine"));
-    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID Contracteur"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom Contracteur"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom Contracteur"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Telephone Contracteur"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse Contracteur"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email Contracteur"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Domaine Contracteur"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout Contracteur"));
     return model;
 }
 

@@ -23,26 +23,26 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_addContracteurButton_clicked();
-    void on_supprimerContracteur_clicked();
-    void on_modifyContracteurButton_clicked();
-    void on_annulerButton_clicked();
-    void on_tableView_2_itemClicked(const QModelIndex &index);
-    void on_comboBox_tri_2_currentIndexChanged(int index);
-    void on_chercher_2_clicked();
-    void on_pdf_2_clicked();
-    void on_generateStatisticsButton_clicked();
-    void on_exportStatisticsPDFButton_clicked();
-    void on_addtask_clicked();
-    void on_completedtask_clicked();
-    void on_rmtask_clicked();
-    void on_testaffichertodo_clicked();
-    void on_affichertree_clicked();
-    void on_tabWidget_currentChanged(int index);
-    void on_contractorlisttable_clicked(const QModelIndex &index);
-    void on_assignCard_clicked();
-    void on_togglePresence_clicked();
-    void on_pushButton_6_clicked(); // Slot for the "Contracteurs" button
+    void on_addContracteurButtoncontracteur_clicked();
+    void on_supprimerContracteurcontracteur_clicked();
+    void on_modifyContracteurButtoncontracteur_clicked();
+    void on_annulerButtoncontracteur_clicked();
+    void on_tableView_2contracteur_itemClicked(const QModelIndex &index);
+    void on_comboBox_tri_2contracteur_currentIndexChanged(int index);
+    void on_chercher_2contracteur_clicked();
+    void on_pdf_2contracteur_clicked();
+    void on_generateStatisticsButtoncontracteur_clicked();
+    void on_exportStatisticsPDFButtoncontracteur_clicked();
+    void on_addtaskcontracteur_clicked();
+    void on_completedtaskcontracteur_clicked();
+    void on_rmtaskcontracteur_clicked();
+    void on_testaffichertodocontracteur_clicked();
+    void on_affichertreecontracteur_clicked();
+    void on_tabWidgetcontracteur_currentChanged(int index);
+    void on_contractorlisttablecontracteur_clicked(const QModelIndex &index);
+    void on_assignCardcontracteur_clicked();
+    void on_togglePresencecontracteur_clicked();
+    void on_pushButton_6contracteur_clicked(); // Slot for the "Contracteurs" button
 
 private:
     Ui::MainWindow *ui;
