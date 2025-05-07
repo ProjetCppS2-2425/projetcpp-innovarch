@@ -17,9 +17,9 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-	gestionressources.cpp
+        gestionressources.cpp
         gestionressources.h
-	connection.cpp rec.h
+        connection.cpp rec.h
         rec.cpp
 )
 
@@ -27,10 +27,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(GestionRessources
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-	icons.qrc
+        icons.qrc
         Atelier_Connexion.pro
-	Atelier_Connexion.pro.user
-	connection.h
+        Atelier_Connexion.pro.user
+        connection.h
         IconDelegate.h
         rec.h
         rec.cpp
@@ -39,7 +39,19 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         architechtes.h dialog.h
         architechtes.cpp dialog.cpp
         dialog.ui
-        projetcrud.h projetcrud.cpp
+        projetcrud.cpp projetcrud.h
+        arduinocl.h arduinocl.cpp
+        sms.h sms.cpp
+        sms.h sms.cpp
+        clients.h clients.cpp
+        contracteur.cpp
+        contracteur.h
+        arduinocontracteur.cpp
+        arduinocontracteur.h
+        ../../../Downloads/youssef/projetcpp-innovarch-gestion-contrats/arduino.h ../../../Downloads/youssef/projetcpp-innovarch-gestion-contrats/contrats.h ../../../Downloads/youssef/projetcpp-innovarch-gestion-contrats/mailer.h
+        contrats.h contrats.cpp
+        mailer.h mailer.cpp
+        arduinocontrat.h arduinocontrat.cpp
 
 
     )

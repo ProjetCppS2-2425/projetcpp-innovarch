@@ -5,10 +5,19 @@
 #include "rec.h"
 #include "dialog.h"
 #include "arduino.h"
+//#include "arduinocontracteur.h"
+#include "contracteur.h"
+#include "contrats.h"
+#include "mailer.h"
+#include "arduinocontrat.h"
 #include "IconDelegate.h"
 #include "connection.h"
 #include <QJsonArray>
 #include "projetcrud.h"
+
+#include "sms.h"
+#include "arduinocl.h"
+#include "clients.h"
 // Qt Core
 #include <QTimer>
 #include <QDebug>
@@ -133,6 +142,10 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     // ----- RESOURCE UI Initialization -----
     ui->mainStack->setCurrentWidget(ui->mainStack);
+
+
+
+
     fillTab();
     populateLowStockTable();
     ui->triButton->setIcon(QIcon(":/ressources/images/ascending.png"));
@@ -158,6 +171,7 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
     connect(ui->bellIcon, &QPushButton::clicked, this, &MainWindow::showAllAlerts);
     connect(ui->recPerso, &QPushButton::clicked, this, &MainWindow::handlePersonalizedRecommendation);
 
+
     QList<QPair<QString, QString>> alerts = gestionRessources.checkAlerts();
     for (const auto& alert : alerts) {
         handleAlertNotification(alert.first, alert.second);
@@ -182,11 +196,132 @@ MainWindow::MainWindow(QWidget *parent, const QString &userRole)
 
     // Login buttons
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-    //connect(ui->pushButton_cl, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-   // connect(ui->pushButton_ct, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-  //  connect(ui->pushButton_contrats, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-    //connect(ui->pushButton_proj, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
-}
+    connect(ui->pushButton_cl, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+   connect(ui->pushButton_ct, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+  connect(ui->pushButton_contrats, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+    connect(ui->pushButton_proj, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+    connect(ui->pushButton_r, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+    connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::onLoginClicked);
+
+
+
+
+
+
+    //partie clients
+
+
+    connect(ui->tableView_4, &QTableView::clicked, this, &MainWindow::on_tableView_itemClicked1);
+    connect(ui->ajouter_6, &QPushButton::clicked, this, &MainWindow::on_addClientButton_clicked);
+    connect(ui->annuler_6, &QPushButton::clicked, this, &MainWindow::on_annulerButton_clicked);
+    connect(ui->supprimer_3, &QPushButton::clicked, this, &MainWindow::on_supprimerClient_clicked);
+    connect(ui->modifier_6, &QPushButton::clicked, this, &MainWindow::on_modifyClientButton_clicked);
+    connect(ui->chercher_6, &QPushButton::clicked, this, &MainWindow::on_pushButtonRecherche_clicked);
+    connect(ui->TrierButton_3, &QPushButton::clicked, this, &MainWindow::on_trierClientButton_clicked);
+    connect(ui->pdf_5, &QPushButton::clicked, this, &MainWindow::on_pdfClientButton_clicked);
+    connect(ui->statButton_2, &QPushButton::clicked, this, &MainWindow::on_statButton1_clicked);
+    connect(ui->sms_2, &QPushButton::clicked, this, &MainWindow::on_btnEnvoyerSMS_clicked);
+    connect(ui->Door_2, &QPushButton::clicked, this, &MainWindow::on_pushButton_openDoor_clicked);
+
+
+
+
+
+
+    qDebug() << "Calling fillTableWidget() at startup";
+    fillTableWidget1();
+
+    // Connexion à Arduino
+    // ArduinoCL A;
+    int connection = A.connect_arduino();
+    if (connection == 0)
+        qDebug() << "✅ Arduino connecté sur " << A.getarduino_port_name();
+    else if (connection == 1)
+        qDebug() << "⚠️ Arduino détecté mais pas connecté.";
+    else
+        qDebug() << "❌ Arduino non détecté.";
+
+//partie contracteur///////
+
+    fillTableWidget2();
+    connect(ui->tableView_2contracteur, &QTableView::clicked, this, &MainWindow::on_tableView_2contracteur_itemClicked);
+    connect(ui->ajoutercontracteur, &QPushButton::clicked, this, &MainWindow::on_addContracteurButtoncontracteur_clicked);
+    connect(ui->annulercontracteur, &QPushButton::clicked, this, &MainWindow::on_annulerButtoncontracteur_clicked);
+    connect(ui->supprimercontracteur, &QPushButton::clicked, this, &MainWindow::on_supprimerContracteurcontracteur_clicked);
+    connect(ui->modifiercontracteur, &QPushButton::clicked, this, &MainWindow::on_modifyContracteurButtoncontracteur_clicked);
+    connect(ui->comboBox_tri_2contracteur, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::on_comboBox_tri_2contracteur_currentIndexChanged);
+    connect(ui->chercher_2contracteur, &QPushButton::clicked, this, &MainWindow::on_chercher_2contracteur_clicked);
+    connect(ui->pdf_2contracteur, &QPushButton::clicked, this, &MainWindow::on_pdf_2contracteur_clicked);
+
+    // Connect statistics-related buttons to their slots
+    connect(ui->stat1_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->stat2_2, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->statbuttcontracteur, &QPushButton::clicked, this, &MainWindow::on_generateStatisticsButtoncontracteur_clicked);
+    connect(ui->pdf_3contracteur, &QPushButton::clicked, this, &MainWindow::on_exportStatisticsPDFButtoncontracteur_clicked);
+    connect(ui->contractorlisttablecontracteur, &QTableView::clicked, this, &MainWindow::on_contractorlisttablecontracteur_clicked);
+
+    // Connect the "Contracteurs" button to its slot
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::on_pushButton_6contracteur_clicked);
+
+    // Populate the architects table
+    loadArchitectsToListView();
+
+    // Connect to Arduino
+        /*arduino->connectToArduino() ;
+
+        connect(arduinoTimer, &QTimer::timeout, this, &MainWindow::readArduinoData);
+
+
+        // Set up a timer to continuously read from Arduino
+        QTimer *arduinoTimer = new QTimer(this);
+        connect(arduinoTimer, &QTimer::timeout, this, &MainWindow::readArduinoData);
+        arduinoTimer->start(100); // Check every 100ms
+
+
+
+
+
+        qDebug() << "Calling fillTableWidget() at startup";
+        fillTableWidget1();
+
+        // Connexion à Arduino
+       // ArduinoCL A;
+       int connection2 = A.connect_arduino();
+        if (connection2 == 0)
+            qDebug() << "✅ Arduino connecté sur " << A.getarduino_port_name();
+        else if (connection2 == 1)
+            qDebug() << "⚠️ Arduino détecté mais pas connecté.";
+        else
+            qDebug() << "❌ Arduino non détecté.";*/
+
+
+    ////////contrat////////
+
+
+    connect(ui->affichercontrat, &QPushButton::clicked, this, &MainWindow::afficherContrats);
+        AB.connect_arduino();
+
+        timer = new QTimer(this);
+        connect(timer, &QTimer::timeout, this, &MainWindow::handleKeypadInput);
+        timer->start(500); // vérifie toutes les 500ms
+
+
+
+
+
+        // Correct signal-slot connections
+        connect(ui->tableWidgetcontrat, &QTableWidget::cellClicked, this, &MainWindow::on_tableWidgetcontrat_cellClicked);
+        connect(ui->tributtoncontrat, &QPushButton::clicked, this, &MainWindow::on_tributtoncontrat_clicked);
+        connect(ui->cherchercontrat, &QPushButton::clicked, this, &MainWindow::on_cherchercontrat_clicked);
+        connect(ui->pushbutton_Email, &QPushButton::clicked, this, &MainWindow::on_pushButton_email_clicked);
+        connect(ui->exportercontrat, &QPushButton::clicked, this, &MainWindow::on_exportercontrat_clicked);
+    }
+
+
+
+
+
+
 
 
 MainWindow::~MainWindow()
@@ -2144,25 +2279,6 @@ void MainWindow::refreshCongeTableViewOnDateClick(const QDate &date)
     }
 }
 
-void MainWindow::on_voirlesStatistiques_clicked()
-{
-    ui->mainStack->setCurrentIndex(1);
-}
-
-void MainWindow::on_commandLinkButton_clicked()
-{
-    ui->mainStack->setCurrentIndex(0);
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->mainStack->setCurrentIndex(2);
-}
-
-void MainWindow::on_pushButton_r_clicked()
-{
-    ui->mainStack->setCurrentIndex(0);
-}
 
 
 void MainWindow::on_ajouter_2_clicked()
@@ -3390,6 +3506,1953 @@ void MainWindow::on_stat1_2_clicked() {
     ui->bar_2->setScene(scene);
     ui->bar_2->setSceneRect(scene->sceneRect());
 }
+//////////// partie client//////////////////
+
+
+//partie clients
+
+void MainWindow::on_pushButton_openDoor_clicked()
+{
+    static QTime lastClickTime; // Pour déboguer les clics rapprochés
+    QTime currentTime = QTime::currentTime();
+    if (lastClickTime.isValid() && lastClickTime.msecsTo(currentTime) < 1000) {
+        qDebug() << "Clic ignoré : trop proche du précédent (< 1s).";
+        return;
+    }
+    lastClickTime = currentTime;
+
+    if (isUpdatingPresence) {
+        qDebug() << "Mise à jour de la présence en cours, clic ignoré.";
+        return;
+    }
+
+    QString id = ui->label_id_2->text().trimmed();  // Récupérer l'ID du QLineEdit
+    if (id.isEmpty()) {
+        QMessageBox::warning(this, "Erreur", "L'ID est vide ! Veuillez entrer un ID valide.");
+        return;
+    }
+
+    // Vérifier si l'Arduino est connecté
+    if (!A.getserial()->isOpen()) {
+        QMessageBox::critical(this, "Erreur", "Arduino non connecté. Vérifiez la connexion.");
+        return;
+    }
+
+    // Envoyer la commande à Arduino
+    A.write_to_arduino("O\n");  // Envoyer 'O' pour ouvrir
+    qDebug() << "Commande 'O\\n' envoyée à Arduino pour ID:" << id;
+
+    // Désactiver le bouton temporairement pour éviter les clics multiples
+    ui->Door_2->setEnabled(false);
+    QTimer::singleShot(5000, this, [this]() {
+        ui->Door_2->setEnabled(true);  // Réactiver après 5s
+    });
+
+    // Mettre à jour la présence
+    isUpdatingPresence = true;
+    updatePresence(id);
+    isUpdatingPresence = false;
+}
+
+void MainWindow::updatePresence(QString id)
+{
+    QSqlQuery query;
+    query.prepare("SELECT presence FROM ARCHITECTES WHERE id_architecte = :id");
+    query.bindValue(":id", id.toInt());
+
+    if (!query.exec()) {
+        QMessageBox::critical(this, "Erreur SQL", "Erreur lors de la vérification de la présence : " + query.lastError().text());
+        return;
+    }
+
+    QString newPresence;
+    if (query.next()) {
+        QString currentPresence = query.value(0).toString().toLower();
+        qDebug() << "Présence actuelle pour ID" << id << ":" << currentPresence;
+
+        // Déterminer la nouvelle présence
+        newPresence = (currentPresence == "present") ? "absent" : "present";
+
+        // Mettre à jour la présence
+        QSqlQuery updateQuery;
+        updateQuery.prepare("UPDATE ARCHITECTES SET presence = :presence WHERE id_architecte = :id");
+        updateQuery.bindValue(":presence", newPresence);
+        updateQuery.bindValue(":id", id.toInt());
+
+        if (updateQuery.exec()) {
+            qDebug() << "Présence mise à jour pour ID" << id << ":" << newPresence;
+            // Vérifier l'état après mise à jour
+            QSqlQuery verifyQuery;
+            verifyQuery.prepare("SELECT presence FROM ARCHITECTES WHERE id_architecte = :id");
+            verifyQuery.bindValue(":id", id.toInt());
+            if (verifyQuery.exec() && verifyQuery.next()) {
+                QString verifiedPresence = verifyQuery.value(0).toString().toLower();
+                qDebug() << "Présence vérifiée après mise à jour pour ID" << id << ":" << verifiedPresence;
+                if (verifiedPresence != newPresence) {
+                    qDebug() << "Erreur : la présence dans la base ne correspond pas à la mise à jour !";
+                }
+            }
+            QMessageBox::information(this, "Succès", QString("Présence mise à jour pour ID %1 : %2").arg(id, newPresence));
+        } else {
+            qDebug() << "Erreur lors de la mise à jour de la présence :" << updateQuery.lastError().text();
+            QMessageBox::critical(this, "Erreur", "Erreur lors de la mise à jour de la présence : " + updateQuery.lastError().text());
+        }
+    } else {
+        qDebug() << "Aucun architecte trouvé avec l'ID" << id;
+        QMessageBox::warning(this, "Erreur", QString("Aucun architecte trouvé avec l'ID %1.").arg(id));
+    }
+}
+
+void MainWindow::fillTableWidget1() {
+    qDebug() << "Executing fillTableWidget()";
+    QSqlQueryModel *model = currentClient.afficher();
+
+    if (model) {
+        ui->tableView_4->setModel(model);
+        ui->tableView_4->resizeColumnsToContents();
+        qDebug() << "Table widget filled successfully";
+    } else {
+        qDebug() << "Failed to fill table widget";
+    }
+}
+
+void MainWindow::on_addClientButton_clicked()
+{
+    if (ui->lineEdit_16->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Nom vide !!");
+        return;
+    }
+
+    if (ui->lineEdit_21->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Prénom vide !!");
+        return;
+    }
+
+    QString email = ui->lineEdit_19->text();
+    if (email.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Email vide !!");
+        return;
+    }
+
+    QSqlQuery query;
+    query.exec("SELECT MAX(ID_CLIENT) FROM clients");
+    int id_client = 1;
+    if (query.next()) {
+        id_client = query.value(0).toInt() + 1;
+    }
+
+    QString nom = ui->lineEdit_16->text();
+    QString prenom = ui->lineEdit_21->text();
+    QString telephone = ui->lineEdit_20->text();
+    QString adresse = ui->lineEdit_18->text();
+    QString sexe = ui->comboBox_6->currentText();
+    int id_projet = ui->lineEdit_15->text().toInt();
+
+
+    qDebug() << "Adding Client with details:";
+    qDebug() << "ID:" << id_client;
+    qDebug() << "Nom:" << nom;
+    qDebug() << "Prénom:" << prenom;
+    qDebug() << "Email:" << email;
+    qDebug() << "Telephone:" << telephone;
+    qDebug() << "Adresse:" << adresse;
+    qDebug() << "Sexe:" << sexe;
+    qDebug() <<"id_projet"<<id_projet;
+
+
+    currentClient = Clients(id_client, nom, prenom, email, telephone, adresse, sexe,id_projet);
+
+    if (currentClient.ajouter()) {
+        QMessageBox::information(this, "Success", "Client ajouté avec succès.");
+        fillTableWidget1();
+
+        ui->lineEdit_16->clear();
+        ui->lineEdit_21->clear();
+        ui->lineEdit_20->clear();
+        ui->lineEdit_18->clear();
+        ui->lineEdit_15->clear();
+        ui->lineEdit_19->clear();
+        ui->comboBox_6->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de l'ajout du client.");
+    }
+}
+
+void MainWindow::on_supprimerClient_clicked() {
+    int id = ui->id_rech_4->text().toInt();
+
+    if (id == 0) {
+        QMessageBox::warning(this, "Input Error", "L'ID pour supprimer est vide.");
+        return;
+    }
+
+    if (currentClient.supprimer(id)) {
+        QMessageBox::information(this, "Success", "Client supprimé avec succès.");
+        fillTableWidget1();
+
+        ui->id_rech_4->clear();
+        ui->lineEdit_16->clear();
+        ui->lineEdit_21->clear();
+        ui->lineEdit_20->clear();
+        ui->lineEdit_18->clear();
+        ui->lineEdit_15->clear();
+        ui->lineEdit_19->clear();
+        ui->comboBox_6->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de la suppression du client.");
+    }
+}
+
+void MainWindow::on_modifyClientButton_clicked()
+{
+    int id = ui->id_rech_4->text().toInt();
+    if (id == 0) {
+        QMessageBox::warning(this, "Input Error", "L'ID pour modifier est vide.");
+        return;
+    }
+
+    QString nom = ui->lineEdit_16->text();
+    QString prenom = ui->lineEdit_21->text();
+
+    QString telephone = ui->lineEdit_20->text();
+
+    QString adresse = ui->lineEdit_18->text();
+    QString email = ui->lineEdit_19->text();
+    QString sexe = ui->comboBox_6->currentText();
+    int id_projet = ui->lineEdit_15->text().toInt();
+
+    currentClient = Clients(id, nom, prenom, email, telephone, adresse, sexe,id_projet);
+
+    if (currentClient.modifier(id)) {
+        QMessageBox::information(this, "Success", "Client modifié avec succès.");
+        fillTableWidget1();
+
+        ui->id_rech_4->clear();
+        ui->lineEdit_16->clear();
+        ui->lineEdit_21->clear();
+        ui->lineEdit_20->clear();
+        ui->lineEdit_18->clear();
+        ui->lineEdit_19->clear();
+        ui->lineEdit_15->clear();
+        ui->comboBox_6->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Failure", "Échec de la modification du client.");
+    }
+}
+
+void MainWindow::on_tableView_itemClicked1(const QModelIndex &index)
+{
+    int row = index.row();
+
+    QString id = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 0)).toString();
+    QString nom = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 1)).toString();
+    QString prenom = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 2)).toString();
+    QString telephone = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 3)).toString();
+    QString adresse = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 4)).toString();
+    QString email = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 5)).toString();
+    QString sexe = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 6)).toString();
+    QString id_projet = ui->tableView_4->model()->data(ui->tableView_4->model()->index(row, 7)).toString();
+
+    ui->id_rech_4->setText(id);
+    ui->lineEdit_16->setText(nom);
+    ui->lineEdit_21->setText(prenom);
+    ui->lineEdit_20->setText(telephone);
+    ui->lineEdit_18->setText(adresse);
+    ui->lineEdit_19->setText(email);
+    ui->lineEdit_15->setText(id_projet);
+    ui->comboBox_6->setCurrentText(sexe);
+
+    // ⚠️ Envoi SMS ici automatiquement
+
+}
+
+
+void MainWindow::refreshTableWidget1() {
+    QSqlQueryModel *model = currentClient.afficher();
+
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+}
+
+void MainWindow::on_annulerButton_clicked() {
+
+    ui->lineEdit_16->clear();
+    ui->lineEdit_21->clear();
+    ui->lineEdit_20->clear();
+    ui->lineEdit_18->clear();
+    ui->lineEdit_15->clear();
+    ui->lineEdit_19->clear();
+    ui->comboBox_6->setCurrentIndex(0);
+}
+
+void MainWindow::on_pushButtonRecherche_clicked() {
+    QString searchText = ui->id_rech_4->text().trimmed();
+    QString searchCriteria = ui->comboBox_5->currentText();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery query;
+
+    if (searchText.isEmpty()) {
+        // Display all clients if no search text is provided
+        query.prepare("SELECT * FROM clients");
+    } else {
+        // Prepare query based on selected criteria
+        if (searchCriteria == "ID") {
+            query.prepare("SELECT * FROM clients WHERE ID_CLIENT = :searchText");
+            query.bindValue(":searchText", searchText.toInt());
+        } else if (searchCriteria == "Nom") {
+            query.prepare("SELECT * FROM clients WHERE LOWER(NOM) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Prénom") {
+            query.prepare("SELECT * FROM clients WHERE LOWER(PRENOM) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Email") {
+            query.prepare("SELECT * FROM clients WHERE LOWER(EMAIL) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Téléphone") {
+            query.prepare("SELECT * FROM clients WHERE TELEPHONE LIKE :searchText");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else if (searchCriteria == "Adresse") {
+            query.prepare("SELECT * FROM clients WHERE LOWER(ADRESSE) LIKE LOWER(:searchText)");
+            query.bindValue(":searchText", "%" + searchText + "%");
+        } else {
+            QMessageBox::warning(this, "Search Error", "Critère de recherche invalide.");
+            return;
+        }
+    }
+
+    if (!query.exec()) {
+        qDebug() << "Search query failed:" << query.lastError().text();
+        QMessageBox::warning(this, "Search Error", "Erreur lors de l'exécution de la recherche.");
+        return;
+    }
+
+    model->setQuery(query);
+
+    // Set column headers
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prénom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Email"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Téléphone"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Adresse"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Sexe"));
+
+    // Display results in the table
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+
+    qDebug() << "Search executed successfully with criteria:" << searchCriteria << "and text:" << searchText;
+}
+void MainWindow::on_trierClientButton_clicked()
+{
+    QString triCritere = ui->comboBox_tri_7->currentText();
+    QString ordre = ui->comboBox_tri_8->currentText();
+
+    QString queryStr = "SELECT * FROM clients ORDER BY ";
+
+    if (triCritere == "ID") {
+        queryStr += "id_client";
+    } else if (triCritere == "Nom") {
+        queryStr += "nom";
+    } else if (triCritere == "Prenom") {
+        queryStr += "prenom";
+    } else if (triCritere == "Telephone") {
+        queryStr += "telephone";
+    } else if (triCritere == "Adresse") {
+        queryStr += "adresse";
+    } else if (triCritere == "Email") {
+        queryStr += "email";
+    } else if (triCritere == "Date d'ajout") {
+        queryStr += "dateajout";
+    } else {
+        queryStr = "SELECT * FROM clients";  // Aucun tri choisi
+    }
+
+    // Ajouter l'ordre
+    if (queryStr.contains("ORDER BY")) {
+        if (ordre == "Décroissant") {
+            queryStr += " DESC";
+        } else {
+            queryStr += " ASC";
+        }
+    }
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+    model->setQuery(queryStr);
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Erreur lors du tri (clients) :" << model->lastError().text();
+    }
+
+    // Entêtes
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Telephone"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Date d'Ajout"));
+
+    ui->tableView->setModel(model);
+    ui->tableView->resizeColumnsToContents();
+}
+
+void MainWindow::on_pdfClientButton_clicked()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, "Enregistrer le PDF", "", "PDF Files (*.pdf)");
+    if (filePath.isEmpty())
+        return;
+
+    QPdfWriter writer(filePath);
+    writer.setPageSize(QPageSize::A4);
+    writer.setResolution(300);
+    writer.setPageMargins(QMarginsF(30, 30, 30, 30));
+
+    QPainter painter(&writer);
+    if (!painter.isActive()) {
+        QMessageBox::warning(this, "Erreur", "Erreur lors de la création du PDF.");
+        return;
+    }
+
+    // ---- Fonts ----
+    QFont titleFont("Arial", 22, QFont::Bold);
+    QFont headerFont("Arial", 13, QFont::Bold);
+    QFont cellFont("Arial", 11);
+    QFont footerFont("Arial", 9);
+
+    const int marginLeft = 50;
+    const int marginRight = 50;
+    const int padding = 10;
+    int top = 100;
+
+    QAbstractItemModel *model = ui->tableView->model();
+    int cols = model->columnCount();
+    int rows = model->rowCount();
+
+    // Largeur dynamique
+    int availableWidth = writer.width() - marginLeft - marginRight;
+    int colWidth = availableWidth / cols;
+    int rowHeight = 50;  // plus grand pour aération
+
+    // ---- Title ----
+    painter.setFont(titleFont);
+    painter.setPen(QColor("#0f172a")); // bleu foncé
+    painter.drawText(QRect(marginLeft, top, writer.width() - marginLeft - marginRight, 60),
+                     Qt::AlignCenter, "📄 Rapport des Clients");
+
+    top += 70;
+
+    // ---- Date ----
+    painter.setFont(cellFont);
+    painter.setPen(Qt::gray);
+    painter.drawText(QRect(marginLeft, top, writer.width() - marginLeft - marginRight, 30),
+                     Qt::AlignRight, "📅 " + QDate::currentDate().toString("dd MMMM yyyy"));
+
+    top += 40;
+
+    // ---- Table Header ----
+    painter.setFont(headerFont);
+    painter.setPen(Qt::black);
+    QColor headerColor("#93c5fd"); // bleu clair
+
+    for (int col = 0; col < cols; ++col) {
+        QRect cellRect(marginLeft + col * colWidth, top, colWidth, rowHeight);
+        painter.fillRect(cellRect, headerColor);
+        painter.setPen(Qt::black);
+        painter.drawRect(cellRect);
+        painter.drawText(cellRect.adjusted(padding, 0, -padding, 0),
+                         Qt::AlignVCenter | Qt::AlignLeft,
+                         model->headerData(col, Qt::Horizontal).toString());
+    }
+
+    top += rowHeight;
+
+    // ---- Table Rows ----
+    painter.setFont(cellFont);
+
+    for (int row = 0; row < rows; ++row) {
+        QColor bgColor = (row % 2 == 0) ? QColor("#f8fafc") : QColor("#e2e8f0");
+        for (int col = 0; col < cols; ++col) {
+            QRect cellRect(marginLeft + col * colWidth, top, colWidth, rowHeight);
+            painter.fillRect(cellRect, bgColor);
+            painter.setPen(Qt::gray);
+            painter.drawRect(cellRect);
+
+            painter.setPen(Qt::black);
+            QString data = model->data(model->index(row, col)).toString();
+            painter.drawText(cellRect.adjusted(padding, 0, -padding, 0),
+                             Qt::AlignVCenter | Qt::AlignLeft, data);
+        }
+
+        top += rowHeight;
+
+        // Page break
+        if (top + rowHeight > writer.height() - 100) {
+            writer.newPage();
+            top = 100;
+        }
+    }
+
+    // ---- Footer ----
+    int footerY = writer.height() - 60;
+    painter.setFont(footerFont);
+    painter.setPen(QColor("#94a3b8"));
+    painter.drawLine(marginLeft, footerY - 10, writer.width() - marginRight, footerY - 10);
+    painter.drawText(marginLeft, footerY,
+                     "🧾 Rapport généré automatiquement par ClientManager Pro");
+    painter.drawText(marginLeft, footerY + 15,
+                     "📧 support@clientmanager.app    © 2025");
+
+    painter.end();
+
+    QMessageBox::information(this, "PDF", "✅ PDF généré avec succès !");
+}
+
+
+
+void MainWindow::on_statButton1_clicked()
+{
+    QMap<QString, int> villeCount;
+    QSqlQuery query("SELECT adresse FROM clients");
+
+    while (query.next()) {
+        QString adresse = query.value(0).toString().toLower();
+        QString ville;
+
+        if (adresse.contains("tunis")) {
+            ville = "Tunis";
+        } else if (adresse.contains("sfax")) {
+            ville = "Sfax";
+        } else if (adresse.contains("sousse")) {
+            ville = "Sousse";
+        } else {
+            ville = "Autres";
+        }
+
+        villeCount[ville]++;
+    }
+    QMap<QString, QColor> villeColors = {
+        {"Tunis", QColor(33, 158, 188)},   // Soft Blue
+        {"Sfax", QColor(176, 196, 177)},    // Fresh Green
+        {"Sousse", QColor(237, 175, 184)},  // Vibrant Orange
+        {"Autres", QColor(155, 89, 182)}   // Elegant Purple
+    };
+    QPieSeries *series = new QPieSeries();
+    int total = 0;
+    for (int count : villeCount.values())
+        total += count;
+
+    for (auto it = villeCount.begin(); it != villeCount.end(); ++it) {
+        double percentage = (double(it.value()) / total) * 100.0;
+        QPieSlice *slice = series->append(it.key() + QString(" (%1%)").arg(percentage, 0, 'f', 1), it.value());
+
+        slice->setLabelVisible(true);
+        slice->setExploded(it.key() != "Autres");
+        slice->setPen(Qt::NoPen);
+        slice->setBrush(villeColors.value(it.key(), Qt::lightGray));
+
+        // Inside your for loop for slices
+        QObject::connect(slice, &QPieSlice::hovered, this, [slice](bool hovered){
+            slice->setExploded(hovered);
+            slice->setLabelFont(hovered ? QFont("Arial", 11, QFont::Bold) : QFont("Arial", 9));
+            slice->setBrush(hovered
+                                ? slice->brush().color().lighter(120)  // Slightly lighter on hover
+                                : slice->brush().color().darker(100)); // Back to normal
+        });
+
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Répartition des clients par ville");
+    chart->setTitleFont(QFont("Arial", 14, QFont::Bold));
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);
+    chart->setBackgroundVisible(true);
+    chart->setBackgroundBrush(QBrush(Qt::white));
+    chart->setDropShadowEnabled(false);
+    chart->setBackgroundPen(Qt::NoPen);
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    // Size of chart inside stat
+    QSize viewSize = ui->stat_2->size();
+    int chartW = viewSize.width() * 0.7;
+    int chartH = viewSize.height() * 0.7;
+    chartView->setFixedSize(chartW, chartH);
+
+    if (ui->stat_2->scene()) {
+        delete ui->stat_2->scene();
+    }
+
+    QGraphicsScene *scene = new QGraphicsScene(this);
+
+    QGraphicsProxyWidget *proxy = scene->addWidget(chartView);
+
+    // 👇 Manually set scene rect bigger than chart so we can move things freely
+    int sceneWidth = viewSize.width();
+    int sceneHeight = viewSize.height() + 200; // Give space to move down
+    scene->setSceneRect(0, 0, sceneWidth, sceneHeight);
+
+    // ✅ Actually move chart down
+    int x = (sceneWidth - chartW) / 2;
+    int y = (sceneHeight - chartH) / 2 -10 ;  // now this works!
+    proxy->setPos(x, y);
+
+    ui->stat_2->setScene(scene);
+    ui->stat_2->setSceneRect(scene->sceneRect()); // 🔒 Lock the scene size
+
+    // 🔧 Optional: Disable scrollbars or scaling
+    ui->stat_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->stat_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->stat_2->setAlignment(Qt::AlignLeft | Qt::AlignTop); // avoid auto-centering
+}
+
+void MainWindow::on_btnEnvoyerSMS_clicked()
+{
+    int idClient = ui->id_rech_4->text().toInt();
+
+    SMS sms;
+    bool success = sms.envoyerStatutProjetAuClient(idClient);
+
+
+    if (success) {
+        QMessageBox::information(this, "Succès", "SMS envoyé au client !");
+    } else {
+        QMessageBox::warning(this, "Erreur", "Échec de l’envoi du SMS.");
+    }
+}
+////////////// partie contracteur///////////////
+
+void MainWindow::fillTableWidget2() {
+    QSqlQueryModel *model = currentContracteur.afficher();
+    if (!model) {
+        qDebug() << "Failed to fetch model for tableView_2.";
+        return;
+    }
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
+}
+
+void MainWindow::on_addContracteurButtoncontracteur_clicked() {
+    // Input validation
+    if (ui->lineEdit_2contracteur->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Nom est vide !");
+        return;
+    }
+    if (ui->lineEdit_13contracteur->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Prenom est vide !");
+        return;
+    }
+    QString telephone = ui->lineEdit_7contracteur->text();
+    if (telephone.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Telephone est vide !");
+        return;
+    }
+    if (!QRegularExpression("^[0-9]{8}$").match(telephone).hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "Le numéro de téléphone doit contenir exactement 8 chiffres !");
+        return;
+    }
+    QString adresse = ui->lineEdit_4contracteur->text();
+    if (adresse.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Adresse est vide !");
+        return;
+    }
+    QString email = ui->lineEdit_5contracteur->text();
+    if (email.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Email est vide !");
+        return;
+    }
+    if (!QRegularExpression("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$").match(email).hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "L'email doit être au format something@something.something !");
+        return;
+    }
+    QString domaine = ui->comboBoxcontracteur->currentText();
+    if (domaine == "Categorie") {
+        QMessageBox::warning(this, "Input Error", "Veuillez sélectionner un domaine valide !");
+        return;
+    }
+
+    // Fetch the maximum ID from the database and increment it by one
+    QSqlQuery query;
+    query.exec("SELECT MAX(id_contracteur) FROM contracteurs");
+    int id_contracteur = 1;
+    if (query.next()) {
+        id_contracteur = query.value(0).toInt() + 1;
+    }
+
+    QString nom = ui->lineEdit_2contracteur->text();
+    QString prenom = ui->lineEdit_13contracteur->text();
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    QString dateAjout = currentDateTime.toString("yyyy-MM-dd HH:mm:ss");
+
+    currentContracteur.setIdContracteur(id_contracteur);
+    currentContracteur.setNom(nom);
+    currentContracteur.setPrenom(prenom);
+    currentContracteur.setTelephone(telephone);
+    currentContracteur.setAdresse(adresse);
+    currentContracteur.setEmail(email);
+    currentContracteur.setDomaine(domaine);
+
+    if (currentContracteur.ajouter()) {
+        // Update the historique column to start with 1
+        QSqlQuery updateQuery;
+        updateQuery.prepare("UPDATE contracteurs SET historique = :historique WHERE id_contracteur = :id");
+        updateQuery.bindValue(":historique", 1);
+        updateQuery.bindValue(":id", id_contracteur);
+        if (!updateQuery.exec()) {
+            qDebug() << "Failed to update historique:" << updateQuery.lastError().text();
+        }
+        QMessageBox::information(this, "Success", "Contracteur ajouté avec succès.");
+        fillTableWidget2();
+
+        // Clear input fields
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de l'ajout du contracteur.");
+    }
+}
+
+void MainWindow::on_supprimerContracteurcontracteur_clicked() {
+    int id = ui->lineEdit_3contracteur->text().toInt();
+    if (id == 0) {
+        QMessageBox::warning(this, "Input Error", "L'ID pour supprimer est vide.");
+        return;
+    }
+    if (currentContracteur.supprimer(id)) {
+        currentContracteur.reassignIds();
+        QMessageBox::information(this, "Success", "Contracteur supprimé avec succès.");
+        fillTableWidget2();
+        ui->lineEdit_3contracteur->clear();
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Error", "Échec de la suppression du contracteur.");
+    }
+}
+
+void MainWindow::on_modifyContracteurButtoncontracteur_clicked() {
+    int id = ui->lineEdit_3contracteur->text().toInt();
+    if (id == 0) {
+        QMessageBox::warning(this, "Input Error", "L'ID pour modifier est vide.");
+        return;
+    }
+    if (ui->lineEdit_2contracteur->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Nom est vide !");
+        return;
+    }
+    if (ui->lineEdit_13contracteur->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Prenom est vide !");
+        return;
+    }
+    QString telephone = ui->lineEdit_7contracteur->text();
+    if (telephone.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Telephone est vide !");
+        return;
+    }
+    if (!QRegularExpression("^[0-9]{8}$").match(telephone).hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "Le numéro de téléphone doit contenir exactement 8 chiffres !");
+        return;
+    }
+    QString adresse = ui->lineEdit_4contracteur->text();
+    if (adresse.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Adresse est vide !");
+        return;
+    }
+    QString email = ui->lineEdit_5contracteur->text();
+    if (email.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Email est vide !");
+        return;
+    }
+    if (!QRegularExpression("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$").match(email).hasMatch()) {
+        QMessageBox::warning(this, "Input Error", "L'email doit être au format something@something.something !");
+        return;
+    }
+    if (ui->comboBoxcontracteur->currentText() == "Domaine") {
+        QMessageBox::warning(this, "Input Error", "Veuillez sélectionner un domaine valide !");
+        return;
+    }
+
+    QString nom = ui->lineEdit_2contracteur->text();
+    QString prenom = ui->lineEdit_13contracteur->text();
+    QString domaine = ui->comboBoxcontracteur->currentText();
+
+    currentContracteur.setNom(nom);
+    currentContracteur.setPrenom(prenom);
+    currentContracteur.setTelephone(telephone);
+    currentContracteur.setAdresse(adresse);
+    currentContracteur.setEmail(email);
+    currentContracteur.setDomaine(domaine);
+
+    if (currentContracteur.modifier(id)) {
+        QMessageBox::information(this, "Success", "Information du contracteur modifiée avec succès.");
+        fillTableWidget2();
+        ui->lineEdit_3contracteur->clear();
+        ui->lineEdit_2contracteur->clear();
+        ui->lineEdit_13contracteur->clear();
+        ui->lineEdit_7contracteur->clear();
+        ui->lineEdit_4contracteur->clear();
+        ui->lineEdit_5contracteur->clear();
+        ui->comboBoxcontracteur->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Failure", "Échec de la modification des informations du contracteur.");
+    }
+}
+
+void MainWindow::on_tableView_2contracteur_itemClicked(const QModelIndex &index) {
+    int row = index.row();
+    QAbstractItemModel *model = ui->tableView_2contracteur->model();
+
+    // Ensure the model is valid
+    if (!model) {
+        qDebug() << "Model is null.";
+        return;
+    }
+
+    // Populate the form fields with the selected row's data
+    ui->lineEdit_3contracteur->setText(model->data(model->index(row, 0)).toString()); // ID
+    ui->lineEdit_2contracteur->setText(model->data(model->index(row, 1)).toString()); // Nom
+    ui->lineEdit_13contracteur->setText(model->data(model->index(row, 2)).toString()); // Prenom
+    ui->lineEdit_7contracteur->setText(model->data(model->index(row, 3)).toString()); // Telephone
+    ui->lineEdit_4contracteur->setText(model->data(model->index(row, 4)).toString()); // Adresse
+    ui->lineEdit_5contracteur->setText(model->data(model->index(row, 5)).toString()); // Email
+    ui->comboBoxcontracteur->setCurrentText(model->data(model->index(row, 6)).toString()); // Domaine
+
+    // Load Historique into the spinBox
+    ui->spinBoxcontracteur->setValue(model->data(model->index(row, 8)).toInt()); // Historique
+
+    // Highlight the selected row in black
+    for (int i = 0; i < model->rowCount(); ++i) {
+        for (int j = 0; j < model->columnCount(); ++j) {
+            if (i == row) {
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::BackgroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::white), Qt::ForegroundRole);
+            } else {
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::NoBrush), Qt::BackgroundRole);
+                ui->tableView_2contracteur->model()->setData(model->index(i, j), QBrush(Qt::black), Qt::ForegroundRole);
+            }
+        }
+    }
+}
+
+void MainWindow::refreshTableWidget2() {
+    QSqlQueryModel *model = currentContracteur.afficher();
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
+}
+
+void MainWindow::on_annulerButtoncontracteur_clicked() {
+    // Clear all input fields
+    ui->lineEdit_2contracteur->clear();
+    ui->lineEdit_13contracteur->clear();
+    ui->lineEdit_3contracteur->clear();
+    ui->lineEdit_7contracteur->clear();
+    ui->lineEdit_4contracteur->clear();
+    ui->lineEdit_5contracteur->clear();
+    ui->comboBoxcontracteur->setCurrentIndex(0); // Reset Domaine
+    ui->spinBoxcontracteur->setValue(0);         // Reset Historique
+}
+
+void MainWindow::on_comboBox_tri_2contracteur_currentIndexChanged(int index) {
+    ui->tableView_2contracteur->setModel(nullptr);
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString queryStr;
+
+    switch (index) {
+    case 1:
+        queryStr = "SELECT * FROM contracteurs ORDER BY dateajout ASC";
+        break;
+    case 2:
+        queryStr = "SELECT * FROM contracteurs ORDER BY LOWER(domaine) ASC";
+        break;
+    case 3:
+        queryStr = "SELECT * FROM contracteurs ORDER BY id_contracteur DESC";
+        break;
+    case 4:
+        queryStr = "SELECT * FROM contracteurs ORDER BY id_contracteur ASC";
+        break;
+    case 5:
+        queryStr = "SELECT * FROM contracteurs ORDER BY avis_clients ASC";
+        break;
+    case 6:
+        queryStr = "SELECT * FROM contracteurs ORDER BY avis_clients DESC";
+        break;
+    case 7: // Sort by name
+        queryStr = "SELECT * FROM contracteurs ORDER BY LOWER(nom) ASC";
+        break;
+    default:
+        queryStr = "SELECT * FROM contracteurs";
+        break;
+    }
+
+    model->setQuery(queryStr);
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in sorting query:" << model->lastError().text();
+    }
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Telephone"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Domaine"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Date d'Ajout"));
+    model->setHeaderData(8, Qt::Horizontal, QObject::tr("Avis Clients"));
+
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
+}
+
+void MainWindow::on_chercher_2contracteur_clicked() {
+    QString searchText = ui->id_rech_2contracteur->text().trimmed();
+    QString searchCriteria = ui->comboBox_2contracteur->currentText();
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QString queryStr;
+
+    if (searchText.isEmpty()) {
+        queryStr = "SELECT * FROM contracteurs";
+    } else {
+        if (searchCriteria == "ID") {
+            queryStr = QString("SELECT * FROM contracteurs WHERE id_contracteur = %1").arg(searchText.toInt());
+        } else if (searchCriteria == "Nom") {
+            queryStr = QString("SELECT * FROM contracteurs WHERE LOWER(nom) LIKE LOWER('%%1%')").arg(searchText);
+        } else if (searchCriteria == "Prenom") {
+            queryStr = QString("SELECT * FROM contracteurs WHERE LOWER(prenom) LIKE LOWER('%%1%')").arg(searchText);
+        } else {
+            queryStr = "SELECT * FROM contracteurs";
+        }
+    }
+
+    model->setQuery(queryStr);
+    if (model->lastError().isValid()) {
+        qDebug() << "Error in search query:" << model->lastError().text();
+        QMessageBox::warning(this, "Search Error", "Failed to execute search query.");
+        return;
+    }
+
+    ui->tableView_2contracteur->setModel(model);
+    ui->tableView_2contracteur->resizeColumnsToContents();
+}
+
+void MainWindow::on_pdf_2contracteur_clicked() {
+    static bool isExporting = false;
+    if (isExporting) {
+        return;
+    }
+    isExporting = true;
+
+    QString filePath = QFileDialog::getSaveFileName(this, "Save PDF", "", "*.pdf");
+    if (filePath.isEmpty()) {
+        isExporting = false;
+        return;
+    }
+
+    QPdfWriter pdfWriter(filePath);
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    pdfWriter.setResolution(300);
+    QPainter painter(&pdfWriter);
+
+    const int margin = 50;
+    const int lineHeight = 50;
+    const int pageWidth = pdfWriter.width();
+    const int usableWidth = pageWidth - 2 * margin;
+    int y = margin;
+
+    painter.setFont(QFont("Helvetica", 16, QFont::Bold));
+    painter.drawText(QRect(margin, y, usableWidth, lineHeight), Qt::AlignCenter, "Liste des Contracteurs");
+    y += lineHeight * 2;
+
+    painter.setFont(QFont("Helvetica", 12, QFont::Bold));
+    const QStringList headers = {"ID", "Nom", "Prenom", "Telephone", "Adresse", "Domaine"};
+    const int columnWidths[] = {10, 15, 15, 15, 25, 20};
+    int x = margin;
+    for (int i = 0; i < headers.size(); ++i) {
+        int colWidth = usableWidth * columnWidths[i] / 100;
+        painter.drawText(x, y, headers[i]);
+        x += colWidth;
+    }
+    y += lineHeight;
+
+    painter.drawLine(margin, y, pageWidth - margin, y);
+    y += lineHeight;
+
+    painter.setFont(QFont("Helvetica", 10));
+    QSqlQuery query("SELECT id_contracteur, nom, prenom, telephone, adresse, domaine FROM contracteurs");
+    while (query.next()) {
+        x = margin;
+        for (int i = 0; i < headers.size(); ++i) {
+            int colWidth = usableWidth * columnWidths[i] / 100;
+            painter.drawText(x, y, query.value(i).toString());
+            x += colWidth;
+        }
+        y += lineHeight;
+        if (y + lineHeight > pdfWriter.height() - margin) {
+            pdfWriter.newPage();
+            y = margin;
+        }
+    }
+
+    painter.end();
+    QMessageBox::information(this, "Exportation PDF", "PDF exporté avec succès.");
+    isExporting = false;
+}
+
+void MainWindow::generateStatistics() {
+    QPieSeries *series = new QPieSeries();
+
+    // Ensure the database connection is open
+    if (!QSqlDatabase::database().isOpen()) {
+        QMessageBox::critical(this, "Database Error", "La connexion à la base de données est fermée.");
+        return;
+    }
+
+    QSqlQuery query;
+    if (!query.exec("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine")) {
+        QMessageBox::critical(this, "Query Error", "Échec de l'exécution de la requête pour les statistiques.");
+        qDebug() << "Query Error:" << query.lastError().text();
+        return;
+    }
+
+    int total = 0;
+
+    // Calculate the total count
+    while (query.next()) {
+        total += query.value(1).toInt();
+    }
+
+    // Check if total is zero
+    if (total == 0) {
+        QMessageBox::information(this, "Statistiques", "Aucune donnée disponible pour les statistiques.");
+        return;
+    }
+
+    // Reset the query to iterate again
+    query.exec("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine");
+
+    // Add slices with percentages
+    while (query.next()) {
+        QString domaine = query.value(0).toString();
+        int count = query.value(1).toInt();
+        double percentage = (static_cast<double>(count) / total) * 100;
+        series->append(QString("%1 (%2%)").arg(domaine).arg(QString::number(percentage, 'f', 2)), count);
+    }
+
+    for (QPieSlice *slice : series->slices()) {
+        slice->setLabel(slice->label());
+        slice->setLabelVisible(true);
+        slice->setLabelFont(QFont("Helvetica", 8, QFont::Bold));
+    }
+
+    series->setHoleSize(0.5);
+    series->setPieSize(0.7);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Répartition des domaines des contracteurs (en pourcentage)");
+    chart->setTitleFont(QFont("Helvetica", 12, QFont::Bold));
+    chart->legend()->setAlignment(Qt::AlignRight);
+    chart->legend()->setFont(QFont("Helvetica", 8));
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setMinimumSize(600, 400);
+
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    scene->addWidget(chartView);
+    ui->graphicsViewcontracteur->setScene(scene);
+    ui->graphicsViewcontracteur->show();
+}
+
+void MainWindow::exportStatisticsPDF() {
+    QString filePath = QFileDialog::getSaveFileName(this, "Enregistrer les statistiques en PDF", "", "*.pdf");
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    QPdfWriter pdf(filePath);
+    pdf.setPageSize(QPageSize(QPageSize::A4));
+    pdf.setResolution(300);
+
+    QPainter painter(&pdf);
+    const int margin = 50;
+    int y = margin;
+
+    QPixmap logo(":/ressources/images/Logo.png");
+    if (!logo.isNull()) {
+        painter.drawPixmap(margin, y, logo.scaledToHeight(100, Qt::SmoothTransformation));
+    }
+
+    QFont dateFont("Helvetica", 10, QFont::Normal);
+    painter.setFont(dateFont);
+    QString dateStr = QDate::currentDate().toString("dd/MM/yyyy");
+    painter.drawText(pdf.width() - margin - 150, y + 30, "📅 " + dateStr);
+
+    y += 120;
+    QFont titleFont("Helvetica", 16, QFont::Bold);
+    painter.setFont(titleFont);
+    painter.drawText(QRect(margin, y, pdf.width() - 2 * margin, 50), Qt::AlignCenter, "Statistiques des domaines des contracteurs");
+    y += 80;
+
+    QPixmap chartPixmap = ui->graphicsViewcontracteur->grab();
+    if (!chartPixmap.isNull()) {
+        int chartWidth = pdf.width() - 2 * margin;
+        QPixmap scaledChart = chartPixmap.scaledToWidth(chartWidth, Qt::SmoothTransformation);
+        painter.drawPixmap(margin, y, scaledChart);
+        y += scaledChart.height() + 50;
+    } else {
+        painter.setFont(QFont("Helvetica", 10));
+        painter.drawText(margin, y, "⚠ Le graphique n'a pas pu être généré.");
+        y += 50;
+    }
+
+    QSqlQuery query("SELECT domaine, COUNT(*) FROM contracteurs GROUP BY domaine");
+    QStringList dataLines;
+    while (query.next()) {
+        QString domaine = query.value(0).toString();
+        int count = query.value(1).toInt();
+        dataLines.append(QString("%1: %2").arg(domaine).arg(count));
+    }
+
+    painter.setFont(QFont("Helvetica", 11));
+    painter.setPen(Qt::black);
+    for (const QString &line : dataLines) {
+        painter.drawText(margin, y, line);
+        y += 30;
+    }
+
+    y += 40;
+    painter.setPen(Qt::gray);
+    painter.drawLine(margin, y, pdf.width() - margin, y);
+    y += 20;
+
+    QFont footerFont("Helvetica", 9);
+    footerFont.setItalic(true);
+    painter.setFont(footerFont);
+    painter.drawText(margin, y, "Exporté par l'application de gestion des contracteurs");
+
+    painter.end();
+    QMessageBox::information(this, "Exportation PDF", "Statistiques exportées avec succès en PDF.");
+}
+
+void MainWindow::on_generateStatisticsButtoncontracteur_clicked() {
+    generateStatistics();
+}
+
+void MainWindow::on_exportStatisticsPDFButtoncontracteur_clicked() {
+    exportStatisticsPDF();
+}
+
+void MainWindow::loadContractorsToTable(QTableView *tableView) {
+    QSqlQueryModel *model = currentContracteur.afficher();
+    tableView->setModel(model);
+    tableView->resizeColumnsToContents();
+}
+
+void MainWindow::loadTasksForContractor(int contractorId) {
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QStandardItemModel *model = new QStandardItemModel(this);
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            QString taskName = taskObj["name"].toString();
+            QString status = taskObj["status"].toString();
+
+            QStandardItem *item = new QStandardItem(taskName + " (" + status + ")");
+            model->appendRow(item);
+        }
+        ui->taskslistcontracteur->setModel(model);
+    }
+}
+
+void MainWindow::populateTreeView(int contractorId) {
+    clearTreeView();
+
+    QSqlQuery query;
+    query.prepare("SELECT nom, prenom, historique, tasks, email, telephone, adresse FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString contractorName = query.value(0).toString() + " " + query.value(1).toString();
+        QString historique = query.value(2).toString();
+        QString tasksJson = query.value(3).toString();
+        QString email = query.value(4).toString();
+        QString telephone = query.value(5).toString();
+        QString adresse = query.value(6).toString();
+
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QStandardItemModel *model = new QStandardItemModel(this);
+        QStandardItem *contractorItem = new QStandardItem(contractorName);
+
+        // Add detailed information
+        contractorItem->appendRow(new QStandardItem("Email: " + email));
+        contractorItem->appendRow(new QStandardItem("Telephone: " + telephone));
+        contractorItem->appendRow(new QStandardItem("Adresse: " + adresse));
+        contractorItem->appendRow(new QStandardItem("Historique: " + historique));
+
+        QStandardItem *tasksItem = new QStandardItem("Tasks");
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            QString taskName = taskObj["name"].toString();
+            QString status = taskObj["status"].toString();
+
+            QStandardItem *taskItem = new QStandardItem(taskName + " (" + status + ")");
+            tasksItem->appendRow(taskItem);
+        }
+        contractorItem->appendRow(tasksItem);
+
+        model->appendRow(contractorItem);
+        ui->treeViewcontracteur->setModel(model);
+    }
+}
+
+void MainWindow::clearTreeView() {
+    QStandardItemModel *model = new QStandardItemModel(this);
+    ui->treeViewcontracteur->setModel(model);
+}
+
+void MainWindow::updateTaskStatus(int contractorId, const QString &task, const QString &status) {
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        for (int i = 0; i < tasksArray.size(); ++i) {
+            QJsonObject taskObj = tasksArray[i].toObject();
+            if (taskObj["name"].toString() == task) {
+                taskObj["status"] = status;
+                tasksArray[i] = taskObj; // Update the array element
+                break;
+            }
+        }
+
+        QJsonDocument updatedDoc(tasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        query.exec();
+    }
+}
+
+void MainWindow::on_addtaskcontracteur_clicked() {
+    QString task = ui->tasktextcontracteur->text().trimmed();
+    if (task.isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "Task cannot be empty.");
+        return;
+    }
+
+    QModelIndex index = ui->contractorlisttablecontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QJsonObject newTask;
+        newTask["name"] = task;
+        newTask["status"] = "Pending";
+        tasksArray.append(newTask);
+
+        QJsonDocument updatedDoc(tasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        if (query.exec()) {
+            QMessageBox::information(this, "Success", "Task added successfully.");
+            loadTasksForContractor(contractorId);
+            populateTreeView(contractorId);
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to add task.");
+        }
+    }
+}
+
+void MainWindow::on_completedtaskcontracteur_clicked() {
+    QModelIndex index = ui->taskslistcontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a task.");
+        return;
+    }
+
+    QString task = index.data().toString().split(" (").first();
+    QModelIndex contractorIndex = ui->contractorlisttablecontracteur->currentIndex();
+    if (!contractorIndex.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = contractorIndex.sibling(contractorIndex.row(), 0).data().toInt();
+    updateTaskStatus(contractorId, task, "Completed");
+    loadTasksForContractor(contractorId);
+    populateTreeView(contractorId);
+}
+
+void MainWindow::on_rmtaskcontracteur_clicked() {
+    QModelIndex index = ui->taskslistcontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a task.");
+        return;
+    }
+
+    QString task = index.data().toString().split(" (").first();
+    QModelIndex contractorIndex = ui->contractorlisttablecontracteur->currentIndex();
+    if (!contractorIndex.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = contractorIndex.sibling(contractorIndex.row(), 0).data().toInt();
+    QSqlQuery query;
+    query.prepare("SELECT tasks FROM contracteurs WHERE id_contracteur = :id");
+    query.bindValue(":id", contractorId);
+    if (query.exec() && query.next()) {
+        QString tasksJson = query.value(0).toString();
+        QJsonDocument doc = QJsonDocument::fromJson(tasksJson.toUtf8());
+        QJsonArray tasksArray = doc.array();
+
+        QJsonArray updatedTasksArray;
+        for (const QJsonValue &value : tasksArray) {
+            QJsonObject taskObj = value.toObject();
+            if (taskObj["name"].toString() != task) {
+                updatedTasksArray.append(taskObj);
+            }
+        }
+
+        QJsonDocument updatedDoc(updatedTasksArray);
+        query.prepare("UPDATE contracteurs SET tasks = :tasks WHERE id_contracteur = :id");
+        query.bindValue(":tasks", QString(updatedDoc.toJson(QJsonDocument::Compact)));
+        query.bindValue(":id", contractorId);
+        if (query.exec()) {
+            QMessageBox::information(this, "Success", "Task removed successfully.");
+            loadTasksForContractor(contractorId);
+            populateTreeView(contractorId);
+        } else {
+            QMessageBox::warning(this, "Error", "Failed to remove task.");
+        }
+    }
+}
+
+void MainWindow::on_testaffichertodocontracteur_clicked() {
+    QModelIndex index = ui->contractorlisttablecontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    loadTasksForContractor(contractorId);
+}
+
+void MainWindow::on_affichertreecontracteur_clicked() {
+    QModelIndex index = ui->tableViewcontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select a contractor.");
+        return;
+    }
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    populateTreeView(contractorId);
+}
+
+void MainWindow::on_contractorlisttablecontracteur_clicked(const QModelIndex &index) {
+    if (!index.isValid()) return;
+
+    int contractorId = index.sibling(index.row(), 0).data().toInt();
+    loadTasksForContractor(contractorId);
+    populateTreeView(contractorId);
+}
+
+/*void MainWindow::on_tabWidgetcontracteur_currentChanged(int index) {
+    if (index == 2) { // To-Do List tab
+        loadContractorsToTable(ui->contractorlisttablecontracteur);
+    } else if (index == 3) { // Tree View tab
+        loadContractorsToTable(ui->tableViewcontracteur);
+    } else if (index == 4) { // Architect tab
+        loadArchitectsToListView();
+        updatePresenceView();
+    }
+}*/
+
+void MainWindow::loadArchitectsToListView()
+{
+    QSqlQuery query("SELECT ID_ARCHITECTE, NOM, PRENOM FROM ARCHITECTES");
+    QStandardItemModel *model = new QStandardItemModel(this);
+
+    while (query.next()) {
+        QString architectInfo = QString("%1 - %2 %3")
+        .arg(query.value(0).toInt()) // ID
+            .arg(query.value(1).toString()) // Nom
+            .arg(query.value(2).toString()); // Prenom
+        QStandardItem *item = new QStandardItem(architectInfo);
+        model->appendRow(item);
+    }
+
+    ui->achitectviewcontracteur->setModel(model);
+}
+
+/*void MainWindow::readArduinoData()
+{
+    QByteArray data = ArdCont.read_from_arduino();
+    if (!data.isEmpty()) {
+        QString rawData = QString(data).trimmed(); // Raw data from the reader
+        qDebug() << "Raw data from RFID reader:" << rawData;
+
+        // Extract the card ID from the raw data
+        QRegularExpression regex("([0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2}:[0-9A-F]{2})");
+        QRegularExpressionMatch match = regex.match(rawData);
+
+        if (match.hasMatch()) {
+            QString cardId = match.captured(1).toUpper(); // Extracted card ID
+            qDebug() << "Card ID extracted:" << cardId;
+
+            // Query the database to find the matching poste in the architectes table
+            QSqlQuery query;
+            query.prepare("SELECT poste, nom, prenom, presence FROM architectes WHERE UPPER(TRIM(poste)) = :cardId");
+            query.bindValue(":cardId", cardId);
+
+            if (query.exec()) {
+                if (query.next()) {
+                    QString poste = query.value(0).toString().trimmed().toUpper();
+                    QString nom = query.value(1).toString();
+                    QString prenom = query.value(2).toString();
+                    QString presence = query.value(3).toString().toLower(); // Normalize presence value
+
+                    qDebug() << "Matching poste found:" << poste << "for architect:" << nom << prenom << "with presence:" << presence;
+
+                    // Toggle the presence attribute
+                    QString newPresence = (presence == "present") ? "absent" : "present";
+                    QSqlQuery updateQuery;
+                    updateQuery.prepare("UPDATE architectes SET presence = :newPresence WHERE UPPER(TRIM(poste)) = :cardId");
+                    updateQuery.bindValue(":newPresence", newPresence);
+                    updateQuery.bindValue(":cardId", cardId);
+
+                    if (updateQuery.exec()) {
+                        qDebug() << "Presence updated to:" << newPresence;
+                        updatePresenceView(); // Refresh the presence view
+                    } else {
+                        qDebug() << "Failed to update presence:" << updateQuery.lastError().text();
+                    }
+                } else {
+                    qDebug() << "No matching poste found for Card ID:" << cardId;
+                }
+            } else {
+                qDebug() << "Database query failed:" << query.lastError().text();
+            }
+        } else {
+            qDebug() << "No valid card ID found in the raw data.";
+        }
+
+        lastScannedCardId = rawData; // Store the last scanned raw data
+    }
+}
+
+void MainWindow::updatePresenceView()
+{
+    // Clear the current model to avoid stale data
+    QStandardItemModel *model = new QStandardItemModel(this);
+    ui->presenceviewcontracteur->setModel(model);
+
+    // Query the database for architects with "present" status
+    QSqlQuery query;
+    query.prepare("SELECT NOM, PRENOM FROM ARCHITECTES WHERE LOWER(PRESENCE) = 'present'");
+
+    if (!query.exec()) {
+        qDebug() << "Failed to fetch presence data:" << query.lastError().text();
+        return;
+    }
+
+    // Populate the model with the results
+    while (query.next()) {
+        QString presentArchitect = QString("%1 %2")
+        .arg(query.value(0).toString()) // NOM
+            .arg(query.value(1).toString()); // PRENOM
+        QStandardItem *item = new QStandardItem(presentArchitect);
+        model->appendRow(item);
+    }
+
+    // Set the updated model to the presenceview widget
+    ui->presenceviewcontracteur->setModel(model);
+
+    // Debug log to confirm the number of entries
+    qDebug() << "Presence view updated with" << model->rowCount() << "entries.";
+}
+
+void MainWindow::on_assignCardcontracteur_clicked()
+{
+    QModelIndex index = ui->achitectviewcontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select an architect.");
+        return;
+    }
+
+    QString selectedArchitect = index.data().toString();
+    int architectId = selectedArchitect.split(" - ").first().toInt();
+
+    QString cardId = ArdCont.read_from_arduino().trimmed(); // Read RFID card ID
+    if (cardId.isEmpty()) {
+        QMessageBox::warning(this, "RFID Error", "No card detected.");
+        return;
+    }
+
+    // Assign the card ID to the selected architect
+    QSqlQuery query;
+    query.prepare("UPDATE ARCHITECTES SET RFID_CARD = :cardId WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":cardId", cardId);
+    query.bindValue(":id", architectId);
+
+    if (query.exec()) {
+        QMessageBox::information(this, "Success", QString("Card ID '%1' assigned to Architect ID %2.").arg(cardId).arg(architectId));
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to assign card.");
+    }
+}
+
+void MainWindow::togglePresence(int architectId, bool isPresent)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE ARCHITECTES SET PRESENCE = :presence WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":presence", isPresent ? "Yes" : "No");
+    query.bindValue(":id", architectId);
+
+    if (query.exec()) {
+        if (isPresent) {
+            ArdCont.write_to_arduino("OPEN_DOOR"); // Send command to open the door
+        }
+        updatePresenceView();
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to update presence.");
+    }
+}
+
+void MainWindow::on_togglePresencecontracteur_clicked()
+{
+    QModelIndex index = ui->achitectviewcontracteur->currentIndex();
+    if (!index.isValid()) {
+        QMessageBox::warning(this, "Selection Error", "Please select an architect.");
+        return;
+    }
+
+    QString selectedArchitect = index.data().toString();
+    int architectId = selectedArchitect.split(" - ").first().toInt();
+
+    QSqlQuery query;
+    query.prepare("SELECT PRESENCE FROM ARCHITECTES WHERE ID_ARCHITECTE = :id");
+    query.bindValue(":id", architectId);
+
+    if (query.exec() && query.next()) {
+        QString currentPresence = query.value(0).toString();
+        bool isPresent = (currentPresence == "present");
+        togglePresence(architectId, !isPresent);
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to toggle presence.");
+    }
+}*/
+
+void MainWindow::on_pushButton_6contracteur_clicked() {
+    // Assuming your work is in the "Contracteurs" tab (index 4 in the QTabWidget)
+    ui->tabWidgetcontracteur->setCurrentIndex(4);
+}
+
+///////////////////////////// contrat/////////////////////////
+
+
+
+void MainWindow::populateTableWidget(QSqlQueryModel* model) {
+    qDebug() << "Populating table widget with model";  // Debug message
+    ui->tableWidgetcontrat->setRowCount(model->rowCount());
+    ui->tableWidgetcontrat->setColumnCount(model->columnCount());
+    ui->tableWidgetcontrat->setHorizontalHeaderLabels({
+        "ID Contrat", "Montant Total", "Date Début", "Date Fin", "Statut Paiement", "ID Projet", "ID Client"
+    });
+
+
+    for (int row = 0; row < model->rowCount(); ++row) {
+        for (int col = 0; col < model->columnCount(); ++col) {
+            QTableWidgetItem* item = new QTableWidgetItem(model->data(model->index(row, col)).toString());
+            ui->tableWidgetcontrat->setItem(row, col, item);
+        }
+    }
+}
+
+
+void MainWindow::afficherContrats()
+{
+    contrats c;
+    QSqlQueryModel* model = c.afficher();
+
+    ui->tableWidgetcontrat->setRowCount(model->rowCount());
+    ui->tableWidgetcontrat->setColumnCount(model->columnCount());
+
+    // Optionnel : définir les en-têtes de colonnes selon la base
+    for (int col = 0; col < model->columnCount(); ++col) {
+        ui->tableWidgetcontrat->setHorizontalHeaderItem(col, new QTableWidgetItem(model->headerData(col, Qt::Horizontal).toString()));
+    }
+
+    // Remplir le tableau
+    for (int row = 0; row < model->rowCount(); ++row) {
+        for (int col = 0; col < model->columnCount(); ++col) {
+            QString data = model->data(model->index(row, col)).toString();
+            ui->tableWidgetcontrat->setItem(row, col, new QTableWidgetItem(data));
+        }
+    }
+
+    delete model; // Libérer la mémoire si ce n'est pas utilisé ailleurs
+}
+
+void MainWindow::handleKeypadInput() {
+    QByteArray data = A.read_from_arduino();
+    if (!data.isEmpty()) {
+        QString idProjet = QString(data).trimmed();
+        QSqlQuery query;
+        query.prepare("SELECT ECHEANCE FROM PROJETS WHERE ID_PROJET = :id");
+        query.bindValue(":id", idProjet);
+
+        if (query.exec()) {
+            if (query.next()) {
+                QDate dateEcheance = query.value(0).toDate();
+                QDate dateActuelle = QDate::currentDate();
+                int joursRestants = dateActuelle.daysTo(dateEcheance);
+
+                if (joursRestants <= 30) {
+                    A.write_to_arduino("2"); // rouge + buzzer
+                    QMessageBox::critical(this, "Échéance proche", "Attention : échéance dans " + QString::number(joursRestants) + " jours.");
+                } else {
+                    A.write_to_arduino("1"); // verte
+                    QMessageBox::information(this, "Échéance", "Encore " + QString::number(joursRestants) + " jours restants.");
+                }
+            } else {
+                A.write_to_arduino("3"); // orangé
+                QMessageBox::warning(this, "Projet inexistant", "Aucun projet avec cet ID.");
+            }
+        } else {
+            QMessageBox::critical(this, "Erreur SQL", "Erreur lors de l'exécution de la requête.");
+        }
+    }
+}
+
+
+
+
+void MainWindow::on_ajoutercontrat_clicked() {
+    qDebug() << "Ajout du contrat";  // Debug message
+
+    contrats c(ui->id_contrat->text().toInt(), ui->montantcontrat->text().toDouble(),
+               ui->date_debutcontrat->date().toString("yyyy-MM-dd"),
+               ui->date_fincontrat->date().toString("yyyy-MM-dd"),
+               ui->statutcontrat->currentText(), ui->iclient_contrat->text().toInt(), ui->iprojet_contrat->text().toInt());
+
+    // Check if data is correct
+    qDebug() << "ID: " << ui->id_contrat->text().toInt();
+    qDebug() << "Montant: " << ui->montantcontrat->text().toDouble();
+
+    if (c.ajouter()) {
+        QMessageBox::information(this, "Success", "Contrat ajouté avec succès.");
+        populateTableWidget(currentContrat.afficher());
+    } else {
+        QMessageBox::critical(this, "Error", "Erreur lors de l'ajout du contrat.");
+    }
+}
+
+
+void MainWindow::on_modifiercontrat_clicked() {
+    contrats c(ui->id_contrat->text().toInt(), ui->montantcontrat->text().toDouble(),
+               ui->date_debutcontrat->date().toString("yyyy-MM-dd"),
+               ui->date_fincontrat->date().toString("yyyy-MM-dd"),
+               ui->statutcontrat->currentText(), ui->iclient_contrat->text().toInt(), ui->iprojet_contrat->text().toInt());
+
+    if (c.modifier(ui->id_contrat->text().toInt())) {
+        QMessageBox::information(this, "Succès", "Contrat modifié avec succès.");
+        populateTableWidget(currentContrat.afficher());
+    } else {
+        QMessageBox::critical(this, "Erreur", "Échec de la modification.");
+    }
+}
+
+void MainWindow::on_supprimercontrat_clicked() {
+    int id = ui->id_contrat->text().toInt();
+    if (currentContrat.supprimer(id)) {
+        QMessageBox::information(this, "Succès", "Contrat supprimé.");
+        populateTableWidget(currentContrat.afficher());
+    } else {
+        QMessageBox::critical(this, "Erreur", "Échec de suppression.");
+    }
+}
+void MainWindow::on_tableWidgetcontrat_cellClicked(int row, int column)
+{
+    QString id = ui->tableWidgetcontrat->item(row, 0)->text();
+    QString montant = ui->tableWidgetcontrat->item(row, 1)->text();
+    QDate date_Debut = QDate::fromString(ui->tableWidgetcontrat->item(row, 2)->text(), "yyyy-MM-dd");
+    QDate date_Fin = QDate::fromString(ui->tableWidgetcontrat->item(row, 3)->text(), "yyyy-MM-dd");
+    QString statut = ui->tableWidgetcontrat->item(row, 4)->text();
+    QString id_Projet = ui->tableWidgetcontrat->item(row, 5)->text();
+    QString id_client = ui->tableWidgetcontrat->item(row, 6)->text();
+
+    ui->id_contrat->setText(id);
+    ui->montantcontrat->setText(montant);
+    ui->date_debutcontrat->setDate(date_Debut);
+    ui->date_fincontrat->setDate(date_Fin);
+    ui->statutcontrat->setCurrentText(statut);
+    ui->iprojet_contrat->setText(id_Projet);
+    ui->iclient_contrat->setText(id_client);
+}
+void MainWindow::on_tributtoncontrat_clicked() {
+    QString critere = ui->tricontrat->currentText();
+    QSqlQueryModel *triModel = currentContrat.trier(critere);
+    populateTableWidget(triModel);
+}
+void MainWindow::on_cherchercontrat_clicked() {
+    QString idText = ui->id_rechcontrat->text();
+    if (idText.isEmpty()) {
+        QMessageBox::warning(this, "Champ vide", "Veuillez entrer un ID.");
+        return;
+    }
+
+    int id = idText.toInt();
+    QSqlQueryModel* resultModel = currentContrat.rechercher(id);
+    if (resultModel->rowCount() == 0) {
+        QMessageBox::information(this, "Aucun résultat", "Aucun contrat trouvé pour cet ID.");
+    }
+
+    populateTableWidget(resultModel);
+}
+void MainWindow::on_statscontrat_clicked() {
+    QMap<QString, int> stats = currentContrat.statistiquesStatut();
+
+    QPieSeries *series = new QPieSeries();
+
+    int total = 0;
+    for (auto count : stats.values()) total += count;
+
+    for (auto it = stats.begin(); it != stats.end(); ++it) {
+        if (it.value() > 0) {
+            double percent = (double)it.value() / total * 100.0;
+            series->append(it.key() + QString(" (%1%)").arg(percent, 0, 'f', 1), it.value());
+        }
+    }
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Répartition des Statuts de Paiement");
+    chart->legend()->setAlignment(Qt::AlignRight);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+
+    QMainWindow *statsWindow = new QMainWindow(this);
+    statsWindow->setWindowTitle("Statistiques Paiement");
+    statsWindow->setCentralWidget(chartView);
+    statsWindow->resize(600, 400);
+    statsWindow->show();
+}
+
+void MainWindow::on_exportercontrat_clicked() {
+    QString fileName = QFileDialog::getSaveFileName(this, "Exporter en PDF", "", "*.pdf");
+
+    if (fileName.isEmpty())
+        return;
+
+    QPdfWriter pdfWriter(fileName);
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    pdfWriter.setResolution(300);
+
+    QPainter painter(&pdfWriter);
+    painter.setFont(QFont("Times", 24)); // Texte plus grand (24pt)
+
+    int margin = 80;                  // Plus de marge
+    int x = margin;
+    int y = margin + 50;              // Décalage pour le titre
+    int rowHeight = 80;               // Augmenter encore la hauteur des lignes
+    int columnWidth = 300;            // Largeur des colonnes plus large
+
+    // Dessiner le titre au centre
+    painter.setFont(QFont("Times", 28)); // Taille plus grande pour le titre
+    QString title = "Liste des Contrats";
+    painter.drawText(pdfWriter.width() / 2 - painter.fontMetrics().horizontalAdvance(title) / 2, y, title);
+    y += 100; // Décalage après le titre
+
+    QSqlQueryModel* model = currentContrat.afficher();
+
+    int cols = model->columnCount();
+    int rows = model->rowCount();
+
+    // Calcul de la largeur totale pour centrer les données
+    int totalWidth = cols * columnWidth;
+    int centerX = (pdfWriter.width() - totalWidth) / 2;
+
+    // Dessiner les en-têtes avec couleur
+    painter.setFont(QFont("Times", 18)); // Taille plus petite pour les en-têtes
+    for (int col = 0; col < cols; ++col) {
+        QString header = model->headerData(col, Qt::Horizontal).toString();
+        QRect rect(centerX + col * columnWidth, y, columnWidth, rowHeight);
+
+        painter.setBrush(QBrush(Qt::lightGray)); // Couleur de fond des en-têtes
+        painter.drawRect(rect);
+
+        painter.setPen(QPen(Qt::black)); // Couleur du texte
+        painter.drawText(rect.adjusted(10, 10, -10, -10), Qt::AlignLeft | Qt::AlignVCenter, header);
+    }
+
+    y += rowHeight;
+
+    // Contenu des contrats avec plus d'espace entre chaque ligne
+    painter.setFont(QFont("Times", 16)); // Police un peu plus petite pour les données
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < cols; ++col) {
+            QString data = model->data(model->index(row, col)).toString();
+            QRect rect(centerX + col * columnWidth, y, columnWidth, rowHeight);
+            painter.setBrush(QBrush(Qt::white)); // Couleur de fond des données
+            painter.drawRect(rect);
+            painter.setPen(QPen(Qt::black)); // Couleur du texte
+            painter.drawText(rect.adjusted(10, 10, -10, -10), Qt::AlignLeft | Qt::AlignVCenter, data);
+        }
+        y += rowHeight;
+
+        // Nouvelle page si besoin
+        if (y + rowHeight > pdfWriter.height() - margin) {
+            pdfWriter.newPage();
+            y = margin + 50;
+
+            // Redessiner le titre centré
+            painter.setFont(QFont("Times", 28));
+            painter.drawText(pdfWriter.width() / 2 - painter.fontMetrics().horizontalAdvance(title) / 2, y, title);
+            y += 100;
+
+            // Redessiner l'en-tête
+            for (int col = 0; col < cols; ++col) {
+                QString header = model->headerData(col, Qt::Horizontal).toString();
+                QRect rect(centerX + col * columnWidth, y, columnWidth, rowHeight);
+                painter.setBrush(QBrush(Qt::lightGray)); // Couleur de fond des en-têtes
+                painter.drawRect(rect);
+                painter.setPen(QPen(Qt::black)); // Couleur du texte
+                painter.drawText(rect.adjusted(10, 10, -10, -10), Qt::AlignLeft | Qt::AlignVCenter, header);
+            }
+            y += rowHeight;
+        }
+    }
+
+    painter.end();
+    QMessageBox::information(this, "PDF", "Exportation terminée avec succès !");
+}
+
+
+
+
+
+
+
+
+
+
+void MainWindow::on_pushButton_email_clicked()
+{
+    QString subject = "Mise à jour importante - Contrats Innovarch";
+    QString body = "Bonjour,\n\n"
+                   "Nous vous rappelons que la date de fin de votre contrat approche. Celui-ci prendra fin dans une semaine.\n\n"
+                   "Nous vous invitons à prendre les dispositions nécessaires.\n\n"
+                   "Cordialement,\n"
+                   "L’équipe Innovarch";
+
+
+    mailer mail;
+    int result = mail.sendEmail("youssef.bensaid@esprit.tn", subject, body); // ← mets ton adresse
+
+    if (result == 0) {
+        QMessageBox::information(this, "Succès", "Email envoyé avec succès !");
+    } else {
+        QMessageBox::critical(this, "Erreur", "Échec de l'envoi de l'email.");
+    }
+}
+
+
+
+
+///////////// ons maram//////////////////
+void MainWindow::on_voirlesStatistiques_clicked()
+{
+    ui->mainStack->setCurrentIndex(1);
+}
+
+void MainWindow::on_commandLinkButton_clicked()
+{
+    ui->mainStack->setCurrentIndex(0);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->mainStack->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButton_r_clicked()
+{
+    ui->mainStack->setCurrentIndex(0);
+}
+
+void MainWindow::on_pushButton_cl_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+void MainWindow::on_pushButton_ct_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+void MainWindow::on_pushButton_5_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+void MainWindow::on_pushButton_contrats_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+
+
+/////////////bibi
 
 void MainWindow::on_pushButton_proj_clicked()
 {
@@ -3418,3 +5481,137 @@ void MainWindow::on_pushButton_11_clicked()
 
 }
 
+void MainWindow::on_pushButton_9_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+void MainWindow::on_pushButton_13_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+void MainWindow::on_pushButton_12_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+
+//////////selim
+void MainWindow::on_pushButton_21_clicked()
+{
+    ui->mainStack->setCurrentIndex(2);
+
+}
+
+
+void MainWindow::on_pushButton_cl_3_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+
+
+void MainWindow::on_pushButton_contrats_3_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+
+
+void MainWindow::on_pushButton_ct_3_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+
+void MainWindow::on_pushButton_proj_3_clicked()
+{
+    ui->mainStack->setCurrentIndex(3);
+
+}
+
+void MainWindow::on_pushButton_r_3_clicked()
+{
+    ui->mainStack->setCurrentIndex(0);
+
+}
+////////// med hedi///////
+
+void MainWindow::on_pushButton_24_clicked()
+{
+    ui->mainStack->setCurrentIndex(2);
+
+}
+
+
+void MainWindow::on_pushButton_cl_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+
+
+void MainWindow::on_pushButton_contrats_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+
+
+void MainWindow::on_pushButton_ct_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+
+void MainWindow::on_pushButton_proj_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(3);
+
+}
+
+void MainWindow::on_pushButton_r_6_clicked()
+{
+    ui->mainStack->setCurrentIndex(0);
+
+}
+//////////// desa/////////////
+void MainWindow::on_pushButton_25_clicked()
+{
+    ui->mainStack->setCurrentIndex(2);
+
+}
+
+
+void MainWindow::on_pushButton_cl_7_clicked()
+{
+    ui->mainStack->setCurrentIndex(4);
+
+}
+
+
+void MainWindow::on_pushButton_contrats_7_clicked()
+{
+    ui->mainStack->setCurrentIndex(6);
+
+}
+
+
+void MainWindow::on_pushButton_ct_7_clicked()
+{
+    ui->mainStack->setCurrentIndex(5);
+
+}
+
+void MainWindow::on_pushButton_proj_7_clicked()
+{
+    ui->mainStack->setCurrentIndex(3);
+
+}
+
+void MainWindow::on_pushButton_r_7_clicked()
+{
+    ui->mainStack->setCurrentIndex(0);
+
+}
