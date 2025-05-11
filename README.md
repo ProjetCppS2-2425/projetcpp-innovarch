@@ -59,7 +59,7 @@ Unlike existing tools like *Houzz Pro* or *ArchDesk*, InnovArch provides a cost-
 
 To explore the profiles of the contributors (if available on GitHub or LinkedIn):
 
-- Dhia Bondka – [GitHub](https://github.com/Dhi5a) *(Replace with actual URL if available)*
+- Dhia Bondka – [GitHub](https://github.com/Dhi5a)
 - Youssef Ben Said – [GitHub](https://github.com/youssef-bensaid)
 - Ahmed Belkhiria – [GitHub](https://github.com/Ahmedbelkhiria)
 - Selim Ben Abdelkader – [GitHub](https://github.com/slouma1234)
